@@ -355,6 +355,8 @@ class SandSegmented extends SandTray {
       b.dataset.value = text; b.textContent = text; b.setAttribute('aria-label', text); b.setAttribute('aria-checked', String(text === this._value));
       b.style.cssText = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0';
       b.addEventListener('click', () => { if (!this.disabled) { Sound.wake(); this.selectValue(text, true); } });
+      b.addEventListener('focus', () => { this.focusedIndex = this.options.indexOf(text); this.spriteKey = null; });
+      b.addEventListener('blur', () => { if (this.focusedIndex === this.options.indexOf(text)) this.focusedIndex = null; this.spriteKey = null; });
       b.addEventListener('keydown', e => this.optionKey(e, text));
       this.append(b); this.optionButtons.push(b);
     }
@@ -401,11 +403,12 @@ class SandSegmented extends SandTray {
     this.stone = [x, this.cy, this.slotW * .43, this.H * .22];
   }
   sprites() {
-    const c = this.ox, k = this.k, key = this.options.join('|') + '|' + Math.round(this.marker * 100);
+    const c = this.ox, k = this.k, key = this.options.join('|') + '|' + Math.round(this.marker * 100) + '|' + this.focusedIndex;
     if (key === this.spriteKey) return; this.spriteKey = key;
     c.setTransform(k, 0, 0, k, 0, 0); c.clearRect(0, 0, this.W, this.H);
     c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = `600 ${Math.max(10, this.H * .14)}px ui-sans-serif, sans-serif`;
     this.options.forEach((label, i) => { c.fillStyle = i === Math.round(this.marker) ? '#f5eddf' : '#67523e'; c.fillText(label, this.slotX[i], this.cy, this.slotW * .85); });
+    if (this.focusedIndex != null) { c.strokeStyle = '#2b2a27'; c.lineWidth = 2; c.beginPath(); c.roundRect(this.slotX[this.focusedIndex] - this.slotW * .46, this.cy - this.H * .28, this.slotW * .92, this.H * .56, this.H * .12); c.stroke(); }
   }
 }
 if (!customElements.get('sand-segmented')) customElements.define('sand-segmented', SandSegmented);
