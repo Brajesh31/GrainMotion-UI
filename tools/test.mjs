@@ -9,11 +9,35 @@ import { join } from 'node:path';
 const URL_ = process.argv[2] || 'http://localhost:8000/gallery/';
 const PORT = await new Promise((res) => { const s = createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
 const PROFILE = mkdtempSync(join(tmpdir(), 'grainmotion-ui-'));
-const chrome = spawn(process.env.CHROME || 'chromium', ['--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${PROFILE}`, '--no-first-run', '--hide-scrollbars', 'about:blank'], { stdio: 'ignore' });
+const chromeOutput = { stdout: '', stderr: '' };
+const chrome = spawn(process.env.CHROME || 'chromium', [
+  '--headless=new', '--no-sandbox', '--disable-dev-shm-usage', '--no-first-run', '--hide-scrollbars',
+  '--enable-webgl', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader',
+  '--remote-allow-origins=*', `--remote-debugging-port=${PORT}`, `--user-data-dir=${PROFILE}`, 'about:blank'
+], { stdio: ['ignore', 'pipe', 'pipe'] });
+chrome.stdout.on('data', chunk => { chromeOutput.stdout = (chromeOutput.stdout + chunk.toString()).slice(-4000); });
+chrome.stderr.on('data', chunk => { chromeOutput.stderr = (chromeOutput.stderr + chunk.toString()).slice(-8000); });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-let targets;
-for (let i = 0; i < 50; i++) { try { targets = await (await fetch(`http://127.0.0.1:${PORT}/json`)).json(); if (Array.isArray(targets) && targets.length) break; } catch {} await sleep(200); }
-const ws = new WebSocket(targets.find((t) => t.type === 'page').webSocketDebuggerUrl);
+let targets, lastTargetResponse = 'No response received from Chrome DevTools';
+for (let i = 0; i < 100; i++) {
+  if (chrome.exitCode !== null) break;
+  try {
+    const response = await fetch(`http://127.0.0.1:${PORT}/json/list`);
+    const body = await response.text();
+    lastTargetResponse = `HTTP ${response.status}: ${body.slice(0, 800)}`;
+    const parsed = JSON.parse(body);
+    if (response.ok && Array.isArray(parsed) && parsed.some(t => t.type === 'page' && t.webSocketDebuggerUrl)) {
+      targets = parsed; break;
+    }
+  } catch (error) { lastTargetResponse = String(error); }
+  await sleep(200);
+}
+const pageTarget = Array.isArray(targets) ? targets.find(t => t.type === 'page' && t.webSocketDebuggerUrl) : null;
+if (!pageTarget) {
+  chrome.kill();
+  throw new Error(`Chrome DevTools did not expose a page target on port ${PORT}. Exit code: ${chrome.exitCode}. Last response: ${lastTargetResponse}. Chrome stderr: ${chromeOutput.stderr}`);
+}
+const ws = new WebSocket(pageTarget.webSocketDebuggerUrl);
 await new Promise((r) => ws.addEventListener('open', r, { once: true }));
 let id = 0; const pending = new Map(); const logs = [];
 ws.addEventListener('message', (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } if (m.method === 'Runtime.exceptionThrown') logs.push('EXC ' + (m.params.exceptionDetails.exception?.description || m.params.exceptionDetails.text)); });
