@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zen Sand Thinking</title>
+<title>GrainMotion-UI Thinking</title>
 <link rel="icon" href="data:,">
 <style>
   :root { --page: #e9e4da; --card: #f1ede5; --ink: #2b2a27; --mute: #7c766b; --line: #d3cbbd; }
@@ -44,7 +44,7 @@
 // ?embed=1 hides the heading and the hint.
 const Q = new URLSearchParams(location.search), el = document.getElementById('el');
 if (Q.get('embed') === '1') document.documentElement.classList.add('embed');
-document.getElementById('snd').onclick = (e) => { ZenSand.Sound.wake(); e.target.textContent = ZenSand.Sound.toggle() ? 'Sound on' : 'Sound off'; };
+document.getElementById('snd').onclick = (e) => { GrainMotionUI.Sound.wake(); e.target.textContent = GrainMotionUI.Sound.toggle() ? 'Sound on' : 'Sound off'; };
 document.getElementById('states').onclick = (e) => { const b = e.target.closest('button'); if (!b) return; el.state = b.dataset.s; for (const x of b.parentNode.children) x.classList.toggle('on', x === b); };
 </script>
 </body>
