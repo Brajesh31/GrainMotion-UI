@@ -7,7 +7,7 @@
       "name": "slider",
       "type": "registry:file",
       "title": "GrainMotion-UI Slider",
-      "description": "A slider that is a bamboo rake in a tray of sand. Drag right and its four tines cut grooves and push a little heap of sand ahead of it; pull back and its back drags the sand flat again. One file of about 170 KB with its sand engine and sounds inside it, no dependencies, defines <sand-slider>.",
+      "description": "A slider that is a bamboo rake in a tray of sand. Drag right and its four tines cut grooves and push a little heap of sand ahead of it; pull back and its back drags the sand flat again. One file of about 170 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-slider>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "slider",
@@ -28,7 +28,7 @@
       "name": "toggle",
       "type": "registry:file",
       "title": "GrainMotion-UI Toggle",
-      "description": "A switch that is a river stone in a tray of raked sand. Switch it on and the stone glides along, parting the sand into a wake, and uncovers a power symbol it had pressed into the sand where it was resting. One file of about 170 KB with its sand engine and sounds inside it, no dependencies, defines <sand-toggle>.",
+      "description": "A switch that is a river stone in a tray of raked sand. Switch it on and the stone glides along, parting the sand into a wake, and uncovers a power symbol it had pressed into the sand where it was resting. One file of about 170 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-toggle>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "switch",
@@ -49,7 +49,7 @@
       "name": "signature",
       "type": "registry:file",
       "title": "GrainMotion-UI Signature",
-      "description": "A signature pad of smoothed sand, written in with a stick that cuts like a brush: linger and the line is wide and deep, hurry and it thins. The sand heaps up along the line. Clear sends a rake across that smooths it all away. One file of about 170 KB with its sand engine and sounds inside it, no dependencies, defines <sand-signature>.",
+      "description": "A signature pad of smoothed sand, written in with a stick that cuts like a brush: linger and the line is wide and deep, hurry and it thins. The sand heaps up along the line. Clear sends a rake across that smooths it all away. One file of about 170 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-signature>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "signature",
@@ -71,7 +71,7 @@
       "name": "thinking",
       "type": "registry:file",
       "title": "GrainMotion-UI Thinking",
-      "description": "An AI agent's working state as a rock in a round tray of sand that rakes itself. Thinking draws rings round the rock, searching draws spokes, using a tool draws lines that flow round it like water, and writing draws dashes like lines of text. One file of about 370 KB with its sand engine and sounds inside it, no dependencies, defines <sand-thinking>.",
+      "description": "An AI agent's working state as a rock in a round tray of sand that rakes itself. Thinking draws rings round the rock, searching draws spokes, using a tool draws lines that flow round it like water, and writing draws dashes like lines of text. One file of about 370 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-thinking>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "loader",
@@ -94,7 +94,7 @@
       "name": "checkbox",
       "type": "registry:file",
       "title": "GrainMotion-UI Checkbox",
-      "description": "A checkbox where a small river stone rolls aside to reveal a checkmark etched into a circular sand well. One standalone JavaScript custom element with the sand engine and required sounds embedded; no runtime dependencies; defines <sand-checkbox>.",
+      "description": "A checkbox where a small river stone rolls aside to reveal a checkmark etched into a circular sand well. One file of about 30 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-checkbox>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "checkbox",
@@ -110,13 +110,13 @@
           "target": "~/public/grainmotion-ui/checkbox.js"
         }
       ],
-      "docs": "GrainMotion-UI Checkbox is a plain script that registers a custom element. Load /grainmotion-ui/checkbox.js with a script tag (not a module). Use <sand-checkbox label=\"Enable notifications\" value=\"yes\"></sand-checkbox>. Read el.checked; it emits input and change when toggled. Read the complete component documentation in checkbox/README.md. More: https://brajesh31.github.io/GrainMotion-UI"
+      "docs": "GrainMotion-UI Checkbox is a plain script that registers a custom element. Load /grainmotion-ui/checkbox.js with a script tag (not a module), Use <sand-checkbox label=\"Enable notifications\" value=\"notifications\"></sand-checkbox>. Read el.checked; it fires input and change when toggled. With a name, a checked value is submitted with its form. More: https://brajesh31.github.io/GrainMotion-UI"
     },
     {
       "name": "radio-group",
       "type": "registry:file",
       "title": "GrainMotion-UI Radio Group",
-      "description": "A radio group with individual stone wells and one selected pebble moving to the active option. One standalone JavaScript custom element with the sand engine and required sounds embedded; no runtime dependencies; defines <sand-radio-group>.",
+      "description": "A radio group with individual stone wells and one selected pebble moving to the active option. One file of about 30 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-radio-group>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "radio",
@@ -132,13 +132,13 @@
           "target": "~/public/grainmotion-ui/radio-group.js"
         }
       ],
-      "docs": "GrainMotion-UI Radio Group is a plain script that registers a custom element. Load /grainmotion-ui/radio-group.js with a script tag (not a module). Use <sand-radio-group label=\"Size\" options=\"Small,Medium,Large\" value=\"Medium\"></sand-radio-group>. Read el.value; it emits input and change. Read the complete component documentation in radio-group/README.md. More: https://brajesh31.github.io/GrainMotion-UI"
+      "docs": "GrainMotion-UI Radio Group is a plain script that registers a custom element. Load /grainmotion-ui/radio-group.js with a script tag (not a module), Use <sand-radio-group name=\"size\" label=\"Choose a size\" options=\"Small,Medium,Large\" value=\"Medium\"></sand-radio-group>. Read el.value and listen for input/change. Options are comma-separated labels, up to five. More: https://brajesh31.github.io/GrainMotion-UI"
     },
     {
       "name": "segmented",
       "type": "registry:file",
       "title": "GrainMotion-UI Segmented Control",
-      "description": "A segmented control where a flat river-stone marker glides across individually carved sections in a sand track. One standalone JavaScript custom element with the sand engine and required sounds embedded; no runtime dependencies; defines <sand-segmented>.",
+      "description": "A segmented control where a flat river-stone marker glides across individually carved sections in a sand track. One file of about 30 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-segmented>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "segmented-control",
@@ -154,13 +154,13 @@
           "target": "~/public/grainmotion-ui/segmented.js"
         }
       ],
-      "docs": "GrainMotion-UI Segmented Control is a plain script that registers a custom element. Load /grainmotion-ui/segmented.js with a script tag (not a module). Use <sand-segmented label=\"Period\" options=\"Day,Week,Month\" value=\"Week\"></sand-segmented>. Read el.value; it emits input and change. Read the complete component documentation in segmented/README.md. More: https://brajesh31.github.io/GrainMotion-UI"
+      "docs": "GrainMotion-UI Segmented Control is a plain script that registers a custom element. Load /grainmotion-ui/segmented.js with a script tag (not a module), Use <sand-segmented name=\"period\" label=\"Time period\" options=\"Day,Week,Month\" value=\"Week\"></sand-segmented>. Read el.value and listen for input/change. More: https://brajesh31.github.io/GrainMotion-UI"
     },
     {
       "name": "range",
       "type": "registry:file",
       "title": "GrainMotion-UI Range Slider",
-      "description": "A two-handle range slider with independently adjustable bamboo rake markers and a visibly disturbed selected interval. One standalone JavaScript custom element with the sand engine and required sounds embedded; no runtime dependencies; defines <sand-range>.",
+      "description": "A two-handle range slider with independently adjustable bamboo rake markers and a visibly disturbed selected interval. One file of about 30 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-range>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "range",
@@ -176,13 +176,13 @@
           "target": "~/public/grainmotion-ui/range.js"
         }
       ],
-      "docs": "GrainMotion-UI Range Slider is a plain script that registers a custom element. Load /grainmotion-ui/range.js with a script tag (not a module). Use <sand-range label=\"Budget\" min=\"0\" max=\"100\" low=\"20\" high=\"80\"></sand-range>. Read el.low, el.high or el.value; it emits input and change. Read the complete component documentation in range/README.md. More: https://brajesh31.github.io/GrainMotion-UI"
+      "docs": "GrainMotion-UI Range Slider is a plain script that registers a custom element. Load /grainmotion-ui/range.js with a script tag (not a module), Use <sand-range name=\"budget\" label=\"Budget range\" min=\"0\" max=\"100\" step=\"5\" low=\"20\" high=\"80\"></sand-range>. Read el.low and el.high; el.value returns the pair. It fires input while adjusting and change when an interaction completes. More: https://brajesh31.github.io/GrainMotion-UI"
     },
     {
       "name": "rating",
       "type": "registry:file",
       "title": "GrainMotion-UI Rating",
-      "description": "A five-point rating control where a selected river stone marks the chosen rating in one of five individual sand wells. One standalone JavaScript custom element with the sand engine and required sounds embedded; no runtime dependencies; defines <sand-rating>.",
+      "description": "A five-point rating control where a selected river stone marks the chosen rating in one of five individual sand wells. One file of about 30 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-rating>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "rating",
@@ -198,7 +198,7 @@
           "target": "~/public/grainmotion-ui/rating.js"
         }
       ],
-      "docs": "GrainMotion-UI Rating is a plain script that registers a custom element. Load /grainmotion-ui/rating.js with a script tag (not a module). Use <sand-rating label=\"Rating\" value=\"4\"></sand-rating>. Read el.value from zero to five; it emits input and change. Read the complete component documentation in rating/README.md. More: https://brajesh31.github.io/GrainMotion-UI"
+      "docs": "GrainMotion-UI Rating is a plain script that registers a custom element. Load /grainmotion-ui/rating.js with a script tag (not a module), Use <sand-rating name=\"product-rating\" label=\"Product rating\" value=\"4\"></sand-rating>. Read el.value and listen for input/change. The supported scale is zero through five. More: https://brajesh31.github.io/GrainMotion-UI"
     }
   ]
 }
