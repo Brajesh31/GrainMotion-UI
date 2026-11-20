@@ -1,9 +1,9 @@
 ---
 name: grainmotion-ui
-description: Build, change or wire in a UI control made of simulated sand (a height field that slumps to its angle of rest, lit on the GPU), using the GrainMotion UI core. Use when asked to add one of the sand-* controls to an app, to change how one behaves, or to make a new control in the same style. Covers the core's API, the rules the set follows (keep the sand's volume, one surprising idea per control, test on a slowed CPU), and wiring a control into a page.
+description: Build, change or wire in a UI control made of simulated sand (a height field that slumps to its angle of rest, lit on the GPU), using the GrainMotion-UI core. Use when asked to add one of the sand-* controls to an app, to change how one behaves, or to make a new control in the same style. Covers the core's API, the rules the set follows (keep the sand's volume, one surprising idea per control, test on a slowed CPU), and wiring a control into a page.
 ---
 
-# GrainMotion UI
+# GrainMotion-UI
 
 A GrainMotion-UI control is an ordinary control (a slider, a switch, a button) made of a tray of sand that moves like sand. The slider is a rake that cuts grooves; the toggle is a stone that glides and leaves a wake; the thinking state's sand rakes itself into a different line for each thing an AI agent does. The sand is a real simulation, not a picture: a height field, one cell per CSS pixel, that you carve in JavaScript and that slumps to its angle of rest, lit by a WebGL2 shader.
 
