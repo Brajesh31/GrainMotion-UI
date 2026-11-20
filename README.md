@@ -8,7 +8,7 @@ A collection of four experimental UI controls built from a real-time sand simula
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
-![GrainMotion-UI complete component gallery](gallery/title.jpg)
+![GrainMotion-UI complete component gallery](gallery/title.svg)
 
 <p>
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/pages.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/pages.yml/badge.svg" alt="GitHub Pages deployment"></a>
