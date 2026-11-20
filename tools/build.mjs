@@ -15,6 +15,11 @@ export const SOUNDS = {
   toggle: { ...LOOP, ...one('settle', 'settle-b', 'stone', 'stone-b') },
   signature: { ...LOOP, ...one('settle', 'settle-b', 'sweep') },
   thinking: { drift: 'drift-loop.wav', flow: 'flow-loop.wav', ...one('settle', 'settle-b', 'reach', 'reach-b', 'scratch', 'scratch-b') },
+  checkbox: one('settle', 'tap'),
+  'radio-group': one('stone', 'tap'),
+  segmented: one('tap'),
+  range: one('tap'),
+  rating: one('stone'),
 };
 // Images a control carries, as constants.
 export const ART = { thinking: { ROCK: 'rock.webp' } };
