@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 const URL_ = process.argv[2] || 'http://localhost:8000/gallery/';
 const PORT = await new Promise((res) => { const s = createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
-const PROFILE = mkdtempSync(join(tmpdir(), 'zs-'));
+const PROFILE = mkdtempSync(join(tmpdir(), 'grainmotion-ui-'));
 const chrome = spawn(process.env.CHROME || 'chromium', ['--headless=new', `--remote-debugging-port=${PORT}`, `--user-data-dir=${PROFILE}`, '--no-first-run', '--hide-scrollbars', 'about:blank'], { stdio: 'ignore' });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let targets;
