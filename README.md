@@ -1,4 +1,4 @@
-# GrainMotion UI
+# GrainMotion-UI
 
 Four ordinary UI controls made of sand that moves like sand. The slider is a rake that cuts grooves and pushes a little heap of sand ahead of it. The toggle is a stone that glides along its tray and uncovers a symbol it was hiding. The AI thinking state rakes a different line for each thing the agent does. The sand is simulated, not drawn: every groove, heap and ripple is a height field that slumps to its angle of rest, lit on the GPU.
 
