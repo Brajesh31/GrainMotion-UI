@@ -355,7 +355,7 @@ class SandRange extends SandTray {
     this._ready = true; this.setAttribute('role', 'group');
     this.setAttribute('aria-label', this.getAttribute('label') || 'Range');
     this.defaultLow = this.num('low', 25); this.defaultHigh = this.num('high', 75);
-    const pair = (this.getAttribute('value') || '').split(',').map(Number);
+    const pair = this.hasAttribute('value') ? this.getAttribute('value').split(',').map(Number) : [];
     this.lowTarget = this._snap(Number.isFinite(pair[0]) ? pair[0] : this.defaultLow);
     this.highTarget = this._snap(Number.isFinite(pair[1]) ? pair[1] : this.defaultHigh);
     if (this.lowTarget > this.highTarget) [this.lowTarget, this.highTarget] = [this.highTarget, this.lowTarget];
