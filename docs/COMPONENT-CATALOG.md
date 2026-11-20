@@ -11,17 +11,17 @@ This is the single human-readable inventory of GrainMotion-UI components. It dis
 | Signature | `sand-signature` | A bamboo stick writes into sand; strokes can be undone or cleared. | [signature/README.md](../signature/README.md) | Implemented |
 | Thinking | `sand-thinking` | A stone and self-raking sand show AI activity states. | [thinking/README.md](../thinking/README.md) | Implemented |
 
-## Proposed components
+## Phase 1 components
 
-The components below are approved planning candidates, not implemented features. Their physical concepts are preliminary and may be refined during design exploration.
+The following five controls now have source files, standalone demos, component READMEs, individual concept diagrams, gallery cards and registry entries. Runtime testing is still pending, so treat them as implemented but not yet fully release-verified.
 
-| # | Component | Custom element | Category | Status |
-|---:|---|---|---|---|
-| 5 | Checkbox | `sand-checkbox` | Selection | Planned |
-| 6 | Radio Group | `sand-radio-group` | Selection | Planned |
-| 7 | Segmented Control | `sand-segmented` | Selection | Planned |
-| 8 | Range Slider | `sand-range` | Range input | Planned |
-| 9 | Rating | `sand-rating` | Rating | Planned |
+| # | Component | Custom element | Main interaction | Documentation | Status |
+|---:|---|---|---|---|---|
+| 5 | Checkbox | `sand-checkbox` | A stone rolls aside to reveal a checkmark pressed into a sand well. | [README](../checkbox/README.md) · [Demo](../checkbox/) | Implemented, verification pending |
+| 6 | Radio Group | `sand-radio-group` | A selected pebble moves between individual option wells. | [README](../radio-group/README.md) · [Demo](../radio-group/) | Implemented, verification pending |
+| 7 | Segmented Control | `sand-segmented` | A flat stone marker glides between carved segments. | [README](../segmented/README.md) · [Demo](../segmented/) | Implemented, verification pending |
+| 8 | Range Slider | `sand-range` | Two bamboo rakes define an interval through the sand. | [README](../range/README.md) · [Demo](../range/) | Implemented, verification pending |
+| 9 | Rating | `sand-rating` | Five pebbles sit in separate wells; one marks the rating. | [README](../rating/README.md) · [Demo](../rating/) | Implemented, verification pending |
 | 10 | Text Field | `sand-input` | Text input | Planned |
 | 11 | Textarea | `sand-textarea` | Text input | Planned |
 | 12 | Password Field | `sand-password` | Secure input | Planned |
