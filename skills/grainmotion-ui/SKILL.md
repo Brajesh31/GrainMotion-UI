@@ -18,7 +18,7 @@ If the job is only to put an existing control into an app, skip to **Wire it in*
 ## 1. Decide two things first
 
 1. **The control.** It must still be that control without the sand: a role (`slider`, `switch`, `img`, `status`), focus, keys, the events a native one fires, and a form value if it has one (`static formAssociated = true`, then `this.formValue(v)`).
-2. **One surprising idea.** A believable motion is not enough. Every control that worked in this set has one thing sand does that nobody expects from a control: the toggle's stone hides a symbol it has pressed into the sand, and moving it uncovers it; the thinking state rakes a different line for each thing the agent does. A stone that just sinks when pressed was called "kind of lame", and it was. Find the idea before writing code.
+2. **One surprising idea.** A believable motion is not enough. Every control that worked in this set has one thing sand does that nobody expects from a control: the toggle's stone hides a symbol it has pressed into the sand, and moving it uncovers it; the thinking state rakes a different line for each thing the agent does; the checkbox stone rolls away from its pressed checkmark; the radio group moves one selected pebble between separate wells; the range uses two rakes to define an interval. A stone that just sinks when pressed was called "kind of lame", and it was. Find the idea before writing code.
 
 ## 2. The core
 
@@ -52,6 +52,10 @@ class SandThing extends SandTray {
 - **Gentle, not quick.** A stone that glides over a second reads as heavy and calm. Snappy UI timing looks wrong in sand.
 - **Let a finger scroll the page.** Set `touch-action: pan-y` on anything that is not a drawing surface, take the pointer only after it moves sideways, and make taps `click`s, so a scroll that starts on a tray changes nothing.
 - **Things nobody can see should not make sounds.** When the thinking state lost its rake, its wooden tap went too.
+
+## Current component set
+
+The repository includes the original Slider, Toggle, Signature and Thinking controls plus Phase 1 Checkbox, Radio Group, Segmented Control, Range Slider and Rating. Read each component README before changing or integrating its public API.
 
 ## Wire it in
 
