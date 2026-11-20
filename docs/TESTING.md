@@ -28,15 +28,15 @@ The test and screenshot utilities require Chrome or Chromium. Set `CHROME` if th
 
 ## Current test coverage
 
-The existing `tools/test.mjs` was originally written for the four initial components. Phase 1 additions are now included in the gallery and need matching automated checks before the release can be called verified. The original checks cover:
+`tools/test.mjs` now includes checks for the original four controls and the five Phase 1 additions in a mobile-sized Chromium viewport. The updated suite has been committed, but a successful CI run is still required before the release can be called verified. The original-control checks cover:
 
 - Slider drag, input/change events, vertical-swipe handling and keyboard increments.
 - Toggle click, Space behavior, change events and vertical-swipe handling.
 - Signature stroke creation, input event, PNG export and Backspace undo.
 - Thinking state labels and busy/idle semantics.
-- FormData submission for slider and toggle.
+- Original form-data submission for Slider and Toggle.
 
-Phase 1 test coverage to add and run:
+The Phase 1 checks added to the test runner cover:
 
 - Checkbox: pointer toggle, Space/Enter, checked state, disabled state and form serialization.
 - Radio Group: option selection, arrow-key navigation, selected radio state and form serialization.
@@ -48,7 +48,7 @@ Phase 1 test coverage to add and run:
 - Horizontal overflow at the configured mobile viewport.
 - Browser script exceptions.
 
-This does not constitute comprehensive accessibility, browser compatibility, security or real-device testing.
+This does not constitute comprehensive accessibility, browser compatibility, security or real-device testing. Passing the browser suite does not replace manual assistive-technology or physical-device testing.
 
 ## Test layers required for new components
 
