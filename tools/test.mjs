@@ -68,8 +68,14 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('slider: sideways drag raises it, with input and a change', v1 > 75 && (await fired('sand-slider input')) > 0 && (await fired('sand-slider change')) >= 1, v1);
   await swipe(x0, y, x0 + 2, y - 70); await sleep(600);
   check('slider: a vertical swipe leaves it alone', (await val()) === v1, await val());
-  await focus('sand-slider'); await key('ArrowLeft', 37); await sleep(900);
-  check('slider: ArrowLeft lowers it by one step', (await val()) === v1 - 1, await val());
+  await focus('sand-slider');
+  const focused = await ev(`document.activeElement === ${E('sand-slider')}`);
+  const targetBefore = await ev(`${E('sand-slider')}.target`);
+  await key('ArrowLeft', 37); await sleep(1400);
+  const targetAfter = await ev(`${E('sand-slider')}.target`), afterKey = await val();
+  check('slider: host receives keyboard focus', focused === true, focused);
+  check('slider: ArrowLeft updates the rake target', targetAfter < targetBefore, targetBefore + ' -> ' + targetAfter);
+  check('slider: ArrowLeft lowers it by one step', afterKey === v1 - 1, afterKey);
   await key('Home', 36); await sleep(1500);
   check('slider: Home takes it to the minimum', (await val()) === 0, await val());
 }
