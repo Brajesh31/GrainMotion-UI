@@ -7,7 +7,7 @@
       "name": "slider",
       "type": "registry:file",
       "title": "GrainMotion-UI Slider",
-      "description": "A slider that is a bamboo rake in a tray of sand. Drag right and its four tines cut grooves and push a little heap of sand ahead of it; pull back and its back drags the sand flat again. One file of about 170 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-slider>.",
+      "description": "A slider that is a bamboo rake in a tray of sand. Drag right and its four tines cut grooves and push a little heap of sand ahead of it; pull back and its back drags the sand flat again. One file of about 170 KB with its sand engine and sounds inside it, no dependencies, defines <sand-slider>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "slider",
@@ -28,7 +28,7 @@
       "name": "toggle",
       "type": "registry:file",
       "title": "GrainMotion-UI Toggle",
-      "description": "A switch that is a river stone in a tray of raked sand. Switch it on and the stone glides along, parting the sand into a wake, and uncovers a power symbol it had pressed into the sand where it was resting. One file of about 170 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-toggle>.",
+      "description": "A switch that is a river stone in a tray of raked sand. Switch it on and the stone glides along, parting the sand into a wake, and uncovers a power symbol it had pressed into the sand where it was resting. One file of about 170 KB with its sand engine and sounds inside it, no dependencies, defines <sand-toggle>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "switch",
@@ -49,7 +49,7 @@
       "name": "signature",
       "type": "registry:file",
       "title": "GrainMotion-UI Signature",
-      "description": "A signature pad of smoothed sand, written in with a stick that cuts like a brush: linger and the line is wide and deep, hurry and it thins. The sand heaps up along the line. Clear sends a rake across that smooths it all away. One file of about 170 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-signature>.",
+      "description": "A signature pad of smoothed sand, written in with a stick that cuts like a brush: linger and the line is wide and deep, hurry and it thins. The sand heaps up along the line. Clear sends a rake across that smooths it all away. One file of about 170 KB with its sand engine and sounds inside it, no dependencies, defines <sand-signature>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "signature",
@@ -71,7 +71,7 @@
       "name": "thinking",
       "type": "registry:file",
       "title": "GrainMotion-UI Thinking",
-      "description": "An AI agent's working state as a rock in a round tray of sand that rakes itself. Thinking draws rings round the rock, searching draws spokes, using a tool draws lines that flow round it like water, and writing draws dashes like lines of text. One file of about 370 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-thinking>.",
+      "description": "An AI agent's working state as a rock in a round tray of sand that rakes itself. Thinking draws rings round the rock, searching draws spokes, using a tool draws lines that flow round it like water, and writing draws dashes like lines of text. One file of about 370 KB with its sand engine and sounds inside it, no dependencies, defines <sand-thinking>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "loader",
@@ -94,7 +94,7 @@
       "name": "checkbox",
       "type": "registry:file",
       "title": "GrainMotion-UI Checkbox",
-      "description": "A checkbox where a small river stone rolls aside to reveal a checkmark etched into a circular sand well. One file of about 30 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-checkbox>.",
+      "description": "A checkbox where a small river stone rolls aside to reveal a checkmark etched into a circular sand well. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-checkbox>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "checkbox",
@@ -116,7 +116,7 @@
       "name": "radio-group",
       "type": "registry:file",
       "title": "GrainMotion-UI Radio Group",
-      "description": "A radio group with individual stone wells and one selected pebble moving to the active option. One file of about 30 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-radio-group>.",
+      "description": "A radio group with individual stone wells and one selected pebble moving to the active option. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-radio-group>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "radio",
@@ -138,7 +138,7 @@
       "name": "segmented",
       "type": "registry:file",
       "title": "GrainMotion-UI Segmented Control",
-      "description": "A segmented control where a flat river-stone marker glides across individually carved sections in a sand track. One file of about 30 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-segmented>.",
+      "description": "A segmented control where a flat river-stone marker glides across individually carved sections in a sand track. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-segmented>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "segmented-control",
@@ -160,7 +160,7 @@
       "name": "range",
       "type": "registry:file",
       "title": "GrainMotion-UI Range Slider",
-      "description": "A two-handle range slider with independently adjustable bamboo rake markers and a visibly disturbed selected interval. One file of about 30 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-range>.",
+      "description": "A two-handle range slider with independently adjustable bamboo rake markers and a visibly disturbed selected interval. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-range>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "range",
@@ -182,7 +182,7 @@
       "name": "rating",
       "type": "registry:file",
       "title": "GrainMotion-UI Rating",
-      "description": "A five-point rating control where a selected river stone marks the chosen rating in one of five individual sand wells. One file of about 30 KB with the sand engine and its sounds inside it, no dependencies, defines <sand-rating>.",
+      "description": "A five-point rating control where a selected river stone marks the chosen rating in one of five individual sand wells. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-rating>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "rating",
