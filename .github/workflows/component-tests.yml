@@ -1,0 +1,63 @@
+name: GrainMotion-UI component validation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Check standalone component bundles
+        run: node tools/build.mjs --check
+
+      - name: Check generated documentation and registry
+        run: node tools/docs.mjs --check
+
+      - name: Start local documentation and demo server
+        run: |
+          python3 -m http.server 8000 > /tmp/grainmotion-ui-server.log 2>&1 &
+          echo $! > /tmp/grainmotion-ui-server.pid
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8000/gallery/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/grainmotion-ui-server.log
+          exit 1
+
+      - name: Test all nine components in mobile Chromium
+        env:
+          CHROME: ${{ steps.chrome.outputs.chrome-path }}
+        run: node tools/test.mjs http://127.0.0.1:8000/gallery/
+
+      - name: Stop local server
+        if: always()
+        run: |
+          if [ -f /tmp/grainmotion-ui-server.pid ]; then
+            kill "$(cat /tmp/grainmotion-ui-server.pid)" || true
+          fi
