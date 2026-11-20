@@ -53,7 +53,7 @@
     </p>
   </header>
   <main class="grid" id="grid"></main>
-  <p class="note">The sand is simulated: every groove, heap and ripple is a height field that slumps to its angle of rest, lit on the GPU. Sound plays after your first touch; <code>ZenSand.Sound.on = false</code> turns it off.</p>
+  <p class="note">The sand is simulated: every groove, heap and ripple is a height field that slumps to its angle of rest, lit on the GPU. Sound plays after your first touch; <code>GrainMotionUI.Sound.on = false</code> turns it off.</p>
 </div>
 <script src="../slider/slider.js"></script>
 <script src="../toggle/toggle.js"></script>
@@ -94,11 +94,11 @@ const WIRE = {
 const SKILL = { url: new URL('../skills/grainmotion-ui/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };
 const fileUrl = (id) => new URL(`../${id}/${id}.js`, location.href).href;
 const prompt = (it) => [
-  `Add the Zen Sand ${it.name.toLowerCase()} to my app. It is a single JavaScript file with no dependencies that defines a <${it.tag}> element.`,
+  `Add the GrainMotion-UI ${it.name.toLowerCase()} to my app. It is a single JavaScript file with no dependencies that defines a <${it.tag}> element.`,
   `1. Get the file from ${fileUrl(it.id)} and save it in my project as ${it.id}.js. Do not rewrite it or split it up: the sand engine and the sounds are inside it.`,
   `2. Load it with a plain script tag (not type="module").`,
   ...WIRE[it.id].map((l, i) => `${i + 3}. ${l}`),
-  `${WIRE[it.id].length + 3}. It scales to its CSS width and the height follows. It needs WebGL2 to draw, and it is made for a light page. It plays sounds after the first touch on the page; ZenSand.Sound.on = false turns them off.`,
+  `${WIRE[it.id].length + 3}. It scales to its CSS width and the height follows. It needs WebGL2 to draw, and it is made for a light page. It plays sounds after the first touch on the page; GrainMotionUI.Sound.on = false turns them off.`,
   `When you are done, show me where you put it and what listens to it. If something about it needs to look different, tell me instead of editing the sand code.`,
   ``,
   `These controls were made with my grainmotion-ui skill: ${SKILL.url}`,
@@ -118,7 +118,7 @@ for (const it of ITEMS) {
     setTimeout(() => (b.textContent = was), 1400);
   });
 }
-document.getElementById('snd').onclick = (e) => { ZenSand.Sound.wake(); e.target.textContent = ZenSand.Sound.toggle() ? 'Sound on' : 'Sound off'; };
+document.getElementById('snd').onclick = (e) => { GrainMotionUI.Sound.wake(); e.target.textContent = GrainMotionUI.Sound.toggle() ? 'Sound on' : 'Sound off'; };
 </script>
 </body>
 </html>
