@@ -4,7 +4,7 @@
 
 ### Interfaces shaped by sand, motion, and interaction.
 
-A collection of four experimental UI controls built from a real-time sand simulation. Each control turns a familiar interaction into something tactile: a rake becomes a slider, a river stone becomes a toggle, a stick becomes a signature pad, and a moving rock becomes an AI activity indicator.
+A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 adds five selection controls, each with its own physical interaction.
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
@@ -14,7 +14,7 @@ A collection of four experimental UI controls built from a real-time sand simula
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/pages.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/pages.yml/badge.svg" alt="GitHub Pages deployment"></a>
   <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
   <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
-  <img src="https://img.shields.io/badge/Components-4-C49A6C" alt="Four components">
+  <img src="https://img.shields.io/badge/Components-9-C49A6C" alt="Nine components">
 </p>
 
 </div>
@@ -23,7 +23,7 @@ A collection of four experimental UI controls built from a real-time sand simula
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI is a set of standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI currently includes nine standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -33,14 +33,19 @@ GrainMotion-UI is a set of standalone custom elements that simulate sand as a he
 
 ## 🎛️ The components
 
-Each component has its own live demo, usage guide, and source file.
+Each component has its own live demo, usage guide, standalone JavaScript file and physical interaction concept.
 
-| Component | Preview | What it does | Demo |
-|---|---|---|---|
-| **Sand Slider** | A bamboo rake cuts grooves through the sand and pushes a small ridge ahead of it. | [Open demo](https://brajesh31.github.io/GrainMotion-UI/slider/) · [Documentation](slider/README.md) |
-| **Sand Toggle** | A smooth river stone glides across its tray, leaving a wake and uncovering a symbol. | [Open demo](https://brajesh31.github.io/GrainMotion-UI/toggle/) · [Documentation](toggle/README.md) |
-| **Sand Signature** | Write with a stick that behaves like a brush, then export the signature as a transparent PNG. | [Open demo](https://brajesh31.github.io/GrainMotion-UI/signature/) · [Documentation](signature/README.md) |
-| **Sand Thinking** | A rock moves through the sand to represent thinking, searching, tool use, writing, and idle states. | [Open demo](https://brajesh31.github.io/GrainMotion-UI/thinking/) · [Documentation](thinking/README.md) |
+| Component | Physical interaction | Demo and documentation |
+|---|---|---|
+| **Sand Slider** | A bamboo rake cuts grooves and pushes a ridge through the sand. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/slider/) · [Documentation](slider/README.md) |
+| **Sand Toggle** | A river stone glides across the tray and uncovers a pressed symbol. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/toggle/) · [Documentation](toggle/README.md) |
+| **Sand Signature** | A bamboo stylus writes into sand; strokes can be undone or cleared. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/signature/) · [Documentation](signature/README.md) |
+| **Sand Thinking** | A rock and self-raking sand represent AI activity states. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/thinking/) · [Documentation](thinking/README.md) |
+| **Sand Checkbox** | A pebble rolls aside to reveal a checkmark etched into its sand well. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/checkbox/) · [Documentation](checkbox/README.md) |
+| **Sand Radio Group** | A selected pebble moves between individual option wells. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/radio-group/) · [Documentation](radio-group/README.md) |
+| **Sand Segmented** | A flat stone marker glides between carved sections. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/segmented/) · [Documentation](segmented/README.md) |
+| **Sand Range** | Two bamboo rakes set the lower and upper bounds of an interval. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/range/) · [Documentation](range/README.md) |
+| **Sand Rating** | Five river stones occupy separate wells; one marks the chosen rating. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/rating/) · [Documentation](rating/README.md) |
 
 > The gallery image above shows the component set together. The concept artwork below documents visual exploration and design direction, not additional live component screenshots.
 
@@ -110,6 +115,11 @@ npx shadcn add Brajesh31/GrainMotion-UI/slider
 npx shadcn add Brajesh31/GrainMotion-UI/toggle
 npx shadcn add Brajesh31/GrainMotion-UI/signature
 npx shadcn add Brajesh31/GrainMotion-UI/thinking
+npx shadcn add Brajesh31/GrainMotion-UI/checkbox
+npx shadcn add Brajesh31/GrainMotion-UI/radio-group
+npx shadcn add Brajesh31/GrainMotion-UI/segmented
+npx shadcn add Brajesh31/GrainMotion-UI/range
+npx shadcn add Brajesh31/GrainMotion-UI/rating
 ```
 
 The files are intended to be placed in `public/grainmotion-ui/`.
@@ -134,6 +144,21 @@ Other elements:
 
 <script src="/grainmotion-ui/thinking.js"></script>
 <sand-thinking state="thinking"></sand-thinking>
+
+<script src="/grainmotion-ui/checkbox.js"></script>
+<sand-checkbox label="Enable notifications" value="yes"></sand-checkbox>
+
+<script src="/grainmotion-ui/radio-group.js"></script>
+<sand-radio-group label="Size" options="Small,Medium,Large" value="Medium"></sand-radio-group>
+
+<script src="/grainmotion-ui/segmented.js"></script>
+<sand-segmented label="Period" options="Day,Week,Month" value="Week"></sand-segmented>
+
+<script src="/grainmotion-ui/range.js"></script>
+<sand-range label="Budget" low="20" high="80"></sand-range>
+
+<script src="/grainmotion-ui/rating.js"></script>
+<sand-rating label="Rating" value="4"></sand-rating>
 ```
 
 For the thinking component, update its state as your agent works:
@@ -212,6 +237,11 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [Toggle documentation](toggle/README.md)
 - [Signature documentation](signature/README.md)
 - [Thinking documentation](thinking/README.md)
+- [Checkbox documentation](checkbox/README.md)
+- [Radio Group documentation](radio-group/README.md)
+- [Segmented Control documentation](segmented/README.md)
+- [Range Slider documentation](range/README.md)
+- [Rating documentation](rating/README.md)
 - [Agent skill](skills/grainmotion-ui/SKILL.md)
 - [AI-readable project guide](llms.txt)
 - [Design process and concept artwork](making-of/README.md)
