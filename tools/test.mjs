@@ -72,12 +72,55 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev(`${E('sand-thinking')}.state = 'idle'`); await sleep(200);
   check('thinking: idle is Ready and not busy', (await ev(`${E('sand-thinking')}.getAttribute('aria-label') + ' ' + ${E('sand-thinking')}.getAttribute('aria-busy')`)) === 'Ready false');
 }
+{ // checkbox: visual checkmark state, click and Space toggle it
+  const el = E('sand-checkbox');
+  await tap('sand-checkbox'); await sleep(300);
+  check('checkbox: tap checks it and reflects aria-checked', (await ev(`${el}.checked`)) === true && (await ev(`${el}.getAttribute('aria-checked')`)) === 'true');
+  await focus('sand-checkbox'); await key(' ', 32); await sleep(250);
+  check('checkbox: Space unchecks it', (await ev(`${el}.checked`)) === false && (await ev(`${el}.getAttribute('aria-checked')`)) === 'false');
+  await ev(`${el}.disabled = true`);
+  check('checkbox: disabled state is exposed', (await ev(`${el}.getAttribute('aria-disabled')`)) === 'true');
+}
+{ // radio group: selecting a stone updates the value; arrow keys move through options
+  await tap('sand-radio-group', 0.83, 0.5); await sleep(250);
+  check('radio group: pointer selects the nearest option', (await ev(`${E('sand-radio-group')}.value`)) === 'Overnight');
+  await ev(`${E('sand-radio-group')}.querySelector('button[data-value="Overnight"]').focus()`);
+  await key('ArrowLeft', 37); await sleep(250);
+  check('radio group: ArrowLeft selects the previous option', (await ev(`${E('sand-radio-group')}.value`)) === 'Express');
+  check('radio group: selected child exposes aria-checked', (await ev(`${E('sand-radio-group')}.querySelector('button[data-value="Express"]').getAttribute('aria-checked')`)) === 'true');
+}
+{ // segmented control: a flat stone moves between carved options
+  await tap('sand-segmented', 0.83, 0.5); await sleep(250);
+  check('segmented: pointer selects the last section', (await ev(`${E('sand-segmented')}.value`)) === 'Month');
+  await ev(`${E('sand-segmented')}.querySelector('button[data-value="Month"]').focus()`);
+  await key('ArrowLeft', 37); await sleep(250);
+  check('segmented: ArrowLeft selects the previous section', (await ev(`${E('sand-segmented')}.value`)) === 'Week');
+}
+{ // range slider: the two bamboo handles stay ordered and can be keyboard-adjusted
+  const el = E('sand-range');
+  const beforeLow = await ev(`${el}.low`), beforeHigh = await ev(`${el}.high`);
+  const [x0, y] = await at('sand-range', 0.25, 0.5), [x1] = await at('sand-range', 0.43, 0.5);
+  await sleep(150); await swipe(x0, y, x1, y); await sleep(350);
+  const low = await ev(`${el}.low`), high = await ev(`${el}.high`);
+  check('range: dragging the lower rake changes only the lower bound', low > beforeLow && low < high && high === beforeHigh, low + ',' + high);
+  await ev(`${el}.querySelector('[role="slider"]').focus()`);
+  await key('ArrowRight', 39); await sleep(150);
+  check('range: focused lower handle responds to ArrowRight', (await ev(`${el}.low`)) > low);
+}
+{ // rating: pebble selection, accessible value text and keyboard endpoint
+  await tap('sand-rating', 0.85, 0.5); await sleep(200);
+  check('rating: pointer selects a value from one to five', (await ev(`${E('sand-rating')}.value`)) === 4);
+  check('rating: value text is announced', (await ev(`${E('sand-rating')}.getAttribute('aria-valuetext')`)) === '4 of 5');
+  await focus('sand-rating'); await key('End', 35); await sleep(150);
+  check('rating: End sets the maximum rating', (await ev(`${E('sand-rating')}.value`)) === 5);
+}
 { // forms: the value controls are sent with a form
   const got = await ev(`(() => {
     const f = document.createElement('form');
-    f.innerHTML = '<sand-slider name="s" value="30"></sand-slider><sand-toggle name="t" checked></sand-toggle>';
+    f.innerHTML = '<sand-slider name="slider" value="30"></sand-slider><sand-toggle name="toggle" checked></sand-toggle><sand-checkbox name="checkbox" value="yes" checked></sand-checkbox><sand-radio-group name="radio" options="Small,Medium,Large" value="Medium"></sand-radio-group><sand-segmented name="segment" options="Day,Week,Month" value="Week"></sand-segmented><sand-range name="range" value="10,90"></sand-range><sand-rating name="rating" value="4"></sand-rating>';
     document.body.append(f); const out = JSON.stringify(Object.fromEntries(new FormData(f))); f.remove(); return out; })()`);
-  check('forms: slider and toggle are in the FormData', got === JSON.stringify({ s: '30', t: 'on' }), got);
+  const expected = { slider: '30', toggle: 'on', checkbox: 'yes', radio: 'Medium', segment: 'Week', range: '10,90', rating: '4' };
+  check('forms: all seven form-associated components serialize their values', got === JSON.stringify(expected), got);
 }
 { // scaling: the height follows the width
   const got = await ev(`(() => { const e = document.createElement('sand-toggle'); e.style.width = '150px'; document.body.append(e); const b = e.getBoundingClientRect(); e.remove(); return b.width + ' ' + Math.round(b.height); })()`);
