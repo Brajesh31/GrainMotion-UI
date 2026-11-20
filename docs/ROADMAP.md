@@ -6,7 +6,9 @@ Grow GrainMotion-UI into a carefully designed library of tactile interface contr
 
 **Target:** 50 components total, including the four already implemented. This means 46 new components.
 
-**Important:** This is a roadmap, not a completion report. Only Slider, Toggle, Signature and Thinking currently exist as implemented components in the repository.
+**Status update (Phase 1):** The first five planned additions now have standalone source files, demo pages, component READMEs and concept assets. They are wired into the main gallery, registry and AI-readable catalog. Runtime/browser verification and the full acceptance checklist are still pending. The original four components remain in place.
+
+This roadmap is not a completion report. A component is not release-complete until its functional and regression tests pass.
 
 ## Non-negotiable principles
 
