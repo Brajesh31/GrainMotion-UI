@@ -89,6 +89,116 @@
         }
       ],
       "docs": "GrainMotion-UI Thinking is a plain script that registers a custom element. Load /grainmotion-ui/thinking.js with a script tag (not a module), then use <sand-thinking state=\"thinking\"></sand-thinking> and set el.state to thinking, searching, tool, writing or idle as your agent works. It is a status region, so the state is read out. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Checkbox",
+      "description": "A checkbox where a small river stone rolls aside to reveal a checkmark etched into a circular sand well. One standalone JavaScript custom element with the sand engine and required sounds embedded; no runtime dependencies; defines <sand-checkbox>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "checkbox",
+        "selection",
+        "input",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "checkbox/checkbox.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/checkbox.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Checkbox is a plain script that registers a custom element. Load /grainmotion-ui/checkbox.js with a script tag (not a module). Use <sand-checkbox label=\"Enable notifications\" value=\"yes\"></sand-checkbox>. Read el.checked; it emits input and change when toggled. Read the complete component documentation in checkbox/README.md. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Radio Group",
+      "description": "A radio group with individual stone wells and one selected pebble moving to the active option. One standalone JavaScript custom element with the sand engine and required sounds embedded; no runtime dependencies; defines <sand-radio-group>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "radio",
+        "selection",
+        "input",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "radio-group/radio-group.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/radio-group.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Radio Group is a plain script that registers a custom element. Load /grainmotion-ui/radio-group.js with a script tag (not a module). Use <sand-radio-group label=\"Size\" options=\"Small,Medium,Large\" value=\"Medium\"></sand-radio-group>. Read el.value; it emits input and change. Read the complete component documentation in radio-group/README.md. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "segmented",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Segmented Control",
+      "description": "A segmented control where a flat river-stone marker glides across individually carved sections in a sand track. One standalone JavaScript custom element with the sand engine and required sounds embedded; no runtime dependencies; defines <sand-segmented>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "segmented-control",
+        "selection",
+        "navigation",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "segmented/segmented.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/segmented.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Segmented Control is a plain script that registers a custom element. Load /grainmotion-ui/segmented.js with a script tag (not a module). Use <sand-segmented label=\"Period\" options=\"Day,Week,Month\" value=\"Week\"></sand-segmented>. Read el.value; it emits input and change. Read the complete component documentation in segmented/README.md. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "range",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Range Slider",
+      "description": "A two-handle range slider with independently adjustable bamboo rake markers and a visibly disturbed selected interval. One standalone JavaScript custom element with the sand engine and required sounds embedded; no runtime dependencies; defines <sand-range>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "range",
+        "slider",
+        "input",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "range/range.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/range.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Range Slider is a plain script that registers a custom element. Load /grainmotion-ui/range.js with a script tag (not a module). Use <sand-range label=\"Budget\" min=\"0\" max=\"100\" low=\"20\" high=\"80\"></sand-range>. Read el.low, el.high or el.value; it emits input and change. Read the complete component documentation in range/README.md. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "rating",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Rating",
+      "description": "A five-point rating control where a selected river stone marks the chosen rating in one of five individual sand wells. One standalone JavaScript custom element with the sand engine and required sounds embedded; no runtime dependencies; defines <sand-rating>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "rating",
+        "input",
+        "selection",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "rating/rating.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/rating.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Rating is a plain script that registers a custom element. Load /grainmotion-ui/rating.js with a script tag (not a module). Use <sand-rating label=\"Rating\" value=\"4\"></sand-rating>. Read el.value from zero to five; it emits input and change. Read the complete component documentation in rating/README.md. More: https://brajesh31.github.io/GrainMotion-UI"
     }
   ]
 }
