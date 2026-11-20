@@ -102,7 +102,7 @@ export const SPEC = [
       ['a new state', 'the sand sweeps itself smooth in a few wide passes, about two seconds, then the new line starts'],
       ['idle', 'the sand stops and settles, and the garden stays as it is']],
     limits: ['**The change between states takes about two seconds,** the sweep included. A state that lasts less than that is barely seen.', '**It is round,** and as high as it is wide.'],
-  },,
+  },
   ...[
   {
     "id": "checkbox",
