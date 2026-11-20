@@ -6,7 +6,7 @@ The images were made with GPT Image 2.6 (`gpt_image_2_6`) through Higgsfield; th
 
 One of ten theme stills for the set (the other nine themes were cut). 3:2.
 
-> UI component concept still, seen from directly above, strictly top-down orthographic. Three ordinary web controls in one horizontal row on a plain pale stone page, at realistic UI proportions: a pill toggle switch (on), a horizontal slider, and a rectangular rounded button. Theme: ZEN SAND GARDEN. Each control is a shallow tray of fine raked sand in a thin dark wooden frame. The toggle's thumb is a smooth rounded grey river stone with raked rings around it; the slider's track is a set of parallel raked grooves that stop where a small bamboo rake head sits as the thumb, smooth sand ahead of it; the button is a sand pad with concentric ripples around a flat stone. Stylized chunky shapes, realistic grain and soft raking light. Limited palette: sand, charcoal, moss green. No text, no perspective, no depth of field, no plants, no scene, no photograph.
+> UI component concept still, seen from directly above, strictly top-down orthographic. Three ordinary web controls in one horizontal row on a plain pale stone page, at realistic UI proportions: a pill toggle switch (on), a horizontal slider, and a rectangular rounded button. Theme: GrainMotion-UI GARDEN. Each control is a shallow tray of fine raked sand in a thin dark wooden frame. The toggle's thumb is a smooth rounded grey river stone with raked rings around it; the slider's track is a set of parallel raked grooves that stop where a small bamboo rake head sits as the thumb, smooth sand ahead of it; the button is a sand pad with concentric ripples around a flat stone. Stylized chunky shapes, realistic grain and soft raking light. Limited palette: sand, charcoal, moss green. No text, no perspective, no depth of field, no plants, no scene, no photograph.
 
 ## 2. Concept sheets
 
@@ -48,7 +48,7 @@ Four rocks, square. The second (basalt with moss in a crack) is the one in `thin
 
 2. Overhead orthographic view looking straight down at one dark basalt garden stone as used in a Kyoto karesansui rock garden, rough faceted top with a few cracks and a small patch of green moss in one crevice, compact irregular outline, lit softly from the upper left, centered on a plain flat pure white background, no shadow on the ground, nothing else in frame, realistic photographic texture
 
-3. Directly overhead view of a single smooth weathered river boulder for a zen sand garden, charcoal grey with soft mottling and a few pale mineral veins, organic lumpy oval outline, gentle satin sheen, light from the upper left, centered, isolated on a flat pure white background, no ground shadow, no sand, realistic detailed stone texture
+3. Directly overhead view of a single smooth weathered river boulder for a GrainMotion-UI garden, charcoal grey with soft mottling and a few pale mineral veins, organic lumpy oval outline, gentle satin sheen, light from the upper left, centered, isolated on a flat pure white background, no ground shadow, no sand, realistic detailed stone texture
 
 4. Top-down view straight down onto a single tall jagged garden rock seen from above, layered dark grey stone with sharp ridges and deep crevices, a little moss on the lit side, irregular angular silhouette, lit from the upper left with deep shade on the lower right faces, centered on a plain flat pure white background, no cast shadow, no other objects, realistic
 
