@@ -365,7 +365,7 @@ class SandRadioGroup extends SandTray {
     this.optionButtons = [];
     for (const text of this.options) {
       const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'radio');
-      b.dataset.value = text; b.textContent = text; b.setAttribute('aria-label', text);
+      b.dataset.value = text; b.textContent = text; b.setAttribute('aria-label', text); b.setAttribute('aria-checked', String(text === this._value));
       b.style.cssText = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0';
       b.addEventListener('click', () => { if (!this.disabled) { Sound.wake(); this.selectValue(text, true); } });
       b.addEventListener('keydown', e => this.optionKey(e, text));
