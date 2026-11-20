@@ -5,11 +5,11 @@ description: Build, change or wire in a UI control made of simulated sand (a hei
 
 # GrainMotion UI
 
-A Zen Sand control is an ordinary control (a slider, a switch, a button) made of a tray of sand that moves like sand. The slider is a rake that cuts grooves; the toggle is a stone that glides and leaves a wake; the thinking state's sand rakes itself into a different line for each thing an AI agent does. The sand is a real simulation, not a picture: a height field, one cell per CSS pixel, that you carve in JavaScript and that slumps to its angle of rest, lit by a WebGL2 shader.
+A GrainMotion-UI control is an ordinary control (a slider, a switch, a button) made of a tray of sand that moves like sand. The slider is a rake that cuts grooves; the toggle is a stone that glides and leaves a wake; the thinking state's sand rakes itself into a different line for each thing an AI agent does. The sand is a real simulation, not a picture: a height field, one cell per CSS pixel, that you carve in JavaScript and that slumps to its angle of rest, lit by a WebGL2 shader.
 
 This skill comes with three things:
 
-- `core.js`: the engine. Load it and everything is on `window.ZenSand`.
+- `core.js`: the engine. Load it and everything is on `window.GrainMotionUI`.
 - `starter.html`: the smallest whole control, a tray you draw in with a finger. Copy it to start a new one.
 - `look.mjs`: opens a page with the CPU slowed four times, photographs an element at chosen moments side by side, and prints frame times.
 
@@ -23,7 +23,7 @@ If the job is only to put an existing control into an app, skip to **Wire it in*
 ## 2. The core
 
 ```js
-const { Sound, SandTray } = window.ZenSand;
+const { Sound, SandTray } = window.GrainMotionUI;
 class SandThing extends SandTray {
   get aspect() { return 0.3; }   // height / width
   init() {}                      // once: roles, keys, listeners
@@ -58,7 +58,7 @@ class SandThing extends SandTray {
 1. Save the control's file into the project (`npx shadcn add Brajesh31/GrainMotion-UI/NAME` puts it in `public/grainmotion-ui/`). Do not rewrite or split it: the engine and the sounds are inside.
 2. Load it with a plain `<script src>`, not as a module. Use the element; each control's README has its attributes and events.
 3. Give it a CSS `width`; its height follows. It needs WebGL2, and it is made for a light page.
-4. Sound plays after the first touch or key on the page. If the app has a mute setting, set `ZenSand.Sound.on` from it.
+4. Sound plays after the first touch or key on the page. If the app has a mute setting, set `GrainMotionUI.Sound.on` from it.
 5. Labels: the slider and toggle do not draw their own label. Put the setting's name and value beside them, as the gallery does.
 
 ## Check it
