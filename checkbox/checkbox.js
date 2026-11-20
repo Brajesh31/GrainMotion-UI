@@ -374,6 +374,8 @@ class SandCheckbox extends SandTray {
       if (this.disabled || (e.key !== ' ' && e.key !== 'Enter')) return;
       e.preventDefault(); Sound.wake(); this.checked = !this.checked;
     });
+    this.addEventListener('focus', () => { this.focused = true; this.spriteKey = null; });
+    this.addEventListener('blur', () => { this.focused = false; this.spriteKey = null; });
   }
   etch(points, radius = 2.8) {
     const W = this.W, h = this.h, ins = this.inside;
