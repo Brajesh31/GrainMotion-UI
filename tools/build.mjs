@@ -20,6 +20,11 @@ export const SOUNDS = {
   segmented: one('tap'),
   range: one('tap'),
   rating: one('stone'),
+  input: one('tap'),
+  textarea: one('tap'),
+  password: one('stone', 'tap'),
+  search: one('tap', 'stone'),
+  otp: one('tap', 'stone'),
 };
 // Images a control carries, as constants.
 export const ART = { thinking: { ROCK: 'rock.webp' } };
