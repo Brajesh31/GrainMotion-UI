@@ -28,13 +28,22 @@ The test and screenshot utilities require Chrome or Chromium. Set `CHROME` if th
 
 ## Current test coverage
 
-The existing `tools/test.mjs` currently exercises the four components in a mobile-sized Chromium viewport. It checks:
+The existing `tools/test.mjs` was originally written for the four initial components. Phase 1 additions are now included in the gallery and need matching automated checks before the release can be called verified. The original checks cover:
 
 - Slider drag, input/change events, vertical-swipe handling and keyboard increments.
 - Toggle click, Space behavior, change events and vertical-swipe handling.
 - Signature stroke creation, input event, PNG export and Backspace undo.
 - Thinking state labels and busy/idle semantics.
 - FormData submission for slider and toggle.
+
+Phase 1 test coverage to add and run:
+
+- Checkbox: pointer toggle, Space/Enter, checked state, disabled state and form serialization.
+- Radio Group: option selection, arrow-key navigation, selected radio state and form serialization.
+- Segmented Control: active segment selection, arrow/Home/End/Space behavior and form serialization.
+- Range Slider: lower/upper handle movement, keyboard steps, non-crossing bounds, input/change timing, touch scroll coexistence and `low,high` form serialization.
+- Rating: pointer selection, Arrow/Home/End adjustments, accessible value text, disabled state and form serialization.
+- Regression: all original four tests must continue to pass with all nine scripts loaded together.
 - Component sizing.
 - Horizontal overflow at the configured mobile viewport.
 - Browser script exceptions.
