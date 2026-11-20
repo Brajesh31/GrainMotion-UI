@@ -389,11 +389,12 @@ class SandRating extends SandTray {
     this.stones = this.slotX.map((x,i)=>i===selected && this._value ? null : [x,this.cy,this.rx*.65,this.ry*.65,.68,.78,.68]).filter(Boolean);
   }
   sprites() {
-    const c = this.ox, k = this.k, key = 'rating|' + this._value;
+    const c = this.ox, k = this.k, key = 'rating|' + this._value + '|' + !!this.focused;
     if (key === this.spriteKey) return; this.spriteKey = key;
     c.setTransform(k,0,0,k,0,0); c.clearRect(0,0,this.W,this.H);
     c.textAlign='center'; c.textBaseline='middle'; c.font=`600 ${Math.max(9,this.H*.09)}px ui-sans-serif,sans-serif`;
     this.slotX.forEach((x,i)=>{ c.fillStyle='#745a3f'; c.fillText(String(i+1),x,this.H*.82); });
+    if (this.focused) { c.strokeStyle='#2b2a27'; c.lineWidth=2; c.beginPath(); c.roundRect(this.pad, this.pad * .8, this.W - this.pad * 2, this.H - this.pad * 1.6, this.H * .18); c.stroke(); }
   }
 }
 if (!customElements.get('sand-rating')) customElements.define('sand-rating', SandRating);
