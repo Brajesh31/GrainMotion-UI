@@ -340,6 +340,8 @@ class SandRating extends SandTray {
     this._value = Math.max(0, Math.min(5, Math.round(this.defaultValue))); this.target = this._value;
     this.setAttribute('role', 'slider'); this.setAttribute('aria-label', this.getAttribute('label') || 'Rating');
     this.style.touchAction = 'pan-y'; this.syncDisabled();
+    this.addEventListener('focus', () => { this.focused = true; this.spriteKey = null; });
+    this.addEventListener('blur', () => { this.focused = false; this.spriteKey = null; });
     this.updateAria(); this.formValue(this._value ? String(this._value) : null);
     this.addEventListener('click', e => { if (!this.disabled && e.target === this) { Sound.wake(); this.setFromPointer(e); } });
     this.addEventListener('keydown', e => {
