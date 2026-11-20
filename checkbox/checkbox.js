@@ -416,6 +416,15 @@ class SandCheckbox extends SandTray {
     this.stone = [this.cx + this.shift * this.rr * .72, this.cy, this.rr * .76, this.rr * .76];
     if (Math.abs(this.target - this.shift) > .002) this.relax(this.cx - this.rr * 2, this.cx + this.rr * 2, 1);
   }
+  sprites() {
+    const c = this.ox, k = this.k, key = this.shift.toFixed(3) + '|' + !!this.focused;
+    if (key === this.spriteKey) return; this.spriteKey = key;
+    c.setTransform(k, 0, 0, k, 0, 0); c.clearRect(0, 0, this.W, this.H);
+    if (this.focused) {
+      c.strokeStyle = '#2b2a27'; c.lineWidth = Math.max(2, this.H * .018);
+      c.beginPath(); c.arc(this.cx, this.cy, this.rr * 1.36, 0, Math.PI * 2); c.stroke();
+    }
+  }
 }
 if (!customElements.get('sand-checkbox')) customElements.define('sand-checkbox', SandCheckbox);
 })();
