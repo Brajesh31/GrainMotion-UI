@@ -14,6 +14,11 @@ The following details are documented by the current component READMEs and source
 | Toggle | Switch role with `aria-checked`; click, Space and Enter behavior. | Broader real screen-reader and browser testing is not recorded. |
 | Signature | Named form value as PNG data URL; Backspace undo and Delete clear. | Drawing itself requires a pointer; there is no documented keyboard drawing alternative. |
 | Thinking | Status region; `aria-busy` while active and accessible state names. | Broader real screen-reader and browser testing is not recorded. |
+| Checkbox | Checkbox role/state, accessible label, Space/Enter, form-associated value and focus treatment. | Screen-reader behavior and full keyboard/touch tests remain unverified. |
+| Radio Group | Radiogroup with individual visually hidden radio buttons, arrow/Home/End/Space selection and accessible labels. | Options are capped at five in this version; screen-reader behavior remains unverified. |
+| Segmented Control | Radiogroup with visually hidden radio buttons, keyboard selection and individual focus treatment. | Options are capped at five in this version; screen-reader behavior remains unverified. |
+| Range Slider | Two visually hidden slider handles with independent values and keyboard controls; visible focus treatment on the matching rake. | Pointer/touch, screen-reader and range-boundary behavior still require runtime verification. |
+| Rating | Slider role with value text, arrow/Home/End keys, disabled behavior and visible focus treatment. | Fixed zero-to-five scale; assistive-technology behavior remains unverified. |
 
 The project documentation states that current tests run in headless Chromium and that real-device, Safari, Firefox and screen-reader testing has not been completed. See [Browser Support](BROWSER-SUPPORT.md).
 
