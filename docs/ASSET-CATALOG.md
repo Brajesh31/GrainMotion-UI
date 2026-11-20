@@ -19,6 +19,11 @@ This catalog records assets found in the current repository tree. It does not as
 | `making-of/concept/13-camera-panel.webp` | WebP | Composition/panel exploration. |
 | `making-of/concept/concept-1.webp` | WebP | Additional early concept artwork. |
 | `making-of/concept/rocks.webp` | WebP | Rock shape and material exploration. |
+| `checkbox/assets/concept.svg` | SVG | Checkbox physical-interaction concept diagram, not a runtime screenshot. |
+| `radio-group/assets/concept.svg` | SVG | Radio group stone-well concept diagram, not a runtime screenshot. |
+| `segmented/assets/concept.svg` | SVG | Segmented-control carved-tray concept diagram, not a runtime screenshot. |
+| `range/assets/concept.svg` | SVG | Two-rake interval concept diagram, not a runtime screenshot. |
+| `rating/assets/concept.svg` | SVG | Five-well pebble rating concept diagram, not a runtime screenshot. |
 
 ### Audio assets
 
