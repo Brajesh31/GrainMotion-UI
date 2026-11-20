@@ -38,8 +38,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   for (const n of NAMES) {
     const file = join(root, n, n + '.js');
     let text = readFileSync(file, 'utf8');
-    text = between(text, 'zen sand core', core, file);
-    text = between(text, 'sounds', 'window.ZenSand.Sound.add({\n' + Object.entries(SOUNDS[n]).map(([k, f]) => `  '${k}': '${uri('sounds/' + f)}',`).join('\n') + '\n});', file);
+    text = between(text, 'grainmotion-ui core', core, file);
+    text = between(text, 'sounds', 'window.GrainMotionUI.Sound.add({\n' + Object.entries(SOUNDS[n]).map(([k, f]) => `  '${k}': '${uri('sounds/' + f)}',`).join('\n') + '\n});', file);
     if (ART[n]) text = between(text, 'art', Object.entries(ART[n]).map(([k, f]) => `const ${k} = '${uri('art/' + f)}';`).join('\n'), file);
     put(file, text);
   }
