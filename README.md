@@ -195,6 +195,18 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 
 ## 📚 Documentation
 
+- [Complete project documentation index](docs/README.md)
+- [50-component expansion roadmap](docs/ROADMAP.md)
+- [Component catalog and implementation status](docs/COMPONENT-CATALOG.md)
+- [Architecture and shared sand engine](docs/ARCHITECTURE.md)
+- [Design system and visual standards](docs/DESIGN-SYSTEM.md)
+- [Asset catalog and creation standards](docs/ASSET-CATALOG.md)
+- [Accessibility standards](docs/ACCESSIBILITY.md)
+- [Performance and rendering plan](docs/PERFORMANCE.md)
+- [Testing strategy](docs/TESTING.md)
+- [Browser support matrix](docs/BROWSER-SUPPORT.md)
+- [Contribution guide](docs/CONTRIBUTING.md)
+- [Component creation guide](docs/COMPONENT-CREATION-GUIDE.md)
 - [Live component gallery](https://brajesh31.github.io/GrainMotion-UI/)
 - [Slider documentation](slider/README.md)
 - [Toggle documentation](toggle/README.md)
@@ -203,7 +215,6 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [Agent skill](skills/grainmotion-ui/SKILL.md)
 - [AI-readable project guide](llms.txt)
 - [Design process and concept artwork](making-of/README.md)
-
 ## ⚠️ Known limitations
 
 - **WebGL2 required for rendering.** Without WebGL2, the controls may remain keyboard-operable, but the sand visuals will not render.
