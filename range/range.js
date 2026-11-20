@@ -394,6 +394,8 @@ class SandRange extends SandTray {
     for (const [node, label] of [[this.handleLow, 'Minimum'], [this.handleHigh, 'Maximum']]) {
       node.setAttribute('role', 'slider'); node.setAttribute('aria-label', (this.getAttribute('label') || 'Range') + ' ' + label);
       node.tabIndex = 0; node.style.cssText = 'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0';
+      node.addEventListener('focus', () => { this.focusWhich = label === 'Minimum' ? 'low' : 'high'; this.spriteKey = null; });
+      node.addEventListener('blur', () => { if (this.focusWhich === (label === 'Minimum' ? 'low' : 'high')) this.focusWhich = null; this.spriteKey = null; });
       node.addEventListener('keydown', e => this.handleKey(e, label === 'Minimum' ? 'low' : 'high'));
       this.append(node);
     }
@@ -438,7 +440,7 @@ class SandRange extends SandTray {
   }
   sprites() {
     const c = this.ox, k = this.k, lx = this._x(this._low), hx = this._x(this._high);
-    const key = lx.toFixed(1) + '|' + hx.toFixed(1);
+    const key = lx.toFixed(1) + '|' + hx.toFixed(1) + '|' + this.focusWhich;
     if (key === this.spriteKey) return; this.spriteKey = key;
     c.setTransform(k, 0, 0, k, 0, 0); c.clearRect(0, 0, this.W, this.H);
     for (const x of [lx, hx]) {
@@ -448,6 +450,8 @@ class SandRange extends SandTray {
       c.fillStyle = '#b99d68';
       for (let j = -1; j <= 1; j++) { c.beginPath(); c.roundRect(x + j * this.H * .07 - w * .45, this.H * .28, w * .9, this.H * .44, w * .35); c.fill(); }
       c.restore();
+      const which = x === lx ? 'low' : 'high';
+      if (which === this.focusWhich) { c.strokeStyle = '#2b2a27'; c.lineWidth = 2; c.beginPath(); c.roundRect(x - w * 1.2, top - this.H * .035, w * 2.4, bot - top + this.H * .07, w); c.stroke(); }
     }
   }
 }
