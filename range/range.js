@@ -372,22 +372,51 @@ class SandRange extends SandTray {
     });
     this.addEventListener('pointerup', e => {
       if (!this.drag) return;
+      const before = this.lowTarget + ',' + this.highTarget;
       if (!this.drag.moved) this.movePointer(e);
-      const moved = this.drag.moved; this.drag = null; if (moved) this.dispatchEvent(new Event('change', { bubbles: true }));
+      const changed = before !== this.lowTarget + ',' + this.highTarget;
+      const moved = this.drag.moved; this.drag = null;
+      if (moved || changed) this.dispatchEvent(new Event('change', { bubbles: true }));
     });
     this.addEventListener('pointercancel', () => { if (this.drag) { const moved = this.drag.moved; this.drag = null; if (moved) this.dispatchEvent(new Event('change', { bubbles: true })); } });
   }
   _snap(v) { const n = Math.max(this.min, Math.min(this.max, Number(v) || 0)); return +(this.min + Math.round((n - this.min) / this.stepSize) * this.stepSize).toFixed(8); }
   _x(v) { return this.inner.x0 + (v - this.min) / (this.max - this.min) * (this.inner.x1 - this.inner.x0); }
-  pointerValue(e) { const b = this.getBoundingClientRect(); return this.min + Math.max(0, Math.min(1, (e.clientX - b.left) / b.width)) * (this.max - this.min); }
+  pointerValue(e) {
+    const b = this.getBoundingClientRect(), x = (e.clientX - b.left) / b.width * this.W, r = this.inner;
+    const f = Math.max(0, Math.min(1, (x - r.x0) / (r.x1 - r.x0)));
+    return this.min + f * (this.max - this.min);
+  }
   movePointer(e) { const v = this._snap(this.pointerValue(e)); if (this.drag.which === 'low') this.setPair(Math.min(v, this.highTarget), this.highTarget, true); else this.setPair(this.lowTarget, Math.max(v, this.lowTarget), true); }
   setPair(a, b, notify) {
     let lo = this._snap(a), hi = this._snap(b); if (lo > hi) [lo, hi] = [hi, lo];
-    const changed = lo !== this.lowTarget || hi !== this.highTarget;
+    const oldLow = this.lowTarget, oldHigh = this.highTarget;
+    const changed = lo !== oldLow || hi !== oldHigh;
     this.lowTarget = lo; this.highTarget = hi;
     if (!this._ready) { this._low = lo; this._high = hi; return; }
     this.formValue(lo + ',' + hi); this.updateHandles();
+    if (changed && this.W) this.updateBand(oldLow, oldHigh, lo, hi);
     if (changed && notify) { this.dispatchEvent(new Event('input', { bubbles: true })); Sound.play('tap', .22, 1.02); }
+  }
+  updateBand(oldLow, oldHigh, low, high) {
+    const r = this.inner, W = this.W, h = this.h;
+    const oldL = this._x(oldLow), oldH = this._x(oldHigh), newL = this._x(low), newH = this._x(high);
+    const spans = [[Math.floor(Math.min(oldL, newL)), Math.ceil(Math.max(oldL, newL))], [Math.floor(Math.min(oldH, newH)), Math.ceil(Math.max(oldH, newH))]];
+    let xa = W, xb = 0;
+    for (const [from, to] of spans) {
+      const a = Math.max(r.x0, from), b = Math.min(r.x1 - 1, to);
+      if (a > b) continue;
+      xa = Math.min(xa, a); xb = Math.max(xb, b);
+      for (let x = a; x <= b; x++) {
+        const selected = x >= newL && x <= newH;
+        for (let y = r.y0; y < r.y1; y++) {
+          const i = y * W + x; if (!this.inside[i]) continue;
+          h[i] = this.lines(x, y, selected ? 4 : 2, selected ? 2.5 : .3) * (selected ? .36 : .16);
+          if (selected) h[i] += -.08 * Math.cos((x - newL) / Math.max(1, newH - newL) * Math.PI * 2);
+        }
+      }
+    }
+    if (xb >= xa) { this.relax(xa, xb + 1, 2); this.dirty = true; }
   }
   createHandles() {
     this.handleLow = document.createElement('span'); this.handleHigh = document.createElement('span');
