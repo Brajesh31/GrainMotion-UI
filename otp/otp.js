@@ -456,6 +456,7 @@ class SandOtp extends SandNativeField {
   }
   attributeChangedCallback(name,oldValue,newValue){super.attributeChangedCallback(name,oldValue,newValue);if(this._ready&&name==='length'){this.field.maxLength=this.length;this.field.minLength=this.length;this.field.pattern='[0-9]{'+this.length+'}';if(this.value.length>this.length)this.setValue(this.value.slice(0,this.length),false);this.layout();this.spriteKey=null;}if(this._ready&&name==='masked')this.applyMask();}
   applyMask(){if(this.field)this.field.style.webkitTextSecurity=this.masked?'disc':'none';}
+  setValue(value,notify=false){const clean=String(value??'').replace(/[^0-9]/g,'').slice(0,this.length);super.setValue(clean,notify);}
   sanitize(announce=false){
     const before=this.field.value,clean=before.replace(/[^0-9]/g,'').slice(0,this.length);
     if(before!==clean){const pos=Math.min(clean.length,this.field.selectionStart||clean.length);this.field.value=clean;try{this.field.setSelectionRange(pos,pos);}catch{}}
@@ -482,7 +483,7 @@ class SandOtp extends SandNativeField {
       c.lineWidth=this.focused&&i===Math.min(this.length-1,pos)?2:1;
       c.beginPath();c.roundRect(x-w*.40,this.H*.24,w*.80,this.H*.52,this.H*.08);c.stroke();
     }
-    if(this.focused){const x=this.slotX[Math.min(this.length-1,pos)]||this.W/2;c.strokeStyle='#2b2a27';c.lineWidth=1.5;c.beginPath();c.arc(x,cy,this.H*.37,0,Math.PI*2);c.stroke();}
+    if(this.focused){const x=this.slotX[Math.min(this.length-1,pos)]||this.W/2;c.strokeStyle='#2b2a27';c.lineWidth=1.5;c.beginPath();c.arc(x,this.cy,this.H*.37,0,Math.PI*2);c.stroke();}
   }
 }
 if(!customElements.get('sand-otp'))customElements.define('sand-otp',SandOtp);
