@@ -3,7 +3,7 @@
 export const REPO = 'Brajesh31/GrainMotion-UI';
 export const SITE = 'https://brajesh31.github.io/GrainMotion-UI';
 export const AUTHOR = 'Brajesh Kumar <https://github.com/Brajesh31>';
-export const COUNT = 'four';
+export const COUNT = 'nine';
 
 // Limits every control shares; each README ends with its own, then these.
 export const COMMON_LIMITS = [
@@ -102,5 +102,402 @@ export const SPEC = [
       ['a new state', 'the sand sweeps itself smooth in a few wide passes, about two seconds, then the new line starts'],
       ['idle', 'the sand stops and settles, and the garden stays as it is']],
     limits: ['**The change between states takes about two seconds,** the sweep included. A state that lasts less than that is barely seen.', '**It is round,** and as high as it is wide.'],
+  },,
+  ...[
+  {
+    "id": "checkbox",
+    "name": "Checkbox",
+    "tag": "sand-checkbox",
+    "categories": [
+      "checkbox",
+      "selection",
+      "input",
+      "sand",
+      "animation"
+    ],
+    "sub": "A pebble reveals a checkmark pressed into sand.",
+    "desc": "A checkbox where a small river stone rolls aside to reveal a checkmark etched into a circular sand well.",
+    "docs": "Use <sand-checkbox label=\"Enable notifications\" value=\"notifications\"></sand-checkbox>. Read el.checked; it fires input and change when toggled. With a name, a checked value is submitted with its form.",
+    "intro": [
+      "A small river stone rests over a checkmark etched into a circular sand well. Checking the control lifts and rolls the stone to one side, revealing the pressed mark; unchecking returns it to cover the mark."
+    ],
+    "demo": {
+      "html": "<sand-checkbox id=\"el\" label=\"Enable notifications\" name=\"notifications\" value=\"yes\"></sand-checkbox><p id=\"out\"></p>",
+      "hint": "Click the tray or focus it and press Space. Watch the stone roll aside and expose the checkmark.",
+      "script": "const out = document.getElementById('out'); const show = () => out.textContent = el.checked ? 'Notifications are on' : 'Notifications are off'; el.addEventListener('change', show); show();"
+    },
+    "use": "<script src=\"checkbox.js\"></script>\n<sand-checkbox label=\"Enable notifications\" name=\"notifications\" value=\"yes\"></sand-checkbox>",
+    "js": "const el = document.querySelector('sand-checkbox');\nel.addEventListener('change', () => savePreference(el.checked));\nel.checked = true;",
+    "attrs": [
+      [
+        "`checked`",
+        "Starts selected",
+        "absent"
+      ],
+      [
+        "`disabled`",
+        "Prevents interaction and form participation",
+        "absent"
+      ],
+      [
+        "`label`",
+        "Accessible name",
+        "Checkbox"
+      ],
+      [
+        "`value`",
+        "Form value when checked",
+        "on"
+      ],
+      [
+        "`name`",
+        "Form field name",
+        ""
+      ]
+    ],
+    "notes": [
+      "**Checkbox semantics:** exposes `role=\"checkbox\"`, `aria-checked`, and a programmatic accessible name.",
+      "**Keyboard:** Space and Enter toggle the control.",
+      "**Form behavior:** unchecked submits no value; checked submits its value (or `on`)."
+    ],
+    "happens": [
+      [
+        "click or press Space/Enter",
+        "the stone moves aside and exposes the checkmark"
+      ],
+      [
+        "uncheck",
+        "the stone settles back over the pressed mark"
+      ],
+      [
+        "disable",
+        "interaction is blocked and the element is removed from the tab order"
+      ]
+    ],
+    "limits": [
+      "**One binary value.** This control is a single checkbox, not a checkbox group."
+    ],
+    "manualDocs": true
   },
+  {
+    "id": "radio-group",
+    "name": "Radio Group",
+    "tag": "sand-radio-group",
+    "categories": [
+      "radio",
+      "selection",
+      "input",
+      "sand",
+      "animation"
+    ],
+    "sub": "A row of river stones marks one selected option.",
+    "desc": "A radio group with individual stone wells and one selected pebble moving to the active option.",
+    "docs": "Use <sand-radio-group name=\"size\" label=\"Choose a size\" options=\"Small,Medium,Large\" value=\"Medium\"></sand-radio-group>. Read el.value and listen for input/change. Options are comma-separated labels, up to five.",
+    "intro": [
+      "A row of individually pressed wells holds a small stone for each choice. The selected stone rises slightly and glides to the chosen well; the other pebbles remain settled in their own impressions."
+    ],
+    "demo": {
+      "html": "<sand-radio-group id=\"el\" name=\"delivery\" label=\"Delivery speed\" options=\"Standard,Express,Overnight\" value=\"Standard\"></sand-radio-group><p id=\"out\"></p>",
+      "hint": "Choose a pebble well with the pointer, or use the arrow keys when an option is focused.",
+      "script": "const out = document.getElementById('out'); const show = () => out.textContent = 'Selected: ' + el.value; el.addEventListener('change', show); show();"
+    },
+    "use": "<script src=\"radio-group.js\"></script>\n<sand-radio-group name=\"size\" label=\"Choose a size\" options=\"Small,Medium,Large\" value=\"Medium\"></sand-radio-group>",
+    "js": "const el = document.querySelector('sand-radio-group');\nel.addEventListener('change', () => updateSize(el.value));\nel.value = 'Large';",
+    "attrs": [
+      [
+        "`options`",
+        "Comma-separated option labels, maximum five",
+        "Pebble 1,Pebble 2,Pebble 3"
+      ],
+      [
+        "`value`",
+        "Initially selected option",
+        "First option"
+      ],
+      [
+        "`label`",
+        "Accessible group name",
+        "Choose an option"
+      ],
+      [
+        "`disabled`",
+        "Disables all choices",
+        "absent"
+      ],
+      [
+        "`name`",
+        "Form field name",
+        ""
+      ]
+    ],
+    "notes": [
+      "**Radio semantics:** the host exposes `role=\"radiogroup\"`; visually hidden radio buttons expose the individual options.",
+      "**Keyboard:** arrow keys change and select; Home and End select first and last; Space selects the focused option.",
+      "**Pointer:** clicking a well selects the nearest option."
+    ],
+    "happens": [
+      [
+        "select an option",
+        "the selected pebble moves to its sand well"
+      ],
+      [
+        "select another option",
+        "the marker glides to the new well and settles"
+      ],
+      [
+        "use arrow keys",
+        "focus and selection move through the options"
+      ]
+    ],
+    "limits": [
+      "**Up to five options.** The first implementation accepts comma-separated labels; a comma cannot be part of one label.",
+      "**Options are configured at creation.** Dynamic option-list mutation is not exposed in this version."
+    ],
+    "manualDocs": true
+  },
+  {
+    "id": "segmented",
+    "name": "Segmented Control",
+    "tag": "sand-segmented",
+    "categories": [
+      "segmented-control",
+      "selection",
+      "navigation",
+      "sand",
+      "animation"
+    ],
+    "sub": "A flat stone glides between carved sections.",
+    "desc": "A segmented control where a flat river-stone marker glides across individually carved sections in a sand track.",
+    "docs": "Use <sand-segmented name=\"period\" label=\"Time period\" options=\"Day,Week,Month\" value=\"Week\"></sand-segmented>. Read el.value and listen for input/change.",
+    "intro": [
+      "A shallow, flat stone travels between sections carved into one long sand tray. The sections are separated by narrow grooves; the stone settles over the active segment like a physical selector."
+    ],
+    "demo": {
+      "html": "<sand-segmented id=\"el\" name=\"period\" label=\"Time period\" options=\"Day,Week,Month\" value=\"Week\"></sand-segmented><p id=\"out\"></p>",
+      "hint": "Select a carved section. The flat stone travels and settles over the active segment.",
+      "script": "const out = document.getElementById('out'); const show = () => out.textContent = 'Showing: ' + el.value; el.addEventListener('change', show); show();"
+    },
+    "use": "<script src=\"segmented.js\"></script>\n<sand-segmented name=\"period\" label=\"Time period\" options=\"Day,Week,Month\" value=\"Week\"></sand-segmented>",
+    "js": "const el = document.querySelector('sand-segmented');\nel.addEventListener('change', () => loadPeriod(el.value));\nel.value = 'Month';",
+    "attrs": [
+      [
+        "`options`",
+        "Comma-separated option labels, maximum five",
+        "Day,Week,Month"
+      ],
+      [
+        "`value`",
+        "Initially selected option",
+        "First option"
+      ],
+      [
+        "`label`",
+        "Accessible group name",
+        "Choose a view"
+      ],
+      [
+        "`disabled`",
+        "Disables all choices",
+        "absent"
+      ],
+      [
+        "`name`",
+        "Form field name",
+        ""
+      ]
+    ],
+    "notes": [
+      "**Radio semantics:** exposes a radiogroup with individually focusable radio options.",
+      "**Keyboard:** arrow keys change and select; Home and End select first and last; Space selects the focused option.",
+      "**Visual marker:** one flat stone moves between all carved sections."
+    ],
+    "happens": [
+      [
+        "select a section",
+        "the flat stone glides to the chosen segment"
+      ],
+      [
+        "switch sections",
+        "the stone pushes a subtle wake and settles over the new section"
+      ],
+      [
+        "disable",
+        "the selection is visible but cannot be changed"
+      ]
+    ],
+    "limits": [
+      "**Up to five options.** Option labels are comma-separated; commas within labels are not supported.",
+      "**Single selected value.** This is not a multi-select control."
+    ],
+    "manualDocs": true
+  },
+  {
+    "id": "range",
+    "name": "Range Slider",
+    "tag": "sand-range",
+    "categories": [
+      "range",
+      "slider",
+      "input",
+      "sand",
+      "animation"
+    ],
+    "sub": "Two bamboo rakes define an interval in the sand.",
+    "desc": "A two-handle range slider with independently adjustable bamboo rake markers and a visibly disturbed selected interval.",
+    "docs": "Use <sand-range name=\"budget\" label=\"Budget range\" min=\"0\" max=\"100\" step=\"5\" low=\"20\" high=\"80\"></sand-range>. Read el.low and el.high; el.value returns the pair. It fires input while adjusting and change when an interaction completes.",
+    "intro": [
+      "Two miniature bamboo rakes move independently through a shared tray. The area between them is cut with a denser set of grooves, making the selected interval visible as disturbed sand."
+    ],
+    "demo": {
+      "html": "<sand-range id=\"el\" name=\"price\" label=\"Price range\" min=\"0\" max=\"500\" step=\"10\" low=\"100\" high=\"400\"></sand-range><p id=\"out\"></p>",
+      "hint": "Drag either bamboo rake. Each handle can also be focused separately and adjusted with the keyboard.",
+      "script": "const out = document.getElementById('out'); const show = () => out.textContent = '₹' + el.low + ' to ₹' + el.high; el.addEventListener('input', show); show();"
+    },
+    "use": "<script src=\"range.js\"></script>\n<sand-range name=\"budget\" label=\"Budget range\" min=\"0\" max=\"100\" step=\"5\" low=\"20\" high=\"80\"></sand-range>",
+    "js": "const el = document.querySelector('sand-range');\nel.addEventListener('input', () => updateBudget(el.low, el.high));\nel.value = [30, 70];",
+    "attrs": [
+      [
+        "`min`",
+        "Minimum permitted value",
+        "0"
+      ],
+      [
+        "`max`",
+        "Maximum permitted value",
+        "100"
+      ],
+      [
+        "`step`",
+        "Keyboard and pointer increment",
+        "1"
+      ],
+      [
+        "`low`",
+        "Initial lower value",
+        "25"
+      ],
+      [
+        "`high`",
+        "Initial upper value",
+        "75"
+      ],
+      [
+        "`value`",
+        "Initial pair as low,high",
+        "Overrides low/high when valid"
+      ],
+      [
+        "`label`",
+        "Accessible group label",
+        "Range"
+      ],
+      [
+        "`disabled`",
+        "Disables both handles",
+        "absent"
+      ],
+      [
+        "`name`",
+        "Form field name, serialized as low,high",
+        ""
+      ]
+    ],
+    "notes": [
+      "**Two independently accessible handles:** each handle exposes slider role, value, minimum and maximum.",
+      "**Keyboard:** arrow keys change by one step; Page Up/Down change by ten steps; Home/End move to min/max.",
+      "**Pointer:** the nearest handle is selected; touch scrolling is preserved until a horizontal drag begins."
+    ],
+    "happens": [
+      [
+        "move lower rake",
+        "the lower bound changes without crossing the upper bound"
+      ],
+      [
+        "move upper rake",
+        "the upper bound changes without crossing the lower bound"
+      ],
+      [
+        "release a rake",
+        "the adjusted value settles and a change event is emitted"
+      ]
+    ],
+    "limits": [
+      "**Form serialization:** one comma-separated `low,high` value is submitted.",
+      "**The first implementation uses a fixed horizontal range layout.**"
+    ],
+    "manualDocs": true
+  },
+  {
+    "id": "rating",
+    "name": "Rating",
+    "tag": "sand-rating",
+    "categories": [
+      "rating",
+      "input",
+      "selection",
+      "sand",
+      "animation"
+    ],
+    "sub": "Five river stones sit in separate rating wells.",
+    "desc": "A five-point rating control where a selected river stone marks the chosen rating in one of five individual sand wells.",
+    "docs": "Use <sand-rating name=\"product-rating\" label=\"Product rating\" value=\"4\"></sand-rating>. Read el.value and listen for input/change. The supported scale is zero through five.",
+    "intro": [
+      "Five individually pressed wells hold small pebbles along a horizontal tray. Choosing a rating lifts the selected pebble into a more prominent position while the remaining stones stay settled in their wells."
+    ],
+    "demo": {
+      "html": "<sand-rating id=\"el\" name=\"rating\" label=\"Experience rating\" value=\"3\"></sand-rating><p id=\"out\"></p>",
+      "hint": "Click a well to give a rating. Use the arrow keys to adjust it while focused.",
+      "script": "const out = document.getElementById('out'); const show = () => out.textContent = el.value ? el.value + ' of 5' : 'Not rated'; el.addEventListener('change', show); show();"
+    },
+    "use": "<script src=\"rating.js\"></script>\n<sand-rating name=\"product-rating\" label=\"Product rating\" value=\"4\"></sand-rating>",
+    "js": "const el = document.querySelector('sand-rating');\nel.addEventListener('change', () => saveRating(el.value));\nel.value = 5;",
+    "attrs": [
+      [
+        "`value`",
+        "Initial rating from zero to five",
+        "0"
+      ],
+      [
+        "`disabled`",
+        "Prevents rating changes",
+        "absent"
+      ],
+      [
+        "`label`",
+        "Accessible name",
+        "Rating"
+      ],
+      [
+        "`name`",
+        "Form field name, omitted from submission when value is zero",
+        ""
+      ]
+    ],
+    "notes": [
+      "**Slider semantics:** exposes minimum zero, maximum five, current value and a readable value text.",
+      "**Keyboard:** arrow keys increase/decrease by one; Home sets zero; End sets five.",
+      "**Pointer:** clicking across the tray selects one of five rating positions."
+    ],
+    "happens": [
+      [
+        "choose a rating",
+        "the selected pebble rises slightly in its well"
+      ],
+      [
+        "change rating",
+        "the selected marker moves to the new well"
+      ],
+      [
+        "clear rating",
+        "set `value` to zero to return to Not rated"
+      ]
+    ],
+    "limits": [
+      "**Fixed scale:** this version supports zero through five only.",
+      "**One value:** half-star and custom-step ratings are not currently supported."
+    ],
+    "manualDocs": true
+  }
+]
+
 ];
