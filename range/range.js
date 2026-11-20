@@ -380,9 +380,9 @@ class SandRange extends SandTray {
     this.addEventListener('pointerup', e => {
       if (!this.drag) return;
       if (!this.drag.moved) this.movePointer(e);
-      this.drag = null; this.dispatchEvent(new Event('change', { bubbles: true }));
+      const moved = this.drag.moved; this.drag = null; if (moved) this.dispatchEvent(new Event('change', { bubbles: true }));
     });
-    this.addEventListener('pointercancel', () => { if (this.drag) { this.drag = null; this.dispatchEvent(new Event('change', { bubbles: true })); } });
+    this.addEventListener('pointercancel', () => { if (this.drag) { const moved = this.drag.moved; this.drag = null; if (moved) this.dispatchEvent(new Event('change', { bubbles: true })); } });
   }
   _snap(v) { const n = Math.max(this.min, Math.min(this.max, Number(v) || 0)); return +(this.min + Math.round((n - this.min) / this.stepSize) * this.stepSize).toFixed(8); }
   _x(v) { return this.inner.x0 + (v - this.min) / (this.max - this.min) * (this.inner.x1 - this.inner.x0); }
