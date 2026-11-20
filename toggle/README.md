@@ -56,5 +56,5 @@ el.checked = true;    // the stone glides there
 - **It does not hold still for `prefers-reduced-motion`.** The sand still moves. If that matters on your page, use a plain control there.
 - **Drawn for a light page.** The sand and the walnut frame are warm and light; they look pasted on over a dark background.
 - **The sand is simulated at one cell per CSS pixel,** so a wider element costs more. Each scales to its CSS `width`; the height follows.
-- **Sound is on** after the first touch or key on the page. `ZenSand.Sound.on = false` turns every control quiet.
+- **Sound is on** after the first touch or key on the page. `GrainMotionUI.Sound.on = false` turns every control quiet.
 - **Checked in headless Chromium** with real touch and key events, with the CPU slowed four times. Not tried in Safari or Firefox, on a real phone, or with a screen reader.
