@@ -91,6 +91,47 @@ The project grew through a series of visual studies exploring how familiar contr
 
 </div>
 
+### Phase 1 component concepts
+
+Each new control also has its own physical-interaction concept sheet. These are design diagrams, not screenshots of the running controls.
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="checkbox/assets/concept.svg" alt="Checkbox stone reveals a checkmark in a sand well" width="100%">
+      <br><strong>Checkbox · Revealed mark</strong>
+    </td>
+    <td align="center" width="50%">
+      <img src="radio-group/assets/concept.svg" alt="Radio group with separate stone wells" width="100%">
+      <br><strong>Radio Group · Selected pebble</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="segmented/assets/concept.svg" alt="Segmented control with a flat stone selector" width="100%">
+      <br><strong>Segmented · Moving marker</strong>
+    </td>
+    <td align="center" width="50%">
+      <img src="range/assets/concept.svg" alt="Range slider with two bamboo rake handles" width="100%">
+      <br><strong>Range · Two rake handles</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="rating/assets/concept.svg" alt="Rating control with five pebble wells" width="100%">
+      <br><strong>Rating · Five pebble wells</strong>
+    </td>
+    <td align="center" width="50%">
+      <strong>One material language</strong>
+      <br>Sand, walnut, bamboo and river stone carry through all nine controls.
+    </td>
+  </tr>
+</table>
+
+</div>
+
 See [making-of/](making-of/) for the design notes, concept images, and prompts behind the visual direction.
 
 ## ⚙️ How it works
