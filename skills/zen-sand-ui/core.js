@@ -1,16 +1,16 @@
-// The Zen Sand core: the engine every control in the set is built on. A tray is a walnut frame holding a
+// The GrainMotion-UI core: the engine every control in the set is built on. A tray is a walnut frame holding a
 // height field of sand, simulated at one cell per CSS pixel in JavaScript and lit on the GPU (WebGL2). Controls
 // extend SandTray, carve the field, and may draw stones in the shader and sprites on an overlay canvas. Sounds
 // are recorded takes played through Web Audio.
 //
 // This file is the source. tools/build.mjs stamps a copy into every control file, so each file works alone.
-// The first one loaded sets window.ZenSand; the others find it there and reuse it.
+// The first one loaded sets window.GrainMotionUI; the others find it there and reuse it.
 (() => {
-if (window.ZenSand) return;
+if (window.GrainMotionUI) return;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 // Sound: decoded lazily on the first gesture (browsers keep audio asleep until then). Each control file adds its
 // own takes as data URIs with Sound.add({ name: 'data:...' }). Names ending in -b are second takes: play('tap')
-// picks between tap and tap-b, so repeats differ. Turn it all off with ZenSand.Sound.on = false.
+// picks between tap and tap-b, so repeats differ. Turn it all off with GrainMotionUI.Sound.on = false.
 const Sound = {
   _on: true, ctx: null, buf: {}, src: {},
   get on() { return this._on; },
@@ -305,5 +305,5 @@ class SandTray extends HTMLElement {
   }
 }
 
-window.ZenSand = { Sound, SandTray, version: 1 };
+window.GrainMotionUI = { Sound, SandTray, version: 1 };
 })();
