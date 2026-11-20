@@ -4,12 +4,22 @@
 
 GrainMotion-UI is currently a browser-native custom-element library. It is not a React or Vue component package. Each published control is a plain JavaScript file that registers a custom element and can be loaded through a normal script tag.
 
-The current repository contains four controls:
+The repository now contains nine controls. The original four remain the reference implementations:
 
 - `slider/slider.js` registers `<sand-slider>`.
 - `toggle/toggle.js` registers `<sand-toggle>`.
 - `signature/signature.js` registers `<sand-signature>`.
 - `thinking/thinking.js` registers `<sand-thinking>`.
+
+Phase 1 adds five standalone controls:
+
+- `checkbox/checkbox.js` registers `<sand-checkbox>`.
+- `radio-group/radio-group.js` registers `<sand-radio-group>`.
+- `segmented/segmented.js` registers `<sand-segmented>`.
+- `range/range.js` registers `<sand-range>`.
+- `rating/rating.js` registers `<sand-rating>`.
+
+The Phase 1 controls reuse the same shared engine and embed only the sound assets configured for that control in `tools/build.mjs`.
 
 ## Runtime layers
 
@@ -48,7 +58,7 @@ This creates a maintenance obligation: when the shared engine, sounds or embedde
 
 ### 4. Specification and generated documentation
 
-[`tools/spec.mjs`](../tools/spec.mjs) is the current source of truth for the four component descriptions, demos, usage snippets, attributes, interaction narratives and known component-specific limits.
+[`tools/spec.mjs`](../tools/spec.mjs) is the current source of truth for all nine component descriptions, demos, usage snippets, attributes, interaction narratives and known component-specific limits. The five Phase 1 entries use `manualDocs` because their expanded READMEs and demo pages are maintained as full hand-authored technical documents; their metadata still feeds the generated registry and `llms.txt`.
 
 [`tools/docs.mjs`](../tools/docs.mjs) generates:
 
@@ -61,7 +71,7 @@ Do not hand-edit generated files without also updating the source specification.
 
 ### 5. Gallery and hosting
 
-- `gallery/index.html` loads all four component scripts and wires their examples.
+- `gallery/index.html` loads all nine component scripts and wires their examples.
 - Component demo pages live in their component folders.
 - The site is deployed to GitHub Pages by `.github/workflows/pages.yml`.
 - The current repository does not define a framework-based bundling pipeline for the controls.
@@ -76,7 +86,7 @@ The following are recommendations, not current capabilities:
 4. **Fallbacks:** controls should preserve useful semantics and operation if WebGL2 or audio is unavailable.
 5. **Specification:** extend the existing `SPEC` structure with structured API definitions, accessibility requirements, test cases, asset references, demo metadata and known limitations.
 6. **Generated docs:** generate component catalog and registry output from the same validated specification.
-7. **Regression:** every shared-engine change must be exercised against the original four controls.
+7. **Regression:** every shared-engine change must be exercised against all nine controls, with particular attention to the original four reference components.
 
 ## Safe change sequence
 
