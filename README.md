@@ -23,7 +23,7 @@ Each control makes sounds: a rake through sand, a stone set down, sand settling,
 
 ## Try them
 
-Live: https://grainmotion-ui.vercel.app
+Live: https://brajesh31.github.io/GrainMotion-UI
 
 Or run it yourself:
 
@@ -61,8 +61,8 @@ Or copy the file into your project by hand. Then load it with a plain script tag
 Each folder's README lists the attributes, properties and events. The slider, toggle and signature work inside a `<form>` like native controls.
 
 - **Size.** Give the element a CSS `width` and the height follows. The sand is simulated at one cell per CSS pixel, so a wider tray costs more.
-- **Sound.** It plays after the first touch or key on the page. `ZenSand.Sound.on = false` silences every control.
-- **How the files share.** Each file carries a copy of the engine (about 18 KB) and its own sounds. The first one loaded sets `window.ZenSand` and the others reuse it. The files are between 170 and 370 KB; the thinking state is the big one, with two sound loops and the rock.
+- **Sound.** It plays after the first touch or key on the page. `GrainMotionUI.Sound.on = false` silences every control.
+- **How the files share.** Each file carries a copy of the engine (about 18 KB) and its own sounds. The first one loaded sets `window.GrainMotionUI` and the others reuse it. The files are between 170 and 370 KB; the thinking state is the big one, with two sound loops and the rock.
 
 For agents, [llms.txt](llms.txt) lists every file and what it is. In the gallery each control has its install line and a "Copy a prompt" button; the prompt points a coding agent at the real file and tells it how to wire it in.
 
@@ -85,7 +85,7 @@ Or copy the folder into your agent's skills folder by hand (for Claude Code, `~/
 
 ## Working on this repo
 
-- `core.js` is the source of the shared engine. After editing it, or anything in `sounds/` or `art/`, run `node tools/build.mjs`, which stamps the engine and each control's sounds into every control file (between the `// >>> zen sand core`, `// >>> sounds` and `// >>> art` markers) and into the skill. `node tools/build.mjs --check` exits 1 if any file is out of date.
+- `core.js` is the source of the shared engine. After editing it, or anything in `sounds/` or `art/`, run `node tools/build.mjs`, which stamps the engine and each control's sounds into every control file (between the `// >>> grainmotion-ui core`, `// >>> sounds` and `// >>> art` markers) and into the skill. `node tools/build.mjs --check` exits 1 if any file is out of date.
 - `sounds/` holds the trimmed takes: one-shots as MP3, loops as WAV (an MP3's padding would click at the loop point). `tools/build.mjs` lists which control plays which.
 - `tools/spec.mjs` says what each control is. `node tools/docs.mjs` writes every folder's `README.md` and `index.html`, `registry.json` and `llms.txt` from it, so edit the spec and not those files.
 - `node tools/test.mjs http://localhost:8000/gallery/` drives every control with real touch and key events at phone width, checks form values, scaling and sideways scroll, and exits 1 on a failure. `node tools/shot.mjs URL OUT W H SCALE` takes a full-page screenshot. Both need Chrome or Chromium (`CHROME=...` if it is somewhere unusual).
