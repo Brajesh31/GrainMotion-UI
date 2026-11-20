@@ -38,7 +38,7 @@ This roadmap is not a completion report. A component is not release-complete unt
 | Accessibility | Record existing semantics and known gaps | Baseline documented; remediation pending |
 | Performance | Identify WebGL context and simulation constraints | Known issues documented; profiling/remediation pending |
 | Testing | Record existing Chromium test coverage and required new checks | Baseline documented; broader coverage pending |
-| Documentation system | Keep `tools/spec.mjs` as source of generated component docs, registry and `llms.txt` | Existing mechanism retained; extension pending |
+| Documentation system | Keep `tools/spec.mjs` as source of generated component docs, registry and `llms.txt` | Extended for nine entries; five expanded component manuals are preserved through `manualDocs` |
 
 **Exit criteria:** design tokens and component contract approved in code/docs; lifecycle and WebGL constraints tested; accessibility and browser test strategy documented; the original four have a passing regression baseline; new-component scaffolding can be generated without altering their behavior.
 
