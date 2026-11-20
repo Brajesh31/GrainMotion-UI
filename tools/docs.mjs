@@ -62,7 +62,7 @@ ${[...c.limits, ...COMMON_LIMITS].map((l) => `- ${l}`).join('\n')}
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zen Sand ${c.name}</title>
+<title>GrainMotion-UI ${c.name}</title>
 <link rel="icon" href="data:,">
 <style>
   :root { --page: #e9e4da; --card: #f1ede5; --ink: #2b2a27; --mute: #7c766b; --line: #d3cbbd; }
@@ -102,7 +102,7 @@ ${[...c.limits, ...COMMON_LIMITS].map((l) => `- ${l}`).join('\n')}
 // ?embed=1 hides the heading and the hint.
 const Q = new URLSearchParams(location.search), el = document.getElementById('el');
 if (Q.get('embed') === '1') document.documentElement.classList.add('embed');
-document.getElementById('snd').onclick = (e) => { ZenSand.Sound.wake(); e.target.textContent = ZenSand.Sound.toggle() ? 'Sound on' : 'Sound off'; };
+document.getElementById('snd').onclick = (e) => { GrainMotionUI.Sound.wake(); e.target.textContent = GrainMotionUI.Sound.toggle() ? 'Sound on' : 'Sound off'; };
 ${d.script || ''}
 </script>
 </body>
@@ -114,11 +114,11 @@ ${d.script || ''}
 put('registry.json', JSON.stringify({
   $schema: 'https://ui.shadcn.com/schema/registry.json', name: 'grainmotion-ui', homepage: SITE,
   items: SPEC.map((c) => ({
-    name: c.id, type: 'registry:file', title: `Zen Sand ${c.name}`,
+    name: c.id, type: 'registry:file', title: `GrainMotion-UI ${c.name}`,
     description: `${c.desc} One file of about ${kb(c.id)} KB with its sand engine and sounds inside it, no dependencies, defines <${c.tag}>.`,
     author: AUTHOR, categories: c.categories,
     files: [{ path: `${c.id}/${c.id}.js`, type: 'registry:file', target: `~/public/grainmotion-ui/${c.id}.js` }],
-    docs: `Zen Sand ${c.name} is a plain script that registers a custom element. Load /grainmotion-ui/${c.id}.js with a script tag (not a module), ${c.docs} More: ${SITE}`,
+    docs: `GrainMotion-UI ${c.name} is a plain script that registers a custom element. Load /grainmotion-ui/${c.id}.js with a script tag (not a module), ${c.docs} More: ${SITE}`,
   })),
 }, null, 2) + '\n');
 
@@ -132,13 +132,13 @@ Source: https://github.com/${REPO}
 
 ## Drop-in controls
 
-Each is one plain script that registers a custom element. Load it with a script tag, not as a module. Do not rewrite or split the file: the sounds (and the thinking state's rock) are inside it as data. Each file carries a copy of the shared engine; the first one loaded sets window.ZenSand and the rest reuse it.
+Each is one plain script that registers a custom element. Load it with a script tag, not as a module. Do not rewrite or split the file: the sounds (and the thinking state's rock) are inside it as data. Each file carries a copy of the shared engine; the first one loaded sets window.GrainMotionUI and the rest reuse it.
 
 ${SPEC.map((c) => `- [${c.name}](${SITE}/${c.id}/${c.id}.js): ${c.desc} \`<${c.tag}>\`: ${c.docs.replace(/^then use /, 'Use ')} [Docs](https://github.com/${REPO}/blob/main/${c.id}/README.md)`).join('\n')}
 
 Install any one with the shadcn CLI: \`npx shadcn add ${REPO}/NAME\`, where NAME is ${SPEC.map((c) => c.id).join(', ')}. The file lands in \`public/grainmotion-ui/\`.
 
-Each scales to its CSS width and needs WebGL2 to draw. They are drawn for a light page. Sound plays after the first touch or key on the page; ZenSand.Sound.on = false silences them all. They do not stop moving for prefers-reduced-motion.
+Each scales to its CSS width and needs WebGL2 to draw. They are drawn for a light page. Sound plays after the first touch or key on the page; GrainMotionUI.Sound.on = false silences them all. They do not stop moving for prefers-reduced-motion.
 
 ## The skill
 
