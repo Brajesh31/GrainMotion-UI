@@ -1,103 +1,229 @@
+<div align="center">
+
 # GrainMotion-UI
 
-Four ordinary UI controls made of sand that moves like sand. The slider is a rake that cuts grooves and pushes a little heap of sand ahead of it. The toggle is a stone that glides along its tray and uncovers a symbol it was hiding. The AI thinking state rakes a different line for each thing the agent does. The sand is simulated, not drawn: every groove, heap and ripple is a height field that slumps to its angle of rest, lit on the GPU.
+### Interfaces shaped by sand, motion, and interaction.
 
-Each one is a single file that defines a custom element, with the sand engine and its recorded sounds inside it, so there is nothing else to fetch. No dependencies, no build step for you, MIT licensed.
+A collection of four experimental UI controls built from a real-time sand simulation. Each control turns a familiar interaction into something tactile: a rake becomes a slider, a river stone becomes a toggle, a stick becomes a signature pad, and a moving rock becomes an AI activity indicator.
 
-![The gallery: all four controls](gallery/title.jpg)
+[**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
-## The four
+![GrainMotion-UI complete component gallery](gallery/title.jpg)
 
-| | element | what it does |
-|---|---|---|
-| [Slider](slider/) | `<sand-slider>` | A bamboo rake. Drag it right and its tines cut four grooves; pull it back and it drags the sand flat. |
-| [Toggle](toggle/) | `<sand-toggle>` | A river stone. Switch it on and it glides along, leaving a wake, and uncovers the power symbol it had pressed into the sand. |
-| [Signature](signature/) | `<sand-signature>` | Sign with a stick that cuts like a brush. You get the signature back as ink on a transparent PNG. |
-| [Thinking](thinking/) | `<sand-thinking>` | An AI agent's working state: a rock in sand that rakes itself, with a different line for thinking, searching, using a tool and writing. |
+<p>
+  <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/pages.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/pages.yml/badge.svg" alt="GitHub Pages deployment"></a>
+  <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
+  <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
+  <img src="https://img.shields.io/badge/Components-4-C49A6C" alt="Four components">
+</p>
 
-## The look
+</div>
 
-A tray of fine pale sand in a dark walnut frame, seen from straight above, lit from the upper left. Everything is drawn in code: the sand is a height field one cell per CSS pixel, carved by the controls and lit by a WebGL2 shader, so grooves have a shadowed wall and a bright one. Stones are drawn in the same shader so they sit in the sand. The only image is the thinking state's rock, which was generated and cut out.
+---
 
-Each control makes sounds: a rake through sand, a stone set down, sand settling, a swish for each spoke the thinking state draws. They are ElevenLabs recordings, inside each file.
+## ✨ What is GrainMotion-UI?
 
-## Try them
+GrainMotion-UI is a set of standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
-Live: https://brajesh31.github.io/GrainMotion-UI
+- **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
+- **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
+- **No runtime dependencies:** no framework or package installation is required to use the controls.
+- **Native-feeling behavior:** keyboard interaction, form integration where supported, and custom-element APIs.
+- **Designed to be explored:** each component has a live demo and its own documentation.
 
-Or run it yourself:
+## 🎛️ The components
 
-```sh
-python3 -m http.server 8000     # from this folder
-# open http://localhost:8000/
-```
+Each component has its own live demo, usage guide, and source file.
 
-That opens the gallery, with all four live.
+| Component | Preview | What it does | Demo |
+|---|---|---|---|
+| **Sand Slider** | A bamboo rake cuts grooves through the sand and pushes a small ridge ahead of it. | [Open demo](https://brajesh31.github.io/GrainMotion-UI/slider/) · [Documentation](slider/README.md) |
+| **Sand Toggle** | A smooth river stone glides across its tray, leaving a wake and uncovering a symbol. | [Open demo](https://brajesh31.github.io/GrainMotion-UI/toggle/) · [Documentation](toggle/README.md) |
+| **Sand Signature** | Write with a stick that behaves like a brush, then export the signature as a transparent PNG. | [Open demo](https://brajesh31.github.io/GrainMotion-UI/signature/) · [Documentation](signature/README.md) |
+| **Sand Thinking** | A rock moves through the sand to represent thinking, searching, tool use, writing, and idle states. | [Open demo](https://brajesh31.github.io/GrainMotion-UI/thinking/) · [Documentation](thinking/README.md) |
 
-## Use one
+> The gallery image above shows the component set together. The concept artwork below documents visual exploration and design direction, not additional live component screenshots.
 
-Each is a single file that defines an element. Install it with the shadcn CLI, which puts the file in `public/grainmotion-ui/`:
+## 🖼️ Visual exploration
 
-```sh
+The project grew through a series of visual studies exploring how familiar controls could be expressed through sand, stones, grooves, and physical movement.
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="making-of/concept/01-set.webp" alt="Early GrainMotion-UI control set concept" width="100%">
+      <br><strong>01 · The control set</strong>
+    </td>
+    <td align="center" width="50%">
+      <img src="making-of/concept/02-toggle.webp" alt="Stone toggle visual concept" width="100%">
+      <br><strong>02 · Stone toggle study</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="making-of/concept/03-slider.webp" alt="Rake slider visual concept" width="100%">
+      <br><strong>03 · Rake slider study</strong>
+    </td>
+    <td align="center" width="50%">
+      <img src="making-of/concept/09-board-toggle.webp" alt="Alternative toggle board concept" width="100%">
+      <br><strong>04 · Toggle explorations</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="making-of/concept/13-camera-panel.webp" alt="Camera and composition concept study" width="100%">
+      <br><strong>05 · Composition study</strong>
+    </td>
+    <td align="center" width="50%">
+      <img src="making-of/concept/rocks.webp" alt="Rock shape and material exploration" width="100%">
+      <br><strong>06 · Stone and material study</strong>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+See [making-of/](making-of/) for the design notes, concept images, and prompts behind the visual direction.
+
+## ⚙️ How it works
+
+The sand is simulated, not a static texture. A height field stores the sand surface, JavaScript updates it as controls move, and a WebGL2 shader lights the surface to reveal grooves, ridges, shadows, and highlights.
+
+- **Simulation:** the sand height field changes as the user interacts with a control.
+- **Relaxation:** displaced sand settles toward its angle of rest.
+- **Rendering:** WebGL2 shades the surface and gives the sand its depth.
+- **Sound:** embedded audio recordings respond to interaction.
+- **Custom elements:** each component registers a reusable HTML element.
+
+The shared engine is available through `window.GrainMotionUI`. Each control file contains the engine and its own required assets, so it can be loaded independently.
+
+## 🚀 Installation
+
+### Add a component with the shadcn CLI
+
+Run the command for the component you want:
+
+```bash
 npx shadcn add Brajesh31/GrainMotion-UI/slider
 npx shadcn add Brajesh31/GrainMotion-UI/toggle
-npx shadcn add Brajesh31/GrainMotion-UI/thinking
 npx shadcn add Brajesh31/GrainMotion-UI/signature
+npx shadcn add Brajesh31/GrainMotion-UI/thinking
 ```
 
-Or copy the file into your project by hand. Then load it with a plain script tag and use its element:
+The files are intended to be placed in `public/grainmotion-ui/`.
+
+### Use a component directly
+
+You can also copy the relevant JavaScript file into your project and load it with a regular script tag.
 
 ```html
-<script src="slider.js"></script>
+<script src="/grainmotion-ui/slider.js"></script>
 <sand-slider value="40" label="Volume"></sand-slider>
+```
 
-<script src="toggle.js"></script>
+Other elements:
+
+```html
+<script src="/grainmotion-ui/toggle.js"></script>
 <sand-toggle label="Focus mode"></sand-toggle>
 
-<script src="thinking.js"></script>
-<sand-thinking state="thinking"></sand-thinking>   <!-- then el.state = 'searching', 'tool', 'writing' or 'idle' -->
+<script src="/grainmotion-ui/signature.js"></script>
+<sand-signature name="signature"></sand-signature>
+
+<script src="/grainmotion-ui/thinking.js"></script>
+<sand-thinking state="thinking"></sand-thinking>
 ```
 
-Each folder's README lists the attributes, properties and events. The slider, toggle and signature work inside a `<form>` like native controls.
+For the thinking component, update its state as your agent works:
 
-- **Size.** Give the element a CSS `width` and the height follows. The sand is simulated at one cell per CSS pixel, so a wider tray costs more.
-- **Sound.** It plays after the first touch or key on the page. `GrainMotionUI.Sound.on = false` silences every control.
-- **How the files share.** Each file carries a copy of the engine (about 18 KB) and its own sounds. The first one loaded sets `window.GrainMotionUI` and the others reuse it. The files are between 170 and 370 KB; the thinking state is the big one, with two sound loops and the rock.
+```js
+const indicator = document.querySelector("sand-thinking");
 
-For agents, [llms.txt](llms.txt) lists every file and what it is. In the gallery each control has its install line and a "Copy a prompt" button; the prompt points a coding agent at the real file and tells it how to wire it in.
-
-## Make your own
-
-`skills/grainmotion-ui/` is how these were made, written as a skill for a coding agent. Install it with:
-
-```sh
-npx skills add Brajesh31/GrainMotion-UI
+indicator.state = "searching";
+// Supported states: thinking, searching, tool, writing, idle
 ```
 
-Or copy the folder into your agent's skills folder by hand (for Claude Code, `~/.claude/skills/`). It has:
+Check each component's documentation for its attributes, properties, events, and form behavior.
 
-- `SKILL.md`, the engine's API and the rules: keep the sand's volume, give each control one surprising idea, test on a slowed CPU.
-- `core.js`, the engine every control is built on.
-- `starter.html`, the smallest whole example: a tray you draw in with your finger.
-- `look.mjs`, which opens a page with the CPU slowed four times, photographs an element at chosen moments and reports frame times.
+## 🔊 Sound controls
 
-[making-of/](making-of/) is how the set went from a still to four simulated controls: the concept sheets, every image and sound prompt, and the notes that changed each control.
+Sound starts after the first user touch or key interaction. You can mute the shared sound engine:
 
-## Working on this repo
+```js
+window.GrainMotionUI.Sound.on = false;
+```
 
-- `core.js` is the source of the shared engine. After editing it, or anything in `sounds/` or `art/`, run `node tools/build.mjs`, which stamps the engine and each control's sounds into every control file (between the `// >>> grainmotion-ui core`, `// >>> sounds` and `// >>> art` markers) and into the skill. `node tools/build.mjs --check` exits 1 if any file is out of date.
-- `sounds/` holds the trimmed takes: one-shots as MP3, loops as WAV (an MP3's padding would click at the loop point). `tools/build.mjs` lists which control plays which.
-- `tools/spec.mjs` says what each control is. `node tools/docs.mjs` writes every folder's `README.md` and `index.html`, `registry.json` and `llms.txt` from it, so edit the spec and not those files.
-- `node tools/test.mjs http://localhost:8000/gallery/` drives every control with real touch and key events at phone width, checks form values, scaling and sideways scroll, and exits 1 on a failure. `node tools/shot.mjs URL OUT W H SCALE` takes a full-page screenshot. Both need Chrome or Chromium (`CHROME=...` if it is somewhere unusual).
+## 🧑‍💻 Run locally
 
-## Limits
+Clone the repository and start a local static server:
 
-- **Checked in headless Chromium** with real touch and key events, and with the CPU slowed four times (60 frames a second for each control). Not yet tried in Safari or Firefox, on a real phone, or with a screen reader.
-- **Needs WebGL2.** Without it a control still works with keys, but nothing is drawn.
-- **About sixteen at once.** Each element is its own WebGL canvas, and browsers keep only about sixteen alive.
-- **It keeps moving for `prefers-reduced-motion`.** The sand is the control; there is no still version yet.
-- **Drawn for a light page.**
+```bash
+git clone https://github.com/Brajesh31/GrainMotion-UI.git
+cd GrainMotion-UI
+python3 -m http.server 8000
+```
 
-## License
+Open [http://localhost:8000](http://localhost:8000) to explore the gallery.
 
-MIT. See [LICENSE](LICENSE). The thinking state's rock and the concept sheets in `making-of/` were generated with GPT Image (through Higgsfield) for this project. The sounds were generated with ElevenLabs for this project.
+## 🛠️ Development
+
+The repository includes scripts for building the standalone controls, generating documentation, capturing screenshots, and testing interactions.
+
+| File | Purpose |
+|---|---|
+| `core.js` | Shared sand simulation and rendering engine |
+| `tools/build.mjs` | Stamps the shared engine and embedded assets into each control |
+| `tools/docs.mjs` | Generates component documentation, demo pages, registry metadata, and `llms.txt` from the component specification |
+| `tools/spec.mjs` | Central component specification |
+| `tools/test.mjs` | Exercises controls with touch and keyboard interactions |
+| `tools/shot.mjs` | Captures browser screenshots |
+| `skills/grainmotion-ui/` | Agent skill, engine reference, starter example, and visual inspection helper |
+
+Useful commands:
+
+```bash
+node tools/build.mjs
+node tools/build.mjs --check
+node tools/docs.mjs
+node tools/docs.mjs --check
+node tools/test.mjs http://localhost:8000/gallery/
+```
+
+The browser test and screenshot utilities require Chrome or Chromium. See the individual scripts for their arguments and environment options.
+
+## 📚 Documentation
+
+- [Live component gallery](https://brajesh31.github.io/GrainMotion-UI/)
+- [Slider documentation](slider/README.md)
+- [Toggle documentation](toggle/README.md)
+- [Signature documentation](signature/README.md)
+- [Thinking documentation](thinking/README.md)
+- [Agent skill](skills/grainmotion-ui/SKILL.md)
+- [AI-readable project guide](llms.txt)
+- [Design process and concept artwork](making-of/README.md)
+
+## ⚠️ Known limitations
+
+- **WebGL2 required for rendering.** Without WebGL2, the controls may remain keyboard-operable, but the sand visuals will not render.
+- **Light backgrounds recommended.** The sand and walnut frame are designed for a light page.
+- **Multiple live canvases have a browser limit.** Each component creates its own WebGL canvas, so avoid mounting large numbers simultaneously.
+- **Reduced motion is not fully implemented.** The sand continues moving when `prefers-reduced-motion` is enabled.
+- **Browser and assistive technology coverage is limited.** The current project notes testing in headless Chromium; broader browser, real-device, and screen-reader testing is still needed.
+
+## 📄 License
+
+This project is distributed under the MIT License. See [LICENSE](LICENSE) for the license text and required copyright notice.
+
+---
+
+<div align="center">
+
+**GrainMotion-UI**
+
+*Let the interface leave a mark.*
+
+[Live Demo](https://brajesh31.github.io/GrainMotion-UI/) · [GitHub Repository](https://github.com/Brajesh31/GrainMotion-UI)
+
+</div>
