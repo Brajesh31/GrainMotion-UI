@@ -1,7 +1,7 @@
 // What each control is, in one place. tools/docs.mjs turns this into every folder's README.md and index.html,
 // registry.json and llms.txt, so they cannot drift apart. Edit here, then run `node tools/docs.mjs`.
 export const REPO = 'Brajesh31/GrainMotion-UI';
-export const SITE = 'https://grainmotion-ui.vercel.app';
+export const SITE = 'https://brajesh31.github.io/GrainMotion-UI';
 export const AUTHOR = 'Brajesh Kumar <https://github.com/Brajesh31>';
 export const COUNT = 'four';
 
@@ -12,7 +12,7 @@ export const COMMON_LIMITS = [
   '**It does not hold still for `prefers-reduced-motion`.** The sand still moves. If that matters on your page, use a plain control there.',
   '**Drawn for a light page.** The sand and the walnut frame are warm and light; they look pasted on over a dark background.',
   '**The sand is simulated at one cell per CSS pixel,** so a wider element costs more. Each scales to its CSS `width`; the height follows.',
-  '**Sound is on** after the first touch or key on the page. `ZenSand.Sound.on = false` turns every control quiet.',
+  '**Sound is on** after the first touch or key on the page. `GrainMotionUI.Sound.on = false` turns every control quiet.',
   '**Checked in headless Chromium** with real touch and key events, with the CPU slowed four times. Not tried in Safari or Firefox, on a real phone, or with a screen reader.',
 ];
 
