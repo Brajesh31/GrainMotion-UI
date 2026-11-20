@@ -128,7 +128,7 @@ put('registry.json', JSON.stringify({
 // ---- llms.txt
 put('llms.txt', `# GrainMotion-UI
 
-> ${COUNT[0].toUpperCase() + COUNT.slice(1)} UI controls made of sand that moves like sand: a slider that is a rake, a toggle that is a stone that hides a symbol, a signature pad you write in with a stick, and an AI thinking state that rakes a different line for each thing the agent does. The sand is a simulated height field lit on the GPU. Each control is one plain script that registers a custom element, with its engine and recorded sounds inside it: no dependencies, no build step, no other files to fetch. MIT licensed.
+> ${COUNT[0].toUpperCase() + COUNT.slice(1)} tactile UI controls made from simulated sand, stones, bamboo and walnut. The original four establish the physical design language: Slider, Toggle, Signature and Thinking. Phase 1 adds Checkbox, Radio Group, Segmented Control, Range Slider and Rating. Every control is a standalone custom element with the sand engine and its required sound assets embedded. No runtime framework is required. MIT licensed.
 
 Live gallery: ${SITE}
 Source: https://github.com/${REPO}
