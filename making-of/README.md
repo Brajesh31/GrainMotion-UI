@@ -1,6 +1,6 @@
 # How it was made
 
-GrainMotion UI started as one of ten themes for a new set of controls, each tried as a single still: a toggle, a slider and a button. Sand won because of one line in its pitch: the control keeps a record of your hand. Grooves stay until you rake them smooth. Every prompt is in [prompts.md](prompts.md).
+GrainMotion-UI started as one of ten themes for a new set of controls, each tried as a single still: a toggle, a slider and a button. Sand won because of one line in its pitch: the control keeps a record of your hand. Grooves stay until you rake them smooth. Every prompt is in [prompts.md](prompts.md).
 
 ## 1. The still and the sheets
 
