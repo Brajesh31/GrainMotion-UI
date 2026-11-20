@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GrainMotion-UI</title>
 <link rel="icon" href="data:,">
-<meta name="description" content="Four UI controls made of sand that moves like sand: a rake slider, a stone toggle, a signature pad and an AI thinking state. Each is one file with no dependencies.">
+<meta name="description" content="Nine tactile UI controls made from simulated sand, including a rake slider, stone toggle, signature pad, AI activity surface and five selection controls.">
 <meta property="og:title" content="GrainMotion-UI">
 <meta property="og:description" content="Four UI controls made of sand that moves like sand. Each is one file with no dependencies.">
 <meta property="og:image" content="title.svg">
@@ -32,6 +32,8 @@
   .stage { flex: 1; display: grid; place-items: center; align-content: center; gap: 10px; min-height: 230px; padding: 16px 0 10px; }
   .stage > :is(sand-slider, sand-signature) { width: 100%; }
   .stage > sand-toggle { width: 190px; } .stage > sand-thinking { width: 210px; }
+  .stage > :is(sand-checkbox,sand-radio-group,sand-segmented,sand-range,sand-rating) { width: 100%; }
+  .stage > sand-checkbox { max-width: 190px; }
   .field { width: 100%; display: flex; justify-content: space-between; font-size: 14px; font-weight: 500; } .field output { color: var(--mute); font-variant-numeric: tabular-nums; }
   .mini { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
   .mini .pill { padding: 3px 10px; font-size: 12.5px; }
@@ -45,7 +47,7 @@
 <div class="wrap">
   <header>
     <h1>GrainMotion-UI</h1>
-    <p class="lede">Four ordinary controls made of sand that moves like sand. Rake it, push a stone through it, sign your name in it, and watch an AI think in it. Each one is a single file with no dependencies.</p>
+    <p class="lede">Nine tactile controls made of sand that moves like sand. Rake it, push a stone through it, choose options, set ranges, rate and sign. Each component is a standalone file with no runtime dependencies.</p>
     <p class="links">
       <button class="pill dark" type="button" id="snd">Sound on</button>
       <a class="pill" href="https://github.com/Brajesh31/GrainMotion-UI" target="_blank" rel="noopener">The repo on GitHub <span aria-hidden="true">&#8599;</span></a>
@@ -58,6 +60,11 @@
 <script src="../toggle/toggle.js"></script>
 <script src="../signature/signature.js"></script>
 <script src="../thinking/thinking.js"></script>
+<script src="../checkbox/checkbox.js"></script>
+<script src="../radio-group/radio-group.js"></script>
+<script src="../segmented/segmented.js"></script>
+<script src="../range/range.js"></script>
+<script src="../rating/rating.js"></script>
 <script>
 // The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
 const REPO = 'Brajesh31/GrainMotion-UI';
@@ -75,6 +82,24 @@ const ITEMS = [
     html: '<sand-thinking state="thinking"></sand-thinking><div class="mini">' + [['thinking', 'Thinking'], ['searching', 'Searching'], ['tool', 'Using a tool'], ['writing', 'Writing'], ['idle', 'Done']].map(([s, t], i) => `<button class="pill${i ? '' : ' dark'}" type="button" data-s="${s}">${t}</button>`).join('') + '</div>',
     wire: (el, c) => { c.querySelector('.mini').onclick = (e) => { const b = e.target.closest('button'); if (!b) return; el.state = b.dataset.s; for (const x of b.parentNode.children) x.classList.toggle('dark', x === b); }; } },
 ];
+
+ITEMS.push(
+  { id: 'checkbox', name: 'Checkbox', tag: 'sand-checkbox', sub: 'A pebble uncovers an etched checkmark.',
+    html: '<div class="field"><span>Notifications</span><output></output></div><sand-checkbox label="Enable notifications" value="yes"></sand-checkbox>',
+    wire: (el, c) => { const o = c.querySelector('output'), f = () => o.textContent = el.checked ? 'On' : 'Off'; el.addEventListener('change', f); f(); } },
+  { id: 'radio-group', name: 'Radio Group', tag: 'sand-radio-group', sub: 'One stone marks the selected well.',
+    html: '<sand-radio-group label="Delivery speed" options="Standard,Express,Overnight" value="Standard"></sand-radio-group><div class="readout"></div>',
+    wire: (el, c) => { const o = c.querySelector('.readout'), f = () => o.textContent = el.value; el.addEventListener('change', f); f(); } },
+  { id: 'segmented', name: 'Segmented', tag: 'sand-segmented', sub: 'A flat stone moves between carved sections.',
+    html: '<sand-segmented label="Time period" options="Day,Week,Month" value="Week"></sand-segmented><div class="readout"></div>',
+    wire: (el, c) => { const o = c.querySelector('.readout'), f = () => o.textContent = el.value; el.addEventListener('change', f); f(); } },
+  { id: 'range', name: 'Range Slider', tag: 'sand-range', sub: 'Two bamboo rakes mark an interval.',
+    html: '<div class="field"><span>Budget</span><output></output></div><sand-range label="Budget range" min="0" max="100" step="5" low="20" high="80"></sand-range>',
+    wire: (el, c) => { const o = c.querySelector('output'), f = () => o.textContent = el.low + " - " + el.high; el.addEventListener('input', f); f(); } },
+  { id: 'rating', name: 'Rating', tag: 'sand-rating', sub: 'Five stones sit in individual rating wells.',
+    html: '<sand-rating label="Experience rating" value="3"></sand-rating><div class="readout"></div>',
+    wire: (el, c) => { const o = c.querySelector('.readout'), f = () => o.textContent = el.value ? el.value + ' / 5' : 'Not rated'; el.addEventListener('change', f); f(); } }
+);
 // What each prompt says about wiring its control in. The rest of the prompt is the same for all of them.
 const WIRE = {
   slider: ['Use <sand-slider value="40" label="..."></sand-slider> where my slider is. min, max and step work as attributes, like a range input.',
@@ -89,6 +114,11 @@ const WIRE = {
   thinking: ['Put <sand-thinking></sand-thinking> where my agent shows that it is working, about 76 pixels wide next to a chat message or bigger on its own.',
     'Set el.state as the agent works: "thinking", "searching", "tool" while it calls a tool, "writing" while it streams its answer, and "idle" when it is done. Each state rakes a different line.',
     'A change of state takes about two seconds to show, because the sand sweeps itself smooth first. Do not switch faster than that.'],
+  checkbox: ['Use <sand-checkbox label="..." value="yes"></sand-checkbox> for a binary choice. Read and set el.checked.', 'It dispatches input and change when its checked state changes. It uses checkbox semantics and can be submitted by a parent form when it has a name.', 'The pebble moves aside to reveal a checkmark pressed into the sand.'],
+  'radio-group': ['Use <sand-radio-group options="Small,Medium,Large" value="Medium"></sand-radio-group> for one choice from a short list.', 'Read and set el.value. Listen for input and change. Give it a label and a name for accessible form use.', 'Each option has its own sand well and pebble; the selected stone moves to the active well. The current implementation supports up to five comma-separated options.'],
+  segmented: ['Use <sand-segmented options="Day,Week,Month" value="Week"></sand-segmented> for a compact single selection.', 'Read and set el.value. Listen for input and change. Give it a label and a name for form submission.', 'A flat stone glides between sections etched into the sand. The current implementation supports up to five comma-separated options.'],
+  range: ['Use <sand-range min="0" max="100" low="20" high="80"></sand-range> when users need two bounds.', 'Read el.low and el.high; el.value returns both. The two slider handles are keyboard-accessible. The form value is serialized as low,high.', 'Two bamboo rakes mark the interval. Each handle moves independently and cannot cross the other.'],
+  rating: ['Use <sand-rating value="3" label="Experience rating"></sand-rating> for a five-point rating.', 'Read or set el.value from 0 through 5. Listen for input and change. A zero value is treated as unanswered in forms.', 'Five pebble wells show the rating. The chosen stone lifts slightly; arrow keys adjust the value.'],
 };
 const SKILL = { url: new URL('../skills/grainmotion-ui/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };
 const fileUrl = (id) => new URL(`../${id}/${id}.js`, location.href).href;
