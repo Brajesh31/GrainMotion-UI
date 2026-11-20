@@ -415,11 +415,12 @@ class SandRadioGroup extends SandTray {
     this.stones = this.slotX.map((sx, j) => j === Math.round(this.marker) ? null : [sx, this.cy, this.rx * .72, this.ry * .72, .72, .86, .75]).filter(Boolean);
   }
   sprites() {
-    const c = this.ox, k = this.k, key = this.options.join('|') + '|' + Math.round(this.marker * 100);
+    const c = this.ox, k = this.k, key = this.options.join('|') + '|' + Math.round(this.marker * 100) + '|' + this.focusedIndex;
     if (key === this.spriteKey) return; this.spriteKey = key;
     c.setTransform(k, 0, 0, k, 0, 0); c.clearRect(0, 0, this.W, this.H);
     c.textAlign = 'center'; c.textBaseline = 'middle'; c.font = `600 ${Math.max(9, this.H * .105)}px ui-sans-serif, sans-serif`;
     this.options.forEach((label, i) => { c.fillStyle = i === Math.round(this.marker) ? '#f4ecdd' : '#67523e'; c.fillText(label, this.slotX[i], this.H * .78, this.W / this.options.length * .9); });
+    if (this.focusedIndex != null) { c.strokeStyle = '#2b2a27'; c.lineWidth = 2; c.beginPath(); c.arc(this.slotX[this.focusedIndex], this.cy, this.ry * 1.48, 0, Math.PI * 2); c.stroke(); }
   }
 }
 if (!customElements.get('sand-radio-group')) customElements.define('sand-radio-group', SandRadioGroup);
