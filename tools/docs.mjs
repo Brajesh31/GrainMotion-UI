@@ -16,6 +16,9 @@ const kb = (id) => Math.round(statSync(join(root, id, id + '.js')).size / 1024 /
 const table = (head, rows) => `| ${head.join(' | ')} |\n|${head.map(() => '---').join('|')}|\n` + rows.map((r) => `| ${r.join(' | ')} |`).join('\n');
 
 for (const c of SPEC) {
+  // Some components maintain full hand-authored technical documentation and demos.
+  // Their metadata still feeds registry.json and llms.txt below.
+  if (c.manualDocs) continue;
   // ---- the folder's README
   put(`${c.id}/README.md`, `# ${c.name}
 
