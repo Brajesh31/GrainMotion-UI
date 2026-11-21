@@ -314,7 +314,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
 
 
 { // Phase 5 acceptance edges: dynamic updates, keyboard variants and lifecycle
-  await ev("(()=>{const el=document.querySelector('sand-tabs');el.setAttribute('activation','automatic');el.setAttribute('orientation','vertical');el.setAttribute('tabs','overview:Overview,activity:Activity');el.removeAttribute('disabled-tabs');el.value='settings';})()");
+  await ev("(()=>{const el=document.querySelector('sand-tabs');el.setAttribute('activation','automatic');el.setAttribute('orientation','vertical');el.value='settings';el.setAttribute('tabs','overview:Overview,activity:Activity');el.removeAttribute('disabled-tabs');})()");
   check('tabs: removing the selected tab selects the first remaining enabled tab', await ev("document.querySelector('sand-tabs').value==='overview'&&document.querySelectorAll('sand-tabs [role=tab]').length===2")===true);
   await ev("(()=>{const el=document.querySelector('sand-tabs');el.buttons[0].focus();el.buttons[0].dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true}));})()");
   check('tabs: vertical orientation uses ArrowDown and automatic activation', await ev("document.querySelector('sand-tabs').value==='activity'&&document.activeElement===document.querySelector('sand-tabs').buttons[1]")===true);
@@ -330,7 +330,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("(()=>{const el=document.querySelector('sand-accordion');const parent=el.parentNode;parent.removeChild(el);parent.appendChild(el);})()");
   check('accordion: component reconnect preserves its current state', await ev("document.querySelector('sand-accordion').buttons.length===2&&document.querySelector('sand-accordion').value==='care'")===true);
 
-  await ev("(()=>{const el=document.querySelector('sand-pagination');el.page=1;el.total=24;})()");
+  await ev("(()=>{const el=document.querySelector('sand-pagination');el.removeAttribute('disabled');el.page=1;el.total=24;})()");
   check('pagination: first page disables first and previous navigation', await ev("(()=>{const el=document.querySelector('sand-pagination');return el.buttons[0].disabled&&el.buttons[1].disabled})()")===true);
   await ev("document.querySelector('sand-pagination').page=24");
   check('pagination: last page disables next and last navigation', await ev("(()=>{const el=document.querySelector('sand-pagination');return el.buttons.at(-1).disabled&&el.buttons.at(-2).disabled})()")===true);
