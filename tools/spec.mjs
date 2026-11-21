@@ -3,7 +3,7 @@
 export const REPO = 'Brajesh31/GrainMotion-UI';
 export const SITE = 'https://brajesh31.github.io/GrainMotion-UI';
 export const AUTHOR = 'Brajesh Kumar <https://github.com/Brajesh31>';
-export const COUNT = 'forty-five';
+export const COUNT = 'fifty';
 
 // Limits every control shares; each README ends with its own, then these.
 export const COMMON_LIMITS = [
@@ -3172,5 +3172,401 @@ export const SPEC = [
       "hint": "Open the drawer, change its placement, then Apply or close.",
       "script": "const out=document.querySelector('.readout');document.getElementById('open-drawer').addEventListener('click',()=>el.showModal());el.addEventListener('confirm',()=>out.textContent='Filters applied');el.addEventListener('drawer-close',e=>out.textContent='Drawer closed: '+e.detail.returnValue);"
     }
-  }
+  },
+{
+  "id": "command",
+  "name": "Command Palette",
+  "tag": "sand-command",
+  "categories": [
+    "command",
+    "palette",
+    "search",
+    "navigation",
+    "productivity",
+    "sand"
+  ],
+  "sub": "A central river stone moves through a searchable command list.",
+  "desc": "A keyboard-first searchable command palette with native modal focus containment, filtering, active result navigation and host-facing command events.",
+  "docs": "Set commands to records with id, label, description, keywords, shortcut and disabled. Call show(), hide(reason) or run(id); read value and listen for command, select, command-open and command-close.",
+  "intro": [
+    "A central marker searches through a compact list of possible actions. The palette owns filtering and keyboard navigation, while the application remains responsible for executing each command."
+  ],
+  "use": "<script src=\"command.js\"></script>\\n<sand-command id=\"commands\"></sand-command>\\n<script>\\ncommands.commands = [{ id: 'new', label: 'New project', keywords: 'create add' }];\\ncommands.addEventListener('command', event => runCommand(event.detail.id));\\n</script>",
+  "js": "const palette = document.querySelector('sand-command');\\npalette.show();\\npalette.addEventListener('command', event => runCommand(event.detail.id));\\npalette.hide('complete');",
+  "attrs": [
+    [
+      "commands (property)",
+      "Array of command records with unique id, label, description, keywords, shortcut and disabled",
+      "Built-in sample commands"
+    ],
+    [
+      "value (property)",
+      "ID of the active result",
+      "First result"
+    ],
+    [
+      "open",
+      "Reflects the native modal open state",
+      "absent"
+    ],
+    [
+      "placeholder",
+      "Search field placeholder",
+      "Search commands"
+    ],
+    [
+      "label",
+      "Accessible dialog and trigger name",
+      "Command palette"
+    ],
+    [
+      "disabled",
+      "Prevents opening and execution",
+      "absent"
+    ]
+  ],
+  "notes": [
+    "Search matches command label, description and keywords. Filtering is local and synchronous; remote search and permissions remain host responsibilities.",
+    "Arrow Up/Down changes the active result; Home/End select the first/last enabled result; Enter emits the command; Escape closes the native modal.",
+    "Call show(), hide(reason) and run(id). Events include command-open, command-close, select and command.",
+    "The Ctrl K label is illustrative. Applications should register their own global shortcut and call show(); this element does not capture Ctrl K globally.",
+    "Native dialog behavior provides top-layer and focus containment. User-defined actions are never evaluated by the component."
+  ],
+  "happens": [
+    [
+      "open the palette",
+      "a walnut frame rises above the page and focus moves into search"
+    ],
+    [
+      "type a query",
+      "the result stones narrow to matching commands"
+    ],
+    [
+      "press Enter",
+      "the selected command is emitted to the host and the palette closes"
+    ]
+  ],
+  "limits": [
+    "Search is in-memory and synchronous. Remote command discovery, shortcut registration, permissions, execution and recent-command history belong to the host.",
+    "The list is not virtualized. Keep the local palette practical in size or implement remote/virtualized search in the host."
+  ],
+  "demo": {
+    "html": "<sand-command id=\"el\"></sand-command><p class=\"readout\">Open the palette and search for a command.</p>",
+    "hint": "Use the trigger, type a query, move with Arrow Up/Down and press Enter. Escape closes.",
+    "script": "const out=document.querySelector('.readout');el.addEventListener('command',e=>out.textContent='Command selected: '+e.detail.label);el.addEventListener('command-close',e=>{if(e.detail.reason==='escape')out.textContent='Palette closed'});"
+  },
+  "manualDocs": true
+},
+{
+  "id": "context-menu",
+  "name": "Context Menu",
+  "tag": "sand-context-menu",
+  "categories": [
+    "context-menu",
+    "menu",
+    "pointer",
+    "touch",
+    "accessibility",
+    "sand"
+  ],
+  "sub": "A carved walnut menu appears at the point of contact.",
+  "desc": "A context menu anchored to a target element or built-in demo surface, opened by right-click, long-press or keyboard shortcut, with viewport-aware positioning and keyboard navigation.",
+  "docs": "Set items to action records and optionally set the for attribute to a target ID. Listen for menu-open, select/menu-select and menu-close. The host executes the selected action.",
+  "intro": [
+    "A carved walnut tray appears where the user asks for more actions. It supports pointer, touch and keyboard requests; the application retains ownership of every action."
+  ],
+  "use": "<script src=\"context-menu.js\"></script>\\n<button id=\"file-target\">Project file</button>\\n<sand-context-menu id=\"menu\" for=\"file-target\"></sand-context-menu>\\n<script>\\nmenu.addEventListener('select', event => performFileAction(event.detail.id));\\n</script>",
+  "js": "const menu = document.querySelector('sand-context-menu');\\nmenu.items = [{ id: 'rename', label: 'Rename' }, { id: 'archive', label: 'Archive' }];\\nmenu.addEventListener('select', event => performAction(event.detail.id));",
+  "attrs": [
+    [
+      "for",
+      "ID of an element that receives contextmenu, touch and keyboard listeners",
+      "Internal demo target"
+    ],
+    [
+      "items (property)",
+      "Records with id, label, disabled, separator and shortcut",
+      "Open, Rename, Duplicate, Archive"
+    ],
+    [
+      "label",
+      "Accessible menu name",
+      "Context menu"
+    ],
+    [
+      "disabled",
+      "Prevents opening and selection",
+      "absent"
+    ]
+  ],
+  "notes": [
+    "Right-click opens the menu at the pointer. A touch long-press opens after approximately 560 ms. ContextMenu and Shift+F10 open it near the target.",
+    "Arrow Up/Down, Home and End move among enabled items. Escape closes the menu and restores focus; Tab closes without forcing focus back.",
+    "The for target must exist when the component binds. Change the attribute after the target is available to rebind listeners.",
+    "Outside-click, scroll, resize and target listeners are removed when closed or disconnected. Events include select, menu-select, menu-open and menu-close."
+  ],
+  "happens": [
+    [
+      "right-click or long-press a target",
+      "the menu opens near the pointer and stays inside the viewport"
+    ],
+    [
+      "use keyboard navigation",
+      "focus moves only between enabled menu items"
+    ],
+    [
+      "choose an action",
+      "the selected item ID is emitted to the host and the menu closes"
+    ]
+  ],
+  "limits": [
+    "The component presents actions but does not execute them, manage permissions, provide nested submenus or maintain application state.",
+    "Touch long-press is best-effort and can conflict with browser or operating-system gestures. Test with the host page's scrolling behavior."
+  ],
+  "demo": {
+    "html": "<sand-context-menu id=\"el\"></sand-context-menu><p class=\"readout\">Right-click, long-press or press Shift + F10 on the target.</p>",
+    "hint": "Try pointer, touch long-press or Shift + F10. Escape closes the menu.",
+    "script": "const out=document.querySelector('.readout');el.addEventListener('select',e=>out.textContent='Selected action: '+e.detail.label);"
+  },
+  "manualDocs": true
+},
+{
+  "id": "filter-builder",
+  "name": "Filter Builder",
+  "tag": "sand-filter-builder",
+  "categories": [
+    "filter",
+    "query",
+    "form",
+    "builder",
+    "productivity",
+    "sand"
+  ],
+  "sub": "Filter conditions connect through carved logical grooves.",
+  "desc": "A structured filter editor with configurable fields, operators and values, AND/OR logic, add/remove/reset operations and a serializable query contract.",
+  "docs": "Set fields and filters as properties, select AND or OR through logic, and listen for input, change, apply and reset. toQuery() returns the host-facing query object.",
+  "intro": [
+    "Filter conditions become small stones linked by a logical channel. This editor owns the condition rows and query shape, not the evaluation or fetching of records."
+  ],
+  "use": "<script src=\"filter-builder.js\"></script>\\n<sand-filter-builder id=\"filters\"></sand-filter-builder>\\n<script>\\nfilters.addEventListener('apply', event => loadResults(event.detail.query));\\n</script>",
+  "js": "const filters = document.querySelector('sand-filter-builder');\\nfilters.fields = [{ id: 'status', label: 'Status', type: 'select', options: ['Open', 'Done'] }];\\nfilters.logic = 'OR';\\nfilters.add();\\nconsole.log(filters.toQuery());",
+  "attrs": [
+    [
+      "fields (property)",
+      "Field definitions with id, label, type and optional select options",
+      "Status, Owner, Priority"
+    ],
+    [
+      "filters (property)",
+      "Condition records with id, field, operator and value",
+      "One status condition"
+    ],
+    [
+      "logic (property)",
+      "AND or OR grouping for all conditions",
+      "AND"
+    ],
+    [
+      "disabled",
+      "Disables editing and apply controls",
+      "absent"
+    ],
+    [
+      "label",
+      "Accessible filter-builder name",
+      "Filter builder"
+    ]
+  ],
+  "notes": [
+    "Supported field types are text, number, date and select. Supported operators are is, is-not, contains, starts-with, greater-than, less-than, before, after, empty and not-empty.",
+    "Set fields, filters and logic as properties. The filters getter returns copies; toQuery() emits { logic, conditions } without internal row IDs.",
+    "add(), remove(index), clear() and reset() edit local builder state. apply() emits an apply event but does not fetch or filter data.",
+    "input and change events report the reason, logic, filters and serialized query. reset is emitted on clear."
+  ],
+  "happens": [
+    [
+      "add a condition",
+      "a new field, operator and value row appears"
+    ],
+    [
+      "change AND to OR",
+      "query grouping changes and a change event is emitted"
+    ],
+    [
+      "apply filters",
+      "the structured query is emitted for the host to execute"
+    ]
+  ],
+  "limits": [
+    "This component defines a portable query shape; it does not validate a backend schema, sanitize SQL, run a query or fetch records.",
+    "All conditions share one AND/OR operator. Nested groups, custom operators, async field loading, per-field validation and query execution remain host responsibilities."
+  ],
+  "demo": {
+    "html": "<sand-filter-builder id=\"el\"></sand-filter-builder><p class=\"readout\">Edit conditions and apply the structured query.</p>",
+    "hint": "Add, remove and edit filter conditions. The component emits a serializable query, not a data fetch.",
+    "script": "const out=document.querySelector('.readout');el.addEventListener('apply',e=>out.textContent=JSON.stringify(e.detail.query));"
+  },
+  "manualDocs": true
+},
+{
+  "id": "table",
+  "name": "Data Table",
+  "tag": "sand-table",
+  "categories": [
+    "table",
+    "data-grid",
+    "sorting",
+    "filtering",
+    "selection",
+    "sand"
+  ],
+  "sub": "Rows settle into a sand board with sortable headings and selection stones.",
+  "desc": "A searchable, sortable and selectable data table with stable row IDs, column visibility, multi-selection, sticky headings and bounded client-side pagination.",
+  "docs": "Set columns and rows as properties; read selected, page and pageSize. Set filter, sortBy and sortDirection, call sort(key), select(id, checked), selectVisible(ids, checked) and listen for sort, filter, select, change and row-activate.",
+  "intro": [
+    "Rows rest inside a walnut frame. A stone marks selected records while column headings act as sortable rails. Pagination bounds rendered rows; the host owns data fetching and persistence."
+  ],
+  "use": "<script src=\"table.js\"></script>\\n<sand-table id=\"projects\" page-size=\"10\"></sand-table>\\n<script>\\nprojects.addEventListener('select', event => saveSelection(event.detail.selected));\\nprojects.addEventListener('sort', event => sortRemoteData(event.detail));\\n</script>",
+  "js": "const table = document.querySelector('sand-table');\\ntable.columns = [{ key: 'name', label: 'Project' }, { key: 'status', label: 'Status' }];\\ntable.rows = [{ id: 'p1', name: 'Atlas', status: 'In progress' }];\\ntable.sort('name');\\ntable.select('p1', true);",
+  "attrs": [
+    [
+      "columns (property)",
+      "Column definitions with key, label, sortable, hidden and align",
+      "Name, Status, Owner, Updated"
+    ],
+    [
+      "rows (property)",
+      "Records with unique id and column values",
+      "Sample project records"
+    ],
+    [
+      "selected (property)",
+      "Selected row IDs",
+      "Empty selection"
+    ],
+    [
+      "filter (property)",
+      "Case-insensitive text filter across visible columns",
+      "Empty"
+    ],
+    [
+      "sortBy / sortDirection",
+      "Sort key and asc/desc direction",
+      "Unsorted, ascending"
+    ],
+    [
+      "page / pageSize",
+      "One-based page and bounded rows per page (1–100)",
+      "1 / 5"
+    ],
+    [
+      "disabled / label",
+      "Disable controls and set accessible name",
+      "Enabled / Data table"
+    ]
+  ],
+  "notes": [
+    "Column values are rendered as text. The columns and rows getters return shallow copies; row IDs must be unique.",
+    "Search is case-insensitive across visible columns. Sorting is stable and supports numeric values or locale-aware strings.",
+    "Use sort(key), select(id, checked) and selectVisible(ids, checked). Header buttons expose aria-sort; select-all applies to the visible page.",
+    "filter, sortBy, sortDirection, page and pageSize properties keep the table in sync. Events include filter, sort, select, change and row-activate."
+  ],
+  "happens": [
+    [
+      "type in the filter field",
+      "rows are filtered across visible columns"
+    ],
+    [
+      "activate a sortable heading",
+      "the table sorts by that column and toggles direction on repeat"
+    ],
+    [
+      "select rows and change pages",
+      "selected IDs persist while visible row windows change"
+    ]
+  ],
+  "limits": [
+    "Client-side pagination bounds the current DOM to pageSize rows, so a separate virtual scroller is not needed for this contract. Large or remote datasets should be paged by the host.",
+    "Column filtering is substring matching. The component does not implement server sorting, column resizing, column reordering, row editing, nested rows, CSV export or persistence."
+  ],
+  "demo": {
+    "html": "<sand-table id=\"el\" page-size=\"4\"></sand-table><p class=\"readout\">Filter rows, sort a heading, select records and page through the dataset.</p>",
+    "hint": "Pagination bounds rendered rows. Selected row IDs persist across pages and filtering.",
+    "script": "const out=document.querySelector('.readout');el.addEventListener('select',e=>out.textContent=e.detail.selected.length+' row(s) selected: '+e.detail.selected.join(', '));el.addEventListener('sort',e=>out.textContent='Sorted by '+e.detail.key+' ('+e.detail.direction+')');"
+  },
+  "manualDocs": true
+},
+{
+  "id": "kanban",
+  "name": "Kanban Board",
+  "tag": "sand-kanban",
+  "categories": [
+    "kanban",
+    "board",
+    "drag-and-drop",
+    "workflow",
+    "productivity",
+    "sand"
+  ],
+  "sub": "Task cards travel between walnut-framed workflow columns.",
+  "desc": "A multi-column Kanban board with stable card and column IDs, native drag-and-drop, explicit move buttons, arrow-key movement, priority labels and host-facing move/select events.",
+  "docs": "Set columns to records containing id, label and cards. Call moveCard(cardId, columnId, index) or action(cardId, direction); listen for move, change and select events.",
+  "intro": [
+    "Task cards settle into distinct work stages. The board supports drag movement and explicit directional controls so moving a card does not depend on pointer precision."
+  ],
+  "use": "<script src=\"kanban.js\"></script>\\n<sand-kanban id=\"board\"></sand-kanban>\\n<script>\\nboard.addEventListener('move', event => persistBoard(event.detail.columns));\\n</script>",
+  "js": "const board = document.querySelector('sand-kanban');\\nboard.moveCard('prototype', 'done');\\nboard.addEventListener('move', event => console.log(event.detail.from, event.detail.to));",
+  "attrs": [
+    [
+      "columns (property)",
+      "Columns with unique IDs, labels and card arrays",
+      "Backlog, In progress, Done"
+    ],
+    [
+      "value (property)",
+      "Alias for the columns array",
+      "Current board state"
+    ],
+    [
+      "disabled",
+      "Disables card moves and selection",
+      "absent"
+    ],
+    [
+      "label",
+      "Accessible board name",
+      "Kanban board"
+    ]
+  ],
+  "notes": [
+    "Each card has a unique id, title, optional description, priority low/normal/high and optional disabled state. IDs are unique across the board.",
+    "Use moveCard(cardId, targetColumnId, targetIndex?) for deterministic movement. action(cardId, left/right/up/down) supports explicit controls.",
+    "Drag-and-drop is an enhancement. Each card also has buttons and Arrow Left/Right/Up/Down plus Home/End keyboard movement.",
+    "move and change report the moved card, source and destination IDs, indices and resulting columns. select reports card activation; the host persists the board."
+  ],
+  "happens": [
+    [
+      "drag a card to another column",
+      "the card moves and column counts update"
+    ],
+    [
+      "use arrow keys or move buttons",
+      "the same move is available without drag-and-drop"
+    ],
+    [
+      "listen for move",
+      "the host receives the new board state for persistence"
+    ]
+  ],
+  "limits": [
+    "The component renders all supplied cards. It does not implement virtual scrolling, swimlanes, column creation, card editing, workflow permissions, server persistence or conflict resolution.",
+    "Native HTML drag-and-drop and touch behavior vary. The explicit arrow controls provide an alternative; host applications should test touch hardware and assistive technology."
+  ],
+  "demo": {
+    "html": "<sand-kanban id=\"el\"></sand-kanban><p class=\"readout\">Move a card with drag-and-drop or its arrow controls.</p>",
+    "hint": "Use card buttons or focus a card and press Arrow Left/Right/Up/Down, Home or End.",
+    "script": "const out=document.querySelector('.readout');el.addEventListener('move',e=>out.textContent=e.detail.card.title+': '+e.detail.from+' → '+e.detail.to);"
+  },
+  "manualDocs": true
+}
 ];
