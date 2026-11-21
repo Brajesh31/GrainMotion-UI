@@ -24,6 +24,11 @@ The following details are documented by the current component READMEs and source
 | Password Field | A real native password input, masked by default, with a Show/Hide button and `aria-pressed` state. | Credential-manager/autofill behavior and manual screen-reader testing remain unverified. |
 | Search Field | A native search input with Enter search event, clear action and `aria-busy` while pending. | Application owns result announcements; manual searchbox announcements remain unverified. |
 | OTP / PIN Input | One native numeric text input, one-time-code autocomplete, paste sanitation and a complete event that exposes length only. | Separate digit fields are not used; manual autofill and screen-reader testing on mobile remain unverified. |
+| Select / Dropdown | Native select with browser popup, accessible name, keyboard navigation and form-associated value. | Popup appearance varies by browser/platform; manual screen-reader verification remains required. |
+| Combobox / Autocomplete | Native text input with datalist, free-text support and a custom exact-suggestion event. | Datalist popup and announcement behavior varies across browser/assistive-technology combinations. |
+| Date Picker | Native date input with ISO calendar value, min/max and unavailable-day validation. | Individual unavailable dates are validated after selection, not visually disabled in the popup. Manual calendar keyboard/screen-reader testing remains required. |
+| Date Range Picker | Two native date inputs with separate accessible names, range order validation and ISO start/end serialization. | Two calendar popups are native browser UI; manual focus order, required-range and screen-reader testing remains required. |
+| Time Picker | Native time input, explicit 12/24-hour readout, min/max/step and timezone-free HH:MM value. | Native popup format is browser/OS locale controlled; the readout is explicit. Manual testing remains required. |
 
 The project documentation states that current tests run in headless Chromium and that real-device, Safari, Firefox and screen-reader testing has not been completed. See [Browser Support](BROWSER-SUPPORT.md).
 
@@ -35,6 +40,16 @@ Phase 2 deliberately layers actual browser-native inputs above the sand renderin
 - **Search:** the search event requests work but does not create results. The integrating application is responsible for announcing result counts and errors. `aria-busy` only indicates that work is pending.
 - **OTP/PIN:** one input is used across the visual digit wells to preserve mobile one-time-code autofill and paste. The `complete` event exposes the configured length, not the code. The application must handle the code securely.
 - **Text Field and Textarea:** the accessible name is applied to the internal native control. The sand stylus is decorative focus feedback, not a substitute caret.
+
+### Phase 3 selection, date and time controls
+
+Phase 3 uses browser-native controls for all interactive selection. The sand renderer is visual feedback only.
+
+- **Select:** preserve native select semantics and browser-owned popup behavior. Use the actual option value as the form value, not the display label unless they are identical.
+- **Combobox:** use one native text input and datalist. Free text is allowed; do not falsely announce that every value must match a suggestion. Native datalist behavior varies by browser.
+- **Date Picker:** expose and submit ISO calendar dates (YYYY-MM-DD). Do not convert a calendar date through local timezone APIs. Individual unavailable dates are custom-validated after selection, but cannot be visually disabled in the native popup.
+- **Date Range:** give start and end separate accessible names, validate ordering and required endpoints, and document the stable YYYY-MM-DD/YYYY-MM-DD serialization.
+- **Time Picker:** keep the value as timezone-free HH:MM. Do not attach a date or convert it to a local timestamp. The explicit format readout is distinct from the native input popup, whose format follows browser locale.
 
 ## Requirements for every new component
 
