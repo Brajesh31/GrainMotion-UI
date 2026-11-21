@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">Time Picker concept study</title><desc id="desc">A small clock dial is etched into the sand, with a river stone marking the selected time. A native time input retains platform time selection and a separate readout shows 12/24-hour formatting.</desc>
+<defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#f8f3e9"/><stop offset="1" stop-color="#e9e0d2"/></linearGradient><linearGradient id="sand" x2="0" y2="1"><stop stop-color="#f4e5c8"/><stop offset=".5" stop-color="#d2b183"/><stop offset="1" stop-color="#f0dfbd"/></linearGradient><radialGradient id="stone"><stop stop-color="#777a7b"/><stop offset=".7" stop-color="#45484a"/><stop offset="1" stop-color="#242627"/></radialGradient></defs>
+<rect width="1600" height="900" fill="url(#bg)"/>
+<text x="800" y="145" text-anchor="middle" font-family="Arial,sans-serif" font-size="62" font-weight="700" fill="#30271f">GrainMotion-UI · Time Picker</text>
+<text x="800" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" fill="#76634f">PHYSICAL INTERACTION CONCEPT · NOT A RUNTIME SCREENSHOT</text>
+<circle cx="800" cy="420" r="230" fill="#604632"/><circle cx="800" cy="420" r="205" fill="url(#sand)"/><circle cx="800" cy="420" r="155" fill="none" stroke="#a98050" stroke-width="8"/><path d="M800 420l0-130M800 420l115 70" stroke="#705335" stroke-width="16" stroke-linecap="round"/><ellipse cx="800" cy="265" rx="48" ry="38" fill="url(#stone)"/>
+<text x="800" y="735" text-anchor="middle" font-family="Arial,sans-serif" font-size="27" fill="#4f3e2e">A small clock dial is etched into the sand, with a river stone marking the selected time. A native time input retains platform time selection and a separate readout shows 12/24-hour formatting.</text>
+<text x="800" y="805" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" letter-spacing="4" fill="#8a765f">SAND · WALNUT · BAMBOO · RIVER STONE</text>
+</svg>
