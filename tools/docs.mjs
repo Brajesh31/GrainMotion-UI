@@ -10,7 +10,21 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..'), check = proces
 let stale = 0;
 const put = (rel, next) => {
   let was = ''; try { was = readFileSync(join(root, rel), 'utf8'); } catch {}
-  if (next !== was) { stale++; if (!check) writeFileSync(join(root, rel), next); console.log(`${check ? 'stale' : 'wrote'} ${rel}`); }
+  if (next !== was) {
+    stale++;
+    if (!check) {
+      writeFileSync(join(root, rel), next);
+      console.log(`wrote ${rel}`);
+    } else {
+      let i = 0;
+      while (i < next.length && i < was.length && next[i] === was[i]) i++;
+      const line = was.slice(0, i).split('\\n').length;
+      const from = Math.max(0, i - 60), to = i + 120;
+      console.log(`stale ${rel} at line ${line}`);
+      console.log(`  expected: ${JSON.stringify(next.slice(from, to))}`);
+      console.log(`  actual:   ${JSON.stringify(was.slice(from, to))}`);
+    }
+  }
 };
 const kb = (id) => Math.round(statSync(join(root, id, id + '.js')).size / 1024 / 10) * 10;
 const table = (head, rows) => `| ${head.join(' | ')} |\n|${head.map(() => '---').join('|')}|\n` + rows.map((r) => `| ${r.join(' | ')} |`).join('\n');
