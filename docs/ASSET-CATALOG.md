@@ -29,6 +29,11 @@ This catalog records assets found in the current repository tree. It does not as
 | `password/assets/concept.svg` | SVG | Masked password and stone shutter concept diagram, not a runtime screenshot. |
 | `search/assets/concept.svg` | SVG | Search well and busy-rake concept diagram, not a runtime screenshot. |
 | `otp/assets/concept.svg` | SVG | OTP/PIN engraved digit-well concept diagram, not a runtime screenshot. |
+| `select/assets/concept.svg` | SVG | Select control and chosen-option stone concept diagram, not a runtime screenshot. |
+| `combobox/assets/concept.svg` | SVG | Combobox datalist suggestion and bamboo rake concept diagram, not a runtime screenshot. |
+| `date-picker/assets/concept.svg` | SVG | Engraved calendar and selected-day pebble concept diagram, not a runtime screenshot. |
+| `date-range/assets/concept.svg` | SVG | Date-range endpoint stones and interval groove concept diagram, not a runtime screenshot. |
+| `time-picker/assets/concept.svg` | SVG | Clock-dial and time marker concept diagram, not a runtime screenshot. |
 
 ### Audio assets
 
