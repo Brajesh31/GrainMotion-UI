@@ -6,7 +6,7 @@ Grow GrainMotion-UI into a carefully designed library of tactile interface contr
 
 **Target:** 50 components total, including the four already implemented. This means 46 new components.
 
-**Status update:** Phases 1–4 have 20 implemented additions on top of the original four. Phase 5 adds five navigation components, bringing the implementation set to 29. Phase 5 source bundles, interactive demos, component guides, concept SVGs, gallery cards, registry entries and 45 targeted Chromium assertions are now committed. The final 29-component validation run is pending; manual assistive-technology and physical-device checks remain outstanding.
+**Status update:** Phases 1–4 contributed 20 implemented additions on top of the original four. Phase 5 adds five navigation components, bringing the implemented set to 29 of the 50-component roadmap. All five Phase 5 standalone bundles, interactive demos, component guides, concept SVGs, gallery cards, registry entries and 45 targeted Chromium assertions are committed. The final 29-component GitHub Actions mobile Chromium run passed **125 assertions with zero failures**. Manual assistive-technology and physical-device checks remain outstanding.
 
 This roadmap is not a completion report. A component is not release-complete until its functional and regression tests pass.
 
@@ -70,7 +70,7 @@ Required coverage: checked/unchecked and selected states, disabled options, keyb
 
 Required coverage: labels, placeholders, input and change events, input constraints, paste behavior, autocomplete, validation messages, password reveal behavior, focus and keyboard support.
 
-**Implementation status:** The five Phase 2 controls now have standalone bundles, live demos, complete component guides and concept assets. The gallery, registry and AI-readable catalog have been extended to fourteen components. The mobile Chromium suite passes the Phase 2 interaction and form checks. Manual screen-reader and real-device verification remains required. Sensitive values must not be written to logs or exposed in visual assets.
+**Implementation status:** Complete for implementation and automated verification. All five components have standalone bundles, demos, component guides, concept SVGs, gallery integrations and registry entries. The 29-component build synchronization, generated documentation/registry checks and mobile Chromium suite passed. The browser suite recorded **125 passing assertions and zero failures**. Manual screen-reader and physical-device verification remains outstanding.
 
 ## Phase 3: Selection, calendar and time controls
 
