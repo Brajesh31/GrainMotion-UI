@@ -6,7 +6,7 @@ Grow GrainMotion-UI into a carefully designed library of tactile interface contr
 
 **Target:** 50 components total, including the four already implemented. This means 46 new components.
 
-**Status update:** Phases 1–8 now deliver 45 implemented components of the 50-component roadmap. Phase 8 adds tooltips, toasts, persistent alerts, native modal dialogs and edge drawers. The final 45-component GitHub Actions mobile Chromium run passed **206 assertions with zero failures**; standalone bundle synchronization, generated documentation validation and GitHub Pages deployment also passed. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818303) · [Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818321). Manual screen-reader, physical-device, Safari and Firefox checks remain outstanding. Phase 9 is now in progress on main with all five source files, individual demos and guides, visual concepts, registry records and 30 targeted Chromium assertions committed. The final 50-component validation and Pages release gates are pending.
+**Current repository snapshot (2026-11-21):** `main` contains 50 component folders, each with a standalone source file, demo and README. The latest full 50-component mobile Chromium validation, run [#486](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878968524) on commit `901599d`, recorded **236 passing assertions and 3 failures**. The failures are two tooltip keyboard focus/dismissal assertions and one toast polite-live-region assertion. Bundle synchronization and generated docs/registry validation passed. The Pages deployment for the same commit succeeded in [run #587](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878968566). This confirms deployment, not release readiness. Browser/device/screen-reader manual checks remain unverified. See [the Phase 0 foundation audit](PHASE-0-FOUNDATION-AUDIT.md) for the verified baseline and blockers.
 
 This roadmap is not a completion report. A component is not release-complete until its functional and regression tests pass.
 
@@ -29,18 +29,19 @@ This roadmap is not a completion report. A component is not release-complete unt
 
 | Workstream | Deliverable | Current status |
 |---|---|---|
-| Repository audit | Inventory current files, four components, core engine and build scripts | Inspected |
-| Existing API baseline | Record element names, properties, methods, attributes and events from current docs/source | Documentation baseline created; further source-level API audit required |
-| Design system | Record observed colors, materials, lighting, geometry and motion rules | Initial baseline documented; formal tokens still need implementation |
-| Architecture | Explain core engine, stamping process, standalone files and generated docs | Documented |
-| Component contract | Define common API, accessibility, lifecycle and distribution standards | Target described; contract implementation pending |
-| Assets | Inventory existing artwork, sounds and textures | Initial inventory documented |
-| Accessibility | Record existing semantics and known gaps | Baseline documented; remediation pending |
-| Performance | Identify WebGL context and simulation constraints | Known issues documented; profiling/remediation pending |
-| Testing | Record existing Chromium test coverage and required new checks | Baseline documented; broader coverage pending |
-| Documentation system | Keep `tools/spec.mjs` as source of generated component docs, registry and `llms.txt` | Extended for nineteen entries; expanded Phase 1, Phase 2 and Phase 3 manuals are preserved through `manualDocs` |
+| Repository inventory | Inventory component folders, source files, demos, guides, core engine and tooling | Verified: 50 component folders and 259 tracked files at audited commit `901599d` |
+| Component source inventory | Compare component IDs across `tools/spec.mjs`, `tools/build.mjs`, source folders and `registry.json` | Automated audit added in `tools/audit.mjs`; CI execution pending |
+| Existing API baseline | Record element names, attributes, properties, methods, events and form behavior | Component guides exist; per-component runtime/API verification remains in Phases 1–11 |
+| Design system | Record observed colors, materials, lighting, geometry and motion rules | Existing baseline retained; provisional shared color/motion tokens added at `design/tokens.css`; legacy components are not yet migrated |
+| Architecture | Explain core engine, stamped standalone bundles, generated docs, registry and constraints | Architecture document updated for 50 components |
+| Component contract | Define required API, lifecycle, accessibility, rendering, docs and tests | Defined in [COMPONENT-CONTRACT.md](COMPONENT-CONTRACT.md) |
+| Assets | Inventory artwork, sounds and textures and their build mappings | Existing asset catalog and build manifest retained; rights/provenance and runtime asset audit remain open |
+| Accessibility | Record existing semantics and known gaps | Baseline documented; reduced-motion and manual assistive-technology verification remain open |
+| Performance and lifecycle | Identify WebGL context, observer, animation and memory constraints | Constraints documented; profiling and runtime remediation remain open |
+| Testing | Record current Chromium coverage and known failures | Latest suite: 236 pass, 3 fail; failures listed in the Phase 0 audit |
+| Documentation system | Keep `tools/spec.mjs` as source of generated component docs, registry and `llms.txt` | Existing generator retained; structural and asset audit added as a separate check |
 
-**Exit criteria:** design tokens and component contract approved in code/docs; lifecycle and WebGL constraints tested; accessibility and browser test strategy documented; the original four have a passing regression baseline; new-component scaffolding can be generated without altering their behavior.
+**Exit criteria:** the structural audit, standalone bundle check and generated documentation check pass in CI; the canonical token file and component contract are present; architecture, asset, accessibility, performance and browser limitations are recorded without overstated claims; the original four have a reproducible automated and visual baseline. Phase 0 does not repair component behavior. The current three Chromium failures remain assigned to their component audit phases. Do not mark Phase 0 complete until the new audit check has passed in GitHub Actions.
 
 ## Phase 1: Essential selection controls
 
@@ -177,7 +178,7 @@ Required coverage: focus trapping where appropriate, Escape behavior, dismissal 
 
 ## Phase 9: Advanced productivity and composite components
 
-**Status: Complete and CI-verified on `main` (2026-11-21).** All five source components, demos, guides, concept sheets, registry entries and 33 targeted browser checks are committed. The full 50-component mobile Chromium suite passed 239 checks with zero failures. Standalone bundle synchronization, generated documentation/registry validation and GitHub Pages deployment passed.
+**Implementation present; latest validation is not passing (2026-11-21).** All five source components, demos, guides and registry entries are present. The latest full 50-component mobile Chromium suite recorded 236 passing assertions and three failures, including tooltip keyboard focus/dismissal and toast polite-live-region checks. Bundle synchronization and generated documentation/registry checks passed; Pages deployment succeeded. Do not treat Phase 9 as release-verified until the current suite passes.
 
 Evidence: [50-component validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878408790) · [GitHub Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878408728). Manual Safari, Firefox, physical-device and screen-reader testing remain open follow-up QA.
 
