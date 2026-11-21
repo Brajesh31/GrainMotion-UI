@@ -331,6 +331,7 @@ class SandSteps extends SandTray {
  syncDisabled(){for(const b of this.buttons)b.disabled=this.disabled;this.formValue(this.disabled?null:String(this._value))}
  formDisabledCallback(v){this._formDisabled=!!v;this.syncDisabled()}
  formResetCallback(){this.value=Number(this.getAttribute('value')||0)}
+ step(){}
  layout(){const r=this.inner;for(let y=r.y0;y<r.y1;y++)for(let x=r.x0;x<r.x1;x++){const i=y*this.W+x;if(this.inside[i])this.h[i]=this.lines(x,y,3,3)*.14}this.relax(r.x0,r.x1,2);this.dirty=true;this.update()}
  }
 if(!customElements.get('sand-steps'))customElements.define('sand-steps',SandSteps);
