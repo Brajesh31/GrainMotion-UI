@@ -76,8 +76,7 @@ ${[...c.limits, ...COMMON_LIMITS].map((l) => `- ${l}`).join('\n')}
   .sub { margin: 4px 0 0; color: var(--mute); }
   .stage { display: grid; justify-items: center; gap: 12px; padding: 28px 0 18px; }
   .stage > :is(sand-slider, sand-signature) { width: 100%; }
-  .stage > sand-toggle { width: min(220px, 60%); } .stage > sand-thinking { width: min(320px, 80%); }
-${['dropzone', 'upload-queue', 'carousel', 'lightbox', 'scrubber', 'color-picker'].includes(c.id) ? '  .stage > :is(sand-dropzone, sand-upload-queue, sand-carousel, sand-lightbox, sand-scrubber, sand-color-picker) { width: min(520px, 100%); }\n' : ''}
+  .stage > sand-toggle { width: min(220px, 60%); } .stage > sand-thinking { width: min(320px, 80%); }${['dropzone', 'upload-queue', 'carousel', 'lightbox', 'scrubber', 'color-picker'].includes(c.id) ? ' .stage > :is(sand-dropzone, sand-upload-queue, sand-carousel, sand-lightbox, sand-scrubber, sand-color-picker) { width: min(520px, 100%); }' : ''}
   .field { width: 100%; display: flex; justify-content: space-between; font-weight: 500; } .field output { color: var(--mute); font-variant-numeric: tabular-nums; }
   .readout { margin: 0; color: var(--mute); }
   .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
