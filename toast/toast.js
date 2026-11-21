@@ -334,7 +334,7 @@ class SandToast extends SandTray{
   connectedCallback(){const reconnect=!!this.c;super.connectedCallback();if(reconnect&&this._ready){this.sync();if(this._open){activeToasts.add(this);reflow();this.startTimer();}}}
   disconnectedCallback(){this.clearTimer();activeToasts.delete(this);reflow();super.disconnectedCallback();}
   init(){this._ready=true;this.style.cssText+=';position:fixed;z-index:10040;width:min(360px,calc(100vw - 24px));margin:0;pointer-events:none;visibility:hidden';this.render();if(this.hasAttribute('open'))this.activate();else this.sync();}
-  attributeChangedCallback(name,old,value){if(!this._ready||old===value)return;if(name==='open'){value===null?this.deactivate('attribute'):this.activate();}else if(name==='duration'&&this._open){this._remaining=this.durationMs();this.startTimer();}else this.sync();}
+  attributeChangedCallback(name,old,value){if(!this._ready||old===value)return;if(name==='open'){value===null?this.deactivate('attribute'):this.activate();}else if(name==='duration'&&this._open){this._remaining=this.durationMs();this.startTimer();}else{this.sync();if(name==='position'&&this._open)reflow();}}
   durationMs(){const v=this.getAttribute('duration');return v===null?4500:Math.max(0,Math.min(60000,Number(v)||0));}
   dismissible(){return this.getAttribute('dismissible')!=='false';}
   render(){
