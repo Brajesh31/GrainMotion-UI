@@ -2,7 +2,7 @@
 
 Two shallow walnut-edged trays hold small river stones. Select one or more stones in either tray, then move them across the channel. The selected set and each item's side remain ordinary data, ready for the host application to persist.
 
-One of forty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of fifty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 
