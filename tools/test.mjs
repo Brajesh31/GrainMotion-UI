@@ -484,6 +484,65 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
 }
 
 
+{ // Phase 8: focus hints, live feedback and native modal surfaces
+  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');window.__p8={toastAction:0,toastDismiss:0,alertAction:0,alertDismiss:0,dialogOpen:0,dialogClose:[],dialogConfirm:0,drawerOpen:0,drawerClose:[],drawerConfirm:0};return {described:b.getAttribute('aria-describedby'),tip:t._id,role:t._bubble.getAttribute('role')}})()");
+  check('tooltip: trigger is associated with a role=tooltip message', await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');return t._target===b&&t._bubble.getAttribute('role')==='tooltip'&&b.getAttribute('aria-describedby').split(/\\s+/).includes(t._id)})()")===true);
+  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');b.dispatchEvent(new Event('focusin',{bubbles:true}));})()");
+  await new Promise(r=>setTimeout(r,320));
+  check('tooltip: keyboard focus opens the hint without moving focus', await ev("(()=>{const t=document.querySelector('sand-tooltip');return t.open&&!t._bubble.hidden&&document.activeElement===document.getElementById('gm-tooltip-trigger')})()")===true);
+  await ev("document.getElementById('gm-tooltip-trigger').dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}))");
+  check('tooltip: Escape dismisses and leaves trigger focus unchanged', await ev("!document.querySelector('sand-tooltip').open&&document.activeElement===document.getElementById('gm-tooltip-trigger')")===true);
+  await ev("(()=>{const t=document.querySelector('sand-tooltip');t.setAttribute('disabled','');t.scheduleShow();})()");
+  check('tooltip: disabled state prevents programmatic display', await ev("document.querySelector('sand-tooltip').show()===false&&!document.querySelector('sand-tooltip').open")===true);
+  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger'),id=t._id;t.remove();return !((b.getAttribute('aria-describedby')||'').split(/\\s+/).includes(id))})()");
+  check('tooltip: disconnect removes only its described-by token', await ev("!document.getElementById('gm-tooltip-trigger').getAttribute('aria-describedby')?.includes(document.querySelector('sand-tooltip')?._id||'__detached__')")===true);
+  await ev("(()=>{const c=document.querySelector('[data-c=tooltip]');const t=document.createElement('sand-tooltip');t.id='el-tooltip-restored';t.setAttribute('for','gm-tooltip-trigger');t.setAttribute('text','Restored hint');c.append(t);})()");
+
+  await ev("(()=>{const t=document.querySelector('sand-toast');t.addEventListener('action',()=>window.__p8.toastAction++);t.addEventListener('dismiss',e=>{window.__p8.toastDismiss++;window.__p8.toastReason=e.detail.reason;});t.show();})()");
+  check('toast: info and success announce as polite status', await ev("(()=>{const t=document.querySelector('sand-toast');return t.ui.getAttribute('role')==='status'&&t.ui.getAttribute('aria-live')==='polite'&&t.open})()")===true);
+  await ev("document.querySelector('sand-toast').setAttribute('tone','error')");
+  check('toast: warning and error switch to assertive alert semantics', await ev("(()=>{const t=document.querySelector('sand-toast');return t.ui.getAttribute('role')==='alert'&&t.ui.getAttribute('aria-live')==='assertive'})()")===true);
+  await ev("document.querySelector('sand-toast').actionButton.click()");
+  check('toast: action event fires before action dismissal', await ev("window.__p8.toastAction===1&&window.__p8.toastDismiss===1&&window.__p8.toastReason==='action'&&!document.querySelector('sand-toast').open")===true);
+  await ev("(()=>{const a=document.querySelector('sand-toast'),b=document.createElement('sand-toast');b.setAttribute('duration','0');b.setAttribute('position','top-right');document.body.append(b);a.setAttribute('tone','success');a.show();b.show();window.__p8.extraToast=b;})()");
+  check('toast: independent notifications stack at separate offsets', await ev("Math.abs(parseFloat(window.__p8.extraToast.style.top)-parseFloat(document.querySelector('sand-toast').style.top))>=90")===true);
+  await ev("(()=>{const t=document.querySelector('sand-toast');t.ui.dispatchEvent(new Event('pointerenter'));})()");
+  check('toast: auto-dismiss timer pauses on hover', await ev("document.querySelector('sand-toast')._timer===0")===true);
+  await ev("(()=>{document.querySelector('sand-toast').dismiss('test');window.__p8.extraToast.dismiss('test');window.__p8.extraToast.remove();})()");
+
+  await ev("(()=>{const a=document.querySelector('sand-alert');a.addEventListener('action',()=>window.__p8.alertAction++);a.addEventListener('dismiss',()=>window.__p8.alertDismiss++);a.setAttribute('tone','info');})()");
+  check('alert: info uses a polite status region', await ev("(()=>{const a=document.querySelector('sand-alert');return a.ui.getAttribute('role')==='status'&&a.ui.getAttribute('aria-live')==='polite'})()")===true);
+  await ev("document.querySelector('sand-alert').setAttribute('tone','error')");
+  check('alert: error uses an assertive alert region', await ev("(()=>{const a=document.querySelector('sand-alert');return a.ui.getAttribute('role')==='alert'&&a.ui.getAttribute('aria-live')==='assertive'})()")===true);
+  await ev("document.querySelector('sand-alert').actionButton.click()");
+  await ev("document.querySelector('sand-alert').closeButton.click()");
+  check('alert: optional action and dismiss emit separate host events', await ev("window.__p8.alertAction===1&&window.__p8.alertDismiss===1&&document.querySelector('sand-alert').dismissed&&document.querySelector('sand-alert').ui.closest('sand-alert').style.display==='none'")===true);
+  await ev("document.querySelector('sand-alert').show()");
+  check('alert: show restores a dismissed persistent banner', await ev("!document.querySelector('sand-alert').dismissed&&document.querySelector('sand-alert').style.display!=='none'")===true);
+
+  await ev("(()=>{const d=document.querySelector('sand-dialog');d.addEventListener('dialog-open',()=>window.__p8.dialogOpen++);d.addEventListener('dialog-close',e=>window.__p8.dialogClose.push(e.detail.returnValue));d.addEventListener('confirm',()=>window.__p8.dialogConfirm++);document.getElementById('open-dialog').focus();d.showModal();})()");
+  check('dialog: enters the native modal top layer with preserved content', await ev("(()=>{const d=document.querySelector('sand-dialog');return d.dialog.open&&d.dialog.matches(':modal')&&d.body.textContent.includes('Check your title')&&window.__p8.dialogOpen===1})()")===true);
+  check('dialog: modal initial focus remains within native dialog', await ev("document.querySelector('sand-dialog').dialog.contains(document.activeElement)")===true);
+  await ev("document.querySelector('sand-dialog').confirmButton.click()");
+  check('dialog: confirm emits action, closes and restores opener focus', await ev("(()=>{const d=document.querySelector('sand-dialog');return window.__p8.dialogConfirm===1&&window.__p8.dialogClose.at(-1)==='confirm'&&!d.dialog.open&&document.activeElement===document.getElementById('open-dialog')})()")===true);
+  await ev("document.querySelector('sand-dialog').showModal()");
+  await ev("document.querySelector('sand-dialog').dialog.dispatchEvent(new Event('cancel',{bubbles:true,cancelable:true}))");
+  check('dialog: Escape cancel follows the default close policy', await ev("(()=>{const d=document.querySelector('sand-dialog');return !d.dialog.open&&window.__p8.dialogClose.at(-1)==='escape'})()")===true);
+  await ev("(()=>{const d=document.querySelector('sand-dialog');d.setAttribute('close-on-backdrop','');d.showModal();d.dialog.dispatchEvent(new MouseEvent('click',{bubbles:true}));})()");
+  check('dialog: optional backdrop click closes the native modal', await ev("!document.querySelector('sand-dialog').dialog.open&&window.__p8.dialogClose.at(-1)==='backdrop'")===true);
+
+  await ev("(()=>{const d=document.querySelector('sand-drawer');d.addEventListener('drawer-open',()=>window.__p8.drawerOpen++);d.addEventListener('drawer-close',e=>window.__p8.drawerClose.push(e.detail.returnValue));d.addEventListener('confirm',()=>window.__p8.drawerConfirm++);document.getElementById('open-drawer').focus();d.showModal();})()");
+  check('drawer: opens as a native modal sheet at the chosen edge', await ev("(()=>{const d=document.querySelector('sand-drawer');return d.dialog.open&&d.dialog.matches(':modal')&&d.panel.dataset.place==='right'&&window.__p8.drawerOpen===1})()")===true);
+  await ev("(()=>{const d=document.querySelector('sand-drawer');d.setAttribute('placement','bottom');d.setAttribute('size','250px');})()");
+  check('drawer: placement and size update panel geometry', await ev("(()=>{const d=document.querySelector('sand-drawer');return d.panel.dataset.place==='bottom'&&d.panel.style.getPropertyValue('--gm-drawer-size')==='250px'})()")===true);
+  await ev("document.querySelector('sand-drawer').dialog.dispatchEvent(new Event('cancel',{bubbles:true,cancelable:true}))");
+  check('drawer: Escape closes and reports return focus', await ev("(()=>{const d=document.querySelector('sand-drawer');return !d.dialog.open&&window.__p8.drawerClose.at(-1)==='escape'&&document.activeElement===document.getElementById('open-drawer')})()")===true);
+  await ev("(()=>{const d=document.querySelector('sand-drawer');d.setAttribute('placement','right');d.setAttribute('action-label','Apply');d.showModal();d.actionButton.click();})()");
+  check('drawer: primary action fires confirm then closes', await ev("(()=>{const d=document.querySelector('sand-drawer');return window.__p8.drawerConfirm===1&&window.__p8.drawerClose.at(-1)==='confirm'&&!d.dialog.open})()")===true);
+  await ev("(()=>{const d=document.querySelector('sand-drawer');d.setAttribute('close-on-backdrop','');d.showModal();d.dialog.dispatchEvent(new MouseEvent('click',{bubbles:true}));})()");
+  check('drawer: opt-in backdrop dismissal closes the sheet', await ev("!document.querySelector('sand-drawer').dialog.open&&window.__p8.drawerClose.at(-1)==='backdrop'")===true);
+}
+
 { // forms: verify all twenty form-associated components in a small isolated form
   const formResults = await ev(`(() => {
     const f = document.createElement('form');
