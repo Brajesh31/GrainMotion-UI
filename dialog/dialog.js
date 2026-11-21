@@ -329,6 +329,7 @@ class SandDialog extends SandTray{
   set open(v){v?this.showModal():this.close('property');}
   connectedCallback(){const reconnect=!!this.c;super.connectedCallback();if(reconnect&&this._ready&&this.hasAttribute('open')&&!this.dialog.open)this.showModal();}
   disconnectedCallback(){if(this.dialog?.open)this.close('disconnect');super.disconnectedCallback();}
+  step(){} // The host UI carries interaction; keep the shared tray loop valid.
   init(){this._ready=true;this.style.cssText+=';position:fixed;left:0;top:0;width:0;height:0;overflow:visible;z-index:10050;pointer-events:none';this._contentNodes=Array.from(this.childNodes).filter(n=>n!==this.c&&n!==this.o);this.render();if(this.hasAttribute('open'))this.showModal();}
   attributeChangedCallback(name,old,value){if(!this._ready||old===value)return;if(name==='open'){if(value!==null&&!this.dialog.open)this.showModal();else if(value===null&&this.dialog.open)this.close('attribute');}else this.sync();}
   render(){
