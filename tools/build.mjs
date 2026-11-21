@@ -25,6 +25,11 @@ export const SOUNDS = {
   password: one('stone', 'tap'),
   search: one('tap', 'stone'),
   otp: one('tap', 'stone'),
+  select: one('stone', 'tap'),
+  combobox: one('tap'),
+  'date-picker': one('stone', 'tap'),
+  'date-range': one('stone'),
+  'time-picker': one('tap', 'stone'),
 };
 // Images a control carries, as constants.
 export const ART = { thinking: { ROCK: 'rock.webp' } };
