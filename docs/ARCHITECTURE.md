@@ -4,7 +4,7 @@
 
 GrainMotion-UI is currently a browser-native custom-element library. It is not a React or Vue component package. Each published control is a plain JavaScript file that registers a custom element and can be loaded through a normal script tag.
 
-The repository now contains nineteen controls. The original four remain the reference implementations:
+The repository now contains twenty-four controls. The original four remain the reference implementations:
 
 - `slider/slider.js` registers `<sand-slider>`.
 - `toggle/toggle.js` registers `<sand-toggle>`.
@@ -38,6 +38,16 @@ Phase 3 adds five native selection/calendar/time controls:
 - `time-picker/time-picker.js` registers `<sand-time-picker>`.
 
 Phase 3 keeps native `<select>`, `<input list>`, `<input type=date>` and `<input type=time>` elements as the accessible controls. The sand tray is supplemental feedback. Date values use ISO calendar strings and time values use timezone-free HH:MM strings; no local timezone conversion is performed.
+
+Phase 4 adds five progress and activity controls:
+
+- `progress/progress.js` registers `<sand-progress>`.
+- `progress-ring/progress-ring.js` registers `<sand-progress-ring>`.
+- `steps/steps.js` registers `<sand-steps>`.
+- `timer/timer.js` registers `<sand-timer>`.
+- `loader/loader.js` registers `<sand-loader>`.
+
+Progress Bar and Progress Ring expose determinate/indeterminate progressbar semantics. Step Indicator uses native buttons for each step and is form-associated. Hourglass Timer uses native action buttons and requestAnimationFrame elapsed-time accounting. Loading Indicator exposes status/aria-busy and holds its rake still when reduced motion is requested.
 
 These five controls create a real browser-native `input` or `textarea` as a child of the custom element and position it above the sand canvases. The sand remains a separate visual layer. Typed content, password characters and OTP digits are not rendered into the sand texture or 2D concept artwork. Each standalone script contains a local `SandNativeField` helper, the shared engine and only its configured sound assets.
 
@@ -78,7 +88,7 @@ This creates a maintenance obligation: when the shared engine, sounds or embedde
 
 ### 4. Specification and generated documentation
 
-[`tools/spec.mjs`](../tools/spec.mjs) is the current source of truth for all nine component descriptions, demos, usage snippets, attributes, interaction narratives and known component-specific limits. The five Phase 1 entries use `manualDocs` because their expanded READMEs and demo pages are maintained as full hand-authored technical documents; their metadata still feeds the generated registry and `llms.txt`.
+[`tools/spec.mjs`](../tools/spec.mjs) is the current source of truth for all twenty-four component descriptions, demos, usage snippets, attributes, interaction narratives and known component-specific limits. The five Phase 1 entries use `manualDocs` because their expanded READMEs and demo pages are maintained as full hand-authored technical documents; their metadata still feeds the generated registry and `llms.txt`.
 
 [`tools/docs.mjs`](../tools/docs.mjs) generates:
 
@@ -91,7 +101,7 @@ Do not hand-edit generated files without also updating the source specification.
 
 ### 5. Gallery and hosting
 
-- `gallery/index.html` loads all nineteen component scripts and wires their examples.
+- `gallery/index.html` loads all twenty-four component scripts and wires their examples.
 - Component demo pages live in their component folders.
 - The site is deployed to GitHub Pages by `.github/workflows/pages.yml`.
 - The current repository does not define a framework-based bundling pipeline for the controls.
