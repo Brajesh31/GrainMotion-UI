@@ -55,7 +55,21 @@ class SandThing extends SandTray {
 
 ## Current component set
 
-The repository includes the original Slider, Toggle, Signature and Thinking controls plus Phase 1 Checkbox, Radio Group, Segmented Control, Range Slider and Rating. Read each component README before changing or integrating its public API.
+The repository includes fourteen controls: Slider, Toggle, Signature, Thinking, Checkbox, Radio Group, Segmented Control, Range Slider, Rating, Text Field, Textarea, Password Field, Search Field and OTP/PIN Input. Read each component README before changing or integrating its public API.
+
+## Phase 2 native text controls
+
+Text Field, Textarea, Password Field, Search Field and OTP/PIN Input are intentionally different from the canvas-first controls. Each contains a real browser-native `input` or `textarea` positioned above the sand canvases.
+
+- Do not paint user text, passwords or OTP/PIN digits into the sand height field or the 2D sprite canvas. The canvas is decorative; the native control owns the value.
+- Keep native keyboard behavior, caret, selection, paste, autocomplete and validity. Do not replace the native field with a canvas-drawn imitation.
+- The outer custom element is form-associated. Put `name` on the custom element, not only on its internal native field.
+- `sand-password` starts masked. The Show/Hide button is the explicit reveal action. Never log password values, place them in screenshots, or include them in analytics.
+- `sand-search` dispatches a bubbling `search` event when Enter is pressed. The host application owns the request, results, errors and result announcements. Set `busy` while work is pending.
+- `sand-otp` deliberately uses one native input across visual digit wells to preserve mobile `autocomplete="one-time-code"`, paste and autofill. Its `complete` event exposes the configured length only, not the entered digits. Handle the value through the application's secure verification flow.
+- The stylus, shutter and rake are visual cues. They are not replacements for the browser's caret, native validation or status announcements.
+
+See the individual component README files for supported attributes, properties, events, form behavior and known limitations.
 
 ## Wire it in
 
