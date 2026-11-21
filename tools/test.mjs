@@ -182,17 +182,31 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('OTP: one-time-code autocomplete and numeric input mode are retained', (await ev("document.querySelector('sand-otp').field.autocomplete === 'one-time-code' && document.querySelector('sand-otp').field.inputMode === 'numeric'")) === true);
   check('OTP: complete event fires without exposing the digits', (await ev("__phase2.complete === 1")) === true);
 }
-{ // forms: the value controls are sent with a form
-  const got = await ev(`(() => {
-    const f = document.createElement('form');
-    f.innerHTML = '<sand-slider name="slider" value="30"></sand-slider><sand-toggle name="toggle" checked></sand-toggle><sand-checkbox name="checkbox" value="yes" checked></sand-checkbox><sand-radio-group name="radio" options="Small,Medium,Large" value="Medium"></sand-radio-group><sand-segmented name="segment" options="Day,Week,Month" value="Week"></sand-segmented><sand-range name="range" value="10,90"></sand-range><sand-rating name="rating" value="4"></sand-rating>';
-    document.body.append(f); const out = JSON.stringify(Object.fromEntries(new FormData(f))); f.remove(); return out; })()`);
-  const expected = { slider: '30', toggle: 'on', checkbox: 'yes', radio: 'Medium', segment: 'Week', range: '10,90', rating: '4' };
-  check('forms: all seven form-associated components serialize their values', got === JSON.stringify(expected), got);
-}
-{ // Phase 2 forms: native text and sensitive controls serialize without logging their values
-  const formOk = await ev("(() => { const f = document.createElement('form'); f.innerHTML = '<sand-input name=\"input\" value=\"hello\"></sand-input><sand-textarea name=\"textarea\" value=\"note\"></sand-textarea><sand-password name=\"password\" value=\"do-not-print-this\"></sand-password><sand-search name=\"search\" value=\"grain\"></sand-search><sand-otp name=\"otp\" value=\"123456\" length=\"6\"></sand-otp>'; document.body.append(f); const d = Object.fromEntries(new FormData(f)); const ok = d.input === 'hello' && d.textarea === 'note' && d.password === 'do-not-print-this' && d.search === 'grain' && d.otp === '123456'; f.remove(); return ok; })()");
-  check('forms: all five Phase 2 controls serialize their values', formOk === true);
+
+{ // forms: reuse gallery controls and verify all twelve form-associated values
+  const formOk = await ev(`(() => {
+    const tags = ['sand-slider','sand-toggle','sand-checkbox','sand-radio-group','sand-segmented','sand-range','sand-rating','sand-input','sand-textarea','sand-password','sand-search','sand-otp'];
+    const names = ['slider','toggle','checkbox','radio','segment','range','rating','input','textarea','password','search','otp'];
+    const els = tags.map(tag => document.querySelector(tag));
+    const saved = els.map(el => ({ el, parent: el.parentNode, next: el.nextSibling, name: el.getAttribute('name'), value: Array.isArray(el.value) ? [...el.value] : el.value, checked: el.checked }));
+    els[0].value = 30; els[1].checked = true; els[2].checked = true;
+    els[3].value = 'Medium'; els[4].value = 'Week'; els[5].value = [10, 90]; els[6].value = 4;
+    els[7].value = 'hello'; els[8].value = 'note'; els[9].value = 'do-not-print-this'; els[10].value = 'grain'; els[11].value = '123456';
+    els.forEach((el, i) => el.setAttribute('name', names[i]));
+    const f = document.createElement('form'); f.append(...els); document.body.append(f);
+    const d = Object.fromEntries(new FormData(f));
+    const ok = d.slider === '30' && d.toggle === 'on' && d.checkbox === 'yes' && d.radio === 'Medium' && d.segment === 'Week' && d.range === '10,90' && d.rating === '4' && d.input === 'hello' && d.textarea === 'note' && d.password === 'do-not-print-this' && d.search === 'grain' && d.otp === '123456';
+    for (const s of saved) {
+      s.parent.insertBefore(s.el, s.next);
+      if (s.name === null) s.el.removeAttribute('name'); else s.el.setAttribute('name', s.name);
+      if (s.checked !== undefined) s.el.checked = s.checked;
+      if (Array.isArray(s.value)) s.el.value = s.value;
+      else if (s.value !== undefined) s.el.value = s.value;
+    }
+    f.remove();
+    return ok;
+  })()`);
+  check('forms: all twelve form-associated components serialize correctly', formOk === true);
 }
 { // scaling: the height follows the width
   const got = await ev(`(() => { const e = document.createElement('sand-toggle'); e.style.width = '150px'; document.body.append(e); const b = e.getBoundingClientRect(); e.remove(); return b.width + ' ' + Math.round(b.height); })()`);
