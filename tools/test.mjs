@@ -186,66 +186,41 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
 
 
 
+
 { // select: native options, label, value and required validation
-  const select = document.querySelector('sand-select');
-  select.field.value = 'express';
-  select.field.dispatchEvent(new Event('change', { bubbles: true }));
-  check('select: native selection updates the host value', select.value === 'express');
-  check('select: selected value is the submitted option value', select.field.selectedOptions[0].textContent === 'Express');
-  select.field.value = '';
-  check('select: required empty choice is invalid', select.checkValidity() === false);
-  select.field.value = 'standard';
-  check('select: valid choice clears required error', select.checkValidity() === true);
+  await ev("window.__phase3Select = { value: '', label: '', requiredInvalid: false, validChoice: false }; const s = document.querySelector('sand-select'); s.field.value = 'express'; s.field.dispatchEvent(new Event('change', { bubbles: true })); window.__phase3Select.value = s.value; window.__phase3Select.label = s.field.selectedOptions[0].textContent; s.field.value = ''; window.__phase3Select.requiredInvalid = !s.checkValidity(); s.field.value = 'standard'; window.__phase3Select.validChoice = s.checkValidity();");
+  check('select: native selection updates the host value', (await ev("window.__phase3Select.value")) === 'express');
+  check('select: selected label and form value stay distinct', (await ev("window.__phase3Select.label")) === 'Express');
+  check('select: required empty choice is invalid', (await ev("window.__phase3Select.requiredInvalid")) === true);
+  check('select: valid choice clears required error', (await ev("window.__phase3Select.validChoice")) === true);
 }
 { // combobox: datalist suggestions, free text and committed suggestion event
-  const combo = document.querySelector('sand-combobox');
-  window.__phase3 = { selected: 0 };
-  combo.addEventListener('option-selected', event => { window.__phase3.selected++; window.__phase3.value = event.detail.value; });
-  combo.field.value = 'BLR';
-  combo.field.dispatchEvent(new Event('input', { bubbles: true }));
-  combo.field.dispatchEvent(new Event('change', { bubbles: true }));
-  check('combobox: committed exact suggestion emits option-selected', window.__phase3.selected === 1 && window.__phase3.value === 'BLR');
-  combo.field.value = 'A free text value';
-  combo.field.dispatchEvent(new Event('input', { bubbles: true }));
-  check('combobox: unlisted free text remains allowed', combo.value === 'A free text value');
-  check('combobox: native datalist is connected', combo.field.list === combo.list && combo.list.options.length >= 4);
+  await ev("window.__phase3Combo = { selected: 0, value: '', freeText: false, connected: false }; const combo = document.querySelector('sand-combobox'); combo.addEventListener('option-selected', event => { window.__phase3Combo.selected++; window.__phase3Combo.value = event.detail.value; }); combo.field.value = 'BLR'; combo.field.dispatchEvent(new Event('input', { bubbles: true })); combo.field.dispatchEvent(new Event('change', { bubbles: true })); window.__phase3Combo.freeText = false; combo.field.value = 'A free text value'; combo.field.dispatchEvent(new Event('input', { bubbles: true })); window.__phase3Combo.freeText = combo.value === 'A free text value'; window.__phase3Combo.connected = combo.field.list === combo.list && combo.list.options.length >= 4;");
+  check('combobox: exact suggestion emits option-selected', (await ev("window.__phase3Combo.selected === 1 && window.__phase3Combo.value === 'BLR'")) === true);
+  check('combobox: unlisted free text remains allowed', (await ev("window.__phase3Combo.freeText")) === true);
+  check('combobox: native datalist is connected', (await ev("window.__phase3Combo.connected")) === true);
 }
 { // date picker: ISO date strings, limits and unavailable-day custom validity
-  const date = document.querySelector('sand-date-picker');
-  date.field.value = '2026-11-24';
-  date.field.dispatchEvent(new Event('input', { bubbles: true }));
-  check('date picker: native date is retained as ISO calendar string', date.value === '2026-11-24');
-  date.setAttribute('unavailable', '2026-11-24');
-  check('date picker: unavailable date fails validity', date.checkValidity() === false);
-  date.field.value = '2026-11-25';
-  date.field.dispatchEvent(new Event('input', { bubbles: true }));
-  check('date picker: available date passes validity', date.checkValidity() === true);
-  check('date picker: min/max bounds are applied to the native date input', date.field.min === '2026-01-01' && date.field.max === '2026-12-31');
+  await ev("window.__phase3Date = { iso: false, unavailable: false, available: false, bounds: false }; const date = document.querySelector('sand-date-picker'); date.field.value = '2026-11-24'; date.field.dispatchEvent(new Event('input', { bubbles: true })); window.__phase3Date.iso = date.value === '2026-11-24'; date.setAttribute('unavailable', '2026-11-24'); window.__phase3Date.unavailable = !date.checkValidity(); date.field.value = '2026-11-25'; date.field.dispatchEvent(new Event('input', { bubbles: true })); window.__phase3Date.available = date.checkValidity(); window.__phase3Date.bounds = date.field.min === '2026-01-01' && date.field.max === '2026-12-31';");
+  check('date picker: native date is retained as an ISO calendar string', (await ev("window.__phase3Date.iso")) === true);
+  check('date picker: unavailable date fails validity', (await ev("window.__phase3Date.unavailable")) === true);
+  check('date picker: available date passes validity', (await ev("window.__phase3Date.available")) === true);
+  check('date picker: min/max bounds reach the native date input', (await ev("window.__phase3Date.bounds")) === true);
 }
 { // date range: ISO serialization, endpoint order, required fields and unavailable values
-  const range = document.querySelector('sand-date-range');
-  range.start = '2026-11-21'; range.end = '2026-11-25';
-  check('date range: value serializes start/end ISO strings', range.value === '2026-11-21/2026-11-25');
-  check('date range: both valid ordered endpoints pass validation', range.checkValidity() === true);
-  range.end = '2026-11-20';
-  check('date range: end before start is invalid', range.checkValidity() === false);
-  range.end = '2026-11-25';
-  range.setAttribute('unavailable', '2026-11-25');
-  check('date range: unavailable endpoint is invalid', range.checkValidity() === false);
-  range.removeAttribute('unavailable');
-  range.start = ''; range.end = '';
-  check('date range: required range needs both endpoints', range.checkValidity() === false);
+  await ev("window.__phase3Range = { serialized: false, ordered: false, reversedInvalid: false, unavailableInvalid: false, requiredInvalid: false }; const range = document.querySelector('sand-date-range'); range.start = '2026-11-21'; range.end = '2026-11-25'; window.__phase3Range.serialized = range.value === '2026-11-21/2026-11-25'; window.__phase3Range.ordered = range.checkValidity(); range.end = '2026-11-20'; window.__phase3Range.reversedInvalid = !range.checkValidity(); range.end = '2026-11-25'; range.setAttribute('unavailable', '2026-11-25'); window.__phase3Range.unavailableInvalid = !range.checkValidity(); range.removeAttribute('unavailable'); range.start = ''; range.end = ''; window.__phase3Range.requiredInvalid = !range.checkValidity();");
+  check('date range: value serializes start/end ISO strings', (await ev("window.__phase3Range.serialized")) === true);
+  check('date range: valid ordered endpoints pass validation', (await ev("window.__phase3Range.ordered")) === true);
+  check('date range: end before start is invalid', (await ev("window.__phase3Range.reversedInvalid")) === true);
+  check('date range: unavailable endpoint is invalid', (await ev("window.__phase3Range.unavailableInvalid")) === true);
+  check('date range: required range needs both endpoints', (await ev("window.__phase3Range.requiredInvalid")) === true);
 }
 { // time picker: stable HH:MM value, 12/24 readout and native time constraints
-  const time = document.querySelector('sand-time-picker');
-  time.field.value = '16:30';
-  time.field.dispatchEvent(new Event('input', { bubbles: true }));
-  check('time picker: value remains timezone-free HH:MM', time.value === '16:30');
-  time.format = '12';
-  check('time picker: 12-hour readout includes AM/PM', time.readout.textContent === '04:30 PM');
-  time.format = '24';
-  check('time picker: 24-hour readout is deterministic', time.readout.textContent === '16:30');
-  check('time picker: min/max/step are applied', time.field.min === '09:00' && time.field.max === '18:00' && time.field.step === '900');
+  await ev("window.__phase3Time = { value: false, twelve: false, twentyFour: false, constraints: false }; const time = document.querySelector('sand-time-picker'); time.field.value = '16:30'; time.field.dispatchEvent(new Event('input', { bubbles: true })); window.__phase3Time.value = time.value === '16:30'; time.format = '12'; window.__phase3Time.twelve = time.readout.textContent === '04:30 PM'; time.format = '24'; window.__phase3Time.twentyFour = time.readout.textContent === '16:30'; window.__phase3Time.constraints = time.field.min === '09:00' && time.field.max === '18:00' && time.field.step === '900';");
+  check('time picker: value remains timezone-free HH:MM', (await ev("window.__phase3Time.value")) === true);
+  check('time picker: 12-hour readout includes AM/PM', (await ev("window.__phase3Time.twelve")) === true);
+  check('time picker: 24-hour readout is deterministic', (await ev("window.__phase3Time.twentyFour")) === true);
+  check('time picker: min/max/step are applied', (await ev("window.__phase3Time.constraints")) === true);
 }
 { // forms: verify all twelve form-associated components in a small isolated form
   const formResults = await ev(`(() => {
