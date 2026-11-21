@@ -29,6 +29,11 @@ The following details are documented by the current component READMEs and source
 | Date Picker | Native date input with ISO calendar value, min/max and unavailable-day validation. | Individual unavailable dates are validated after selection, not visually disabled in the popup. Manual calendar keyboard/screen-reader testing remains required. |
 | Date Range Picker | Two native date inputs with separate accessible names, range order validation and ISO start/end serialization. | Two calendar popups are native browser UI; manual focus order, required-range and screen-reader testing remains required. |
 | Time Picker | Native time input, explicit 12/24-hour readout, min/max/step and timezone-free HH:MM value. | Native popup format is browser/OS locale controlled; the readout is explicit. Manual testing remains required. |
+| Progress Bar | Progressbar role, min/max/current value and value text; indeterminate mode omits aria-valuenow. | Manual screen-reader announcement testing remains required. |
+| Progress Ring | Progressbar role with the same determinate/indeterminate value semantics as Progress Bar. | Circular motion is decorative; manual screen-reader testing remains required. |
+| Step Indicator | Group of native buttons with accessible step labels and aria-current=step for the active step. | Supports up to five steps; manual keyboard/screen-reader workflow testing remains required. |
+| Hourglass Timer | Timer role, label, aria-valuetext, native pause/resume/reset/cancel buttons and completion event. | Live announcement frequency and timer use in background tabs require manual testing. |
+| Loading Indicator | Status role, polite live region, accessible label and aria-busy reflecting activity. | Manual live-region announcement and reduced-motion testing remains required. |
 
 The project documentation states that current tests run in headless Chromium and that real-device, Safari, Firefox and screen-reader testing has not been completed. See [Browser Support](BROWSER-SUPPORT.md).
 
@@ -121,3 +126,12 @@ For form-associated components:
 - [ ] Results and known gaps are recorded in the component README.
 
 A checklist is a requirement, not evidence by itself. Mark items complete only after testing.
+
+### Phase 4 progress and activity controls
+
+- **Progress Bar and Progress Ring:** expose role=progressbar, min/max and a current value only in determinate mode. Indeterminate mode must omit aria-valuenow rather than announcing a fabricated percentage.
+- **Step Indicator:** each step is a real button with a meaningful accessible name. The active step uses aria-current=step. Do not rely on stone color alone to communicate completion.
+- **Hourglass Timer:** expose a timer role and concise aria-valuetext. Pause, resume, reset and cancel are native buttons. Avoid announcing every animation frame; the timer-tick event is emitted at whole-second boundaries.
+- **Loading Indicator:** use role=status, aria-live=polite and aria-busy. Set active=false when the operation completes. Respect prefers-reduced-motion by holding the rake still.
+- All sand movement and sound remain supplementary. The control's current state and actions must remain understandable without motion, color or audio.
+
