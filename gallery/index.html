@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GrainMotion-UI</title>
 <link rel="icon" href="data:,">
-<meta name="description" content="Forty-five tactile UI controls made from simulated sand, including selection, media, advanced layout and feedback overlays.">
+<meta name="description" content="Fifty tactile UI controls made from simulated sand, including selection, media, advanced layout and feedback overlays.">
 <meta property="og:title" content="GrainMotion-UI">
 <meta property="og:description" content="Forty-five tactile controls made from simulated sand, including selection, media, advanced layout and feedback overlays.">
 <meta property="og:image" content="title.svg">
@@ -37,7 +37,7 @@
   .stage > :is(sand-select,sand-combobox,sand-date-picker,sand-date-range) { width: 100%; }
   .stage > sand-time-picker { width: min(280px, 100%); }
   .stage > :is(sand-tabs,sand-accordion,sand-pagination,sand-breadcrumbs,sand-menu) { width: 100%; }
-  .stage > :is(sand-dropzone,sand-upload-queue,sand-carousel,sand-lightbox,sand-scrubber,sand-color-picker,sand-sortable,sand-transfer-list,sand-split-pane,sand-resizable,sand-tree) { width: 100%; }
+  .stage > :is(sand-dropzone,sand-upload-queue,sand-carousel,sand-lightbox,sand-scrubber,sand-color-picker,sand-sortable,sand-transfer-list,sand-split-pane,sand-resizable,sand-tree,sand-command,sand-context-menu,sand-filter-builder,sand-table,sand-kanban) { width: 100%; }
   .stage > :is(sand-progress,sand-steps,sand-loader) { width: 100%; }
   .stage > sand-progress-ring { width: min(220px, 100%); }
   .stage > sand-timer { width: min(300px, 100%); }
@@ -55,7 +55,7 @@
 <div class="wrap">
   <header>
     <h1>GrainMotion-UI</h1>
-    <p class="lede">Forty tactile controls made of sand that moves like sand. Rake it, push a stone through it, select, write, track progress, step through a workflow and watch an hourglass. Each component is a standalone file with no runtime dependencies.</p>
+    <p class="lede">Fifty tactile controls made of sand that moves like sand. Rake it, push a stone through it, select, write, track progress, step through a workflow and watch an hourglass. Each component is a standalone file with no runtime dependencies.</p>
     <p class="links">
       <button class="pill dark" type="button" id="snd">Sound on</button>
       <a class="pill" href="https://github.com/Brajesh31/GrainMotion-UI" target="_blank" rel="noopener">The repo on GitHub <span aria-hidden="true">&#8599;</span></a>
@@ -109,6 +109,11 @@
 <script src="../alert/alert.js"></script>
 <script src="../dialog/dialog.js"></script>
 <script src="../drawer/drawer.js"></script>
+<script src="../command/command.js"></script>
+<script src="../context-menu/context-menu.js"></script>
+<script src="../filter-builder/filter-builder.js"></script>
+<script src="../table/table.js"></script>
+<script src="../kanban/kanban.js"></script>
 <script>
 // The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
 const REPO = 'Brajesh31/GrainMotion-UI';
@@ -249,7 +254,13 @@ ITEMS.push(
   {id:'toast',name:'Toast Notification',tag:'sand-toast',sub:'A stone rolls into a tray, announces status and exits.',html:'<sand-toast id="el" tone="success" title="Changes saved" message="Your project is up to date." duration="0" position="top-right" action-label="Undo"></sand-toast><button class="pill" type="button" data-show-toast>Show toast</button><p class="readout">Persistent toast example, dismiss it yourself.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');card.querySelector('[data-show-toast]').addEventListener('click',()=>el.show());el.addEventListener('action',()=>o.textContent='Undo action requested');el.addEventListener('dismiss',e=>o.textContent='Dismissed: '+e.detail.reason);}},
   {id:'alert',name:'Alert Banner',tag:'sand-alert',sub:'A raised sand strip and mineral marker communicate status.',html:'<sand-alert id="el" tone="warning" title="Storage almost full" message="Remove unused files to continue." dismissible action-label="Review storage"></sand-alert><p class="readout">This banner stays until dismissed.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');el.addEventListener('action',()=>o.textContent='Storage review requested');el.addEventListener('dismiss',()=>o.textContent='Alert dismissed');}},
   {id:'dialog',name:'Dialog / Modal',tag:'sand-dialog',sub:'A framed surface appears above the page with native focus containment.',html:'<button id="open-dialog" class="pill" type="button">Open dialog</button><sand-dialog id="el" title="Publish this project?" description="This action makes the current draft visible." confirm-label="Publish" cancel-label="Keep editing"><p>Check your title, description and access settings before publishing.</p></sand-dialog><p class="readout">The modal uses native dialog focus containment.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');card.querySelector('#open-dialog').addEventListener('click',()=>el.showModal());el.addEventListener('confirm',()=>o.textContent='Publish action requested');el.addEventListener('dialog-close',e=>o.textContent='Dialog closed: '+e.detail.returnValue);}},
-  {id:'drawer',name:'Drawer / Sheet',tag:'sand-drawer',sub:'A wood-framed panel enters from a screen edge.',html:'<button id="open-drawer" class="pill" type="button">Open filters</button><sand-drawer id="el" title="Filter results" description="Choose the project status to display." placement="right" size="360px" action-label="Apply filters"><p>In progress</p><p>Needs review</p><p>Completed</p></sand-drawer><p class="readout">Choose an edge sheet to inspect filters.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');card.querySelector('#open-drawer').addEventListener('click',()=>el.showModal());el.addEventListener('confirm',()=>o.textContent='Filters applied');el.addEventListener('drawer-close',e=>o.textContent='Drawer closed: '+e.detail.returnValue);}}
+  {id:'drawer',name:'Drawer / Sheet',tag:'sand-drawer',sub:'A wood-framed panel enters from a screen edge.',html:'<button id="open-drawer" class="pill" type="button">Open filters</button><sand-drawer id="el" title="Filter results" description="Choose the project status to display." placement="right" size="360px" action-label="Apply filters"><p>In progress</p><p>Needs review</p><p>Completed</p></sand-drawer><p class="readout">Choose an edge sheet to inspect filters.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');card.querySelector('#open-drawer').addEventListener('click',()=>el.showModal());el.addEventListener('confirm',()=>o.textContent='Filters applied');el.addEventListener('drawer-close',e=>o.textContent='Drawer closed: '+e.detail.returnValue);}},
+  {id:'command',name:'Command Palette',tag:'sand-command',sub:'A searchable action list with native modal focus.',html:'<sand-command id="el"></sand-command><p class="readout">Search the available commands and press Enter.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');el.addEventListener('command',e=>o.textContent='Command: '+e.detail.label);el.addEventListener('command-close',e=>{if(e.detail.reason==='escape')o.textContent='Palette closed'});}},
+  {id:'context-menu',name:'Context Menu',tag:'sand-context-menu',sub:'A carved action tray opens at the point of contact.',html:'<sand-context-menu id="el"></sand-context-menu><p class="readout">Right-click, long-press or press Shift + F10.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');el.addEventListener('select',e=>o.textContent='Action: '+e.detail.label);el.addEventListener('menu-open',()=>o.textContent='Context menu open');}},
+  {id:'filter-builder',name:'Filter Builder',tag:'sand-filter-builder',sub:'Connect filter conditions with AND or OR logic.',html:'<sand-filter-builder id="el"></sand-filter-builder><p class="readout">Edit conditions, then apply the filter query.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');el.addEventListener('apply',e=>o.textContent=JSON.stringify(e.detail.query));}},
+  {id:'table',name:'Data Table',tag:'sand-table',sub:'Search, sort and select rows in a walnut-framed table.',html:'<sand-table id="el" page-size="4"></sand-table><p class="readout">Sort a heading, filter rows, select and paginate.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');el.addEventListener('select',e=>o.textContent=e.detail.selected.length+' selected: '+e.detail.selected.join(', '));el.addEventListener('sort',e=>o.textContent='Sorted by '+e.detail.key+' ('+e.detail.direction+')');}},
+  {id:'kanban',name:'Kanban Board',tag:'sand-kanban',sub:'Cards settle into their workflow columns.',html:'<sand-kanban id="el"></sand-kanban><p class="readout">Move cards with arrows or drag-and-drop.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');el.addEventListener('move',e=>o.textContent=e.detail.card.title+': '+e.detail.from+' → '+e.detail.to);}}
+
 );
 
 // What each prompt says about wiring its control in. The rest of the prompt is the same for all of them.
@@ -312,6 +323,12 @@ const WIRE = {
   dialog:['Use <sand-dialog title="Confirm changes"> with caller-owned content nodes for a native modal.','Call showModal() or show(), then close(returnValue). Listen for dialog-open, dialog-close and confirm. Escape is enabled by default; backdrop close is opt-in.','The browser provides the native modal top layer and focus containment.'],
   drawer:['Use <sand-drawer title="Filters" placement="right" size="360px"> with caller-owned content nodes.','Call showModal() or close(returnValue). Configure placement, size, Escape and backdrop policy; listen for drawer-open, drawer-close and confirm.','The sheet is modal and uses native dialog focus containment.'],
 
+,
+  command:['Load sand-command and open it from a button or application shortcut. Provide a commands array with unique IDs; Arrow Up/Down changes the result and Enter emits command and select.','Listen for command to execute the chosen item, command-open and command-close for lifecycle. The host owns global shortcut registration, permissions, command execution and persistence.','The built-in Ctrl K text is only a visual hint; this component does not capture global shortcuts.'],
+  'context-menu':['Load sand-context-menu and set items to action records. Set for to the ID of a target element, or use its built-in demo surface.','Right-click, touch long-press, ContextMenu or Shift+F10 can open it. Listen for select/menu-select and execute the selected ID in the host.','Outside clicks and scrolling close the menu; nested submenus and permissions remain host responsibilities.'],
+  'filter-builder':['Load sand-filter-builder and provide fields with id, label, type and optional options. Read filters and logic or call toQuery().','Listen for input/change while editing and apply when the user confirms. The component emits structured conditions; your application must validate and execute them.','The current schema supports one AND/OR group. Nested groups and backend query execution are not included.'],
+  table:['Load sand-table and set columns and rows using unique IDs. Search filters visible columns; headings sort; selection persists when paging.','Read selected, page, pageSize, sortBy and filter. Listen for sort, filter, select, change and row-activate.','Client-side pagination bounds rendered rows. Server pagination, row editing, column resizing and persistence belong to the host.'],
+  kanban:['Load sand-kanban and provide columns with unique IDs and card arrays. Each card needs a unique ID across the board.','Use drag-and-drop, card arrow controls, Arrow keys, Home/End, moveCard(id, columnId, index) or action(id, direction). Listen for move/change and persist the returned columns.','Drag-and-drop is an enhancement; explicit keyboard controls remain available. Server persistence, workflow permissions and conflict handling belong to the host.']
 
 };
 const SKILL = { url: new URL('../skills/grainmotion-ui/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };
