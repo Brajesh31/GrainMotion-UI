@@ -332,7 +332,7 @@ class SandTooltip extends SandTray {
   get disabled(){return this.hasAttribute('disabled');}
   connectedCallback(){const reconnect=!!this.c;super.connectedCallback();if(reconnect&&this._ready)this.attach();}
   disconnectedCallback(){this.clearTimer();this.detach();super.disconnectedCallback();}
-  init(){this._ready=true;this.style.cssText+=';position:absolute;width:1px;height:1px;overflow:visible;pointer-events:none;z-index:10020';this.createBubble();this.attach();this.apply();}
+  init(){this._ready=true;if(this.hasAttribute('for'))this.style.cssText+=';position:absolute;width:24px;height:6px;overflow:visible;pointer-events:none;z-index:10020';else this.style.cssText+=';display:inline-block;position:relative;width:max-content;min-width:36px;max-width:100%;overflow:visible;z-index:10020';this.createBubble();this.attach();this.apply();}
   attributeChangedCallback(name,old,value){if(!this._ready||old===value)return;if(name==='open'){this._open=value!==null;this.apply();}else if(name==='for'){this.attach();}else this.sync();}
   createBubble(){
     this.querySelectorAll('.gm-tooltip-style,.gm-tooltip-bubble').forEach(x=>x.remove());
