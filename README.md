@@ -22,6 +22,8 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ---
 
+> **Important for ChatGPT and AI coding sessions:** Read [`AGENTS.md`](AGENTS.md) before making any repository changes. It contains the project handover, current phase status, release roadmap and required workflow. **Do not create a branch or pull request. Edit the existing `main` branch directly and commit changes there.** When starting a new chat, use the copy/paste continuation prompt at the bottom of `AGENTS.md`.
+
 ## ✨ What is GrainMotion-UI?
 
 GrainMotion-UI contains 50 standalone custom-element implementations across the original set and Phases 1–9. The source files, demos and component guides are present, but the project is in a release-hardening cycle. The latest full mobile Chromium validation has three failing assertions, so the collection is not currently described as fully verified or release-ready. The components simulate sand as a height field and render it with a WebGL2 shader.
