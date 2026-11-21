@@ -75,7 +75,8 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   const targetAfter = await ev(`${E('sand-slider')}.target`), afterKey = await val();
   check('slider: host receives keyboard focus', focused === true, focused);
   check('slider: ArrowLeft updates the rake target', targetAfter < targetBefore, targetBefore + ' -> ' + targetAfter);
-  check('slider: ArrowLeft lowers it by one step', afterKey === v1 - 1, afterKey);
+  const expectedSliderStep = await ev("document.querySelector('sand-slider').inc / (document.querySelector('sand-slider').max - document.querySelector('sand-slider').min)");
+  check('slider: ArrowLeft changes the target by exactly one configured step', Math.abs((targetBefore - targetAfter) - expectedSliderStep) < 0.002, targetBefore + ' -> ' + targetAfter);
   await key('Home', 36); await sleep(1500);
   check('slider: Home takes it to the minimum', (await val()) === 0, await val());
 }
