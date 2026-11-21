@@ -135,3 +135,13 @@ A checklist is a requirement, not evidence by itself. Mark items complete only a
 - **Loading Indicator:** use role=status, aria-live=polite and aria-busy. Set active=false when the operation completes. Respect prefers-reduced-motion by holding the rake still.
 - All sand movement and sound remain supplementary. The control's current state and actions must remain understandable without motion, color or audio.
 
+
+### Phase 5 navigation controls
+
+- **Tabs:** expose a tablist with native tab buttons and labelled tabpanels. Maintain aria-selected, aria-controls, aria-labelledby and roving tabindex. Horizontal tabs use Left/Right, vertical tabs use Up/Down, and Home/End move to the edges. Manual activation requires Enter or Space. Disabled tabs must be skipped.
+- **Accordion:** use native disclosure buttons with aria-expanded and aria-controls, plus labelled panel regions. Enter and Space activate the header. Up/Down, Home and End move focus between headers without changing the selected panel.
+- **Pagination:** use a named navigation landmark and real page buttons. Mark the current page with aria-current=page. Disable previous/next/first/last controls at their respective boundaries. Ellipses are decorative, not interactive.
+- **Breadcrumbs:** use a named navigation landmark, native anchors for ancestor locations and aria-current=page for the current location. Never turn unsafe URL schemes into links. Separators are hidden from assistive technology.
+- **Menu:** expose a native trigger button with aria-haspopup=menu and aria-expanded, plus menu/menuitem roles. Support Arrow keys, Home/End, Escape, outside dismissal and focus restoration. Tab must close the menu without trapping focus. This is not a modal and must not trap focus.
+- Sand movement, shadows and sounds are supplemental. State must remain available through DOM properties and semantics when WebGL, animation or audio is unavailable.
+- The new Chromium checks cover these semantic and keyboard contracts, but real screen-reader announcements and physical-device behavior have not yet been manually verified.
