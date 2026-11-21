@@ -2,7 +2,7 @@
 
 A small stone of information appears beside the control that needs it. The hint is connected to its trigger through aria-describedby, opens on pointer hover or keyboard focus, and never steals focus from the control.
 
-One of forty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of fifty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 
