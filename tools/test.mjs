@@ -504,10 +504,10 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('toast: warning and error switch to assertive alert semantics', await ev("(()=>{const t=document.querySelector('sand-toast');return t.ui.getAttribute('role')==='alert'&&t.ui.getAttribute('aria-live')==='assertive'})()")===true);
   await ev("document.querySelector('sand-toast').actionButton.click()");
   check('toast: action event fires before action dismissal', await ev("window.__p8.toastAction===1&&window.__p8.toastDismiss===1&&window.__p8.toastReason==='action'&&!document.querySelector('sand-toast').open")===true);
-  await ev("(()=>{const a=document.querySelector('sand-toast'),b=document.createElement('sand-toast');b.setAttribute('duration','0');b.setAttribute('position','top-right');document.body.append(b);a.setAttribute('tone','success');a.show();b.show();window.__p8.extraToast=b;})()");
+  await ev("(()=>{const a=document.querySelector('sand-toast'),b=document.createElement('sand-toast');a.setAttribute('duration','5000');b.setAttribute('duration','5000');b.setAttribute('position','top-right');document.body.append(b);a.setAttribute('tone','success');a.show();b.show();window.__p8.extraToast=b;})()");
   check('toast: independent notifications stack at separate offsets', await ev("Math.abs(parseFloat(window.__p8.extraToast.style.top)-parseFloat(document.querySelector('sand-toast').style.top))>=90")===true);
   await ev("(()=>{const t=document.querySelector('sand-toast');t.ui.dispatchEvent(new Event('pointerenter'));})()");
-  check('toast: auto-dismiss timer pauses on hover', await ev("document.querySelector('sand-toast')._timer===0")===true);
+  check('toast: auto-dismiss timer pauses on hover', await ev("(()=>{const t=document.querySelector('sand-toast');return t._timer===0&&t._remaining>0})()")===true);
   await ev("(()=>{document.querySelector('sand-toast').dismiss('test');window.__p8.extraToast.dismiss('test');window.__p8.extraToast.remove();})()");
 
   await ev("(()=>{const a=document.querySelector('sand-alert');a.addEventListener('action',()=>window.__p8.alertAction++);a.addEventListener('dismiss',()=>window.__p8.alertDismiss++);a.setAttribute('tone','info');})()");
