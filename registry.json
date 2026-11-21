@@ -7,7 +7,7 @@
       "name": "slider",
       "type": "registry:file",
       "title": "GrainMotion-UI Slider",
-      "description": "A slider that is a bamboo rake in a tray of sand. Drag right and its four tines cut grooves and push a little heap of sand ahead of it; pull back and its back drags the sand flat again. One file of about 170 KB with its sand engine and sounds inside it, no dependencies, defines <sand-slider>.",
+      "description": "A slider that is a bamboo rake in a tray of sand. Drag right and its four tines cut grooves and push a little heap of sand ahead of it; pull back and its back drags the sand flat again. One file of about 180 KB with its sand engine and sounds inside it, no dependencies, defines <sand-slider>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "slider",
@@ -49,7 +49,7 @@
       "name": "signature",
       "type": "registry:file",
       "title": "GrainMotion-UI Signature",
-      "description": "A signature pad of smoothed sand, written in with a stick that cuts like a brush: linger and the line is wide and deep, hurry and it thins. The sand heaps up along the line. Clear sends a rake across that smooths it all away. One file of about 170 KB with its sand engine and sounds inside it, no dependencies, defines <sand-signature>.",
+      "description": "A signature pad of smoothed sand, written in with a stick that cuts like a brush: linger and the line is wide and deep, hurry and it thins. The sand heaps up along the line. Clear sends a rake across that smooths it all away. One file of about 180 KB with its sand engine and sounds inside it, no dependencies, defines <sand-signature>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "signature",
