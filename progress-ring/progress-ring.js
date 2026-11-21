@@ -329,7 +329,7 @@ class SandProgressRing extends SandTray {
  reflect(){if(!this._ready)return;this.setAttribute('role','progressbar');this.setAttribute('aria-label',this.getAttribute('label')||'Progress');this.setAttribute('aria-valuemin',this.min);this.setAttribute('aria-valuemax',this.max);if(this.indeterminate)this.removeAttribute('aria-valuenow');else this.setAttribute('aria-valuenow',String(this._value));this.setAttribute('aria-valuetext',this.indeterminate?'In progress':Math.round(this.target*100)+'%')}
  init(){this._ready=true;this._value=this.min;this.value=this.getAttribute('value')??0;this.pos=this.target;this.reflect()}
  layout(){const r=this.inner,cx=this.W/2,cy=this.H/2,rad=Math.min(this.W,this.H)*.34;this.cx=cx;this.cy=cy;this.rad=rad;for(let y=r.y0;y<r.y1;y++)for(let x=r.x0;x<r.x1;x++){const i=y*this.W+x;if(!this.inside[i])continue;const d=Math.abs(Math.hypot(x-cx,y-cy)-rad);if(d<3)this.h[i]-=.26*(1-d/3);else if(d<5)this.h[i]+=.035*(1-(d-3)/2)}this.relax(r.x0,r.x1,3);this.dirty=true}
- step(dt){this.phase+=dt;const t=this.indeterminate?((this.phase*.18)%1):this.target;this.pos+=(t-this.pos)*Math.min(1,dt*4);const a=-Math.PI/2+this.pos*Math.PI*2;this.stone=[this.cx+Math.cos(a)*this.rad,this.cy+Math.sin(a)*this.rad,this.H*.075,this.H*.075]}
+ step(dt){this.phase+=dt;const t=this.indeterminate?(this.reduced?.25:((this.phase*.18)%1)):this.target;if(this.reduced)this.pos=t;else this.pos+=(t-this.pos)*Math.min(1,dt*4);const a=-Math.PI/2+this.pos*Math.PI*2;this.stone=[this.cx+Math.cos(a)*this.rad,this.cy+Math.sin(a)*this.rad,this.H*.075,this.H*.075]}
 }
 if(!customElements.get('sand-progress-ring'))customElements.define('sand-progress-ring',SandProgressRing);
 })();
