@@ -487,8 +487,8 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
 { // Phase 8: focus hints, live feedback and native modal surfaces
   await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');window.__p8={tipId:t._id,toastAction:0,toastDismiss:0,alertAction:0,alertDismiss:0,dialogOpen:0,dialogClose:[],dialogConfirm:0,drawerOpen:0,drawerClose:[],drawerConfirm:0};return {described:b.getAttribute('aria-describedby'),tip:t._id,role:t._bubble.getAttribute('role')}})()");
   check('tooltip: trigger is associated with a role=tooltip message', await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');return t._target===b&&t._bubble.getAttribute('role')==='tooltip'&&b.getAttribute('aria-describedby').split(/\\s+/).includes(t._id)})()")===true);
-  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');b.focus();})()");
-  await new Promise(r=>setTimeout(r,320));
+  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');t.setAttribute('delay','0');b.focus();})()");
+  await new Promise(r=>setTimeout(r,700));
   check('tooltip: keyboard focus opens the hint without moving focus', await ev("(()=>{const t=document.querySelector('sand-tooltip');return t.open&&!t._bubble.hidden&&document.activeElement===document.getElementById('gm-tooltip-trigger')})()")===true);
   await ev("document.getElementById('gm-tooltip-trigger').dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}))");
   check('tooltip: Escape dismisses and leaves trigger focus unchanged', await ev("!document.querySelector('sand-tooltip').open&&document.activeElement===document.getElementById('gm-tooltip-trigger')")===true);
@@ -501,7 +501,8 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('tooltip: preferred placement flips when the viewport edge has no room', await ev("document.querySelector('sand-tooltip')._bubble.dataset.placement==='bottom'")===true);
   await ev("(()=>{const t=document.querySelector('sand-tooltip');t.hide();document.getElementById('gm-tooltip-trigger').style.cssText='';})()");
 
-  await ev("(()=>{const t=document.querySelector('sand-toast');t.addEventListener('action',()=>window.__p8.toastAction++);t.addEventListener('dismiss',e=>{window.__p8.toastDismiss++;window.__p8.toastReason=e.detail.reason;});t.show();})()");
+  await ev("(()=>{const t=document.querySelector('sand-toast');t.addEventListener('action',()=>window.__p8.toastAction++);t.addEventListener('dismiss',e=>{window.__p8.toastDismiss++;window.__p8.toastReason=e.detail.reason;});t.setAttribute('tone','success');t.show();})()");
+  await new Promise(r=>setTimeout(r,500));
   check('toast: info and success announce as polite status', await ev("(()=>{const t=document.querySelector('sand-toast');return t.ui.getAttribute('role')==='status'&&t.ui.getAttribute('aria-live')==='polite'&&t.open})()")===true);
   await ev("document.querySelector('sand-toast').setAttribute('tone','error')");
   check('toast: warning and error switch to assertive alert semantics', await ev("(()=>{const t=document.querySelector('sand-toast');return t.ui.getAttribute('role')==='alert'&&t.ui.getAttribute('aria-live')==='assertive'})()")===true);
