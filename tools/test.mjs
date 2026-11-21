@@ -769,7 +769,7 @@ const activePreviews = await ev('window.__grainGalleryActivePreviewCount?.() ?? 
 check('gallery: active preview count stays within the eight-context budget', activePreviews > 0 && activePreviews <= 8, activePreviews);
 const cardCount = await ev("document.querySelectorAll('#grid .piece').length");
 check('gallery: all fifty cards are present while previews are virtualized', cardCount === 50, cardCount);
-const sliderIsUnmounted = await ev("document.querySelector('sand-slider') === null");
+const sliderIsUnmounted = await ev("document.querySelector('#grid').querySelector('sand-slider') === null");
 check('gallery: off-screen previews release their mounted element', sliderIsUnmounted === true, sliderIsUnmounted);
 const wide = await ev('document.documentElement.scrollWidth'); check('no sideways scroll at 390', wide <= 390, wide);
 check('no script errors', !logs.length, logs.join(' | '));

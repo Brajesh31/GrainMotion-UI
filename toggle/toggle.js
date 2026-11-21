@@ -472,6 +472,7 @@ window.GrainMotionUI.Sound.add({
 });
 // <<< sounds
 const { Sound, SandTray } = window.GrainMotionUI;
+const easeInOut = (u) => 0.5 - 0.5 * Math.cos(Math.PI * u);
 
 class SandToggle extends SandTray {
   static formAssociated = true;

@@ -552,8 +552,10 @@ class SandSlider extends SandTray {
       const previous = this.value, moving = this.vel !== 0 || Math.abs(this.target - this.v) > 1e-4;
       this.v = Math.min(1, Math.max(0, this.target)); this.vel = 0; this.sweeping = false;
       this.carveTo(this.v);
-      if (moving) { const rx = this.rakeX(this.v), win = this.H * 0.9;
-        this.relax(Math.min(rx - win, this.moved[0] - 4), Math.max(rx + win, this.moved[1] + 4), 3, this.prevX); }
+      if (moving) {
+        const rx = this.rakeX(this.v), win = this.H * 0.9;
+        this.relax(Math.min(rx - win, this.moved[0] - 4), Math.max(rx + win, this.moved[1] + 4), 3, this.prevX);
+      }
       const val = this.value;
       if (val !== this.lastV) {
         const first = this.lastV === undefined; this.lastV = val;

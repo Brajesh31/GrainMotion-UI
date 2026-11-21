@@ -472,6 +472,8 @@ window.GrainMotionUI.Sound.add({
 });
 // <<< sounds
 const { Sound, SandTray } = window.GrainMotionUI;
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+const ease = (u) => 0.5 - 0.5 * Math.cos(Math.PI * clamp01(u));
 
 class SandSignature extends SandTray {
   static formAssociated = true;

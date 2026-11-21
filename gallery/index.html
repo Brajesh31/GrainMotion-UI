@@ -432,6 +432,9 @@ for (const it of ITEMS) {
 window.__grainGalleryEnsureMounted = (tag) => {
   const state = previewStates.find((item) => item.it.tag === tag || item.it.id === tag);
   if (!state) return null;
+  // Do not scroll on every browser assertion. Re-scrolling an already mounted card can
+  // steal focus from menu/dialog controls and makes keyboard tests nondeterministic.
+  if (state.mounted && state.element) return state.element;
   state.card.scrollIntoView({ block: 'center', inline: 'nearest' });
   syncPreviewGeometry(state);
   return state.element;
