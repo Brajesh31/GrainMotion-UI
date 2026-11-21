@@ -321,7 +321,7 @@ const { Sound, SandTray } = window.GrainMotionUI;
 
 class SandTimer extends SandTray {
  static formAssociated=true;static observedAttributes=['duration','label','disabled'];get aspect(){return .95}
- constructor(){super();this.duration=60;this.remaining=60;this.running=false;this.cancelled=false;this.lastAnnounce=-1;this.phase=0}
+ constructor(){super();this.duration=60;this.remaining=60;this.running=false;this.cancelled=false;this.lastAnnounce=-1;this.phase=0;this._completed=false}
  get disabled(){return this.hasAttribute('disabled')||!!this._formDisabled}
  init(){this._ready=true;this.duration=Math.max(1,Number(this.getAttribute('duration')||60));this.remaining=this.duration;this.setAttribute('role','timer');this.setAttribute('aria-label',this.getAttribute('label')||'Countdown timer');this.setAttribute('aria-live','off');this.makeControls();this.formValue(String(this.remaining))}
  attributeChangedCallback(n,o,v){if(!this._ready||o===v)return;if(n==='duration'){this.duration=Math.max(1,Number(v)||60);this.reset()}if(n==='label')this.setAttribute('aria-label',v||'Countdown timer');if(n==='disabled')this.syncControls()}
@@ -330,13 +330,13 @@ class SandTimer extends SandTray {
  syncControls(){for(const b of [this.pauseButton,this.resetButton,this.cancelButton])if(b)b.disabled=this.disabled;if(this.pauseButton)this.pauseButton.textContent=this.running?'Pause':'Resume'}
  start(){if(this.disabled||this.remaining<=0)return;this.running=true;this.cancelled=false;this.syncControls();Sound.play('tap',.3)}
  pause(){if(this.running){this.running=false;this.syncControls()}else this.start()}
- reset(){this.running=false;this.cancelled=false;this.remaining=this.duration;this.updateStatus();this.syncControls()}
+ reset(){this.running=false;this.cancelled=false;this._completed=false;this.remaining=this.duration;this.updateStatus();this.syncControls()}
  cancel(){this.running=false;this.cancelled=true;this.remaining=0;this.updateStatus();this.syncControls()}
  formDisabledCallback(v){this._formDisabled=!!v;this.syncControls()}
  formResetCallback(){this.reset()}
  updateStatus(){const seconds=Math.ceil(this.remaining);this.setAttribute('aria-valuetext',this.cancelled?'Cancelled':seconds<=0?'Complete':seconds+' seconds remaining');this.formValue(String(seconds));if(seconds!==this.lastAnnounce){this.lastAnnounce=seconds;this.dispatchEvent(new CustomEvent('timer-tick',{bubbles:true,detail:{remaining:seconds}}))}}
  layout(){const r=this.inner,cx=this.W/2,waist=this.H*.48;this.cx=cx;this.waist=waist;for(let y=r.y0;y<r.y1;y++)for(let x=r.x0;x<r.x1;x++){const i=y*this.W+x;if(!this.inside[i])continue;const ny=(y-this.H*.12)/(this.H*.66),half=Math.max(3,this.W*.23*Math.abs(ny-.5)*2);if(Math.abs(x-cx)<half)this.h[i]+=.025}this.relax(r.x0,r.x1,2);this.dirty=true;this.updateStatus()}
- step(dt){if(this.running){this.remaining=Math.max(0,this.remaining-dt);if(this.remaining<=0){this.running=false;this.syncControls();Sound.play('settle',.35)}this.updateStatus()}this.phase+=dt;this.fill=1-this.remaining/this.duration}
+ step(dt){if(this.running){this.remaining=Math.max(0,this.remaining-dt);if(this.remaining<=0){this.running=false;this.syncControls();Sound.play('settle',.35);if(!this._completed){this._completed=true;this.dispatchEvent(new Event('complete',{bubbles:true}))}}this.updateStatus()}this.phase+=dt;this.fill=1-this.remaining/this.duration}
  sprites(){const c=this.ox,k=this.k,key=Math.ceil(this.remaining)+'|'+this.running;if(key===this.spriteKey)return;this.spriteKey=key;c.setTransform(k,0,0,k,0,0);c.clearRect(0,0,this.W,this.H);const x=this.cx,y=this.waist,w=this.W*.19,h=this.H*.25;c.strokeStyle='#9a7046';c.lineWidth=3;c.beginPath();c.moveTo(x-w,y-h);c.lineTo(x+w,y-h);c.lineTo(x+3,y);c.lineTo(x+w,y+h);c.lineTo(x-w,y+h);c.lineTo(x-3,y);c.closePath();c.stroke();c.fillStyle='#b88a53';const topH=h*(1-this.fill);c.beginPath();c.moveTo(x-w*.85,y-h*.8);c.lineTo(x+w*.85,y-h*.8);c.lineTo(x+3,y);c.lineTo(x-3,y);c.closePath();c.fill();c.beginPath();c.moveTo(x-w*.85,y+h*.8);c.lineTo(x+w*.85,y+h*.8);c.lineTo(x,y+h*.8-topH*.8);c.closePath();c.fill();if(this.running){c.beginPath();c.moveTo(x,y-3);c.lineTo(x,y+8);c.stroke()}}
 }
 if(!customElements.get('sand-timer'))customElements.define('sand-timer',SandTimer);
