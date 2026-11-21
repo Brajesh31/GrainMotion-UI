@@ -93,13 +93,13 @@ The Phase 2, Phase 3 and Phase 4 checks in the passing test runner cover:
 
 ### Phase 9 productivity and composite coverage (new, validation pending)
 
-The test runner now contains 30 targeted Phase 9 checks. They are committed but should not be described as passing until the 50-component Actions run completes.
+The test runner now contains 33 targeted Phase 9 checks. They are committed but should not be described as passing until the 50-component Actions run completes.
 
 - Command Palette: native modal open/focus, label/description/keyword filtering, Arrow navigation, Enter selection event, close reason, Escape and disabled trigger.
-- Context Menu: menu role and initial focus, keyboard navigation that skips disabled actions, selection payload, Escape cleanup and disabled opening.
+- Context Menu: menu role and initial focus, keyboard navigation that skips disabled actions, selection payload, Escape cleanup, disabled opening, touch long-press opening and movement cancellation.
 - Filter Builder: field/operator/value conditions, query serialization, condition edits, add/remove/clear, apply/reset events and disabled controls.
 - Data Table: semantic headers, bounded pagination, ascending/descending stable sort, aria-sort, filtering, selection across pages, select-visible and disabled controls.
-- Kanban Board: stable card/column rendering, same-column order, cross-column move detail, ArrowRight movement and disabled drag/button state.
+- Kanban Board: stable card/column rendering, same-column order and drag insertion, cross-column move detail, ArrowRight movement and disabled drag/button state.
 
 The remaining test layers still require manual checks on physical touch devices, Safari and Firefox, and with named screen-reader/browser combinations.
 
