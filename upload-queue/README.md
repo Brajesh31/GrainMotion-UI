@@ -2,7 +2,7 @@
 
 The queue is a small transfer channel: each file has its own tile, status and progress ridge. The component owns the queue's state and controls; your application owns the actual HTTP request, authentication, storage destination and retry policy.
 
-One of thirty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of forty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 

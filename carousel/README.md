@@ -2,7 +2,7 @@
 
 Photographs sit in framed walnut plates. The selected plate moves along a shallow sand track while the native controls and accessible text identify the current image.
 
-One of thirty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of forty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 
