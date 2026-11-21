@@ -478,6 +478,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   const tree=document.querySelector('sand-tree');
   tree.items=[{id:'root',label:'Root',children:[{id:'branch',label:'Branch',children:[{id:'leaf',label:'Leaf'}]},{id:'other',label:'Other'}]},{id:'loose',label:'Loose'}];
   tree.expanded=['root','branch'];
+  check('tree: new hierarchy assigns one valid keyboard entry point', await ev("(()=>{const el=document.querySelector('sand-tree');return el.value==='root'&&el.nodeButtons.filter(b=>b.tabIndex===0).length===1})()")===true);
   tree.addEventListener('select',()=>window.__p7.select++);
   tree.addEventListener('expand',()=>window.__p7.expand++);
   check('tree: nested nodes expose treeitem levels', await ev("document.querySelector('sand-tree').nodeButtons.find(b=>b.dataset.nodeId==='leaf')?.getAttribute('aria-level')==='3'")===true);

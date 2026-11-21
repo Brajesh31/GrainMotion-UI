@@ -338,7 +338,10 @@ class SandTree extends SandTray {
       if(seen.has(id))return null;seen.add(id);
       return {id,label:String(x?.label??id),disabled:!!x?.disabled,children:normalize(x?.children,prefix+'-'+(i+1))};
     }).filter(Boolean);
-    this._items=normalize(value);if(this._expanded)this.renderTree?.();
+    this._items=normalize(value);
+    const flat=[];const collect=rows=>rows.forEach(item=>{flat.push(item);collect(item.children);});collect(this._items);
+    if(!flat.some(item=>item.id===this._value&&!item.disabled))this._value=flat.find(item=>!item.disabled)?.id||'';
+    if(this._expanded){this._expanded=new Set([...this._expanded].filter(id=>flat.some(item=>item.id===id&&item.children.length)));this.renderTree();}
   }
   get value() { return this._value||''; }
   set value(v) { this.select(String(v),true); }
