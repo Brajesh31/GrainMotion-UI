@@ -499,6 +499,7 @@ class SandTransferList extends SandTray {
   }
   get selected() { return [...(this._selected||[])]; }
   set selected(v) { this.select(v); }
+  attributeChangedCallback() { this.renderLists?.(); }
   init() {
     this.style.touchAction='pan-y';
     this._items=this._items||[

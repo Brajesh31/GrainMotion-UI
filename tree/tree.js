@@ -489,6 +489,8 @@ class SandTree extends SandTray {
   static get observedAttributes() { return ['disabled','label']; }
   get aspect() { return .92; }
   get disabled() { return this.hasAttribute('disabled'); }
+  attributeChangedCallback() { this.syncDisabled?.(); }
+  syncDisabled() { if(!this.root)return; this.root.setAttribute('aria-disabled',String(this.disabled)); this.nodeButtons?.forEach(b=>b.disabled=this.disabled||!!this.findNode(b.dataset.nodeId)?.disabled); this.root.querySelectorAll('.gm-tree-expander').forEach(b=>b.disabled=this.disabled||!this.findNode(b.nextElementSibling?.dataset.nodeId)?.children.length); }
   get items() { return (this._items||[]).map(copyNode); }
   set items(value) {
     const seen=new Set();

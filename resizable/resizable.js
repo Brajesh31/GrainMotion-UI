@@ -489,6 +489,7 @@ class SandResizable extends SandTray {
   static get observedAttributes() { return ['disabled','label']; }
   get aspect() { return .7; }
   get disabled() { return this.hasAttribute('disabled'); }
+  attributeChangedCallback() { this.syncHandles?.(); }
   get panels() { return (this._panels||[]).map(x=>({...x})); }
   set panels(value) {
     this._panels=(Array.isArray(value)?value:[]).slice(0,4).map((x,i)=>({
