@@ -95,7 +95,7 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 
 ### Phase 9 · Productivity and composite controls (implementation present, validation open)
 
-The five controls are integrated with standalone source, demos, technical guides and registry entries. The latest full 50-component mobile Chromium run recorded 236 passing assertions and three failures: two tooltip focus/dismissal checks and one toast polite-live-region check. The bundle synchronization and generated documentation/registry checks passed. Manual cross-browser, physical-device and screen-reader checks remain outstanding.
+The five controls are integrated with standalone source, demos, technical guides and registry entries. The latest full 50-component mobile Chromium run (run [#498](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44883477540)) recorded 235 passing assertions and four failures: two tooltip focus/dismissal checks, one toast polite-live-region check and one context-menu touch long-press check. The bundle synchronization, generated documentation/registry checks and new structural audit passed. Manual cross-browser, physical-device and screen-reader checks remain outstanding.
 
 | Component | Physical interaction | Demo and documentation |
 |---|---|---|
