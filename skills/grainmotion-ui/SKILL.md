@@ -55,7 +55,7 @@ class SandThing extends SandTray {
 
 ## Current component set
 
-The repository includes fourteen controls: Slider, Toggle, Signature, Thinking, Checkbox, Radio Group, Segmented Control, Range Slider, Rating, Text Field, Textarea, Password Field, Search Field and OTP/PIN Input. Read each component README before changing or integrating its public API.
+The repository includes nineteen controls: Slider, Toggle, Signature, Thinking, Checkbox, Radio Group, Segmented Control, Range Slider, Rating, Text Field, Textarea, Password Field, Search Field, OTP/PIN Input, Select, Combobox, Date Picker, Date Range Picker and Time Picker. Read each component README before changing or integrating its public API.
 
 ## Phase 2 native text controls
 
@@ -70,6 +70,20 @@ Text Field, Textarea, Password Field, Search Field and OTP/PIN Input are intenti
 - The stylus, shutter and rake are visual cues. They are not replacements for the browser's caret, native validation or status announcements.
 
 See the individual component README files for supported attributes, properties, events, form behavior and known limitations.
+
+## Phase 3 selection, date and time controls
+
+Select, Combobox, Date Picker, Date Range Picker and Time Picker use native browser controls placed above the sand renderer.
+
+- Keep the native select popup, datalist suggestion UI, date picker and time picker as the interactive controls. The sand surface is supplemental.
+- Select options use comma-separated entries. Use value:Label when the submitted value differs from the visible label.
+- Combobox is free text; it uses a datalist and does not force every value to match a suggestion.
+- Date values are ISO calendar strings (YYYY-MM-DD). Do not convert them through local timezone APIs. Date ranges serialize as YYYY-MM-DD/YYYY-MM-DD.
+- Unavailable dates are custom-validated after selection; the native calendar popup is not modified to gray them out.
+- Time values are timezone-free HH:MM strings. 12/24-hour readout formatting is separate from the browser-native popup, whose presentation follows the browser locale.
+- Preserve min/max/step, required/disabled state, native keyboard behavior, form association and validation.
+
+See the individual component READMEs for supported APIs and known platform limitations.
 
 ## Wire it in
 
