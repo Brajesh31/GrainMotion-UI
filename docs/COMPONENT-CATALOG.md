@@ -35,17 +35,24 @@ These five native text and structured-input controls have standalone bundles, li
 | 13 | Search Field | `sand-search` | A native search input with clear action and a moving busy rake. | [README](../search/README.md) · [Demo](../search/) | Implemented, Chromium CI passed |
 | 14 | OTP / PIN Input | `sand-otp` | One native numeric input across engraved digit wells. | [README](../otp/README.md) · [Demo](../otp/) | Implemented, Chromium CI passed |
 
+## Phase 3 components
+
+The five selection, calendar and time controls now have standalone bundles, live demos, expanded component READMEs, concept artwork, gallery cards and registry entries. Automated interaction verification is pending until the Phase 3 CI run passes.
+
+| # | Component | Custom element | Main interaction | Documentation | Status |
+|---:|---|---|---|---|---|
+| 15 | Select / Dropdown | `sand-select` | A river stone settles into the chosen option well. | [README](../select/README.md) · [Demo](../select/) | Implemented, verification pending |
+| 16 | Combobox / Autocomplete | `sand-combobox` | A bamboo rake follows the typed query as native suggestions appear. | [README](../combobox/README.md) · [Demo](../combobox/) | Implemented, verification pending |
+| 17 | Date Picker | `sand-date-picker` | An engraved calendar grid holds a pebble on the selected day. | [README](../date-picker/README.md) · [Demo](../date-picker/) | Implemented, verification pending |
+| 18 | Date Range Picker | `sand-date-range` | Two river stones mark the start and end of a date interval. | [README](../date-range/README.md) · [Demo](../date-range/) | Implemented, verification pending |
+| 19 | Time Picker | `sand-time-picker` | A circular sand dial marks the selected time. | [README](../time-picker/README.md) · [Demo](../time-picker/) | Implemented, verification pending |
+
 ## Planned components
 
 The components below are roadmap candidates, not implemented features. Their physical concepts are preliminary and may be refined during design exploration.
 
 | # | Component | Custom element | Category | Status |
 |---:|---|---|---|---|
-| 15 | Select / Dropdown | `sand-select` | Selection | Planned |
-| 16 | Combobox / Autocomplete | `sand-combobox` | Searchable selection | Planned |
-| 17 | Date Picker | `sand-date-picker` | Date and time | Planned |
-| 18 | Date Range Picker | `sand-date-range` | Date and time | Planned |
-| 19 | Time Picker | `sand-time-picker` | Date and time | Planned |
 | 20 | Progress Bar | `sand-progress` | Progress | Planned |
 | 21 | Progress Ring | `sand-progress-ring` | Progress | Planned |
 | 22 | Step Indicator | `sand-steps` | Progress | Planned |
