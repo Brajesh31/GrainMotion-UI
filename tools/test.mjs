@@ -264,8 +264,9 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('tabs: selecting a tab updates value and change detail', await ev("document.querySelector('sand-tabs').value==='activity'&&window.__p5Tabs.changes===1&&window.__p5Tabs.last==='activity'")===true);
   await ev("(()=>{const tabs=document.querySelector('sand-tabs');tabs.setAttribute('activation','manual');tabs.buttons[2].focus();tabs.buttons[2].dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));})()");
   check('tabs: manual activation keeps arrow focus separate from selected state', await ev("document.querySelector('sand-tabs').value==='activity'")===true);
+  check('tabs: arrow focus moves without changing manual selection', await ev("document.activeElement===document.querySelector('sand-tabs').buttons[0]&&document.querySelector('sand-tabs').value==='activity'")===true);
   await ev("document.activeElement.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));");
-  check('tabs: Enter activates a manually focused tab', await ev("document.querySelector('sand-tabs').value==='settings'")===true);
+  check('tabs: Enter activates the manually focused tab', await ev("document.querySelector('sand-tabs').value==='overview'")===true);
   await ev("document.querySelector('sand-tabs').setAttribute('disabled-tabs','activity')");
   check('tabs: disabled tab cannot be focused by arrow navigation', await ev("document.querySelector('sand-tabs').buttons[1].disabled")===true);
 }
