@@ -4,7 +4,7 @@
 
 ### Interfaces shaped by sand, motion, and interaction.
 
-A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray. Phase 6 adds six media and file controls with real file selection, media timelines, framed images and mineral pigment choices. Phase 7 adds five advanced list and layout controls: sorting, item transfer, split panes, resizable panels and nested tree navigation. Phase 8 is underway with five feedback and overlay controls: tooltips, toasts, persistent alerts, native modal dialogs and edge drawers.
+A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray. Phase 6 adds six media and file controls with real file selection, media timelines, framed images and mineral pigment choices. Phase 7 adds five advanced list and layout controls: sorting, item transfer, split panes, resizable panels and nested tree navigation. Phase 8 adds five feedback and overlay controls: tooltips, toasts, persistent alerts, native modal dialogs and edge drawers.
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
@@ -15,7 +15,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml/badge.svg" alt="Component validation"></a>
   <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
   <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
-  <img src="https://img.shields.io/badge/Components-40-C49A6C" alt="Forty components">
+  <img src="https://img.shields.io/badge/Components-45-C49A6C" alt="Forty-five components">
 </p>
 
 </div>
@@ -24,7 +24,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI currently has forty CI-verified standalone custom elements, with five additional Phase 8 feedback and overlay controls in active integration. The components simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI currently has forty-five CI-verified standalone custom elements across the original set and Phases 1–8. The components simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -82,7 +82,7 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 | **Sand Resizable Panels** | Walnut partitions resize two to four adjacent dashboard panels. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/resizable/) · [Documentation](resizable/README.md) |
 | **Sand Tree View** | Branching paths expand and collapse while a stone marks the selected node. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/tree/) · [Documentation](tree/README.md) |
 
-### Phase 8 · Feedback and overlays (in progress)
+### Phase 8 · Feedback and overlays (complete)
 
 | Component | Physical interaction | Demo and documentation |
 |---|---|---|
@@ -169,7 +169,7 @@ Each new control also has its own physical-interaction concept sheet. These are 
     </td>
     <td align="center" width="50%">
       <strong>One material language</strong>
-      <br>Sand, walnut, bamboo and river stone carry through all forty controls.
+      <br>Sand, walnut, bamboo and river stone carry through all forty-five controls.
     </td>
   </tr>
 </table>

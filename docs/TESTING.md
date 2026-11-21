@@ -28,7 +28,7 @@ The test and screenshot utilities require Chrome or Chromium. Set `CHROME` if th
 
 ## Current test coverage
 
-`tools/test.mjs` loads all forty implemented controls in a mobile-sized Chromium viewport. The latest 40-component GitHub Actions run passed **180 browser assertions with zero failures**, including 27 targeted Phase 7 assertions. Standalone bundle synchronization and generated documentation checks passed in the same run, and the corresponding GitHub Pages deployment succeeded. The suite continues to cover original-control regressions as well as every implemented phase. The original-control checks cover:
+`tools/test.mjs` loads all forty-five implemented controls in a mobile-sized Chromium viewport. The latest 45-component GitHub Actions run passed **206 browser assertions with zero failures**, including 27 targeted Phase 7 checks and 26 targeted Phase 8 checks. Standalone bundle synchronization and generated documentation checks passed in the same run, and the corresponding GitHub Pages deployment succeeded. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818303) · [Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818321). Manual screen-reader, physical-device, Safari and Firefox testing remains outstanding. The original-control checks cover:
 
 - Slider drag, input/change events, vertical-swipe handling and keyboard increments.
 - Toggle click, Space behavior, change events and vertical-swipe handling.
@@ -79,6 +79,16 @@ The Phase 2, Phase 3 and Phase 4 checks in the passing test runner cover:
 - Phase 7 Split Pane: separator semantics, orientation, keyboard resize, input event and min/max clamping.
 - Phase 7 Resizable Panels: panel/separator rendering, adjacent size conservation, keyboard resize, change event and disabled state.
 - Phase 7 Tree View: valid roving entry point, nested levels, selection events, visible-node collapse/expand, arrow-key navigation and disabled state.
+
+
+### Phase 8 feedback and overlay coverage
+
+- Tooltip: pointer/focus description association, preserved `aria-describedby` tokens, Escape dismissal, disabled behavior and viewport-edge placement flip.
+- Toast Notification: polite status versus assertive alert roles, action-before-dismiss event ordering, multi-toast corner stacking, live repositioning and hover timer pause.
+- Alert Banner: tone-aware live regions, separate action/dismiss events and programmatic restore of a persistent alert.
+- Dialog / Modal: native modal top-layer semantics, caller-content preservation, focus containment, confirm/close return values, Escape and opt-in backdrop close.
+- Drawer / Sheet: native modal focus behavior, four-edge placement and bounded sizing, Escape/focus restoration, optional action and backdrop dismissal.
+
 
 - Component sizing.
 - Horizontal overflow at the configured mobile viewport.

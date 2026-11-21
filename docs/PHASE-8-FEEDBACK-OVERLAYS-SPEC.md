@@ -1,6 +1,6 @@
 # Phase 8: Feedback and Overlays
 
-> **Status:** Implementation in progress on `main`. The API and acceptance contract below guide five independent standalone custom elements. Phase 8 is not complete until bundle synchronization, generated documentation, the complete 45-component Chromium regression suite and GitHub Pages deployment pass.
+> **Status: Complete on `main`.** The 45-component mobile Chromium suite passed **206 assertions with zero failures**, including 26 Phase 8 checks. Bundle synchronization, generated documentation and Pages deployment passed. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818303) · [Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818321). Manual screen-reader, physical-device, Safari and Firefox testing remains outstanding.
 
 ## Design direction
 
