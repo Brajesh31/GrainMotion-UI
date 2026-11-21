@@ -332,7 +332,7 @@ class SandTooltip extends SandTray {
   get disabled(){return this.hasAttribute('disabled');}
   connectedCallback(){const reconnect=!!this.c;super.connectedCallback();if(reconnect&&this._ready)this.attach();}
   disconnectedCallback(){this.clearTimer();this.detach();super.disconnectedCallback();}
-  init(){this._ready=true;if(this.hasAttribute('for'))this.style.cssText+=';position:absolute;width:24px;height:6px;overflow:visible;pointer-events:none;z-index:10020';else this.style.cssText+=';display:inline-block;position:relative;width:max-content;min-width:36px;max-width:100%;overflow:visible;z-index:10020';this.createBubble();this.attach();this.apply();}
+  init(){this._ready=true;if(this.hasAttribute('for'))this.style.cssText+=';position:absolute;width:24px;height:6px;overflow:visible;pointer-events:none;z-index:10020';else this.style.cssText+=';position:fixed;width:0;height:0;overflow:visible;pointer-events:none;z-index:10020';this.createBubble();this.attach();this.apply();}
   attributeChangedCallback(name,old,value){if(!this._ready||old===value)return;if(name==='open'){this._open=value!==null;this.apply();}else if(name==='for'){this.attach();}else this.sync();}
   createBubble(){
     this.querySelectorAll('.gm-tooltip-style,.gm-tooltip-bubble').forEach(x=>x.remove());
@@ -340,17 +340,13 @@ class SandTooltip extends SandTray {
     this._bubble=document.createElement('div');this._bubble.className='gm-tooltip-bubble';this._bubble.id=this._id;this._bubble.setAttribute('role','tooltip');this._bubble.hidden=true;
     this.append(style,this._bubble);this.sync();
   }
-  resolveTarget(){
-    const id=this.getAttribute('for');
-    if(id)return document.getElementById(id);
-    return Array.from(this.children).find(x=>x!==this.c&&x!==this.o&&x!==this._bubble&&x.tagName!=='STYLE')||null;
-  }
+  resolveTarget(){const id=this.getAttribute('for');return id?document.getElementById(id):null;}
   attach(){
     this.detach();this._target=this.resolveTarget();if(!this._target)return;
     const focusable=this._target.matches('button,a[href],input,select,textarea,[tabindex]');
     if(!focusable){this._target.tabIndex=0;this._addedTabIndex=true;}
     const tokens=(this._target.getAttribute('aria-describedby')||'').split(/\s+/).filter(Boolean);if(!tokens.includes(this._id))tokens.push(this._id);this._target.setAttribute('aria-describedby',tokens.join(' '));
-    this._handlers={enter:()=>this.scheduleShow(),leave:()=>{if(document.activeElement!==this._target)this.hide();},focus:()=>this.scheduleShow(),blur:e=>{if(e.relatedTarget!==this._target&&!this.contains(e.relatedTarget))this.hide();},key:e=>{if(e.key==='Escape'&&this._open){e.preventDefault();this.hide();}}};
+    this._handlers={enter:()=>this.scheduleShow(),leave:()=>{if(document.activeElement!==this._target)this.hide();},focus:()=>this.scheduleShow(),blur:e=>{if(!this._target?.contains(e.relatedTarget)&&!this.contains(e.relatedTarget))this.hide();},key:e=>{if(e.key==='Escape'&&this._open){e.preventDefault();this.hide();}}};
     this._target.addEventListener('pointerenter',this._handlers.enter);this._target.addEventListener('pointerleave',this._handlers.leave);this._target.addEventListener('focusin',this._handlers.focus);this._target.addEventListener('focusout',this._handlers.blur);this._target.addEventListener('keydown',this._handlers.key);
     if(this._open)this.position();
   }
