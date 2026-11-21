@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GrainMotion-UI</title>
 <link rel="icon" href="data:,">
-<meta name="description" content="Forty tactile UI controls made from simulated sand, including selection, text, calendar, media and advanced layout controls.">
+<meta name="description" content="Forty-five tactile UI controls made from simulated sand, including selection, media, advanced layout and feedback overlays.">
 <meta property="og:title" content="GrainMotion-UI">
-<meta property="og:description" content="Forty tactile controls made from simulated sand, including selection, text, calendar, media and advanced layout controls.">
+<meta property="og:description" content="Forty-five tactile controls made from simulated sand, including selection, media, advanced layout and feedback overlays.">
 <meta property="og:image" content="title.svg">
 <style>
   /* The gallery: every control live on one page, with its install line and a prompt for a coding agent. */
@@ -104,6 +104,11 @@
 <script src="../split-pane/split-pane.js"></script>
 <script src="../resizable/resizable.js"></script>
 <script src="../tree/tree.js"></script>
+<script src="../tooltip/tooltip.js"></script>
+<script src="../toast/toast.js"></script>
+<script src="../alert/alert.js"></script>
+<script src="../dialog/dialog.js"></script>
+<script src="../drawer/drawer.js"></script>
 <script>
 // The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
 const REPO = 'Brajesh31/GrainMotion-UI';
@@ -238,6 +243,15 @@ ITEMS.push(
  {id:'resizable',name:'Resizable Panels',tag:'sand-resizable',sub:'Walnut partitions resize several sand-backed panels.',html:'<sand-resizable label="Project dashboard"></sand-resizable><p class="readout">Drag a partition or focus it and press Left/Right.</p>',wire:(el,card)=>{el.panels=[{id:'summary',label:'Summary',content:'Milestones and project health.',min:20,max:58},{id:'activity',label:'Activity',content:'Recent changes and team updates.',min:20,max:60},{id:'inspector',label:'Inspector',content:'Selected task properties.',min:18,max:58}];const o=card.querySelector('.readout');el.addEventListener('change',e=>o.textContent='Panel sizes: '+e.detail.sizes.map(x=>Math.round(x)+'%').join(' / '));}},
  {id:'tree',name:'Tree View',tag:'sand-tree',sub:'Branching paths are etched into sand and marked with stones.',html:'<sand-tree label="Project files"></sand-tree><p class="readout">Select a node or expand a branch.</p>',wire:(el,card)=>{el.items=[{id:'app',label:'app',children:[{id:'components',label:'components',children:[{id:'controls',label:'controls'},{id:'layout',label:'layout'}]},{id:'styles',label:'styles'}]},{id:'public',label:'public',children:[{id:'images',label:'images'}]},{id:'readme',label:'README.md'}];el.expanded=['app','components'];const o=card.querySelector('.readout');el.addEventListener('select',e=>o.textContent='Selected: '+e.detail.value);}}
 );
+
+ITEMS.push(
+  {id:'tooltip',name:'Tooltip',tag:'sand-tooltip',sub:'A small information stone appears by a focused or hovered control.',html:'<button id="gm-tooltip-trigger" class="pill" type="button">Hover or focus</button><sand-tooltip id="el" for="gm-tooltip-trigger" text="Saves the current draft." placement="top" delay="250"></sand-tooltip><p class="readout">The hint is connected through aria-describedby.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');el.addEventListener('keydown',e=>{if(e.key==='Escape')o.textContent='Tooltip dismissed'});}},
+  {id:'toast',name:'Toast Notification',tag:'sand-toast',sub:'A stone rolls into a tray, announces status and exits.',html:'<sand-toast id="el" tone="success" title="Changes saved" message="Your project is up to date." duration="0" position="top-right" action-label="Undo"></sand-toast><button class="pill" type="button" data-show-toast>Show toast</button><p class="readout">Persistent toast example, dismiss it yourself.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');card.querySelector('[data-show-toast]').addEventListener('click',()=>el.show());el.addEventListener('action',()=>o.textContent='Undo action requested');el.addEventListener('dismiss',e=>o.textContent='Dismissed: '+e.detail.reason);}},
+  {id:'alert',name:'Alert Banner',tag:'sand-alert',sub:'A raised sand strip and mineral marker communicate status.',html:'<sand-alert id="el" tone="warning" title="Storage almost full" message="Remove unused files to continue." dismissible action-label="Review storage"></sand-alert><p class="readout">This banner stays until dismissed.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');el.addEventListener('action',()=>o.textContent='Storage review requested');el.addEventListener('dismiss',()=>o.textContent='Alert dismissed');}},
+  {id:'dialog',name:'Dialog / Modal',tag:'sand-dialog',sub:'A framed surface appears above the page with native focus containment.',html:'<button id="open-dialog" class="pill" type="button">Open dialog</button><sand-dialog id="el" title="Publish this project?" description="This action makes the current draft visible." confirm-label="Publish" cancel-label="Keep editing"><p>Check your title, description and access settings before publishing.</p></sand-dialog><p class="readout">The modal uses native dialog focus containment.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');card.querySelector('#open-dialog').addEventListener('click',()=>el.showModal());el.addEventListener('confirm',()=>o.textContent='Publish action requested');el.addEventListener('dialog-close',e=>o.textContent='Dialog closed: '+e.detail.returnValue);}},
+  {id:'drawer',name:'Drawer / Sheet',tag:'sand-drawer',sub:'A wood-framed panel enters from a screen edge.',html:'<button id="open-drawer" class="pill" type="button">Open filters</button><sand-drawer id="el" title="Filter results" description="Choose the project status to display." placement="right" size="360px" action-label="Apply filters"><p>In progress</p><p>Needs review</p><p>Completed</p></sand-drawer><p class="readout">Choose an edge sheet to inspect filters.</p>',wire:(el,card)=>{const o=card.querySelector('.readout');card.querySelector('#open-drawer').addEventListener('click',()=>el.showModal());el.addEventListener('confirm',()=>o.textContent='Filters applied');el.addEventListener('drawer-close',e=>o.textContent='Drawer closed: '+e.detail.returnValue);}}
+);
+
 // What each prompt says about wiring its control in. The rest of the prompt is the same for all of them.
 
 const WIRE = {
@@ -291,6 +305,13 @@ const WIRE = {
  'split-pane':['Use <sand-split-pane axis="horizontal" value="58"></sand-split-pane> with slotted start and end content.','Read/set value as the first pane percentage. Configure axis, min-size, max-size and disabled. Pointer and keyboard resizing are supported.','A stone divider shifts between two work surfaces.'],
  resizable:['Use <sand-resizable></sand-resizable> with two to four panel descriptors.','Read/set sizes as percentages and call resizeBoundary(index,delta). Adjacent panels share each change; separators support pointer and keyboard input.','Walnut partitions resize independent panels.'],
  tree:['Use <sand-tree></sand-tree> with nested items containing id,label and children.','Read/set value and expanded; call select(id) or toggle(id). Arrow keys navigate visible nodes and expand/collapse branches.','A stone marker follows the selected branch.'],
+
+  tooltip:['Use <sand-tooltip for="save" text="Saves the current draft." placement="top"></sand-tooltip> next to a trigger with id="save".','Read or set open, or call show() and hide(). Hover and keyboard focus display the hint; Escape and focus loss dismiss it. The message is connected through aria-describedby.','The tooltip is supplementary text and never receives focus.'],
+  toast:['Use <sand-toast message="Saved." tone="success" duration="4500"></sand-toast> for transient status.','Call show(message?) and dismiss(reason?). Configure tone, position, duration and action-label; listen for action and dismiss. The timer pauses while hovered or focused.','Multiple toasts stack by corner. A duration of zero disables auto-dismiss.'],
+  alert:['Use <sand-alert tone="warning" title="Storage almost full" message="Remove unused files." dismissible></sand-alert> for persistent status.','Call dismiss() or show(), and listen for action and dismiss. Warning/error use assertive alert semantics; info/success use polite status semantics.','Unlike a toast, an alert banner does not disappear automatically.'],
+  dialog:['Use <sand-dialog title="Confirm changes"> with caller-owned content nodes for a native modal.','Call showModal() or show(), then close(returnValue). Listen for dialog-open, dialog-close and confirm. Escape is enabled by default; backdrop close is opt-in.','The browser provides the native modal top layer and focus containment.'],
+  drawer:['Use <sand-drawer title="Filters" placement="right" size="360px"> with caller-owned content nodes.','Call showModal() or close(returnValue). Configure placement, size, Escape and backdrop policy; listen for drawer-open, drawer-close and confirm.','The sheet is modal and uses native dialog focus containment.'],
+
 
 };
 const SKILL = { url: new URL('../skills/grainmotion-ui/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };

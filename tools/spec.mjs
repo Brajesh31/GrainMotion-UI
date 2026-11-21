@@ -3,7 +3,7 @@
 export const REPO = 'Brajesh31/GrainMotion-UI';
 export const SITE = 'https://brajesh31.github.io/GrainMotion-UI';
 export const AUTHOR = 'Brajesh Kumar <https://github.com/Brajesh31>';
-export const COUNT = 'forty';
+export const COUNT = 'forty-five';
 
 // Limits every control shares; each README ends with its own, then these.
 export const COMMON_LIMITS = [
@@ -2729,6 +2729,448 @@ export const SPEC = [
       "html": "<sand-tree id=\"el\" label=\"Project files\"></sand-tree><p class=\"readout\" id=\"out\">Select a node or expand a branch.</p>",
       "hint": "Use Arrow Up/Down to move, Arrow Right to expand, Arrow Left to collapse or return to the parent.",
       "script": "el.items=[{id:'app',label:'app',children:[{id:'components',label:'components',children:[{id:'controls',label:'controls'},{id:'layout',label:'layout'}]},{id:'styles',label:'styles'}]},{id:'public',label:'public',children:[{id:'images',label:'images'}]},{id:'readme',label:'README.md'}];el.expanded=['app','components'];const out=document.getElementById('out');el.addEventListener('select',e=>out.textContent='Selected: '+e.detail.value);"
+    }
+  },
+  {
+    "id": "tooltip",
+    "name": "Tooltip",
+    "tag": "sand-tooltip",
+    "categories": [
+      "tooltip",
+      "hint",
+      "accessibility",
+      "feedback",
+      "sand"
+    ],
+    "sub": "A small information stone appears beside a focused or hovered control.",
+    "desc": "A non-interactive tooltip anchored to a trigger by element ID, with pointer and keyboard activation, Escape dismissal, configurable placement and delay, and aria-describedby token preservation.",
+    "docs": "Use the for attribute to reference a trigger element ID and text for the hint. Set placement and delay, or read/write open and call show() or hide().",
+    "intro": [
+      "A small stone of information appears beside the control that needs it. The hint is connected to its trigger through aria-describedby, opens on pointer hover or keyboard focus, and never steals focus from the control."
+    ],
+    "use": "<script src=\"tooltip.js\"></script>\\n<button id=\"save\" type=\"button\">Save draft</button>\\n<sand-tooltip for=\"save\" text=\"Saves the current draft.\" placement=\"top\" delay=\"250\"></sand-tooltip>",
+    "js": "const tip = document.querySelector('sand-tooltip');\\ntip.show(); // show it programmatically\\ntip.hide(); // dismiss it without moving focus",
+    "attrs": [
+      [
+        "`for`",
+        "ID of the trigger element in the same document",
+        "required"
+      ],
+      [
+        "`text`",
+        "Tooltip message, inserted as text",
+        "empty"
+      ],
+      [
+        "`placement`",
+        "Preferred placement: top, right, bottom or left",
+        "top"
+      ],
+      [
+        "`delay`",
+        "Show delay in milliseconds, clamped to 0–2000",
+        "350"
+      ],
+      [
+        "`disabled`",
+        "Disable tooltip display",
+        "absent"
+      ],
+      [
+        "`open`",
+        "Reflects open state",
+        "absent"
+      ]
+    ],
+    "notes": [
+      "The tooltip is associated with the trigger using `aria-describedby`. Existing description IDs are preserved and the tooltip's ID is removed on disconnect.",
+      "Pointer hover and keyboard focus show the hint. Pointer exit, focus loss and Escape hide it; the tooltip itself never receives focus.",
+      "Use `show()` and `hide()` for programmatic control, or read/write the `open` property.",
+      "The tooltip only positions the hint. It does not add a trigger button or make a non-interactive element interactive."
+    ],
+    "happens": [
+      [
+        "hover or focus the trigger",
+        "a short delay lets the small information stone appear"
+      ],
+      [
+        "press Escape",
+        "the tooltip closes without changing trigger focus"
+      ],
+      [
+        "remove the tooltip",
+        "its described-by token and event listeners are cleaned up"
+      ]
+    ],
+    "limits": [
+      "A tooltip is for short, non-interactive supplementary text. Use a dialog, popover or disclosure for content containing links, controls or longer instructions. `for` must resolve to an element in the same document."
+    ],
+    "demo": {
+      "html": "<button id=\"save\" type=\"button\" class=\"pill\">Hover or focus to see the hint</button><sand-tooltip id=\"el\" for=\"save\" text=\"Saves the current draft.\" placement=\"top\" delay=\"250\"></sand-tooltip><p class=\"readout\">The hint is associated through aria-describedby.</p>",
+      "hint": "Hover the button or Tab to it. Press Escape to dismiss the tooltip.",
+      "script": "const trigger=document.getElementById('save');"
+    }
+  },
+  {
+    "id": "toast",
+    "name": "Toast Notification",
+    "tag": "sand-toast",
+    "categories": [
+      "toast",
+      "notification",
+      "status",
+      "feedback",
+      "accessibility",
+      "sand"
+    ],
+    "sub": "A stone rolls into a miniature tray, displays a message and exits.",
+    "desc": "A timed notification with status or alert semantics, action and dismiss controls, timer pausing on hover/focus, and independent corner stacking.",
+    "docs": "Call show(message?) and dismiss(reason?) or set open. Configure title, message, tone, duration, position and action-label. Listen for action and dismiss events.",
+    "intro": [
+      "A small walnut tray receives a river stone, announces a status message and settles out of view. Notifications can coexist, pause their timer while the user points at or focuses them, and expose an optional action."
+    ],
+    "use": "<script src=\"toast.js\"></script>\\n<sand-toast id=\"notice\" tone=\"success\" title=\"Saved\" message=\"Your changes are stored.\" duration=\"4500\"></sand-toast>\\n<script>\\nnotice.show();\\nnotice.addEventListener('dismiss', event => console.log(event.detail.reason));\\n</script>",
+    "js": "const notice = document.querySelector('sand-toast');\\nnotice.show('Profile updated');\\nnotice.addEventListener('action', () => undoLastChange());\\nnotice.addEventListener('dismiss', event => recordDismissReason(event.detail.reason));",
+    "attrs": [
+      [
+        "`message`",
+        "Notification body text",
+        "empty"
+      ],
+      [
+        "`title`",
+        "Optional short heading",
+        "empty"
+      ],
+      [
+        "`tone`",
+        "info, success, warning or error",
+        "info"
+      ],
+      [
+        "`duration`",
+        "Auto-dismiss time in milliseconds; zero disables timeout",
+        "4500"
+      ],
+      [
+        "`position`",
+        "top-right, top-left, bottom-right or bottom-left",
+        "top-right"
+      ],
+      [
+        "`action-label`",
+        "Optional action button text",
+        "absent"
+      ],
+      [
+        "`dismissible`",
+        "Show the close button; defaults on unless set to false",
+        "true"
+      ],
+      [
+        "`open`",
+        "Reflects whether the toast is visible",
+        "absent"
+      ]
+    ],
+    "notes": [
+      "Call `show(message?)` to display the toast and `dismiss(reason?)` to close it. Reasons include `programmatic`, `timeout`, `action` and `close`.",
+      "An optional action button dispatches `action` and then dismisses the toast. The close button dispatches `dismiss`.",
+      "Info and success use `role=status` with polite live announcements. Warning and error use `role=alert` with assertive announcements.",
+      "The timer pauses while the toast is hovered or contains keyboard focus. Set `duration=\"0\"` for a persistent toast.",
+      "Multiple toast elements can be open at once. The component stacks them by corner; the host owns the application-level notification queue."
+    ],
+    "happens": [
+      [
+        "call show()",
+        "the stone settles into a corner tray and the message is announced"
+      ],
+      [
+        "hover or focus the toast",
+        "the automatic dismissal timer pauses"
+      ],
+      [
+        "activate its action",
+        "the action event is emitted before the toast closes"
+      ]
+    ],
+    "limits": [
+      "A toast is transient feedback, not a durable error log or the only way to access a critical action. The component does not persist notifications across page loads or manage a network operation."
+    ],
+    "demo": {
+      "html": "<sand-toast id=\"el\" tone=\"success\" title=\"Changes saved\" message=\"Your project is up to date.\" duration=\"0\" position=\"top-right\" action-label=\"Undo\"></sand-toast><button class=\"pill\" type=\"button\" id=\"show-toast\">Show toast</button><p class=\"readout\">The example uses duration 0 so you can dismiss it yourself.</p>",
+      "hint": "Show the toast, hover or focus it, activate Undo, or use the close button.",
+      "script": "const out=document.querySelector('.readout');document.getElementById('show-toast').addEventListener('click',()=>el.show());el.addEventListener('action',()=>out.textContent='Undo action requested');el.addEventListener('dismiss',e=>out.textContent='Dismissed: '+e.detail.reason);"
+    }
+  },
+  {
+    "id": "alert",
+    "name": "Alert Banner",
+    "tag": "sand-alert",
+    "categories": [
+      "alert",
+      "banner",
+      "status",
+      "feedback",
+      "accessibility",
+      "sand"
+    ],
+    "sub": "A raised sand strip and mineral marker communicate status.",
+    "desc": "A persistent status banner with tone-aware live-region semantics, optional title, action and dismissal. It stays visible until the host or user dismisses it.",
+    "docs": "Set tone, title, message, dismissible and action-label. Call dismiss() or show(), and listen for action and dismiss events.",
+    "intro": [
+      "A broad raised strip of sand holds a mineral marker beside a message that should remain visible until it is resolved. Unlike a toast, an alert does not disappear on a timer."
+    ],
+    "use": "<script src=\"alert.js\"></script>\\n<sand-alert tone=\"warning\" title=\"Storage almost full\" message=\"Remove unused files to continue.\" dismissible></sand-alert>",
+    "js": "const alert = document.querySelector('sand-alert');\\nalert.addEventListener('action', () => openStorageSettings());\\nalert.addEventListener('dismiss', () => markNoticeHidden());",
+    "attrs": [
+      [
+        "`tone`",
+        "info, success, warning or error",
+        "info"
+      ],
+      [
+        "`title`",
+        "Optional banner heading",
+        "empty"
+      ],
+      [
+        "`message`",
+        "Banner body text",
+        "empty"
+      ],
+      [
+        "`dismissible`",
+        "Show a close button",
+        "absent"
+      ],
+      [
+        "`action-label`",
+        "Optional action button text",
+        "absent"
+      ],
+      [
+        "`dismissed`",
+        "Reflects whether the banner is hidden",
+        "absent"
+      ]
+    ],
+    "notes": [
+      "The alert uses `role=status` with polite announcements for info/success, and `role=alert` with assertive announcements for warning/error.",
+      "Set `dismissible` to show the close control. Call `dismiss()` programmatically or `show()` to restore it.",
+      "The optional action button dispatches an `action` event. The alert does not close automatically after an action.",
+      "Message and title are inserted as text. Application state, persistence and remediation remain host responsibilities."
+    ],
+    "happens": [
+      [
+        "show a warning",
+        "a raised sand strip and attention stone signal a persistent message"
+      ],
+      [
+        "activate the action",
+        "the host receives an action event and can open its workflow"
+      ],
+      [
+        "dismiss the banner",
+        "the host receives a dismiss event and can restore the banner later"
+      ]
+    ],
+    "limits": [
+      "An alert banner remains until dismissed; it is not a toast and has no auto-dismiss timer. It does not fetch data, resolve the alert or persist dismissal state."
+    ],
+    "demo": {
+      "html": "<sand-alert id=\"el\" tone=\"warning\" title=\"Storage almost full\" message=\"Remove unused files to continue.\" dismissible action-label=\"Review storage\"></sand-alert><p class=\"readout\">This banner stays until dismissed.</p>",
+      "hint": "Try the action or close button, then restore the message from the host.",
+      "script": "const out=document.querySelector('.readout');el.addEventListener('action',()=>out.textContent='Storage review requested');el.addEventListener('dismiss',()=>out.textContent='Alert dismissed');"
+    }
+  },
+  {
+    "id": "dialog",
+    "name": "Dialog / Modal",
+    "tag": "sand-dialog",
+    "categories": [
+      "dialog",
+      "modal",
+      "overlay",
+      "accessibility",
+      "feedback",
+      "sand"
+    ],
+    "sub": "A framed sand surface appears above the page with actions.",
+    "desc": "A native modal dialog custom element that preserves caller content, traps focus through the browser top layer, supports Escape and optional backdrop dismissal, and restores opener focus.",
+    "docs": "Set open or call showModal()/show(). Use close(returnValue), title, description, confirm-label, cancel-label and dismissal policy attributes.",
+    "intro": [
+      "A framed walnut surface rises above the page while the rest of the document falls behind a quiet backdrop. The component uses the browser's native modal dialog, so focus containment and the top layer are genuine browser behavior."
+    ],
+    "use": "<script src=\"dialog.js\"></script>\\n<button id=\"confirm\" type=\"button\">Review changes</button>\\n<sand-dialog id=\"review\" title=\"Confirm changes\" description=\"Review before saving.\">\\n  <p>Your draft is ready to publish.</p>\\n</sand-dialog>\\n<script>\\nconfirm.addEventListener('click', () => review.showModal());\\nreview.addEventListener('dialog-close', event => console.log(event.detail.returnValue));\\n</script>",
+    "js": "const modal = document.querySelector('sand-dialog');\\nmodal.addEventListener('confirm', () => publishDraft());\\nmodal.addEventListener('dialog-close', event => restorePageState(event.detail.returnValue));\\nmodal.showModal();",
+    "attrs": [
+      [
+        "`open`",
+        "Reflects native modal open state",
+        "absent"
+      ],
+      [
+        "`title`",
+        "Dialog heading",
+        "Dialog"
+      ],
+      [
+        "`description`",
+        "Optional accessible description",
+        "empty"
+      ],
+      [
+        "`confirm-label`",
+        "Primary action button text",
+        "Done"
+      ],
+      [
+        "`cancel-label`",
+        "Secondary action button text",
+        "Cancel"
+      ],
+      [
+        "`close-on-escape`",
+        "Allow Escape to close unless value is false",
+        "true"
+      ],
+      [
+        "`close-on-backdrop`",
+        "Allow a click on the backdrop to close",
+        "absent"
+      ],
+      [
+        "`label`",
+        "Accessible name override",
+        "heading"
+      ]
+    ],
+    "notes": [
+      "The implementation uses the native `<dialog>` element with `showModal()`, allowing the browser to manage the top layer and modal focus containment.",
+      "Caller-provided child nodes are moved into the dialog body without parsing HTML. Use DOM nodes for interactive content and keep ownership in the host.",
+      "The Close, Cancel and Done controls call `close()` with a return value. Done also emits `confirm` before closing.",
+      "The `cancel` event from Escape is prevented and handled according to `close-on-escape`; backdrop closing is opt-in through `close-on-backdrop`.",
+      "The component restores focus to the element that opened it when that element is still connected. Listen for `dialog-open` and `dialog-close`."
+    ],
+    "happens": [
+      [
+        "call showModal()",
+        "the native dialog enters the top layer and the rest of the page becomes inert"
+      ],
+      [
+        "press Tab",
+        "the browser keeps keyboard focus inside the modal"
+      ],
+      [
+        "confirm or cancel",
+        "the return value and close event let the host decide what happens next"
+      ]
+    ],
+    "limits": [
+      "The dialog manages presentation and focus only. It does not validate, submit or persist the form content placed inside it. The caller remains responsible for the opener and business workflow."
+    ],
+    "demo": {
+      "html": "<button id=\"open-dialog\" class=\"pill\" type=\"button\">Open dialog</button><sand-dialog id=\"el\" title=\"Publish this project?\" description=\"This action makes the current draft visible.\" confirm-label=\"Publish\" cancel-label=\"Keep editing\"><p>Check your title, description and access settings before publishing.</p></sand-dialog><p class=\"readout\">The modal uses native dialog focus containment.</p>",
+      "hint": "Open the modal, use Tab, Escape, Cancel or Publish.",
+      "script": "const out=document.querySelector('.readout');document.getElementById('open-dialog').addEventListener('click',()=>el.showModal());el.addEventListener('confirm',()=>out.textContent='Publish action requested');el.addEventListener('dialog-close',e=>out.textContent='Dialog closed: '+e.detail.returnValue);"
+    }
+  },
+  {
+    "id": "drawer",
+    "name": "Drawer / Sheet",
+    "tag": "sand-drawer",
+    "categories": [
+      "drawer",
+      "sheet",
+      "overlay",
+      "modal",
+      "accessibility",
+      "sand"
+    ],
+    "sub": "A wood-framed sand panel enters from a screen edge.",
+    "desc": "A responsive modal sheet that slides from the left, right, top or bottom, uses native dialog focus containment, and provides Escape/backdrop and action controls.",
+    "docs": "Set open or call showModal()/show(). Configure placement, size, title and description; close(returnValue) and listen for drawer-open, drawer-close and confirm.",
+    "intro": [
+      "A wood-framed sheet moves in from the edge of the viewport, carrying a compact workspace or filter surface. It uses a native modal dialog for focus containment while the panel itself follows the selected edge."
+    ],
+    "use": "<script src=\"drawer.js\"></script>\\n<button id=\"filters\" type=\"button\">Open filters</button>\\n<sand-drawer id=\"sheet\" title=\"Filters\" placement=\"right\" size=\"360px\">\\n  <p>Choose the filters to apply.</p>\\n</sand-drawer>\\n<script>\\nfilters.addEventListener('click', () => sheet.showModal());\\n</script>",
+    "js": "const sheet = document.querySelector('sand-drawer');\\nsheet.setAttribute('placement', 'bottom');\\nsheet.showModal();\\nsheet.addEventListener('drawer-close', event => saveSheetResult(event.detail.returnValue));",
+    "attrs": [
+      [
+        "`open`",
+        "Reflects native modal open state",
+        "absent"
+      ],
+      [
+        "`title`",
+        "Sheet heading",
+        "Details"
+      ],
+      [
+        "`description`",
+        "Optional accessible description",
+        "empty"
+      ],
+      [
+        "`placement`",
+        "left, right, top or bottom",
+        "right"
+      ],
+      [
+        "`size`",
+        "Panel width or height as CSS length; clamped to viewport",
+        "380px"
+      ],
+      [
+        "`close-on-escape`",
+        "Allow Escape to close unless value is false",
+        "true"
+      ],
+      [
+        "`close-on-backdrop`",
+        "Allow a click on the backdrop to close",
+        "absent"
+      ],
+      [
+        "`action-label`",
+        "Show an optional primary action button",
+        "absent"
+      ],
+      [
+        "`label`",
+        "Accessible name override",
+        "heading"
+      ]
+    ],
+    "notes": [
+      "The drawer uses a native modal `<dialog>` to enter the top layer and keep focus within the sheet.",
+      "Set `placement` to `left`, `right`, `top` or `bottom`. The `size` attribute sets the width for side sheets or height for top/bottom sheets and is clamped to the viewport.",
+      "Child DOM nodes are moved into the sheet body without parsing HTML. They remain real host-owned nodes.",
+      "Escape closes by default. Backdrop closing is opt-in with `close-on-backdrop`. The optional action button emits `confirm` before closing.",
+      "Listen for `drawer-open` and `drawer-close`. Focus returns to the opener if it is still connected."
+    ],
+    "happens": [
+      [
+        "call showModal()",
+        "the framed sheet enters from its configured edge"
+      ],
+      [
+        "change placement",
+        "the panel switches to left, right, top or bottom"
+      ],
+      [
+        "close the sheet",
+        "the native modal closes and focus returns to its opener"
+      ]
+    ],
+    "limits": [
+      "The drawer is modal in this phase. Non-modal docked sidebars belong to the layout system. The component does not manage route changes, filter state or persistence."
+    ],
+    "demo": {
+      "html": "<button id=\"open-drawer\" class=\"pill\" type=\"button\">Open filters</button><sand-drawer id=\"el\" title=\"Filter results\" description=\"Choose the project status to display.\" placement=\"right\" size=\"360px\" action-label=\"Apply filters\"><p>In progress</p><p>Needs review</p><p>Completed</p></sand-drawer><p class=\"readout\">Choose an edge sheet to inspect filters.</p>",
+      "hint": "Open the drawer, change its placement, then Apply or close.",
+      "script": "const out=document.querySelector('.readout');document.getElementById('open-drawer').addEventListener('click',()=>el.showModal());el.addEventListener('confirm',()=>out.textContent='Filters applied');el.addEventListener('drawer-close',e=>out.textContent='Drawer closed: '+e.detail.returnValue);"
     }
   }
 ];

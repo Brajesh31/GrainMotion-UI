@@ -51,6 +51,11 @@ export const SOUNDS = {
   'split-pane': one('stone', 'tap'),
   resizable: one('stone', 'tap'),
   tree: one('stone', 'tap'),
+  tooltip: one('stone', 'tap'),
+  toast: one('stone', 'tap'),
+  alert: one('stone', 'tap'),
+  dialog: one('stone', 'tap'),
+  drawer: one('stone', 'tap'),
 };
 // Images a control carries, as constants.
 export const ART = { thinking: { ROCK: 'rock.webp' } };
