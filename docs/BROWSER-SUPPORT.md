@@ -2,7 +2,7 @@
 
 ## Current verified scope
 
-The Phase 1 selection controls and Phase 2 native text controls have passed the automated mobile Chromium workflow. Phase 3 adds native select, datalist autocomplete, date/date-range validation and time-format assertions; that suite is pending its first passing CI run. Physical mobile, desktop Safari/Firefox and manual assistive-technology testing remain unverified. Physical mobile, desktop Safari/Firefox and manual assistive-technology testing remain unverified.
+All nineteen controls across Phases 1, 2 and 3 have passed the automated mobile Chromium workflow. The current run passed 65 browser assertions, including native select, datalist autocomplete, date/date-range validation, time formatting, forms and original-component regression checks. Physical mobile, desktop Safari/Firefox and manual assistive-technology testing remain unverified.
 
 The existing notes explicitly say the project has not yet been broadly tested in:
 
