@@ -425,7 +425,7 @@ class SandTimePicker extends SandPickerBase {
  init(){
   this.initNative('input','time','Choose a time','position:absolute;z-index:4;left:7%;top:54%;width:86%;height:31%;box-sizing:border-box;border:0;border-radius:0;background:transparent;color:#423627;font:600 16px ui-sans-serif,system-ui,sans-serif;padding:0 4%;color-scheme:light;');
   this.readout=document.createElement('output');this.readout.style.cssText='position:absolute;z-index:4;left:0;right:0;top:10%;text-align:center;color:#604832;font:700 16px ui-sans-serif,system-ui,sans-serif;pointer-events:none;';
-  this.append(this.readout);this.field.addEventListener('input',()=>this.updateReadout());this.field.addEventListener('change',()=>{Sound.wake();Sound.play('tap',.18,1);this.updateReadout();});
+  this.readout.setAttribute('aria-live','polite');this.readout.setAttribute('aria-label','Formatted selected time');this.append(this.readout);this.field.addEventListener('input',()=>this.updateReadout());this.field.addEventListener('change',()=>{Sound.wake();Sound.play('tap',.18,1);this.updateReadout();});
   this.syncFormat();this.updateReadout();
  }
  attributeChangedCallback(n,o,v){super.attributeChangedCallback(n,o,v);if(this.ready&&n==='format')this.syncFormat();}
