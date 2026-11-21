@@ -28,7 +28,7 @@ The test and screenshot utilities require Chrome or Chromium. Set `CHROME` if th
 
 ## Current test coverage
 
-`tools/test.mjs` covers all fourteen controls in a mobile-sized Chromium viewport. Phase 1 has a successful CI baseline. Phase 2 assertions have been added and will be marked verified only after the current GitHub Actions run passes. The original-control checks cover:
+`tools/test.mjs` covers all fourteen controls in a mobile-sized Chromium viewport. Phases 1 and 2 have successful mobile Chromium CI runs, including the original four-component regression checks. The original-control checks cover:
 
 - Slider drag, input/change events, vertical-swipe handling and keyboard increments.
 - Toggle click, Space behavior, change events and vertical-swipe handling.
@@ -45,7 +45,7 @@ The Phase 1 checks added to the test runner cover:
 - Rating: pointer selection, Arrow/Home/End adjustments, accessible value text, disabled state and form serialization.
 - Regression: all original four tests must continue to pass with all fourteen scripts loaded together.
 
-The Phase 2 checks added to the test runner cover:
+The Phase 2 checks in the passing test runner cover:
 
 - Text Field: real native input value updates, accessible name, and native email validity.
 - Textarea: multiline value retention and rows configuration.
