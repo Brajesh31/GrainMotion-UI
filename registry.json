@@ -536,6 +536,112 @@
         }
       ],
       "docs": "GrainMotion-UI Loading Indicator is a plain script that registers a custom element. Load /grainmotion-ui/loader.js with a script tag (not a module), Use <sand-loader label=\"Loading results\"></sand-loader>. Set active=false when work completes and speed to adjust the animation rate. Reduced motion holds the rake still. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "tabs",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Tabs",
+      "description": "A tactile tab system with a flat river-stone marker moving between carved tab wells. Real HTML tab buttons and content panels preserve native interaction and accessible semantics. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-tabs>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "navigation",
+        "tabs",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "tabs/tabs.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/tabs.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Tabs is a plain script that registers a custom element. Load /grainmotion-ui/tabs.js with a script tag (not a module), Use <sand-tabs tabs=\"overview:Overview,activity:Activity\" value=\"overview\"></sand-tabs>. Put template[data-panel] elements inside for real panel content. Read or set value and listen for the bubbling change event. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "accordion",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Accordion",
+      "description": "An accordion made from walnut lids with small stone pulls. Opening a lid reveals a sand-toned compartment containing preserved native HTML content. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-accordion>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "disclosure",
+        "navigation",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "accordion/accordion.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/accordion.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Accordion is a plain script that registers a custom element. Load /grainmotion-ui/accordion.js with a script tag (not a module), Use <sand-accordion items=\"shipping:Shipping,returns:Returns\" value=\"shipping\"></sand-accordion> with template[data-panel] children. Add multiple for simultaneous panels and collapsible to allow all panels to close. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "pagination",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Pagination",
+      "description": "A pagination control with numbered sand wells and a moving river-stone page marker. Page state and navigation are native buttons; data loading remains the host application's responsibility. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-pagination>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "navigation",
+        "pagination",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "pagination/pagination.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/pagination.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Pagination is a plain script that registers a custom element. Load /grainmotion-ui/pagination.js with a script tag (not a module), Use <sand-pagination page=\"4\" total=\"24\"></sand-pagination>. Read or set page, configure sibling-count and boundary-count, and listen for change to load the selected page. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "breadcrumbs",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Breadcrumbs",
+      "description": "A breadcrumb navigation trail with real ancestor links and a non-interactive current page marker. River stones sit along a shallow raked path. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-breadcrumbs>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "navigation",
+        "breadcrumbs",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "breadcrumbs/breadcrumbs.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/breadcrumbs.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Breadcrumbs is a plain script that registers a custom element. Load /grainmotion-ui/breadcrumbs.js with a script tag (not a module), Use <sand-breadcrumbs items=\"Home|/;Library|/library;Current\"></sand-breadcrumbs>. Supply semicolon-separated Label|URL ancestors and a plain current label, or assign the items array property. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "menu",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Menu / Popover",
+      "description": "A compact command menu with a lifting stone trigger, anchored walnut tray, keyboard navigation, outside dismissal and focus restoration. Commands are emitted as events for the host application. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-menu>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "navigation",
+        "menu",
+        "popover",
+        "overlay",
+        "sand"
+      ],
+      "files": [
+        {
+          "path": "menu/menu.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/menu.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Menu / Popover is a plain script that registers a custom element. Load /grainmotion-ui/menu.js with a script tag (not a module), Use <sand-menu items=\"new:New project,duplicate:Duplicate\"></sand-menu>. Listen for the bubbling select event to run an action. The open property and attribute control the menu visibility. More: https://brajesh31.github.io/GrainMotion-UI"
     }
   ]
 }
