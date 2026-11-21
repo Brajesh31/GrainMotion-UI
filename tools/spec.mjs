@@ -3,7 +3,7 @@
 export const REPO = 'Brajesh31/GrainMotion-UI';
 export const SITE = 'https://brajesh31.github.io/GrainMotion-UI';
 export const AUTHOR = 'Brajesh Kumar <https://github.com/Brajesh31>';
-export const COUNT = 'fourteen';
+export const COUNT = 'nineteen';
 
 // Limits every control shares; each README ends with its own, then these.
 export const COMMON_LIMITS = [
@@ -787,5 +787,469 @@ export const SPEC = [
     "desc": "A numeric OTP/PIN input drawn across individual engraved wells. One native input preserves mobile one-time-code autofill, paste, selection and keyboard behavior.",
     "docs": "Use <sand-otp name=\"verificationCode\" label=\"Verification code\" length=\"6\" autocomplete=\"one-time-code\" required></sand-otp>. Length is clamped from four to ten. The complete event exposes detail.length only, never the entered digits.",
     "manualDocs": true
-  }
+  },
+{
+  "id": "select",
+  "name": "Select / Dropdown",
+  "tag": "sand-select",
+  "categories": [
+    "select",
+    "dropdown",
+    "selection",
+    "form",
+    "sand",
+    "animation"
+  ],
+  "sub": "A river stone settles in the well of the chosen option.",
+  "desc": "A native select control with a floating river stone and a carved chevron. The browser retains its familiar option popup, keyboard navigation and form semantics.",
+  "docs": "Use <sand-select name=\"delivery\" label=\"Delivery speed\" options=\"Standard,Express,Overnight\" placeholder=\"Choose delivery\"></sand-select>. Options are comma-separated; use value:Label for distinct submitted values and visible labels. Read or set el.value.",
+  "intro": [
+    "A small river stone settles into a carved well for the chosen option. The browser-native select remains responsible for its popup, keyboard navigation and selection semantics; the sand layer adds a physical marker and a pressed chevron."
+  ],
+  "use": "<script src=\"select.js\"></script>\n<sand-select name=\"delivery\" label=\"Delivery speed\" options=\"standard:Standard,express:Express,overnight:Overnight\" placeholder=\"Choose delivery\" required></sand-select>",
+  "js": "const select = document.querySelector('sand-select');\nselect.addEventListener('change', () => saveDelivery(select.value));\nselect.value = 'express';",
+  "attrs": [
+    [
+      "options",
+      "Comma-separated options; `value:Label` defines a distinct form value and display label",
+      "empty"
+    ],
+    [
+      "value",
+      "Initially selected option value",
+      "empty"
+    ],
+    [
+      "label",
+      "Accessible name for the native select",
+      "Select a value"
+    ],
+    [
+      "placeholder",
+      "First empty option label",
+      "Choose an option"
+    ],
+    [
+      "name",
+      "Form submission name",
+      "empty"
+    ],
+    [
+      "required",
+      "Require a non-empty selection",
+      "absent"
+    ],
+    [
+      "disabled",
+      "Disable selection and form participation",
+      "absent"
+    ],
+    [
+      "lang",
+      "Locale hint for browser popup",
+      "document language"
+    ]
+  ],
+  "notes": [
+    "**Native select:** the inner control is a real `<select>`. The browser owns the option popup, arrow-key behavior, touch selection and option semantics.",
+    "**Option syntax:** `options=\"standard:Standard,express:Express\"` submits `standard` and displays `Standard`. Without a colon, the same text is used for both value and label.",
+    "**Form value:** the selected option value is submitted as a string; the empty placeholder submits an empty value."
+  ],
+  "happens": [
+    [
+      "open the control",
+      "the browser displays its native option picker"
+    ],
+    [
+      "choose an option",
+      "the select value changes and the sand stone settles at the selected position"
+    ],
+    [
+      "change the options attribute",
+      "the native option list is rebuilt while preserving the selected value when it still exists"
+    ]
+  ],
+  "limits": [
+    "The option popup is rendered by the browser/operating system and cannot be styled like a custom HTML menu.",
+    "The physical stone represents the current selection; it does not replace the native select popup."
+  ],
+  "manualDocs": true
+},
+{
+  "id": "combobox",
+  "name": "Combobox / Autocomplete",
+  "tag": "sand-combobox",
+  "categories": [
+    "combobox",
+    "autocomplete",
+    "search",
+    "input",
+    "form",
+    "sand",
+    "animation"
+  ],
+  "sub": "A bamboo rake follows the typed query as native suggestions appear.",
+  "desc": "A native text input connected to a datalist for browser-managed suggestions. It permits free text, keyboard entry and paste while a small rake follows the query.",
+  "docs": "Use <sand-combobox name=\"city\" label=\"City\" options=\"DEL:Delhi,BLR:Bengaluru,HYD:Hyderabad\" placeholder=\"Start typing\"></sand-combobox>. The browser provides the datalist suggestion UI. Read or set el.value; free text is allowed.",
+  "intro": [
+    "A thin bamboo rake follows the characters as the user types. Suggestions come from a real browser `<datalist>` connected to a native text input, so free text, paste and keyboard editing remain available."
+  ],
+  "use": "<script src=\"combobox.js\"></script>\n<sand-combobox name=\"city\" label=\"City\" options=\"DEL:Delhi,BLR:Bengaluru,HYD:Hyderabad\" placeholder=\"Start typing\"></sand-combobox>",
+  "js": "const city = document.querySelector('sand-combobox');\ncity.addEventListener('option-selected', event => useCity(event.detail.value));\ncity.addEventListener('input', () => preview(city.value));",
+  "attrs": [
+    [
+      "options",
+      "Comma-separated suggestions; `value:Label` separates values from labels",
+      "empty"
+    ],
+    [
+      "value",
+      "Initial text value",
+      "empty"
+    ],
+    [
+      "label",
+      "Accessible name for the native text input",
+      "Search options"
+    ],
+    [
+      "placeholder",
+      "Native input placeholder",
+      "empty"
+    ],
+    [
+      "name",
+      "Form submission name",
+      "empty"
+    ],
+    [
+      "disabled",
+      "Disable editing and form participation",
+      "absent"
+    ],
+    [
+      "required",
+      "Require a non-empty value",
+      "absent"
+    ],
+    [
+      "autocomplete",
+      "Browser autocomplete hint",
+      "off"
+    ]
+  ],
+  "notes": [
+    "**Native datalist:** the component uses an actual text input and an associated `<datalist>`. Suggestion display varies by browser and operating system.",
+    "**Free text:** users are not restricted to the provided options. This is an autocomplete input, not a strict select.",
+    "**Option event:** when the changed value exactly matches a suggestion, the component emits `option-selected` with `{ value, label }`."
+  ],
+  "happens": [
+    [
+      "type a query",
+      "the browser offers matching datalist suggestions where supported; the rake follows the input length"
+    ],
+    [
+      "choose a suggestion",
+      "the native input receives its value and a matching change emits option-selected"
+    ],
+    [
+      "enter an unlisted value",
+      "the value remains valid free text unless the integrating application applies its own validation"
+    ]
+  ],
+  "limits": [
+    "The suggestion popup is native browser UI and is not fully styleable.",
+    "Datalist filtering and announcement details differ across browsers; manual screen-reader verification is required.",
+    "Suggestions are comma-separated in the options attribute. For complex or dynamic data, set the `options` attribute from application code."
+  ],
+  "manualDocs": true
+},
+{
+  "id": "date-picker",
+  "name": "Date Picker",
+  "tag": "sand-date-picker",
+  "categories": [
+    "date-picker",
+    "calendar",
+    "date",
+    "form",
+    "sand",
+    "animation"
+  ],
+  "sub": "An engraved calendar grid holds a pebble on the selected day.",
+  "desc": "A native date input over an engraved sand calendar. The value remains an ISO YYYY-MM-DD date string, with min, max and unavailable-day validation that avoids local timezone conversions.",
+  "docs": "Use <sand-date-picker name=\"startDate\" label=\"Start date\" min=\"2026-01-01\" max=\"2026-12-31\" unavailable=\"2026-12-25\"></sand-date-picker>. The value uses YYYY-MM-DD and is not converted through the local timezone. The native date picker handles calendar keyboard interaction.",
+  "intro": [
+    "An engraved calendar grid is cut into the sand, with a small pebble marking the selected day. The actual calendar popup and keyboard behavior are provided by a native `<input type=\"date\">`; the component stores the browser's ISO `YYYY-MM-DD` value without converting it into a local-time timestamp."
+  ],
+  "use": "<script src=\"date-picker.js\"></script>\n<sand-date-picker name=\"startDate\" label=\"Start date\" min=\"2026-01-01\" max=\"2026-12-31\" unavailable=\"2026-12-25\" required></sand-date-picker>",
+  "js": "const date = document.querySelector('sand-date-picker');\ndate.addEventListener('change', () => saveDate(date.value));\ndate.value = '2026-11-21';",
+  "attrs": [
+    [
+      "value",
+      "Initial ISO calendar date (`YYYY-MM-DD`)",
+      "empty"
+    ],
+    [
+      "label",
+      "Accessible name",
+      "Choose a date"
+    ],
+    [
+      "name",
+      "Form submission name",
+      "empty"
+    ],
+    [
+      "min / max",
+      "Inclusive ISO date bounds",
+      "unset"
+    ],
+    [
+      "unavailable",
+      "Comma-separated ISO dates that fail validation",
+      "empty"
+    ],
+    [
+      "required",
+      "Require a selected date",
+      "absent"
+    ],
+    [
+      "disabled",
+      "Disable selection and form participation",
+      "absent"
+    ],
+    [
+      "lang",
+      "Locale hint for native calendar UI",
+      "document language"
+    ]
+  ],
+  "notes": [
+    "**Native date input:** the browser provides its platform calendar UI, keyboard support and date formatting.",
+    "**Stable date value:** `value` is the native ISO `YYYY-MM-DD` string. The component does not parse the date through local time, so it does not shift at timezone boundaries.",
+    "**Unavailable dates:** put exact ISO dates in the comma-separated `unavailable` attribute. A selected unavailable date receives a custom validity message; min and max are enforced by the native input."
+  ],
+  "happens": [
+    [
+      "open the date field",
+      "the browser opens its native date picker"
+    ],
+    [
+      "choose a date",
+      "the ISO date value updates and the pebble marks its day position"
+    ],
+    [
+      "choose an unavailable date",
+      "the field becomes invalid with an explanatory validation message"
+    ],
+    [
+      "set min or max",
+      "the browser prevents dates outside the inclusive range"
+    ]
+  ],
+  "limits": [
+    "Individual unavailable days are validated after selection; the native browser calendar popup is not modified to gray out those days.",
+    "Calendar appearance and keyboard behavior are controlled by the browser/operating system and vary by platform.",
+    "The value is a calendar date, not a timestamp or timezone-aware instant."
+  ],
+  "manualDocs": true
+},
+{
+  "id": "date-range",
+  "name": "Date Range Picker",
+  "tag": "sand-date-range",
+  "categories": [
+    "date-range",
+    "calendar",
+    "date",
+    "range",
+    "form",
+    "sand",
+    "animation"
+  ],
+  "sub": "Two river stones mark the start and end of a date interval.",
+  "desc": "Two native date fields represent an inclusive calendar range. The component validates order, required endpoints, min/max bounds and unavailable days; it serializes complete ranges as start/end ISO strings.",
+  "docs": "Use <sand-date-range name=\"stay\" start=\"2026-11-21\" end=\"2026-11-25\" min=\"2026-01-01\" max=\"2026-12-31\"></sand-date-range>. The value is `YYYY-MM-DD/YYYY-MM-DD`; start and end are separate properties. Dates are compared as calendar days, not local timestamps.",
+  "intro": [
+    "Two river stones mark the beginning and end of a date interval, with a shallow line pressed between them. Two native date inputs preserve each endpoint's calendar popup and keyboard support. The complete value is serialized as `start/end` using ISO calendar dates."
+  ],
+  "use": "<script src=\"date-range.js\"></script>\n<sand-date-range name=\"stay\" label=\"Stay dates\" start=\"2026-11-21\" end=\"2026-11-25\" min=\"2026-01-01\" max=\"2026-12-31\" required></sand-date-range>",
+  "js": "const range = document.querySelector('sand-date-range');\nrange.addEventListener('date-range-change', ({ detail }) => showDates(detail.start, detail.end));\nrange.start = '2026-11-21';\nrange.end = '2026-11-25';",
+  "attrs": [
+    [
+      "start / end",
+      "Initial ISO start and end dates",
+      "empty"
+    ],
+    [
+      "value",
+      "Combined `start/end` ISO value",
+      "empty"
+    ],
+    [
+      "label",
+      "Accessible label prefix for the range",
+      "Date range"
+    ],
+    [
+      "name",
+      "Form submission name",
+      "empty"
+    ],
+    [
+      "min / max",
+      "Inclusive bounds for both endpoints",
+      "unset"
+    ],
+    [
+      "unavailable",
+      "Comma-separated ISO dates invalid for either endpoint",
+      "empty"
+    ],
+    [
+      "required",
+      "Require both endpoints",
+      "absent"
+    ],
+    [
+      "disabled",
+      "Disable both date fields and form participation",
+      "absent"
+    ],
+    [
+      "lang",
+      "Locale hint for native date UI",
+      "document language"
+    ]
+  ],
+  "notes": [
+    "**Two native date fields:** start and end each use a browser `<input type=\"date\">` and have separate accessible names. The browser handles calendar popups and keyboard support.",
+    "**Stable serialization:** the complete form value is `YYYY-MM-DD/YYYY-MM-DD`. Both dates are calendar strings; no local timezone conversion is performed.",
+    "**Validation:** the end date cannot precede the start date. Both endpoints respect min/max and the unavailable list. Required means both endpoints must be present.",
+    "**Events:** native `input` and `change` events bubble from each field. `date-range-change` includes `{ start, end }` when an endpoint is committed."
+  ],
+  "happens": [
+    [
+      "choose a start date",
+      "the first stone moves to that calendar day"
+    ],
+    [
+      "choose an end date",
+      "the second stone moves and the interval becomes visible"
+    ],
+    [
+      "set the end before the start",
+      "the range receives a validation error"
+    ],
+    [
+      "leave one endpoint empty",
+      "the range stays incomplete and required validation fails"
+    ]
+  ],
+  "limits": [
+    "The native calendar popup cannot visually disable individual unavailable days; those dates are rejected through validity after selection.",
+    "The visual marker position is a compact calendar-day scale, not a full month-layout calendar.",
+    "The form value is null until both endpoints are provided; when complete it is serialized as `start/end`."
+  ],
+  "manualDocs": true
+},
+{
+  "id": "time-picker",
+  "name": "Time Picker",
+  "tag": "sand-time-picker",
+  "categories": [
+    "time-picker",
+    "time",
+    "form",
+    "sand",
+    "animation"
+  ],
+  "sub": "A small clock dial is etched into the sand, with a stone hand marking the time.",
+  "desc": "A native time input paired with a circular sand dial and deterministic 12/24-hour readout. Values remain timezone-free HH:MM strings; min, max and step use native time constraints.",
+  "docs": "Use <sand-time-picker name=\"appointment\" label=\"Appointment time\" format=\"12\" min=\"09:00\" max=\"17:30\" step=\"900\"></sand-time-picker>. Read or set el.value in 24-hour `HH:MM` form. The `format` property controls a 12/24-hour readout; native input presentation follows browser locale.",
+  "intro": [
+    "A small clock dial is etched into the sand, with a river stone marking the selected time. A native `<input type=\"time\">` retains platform time selection, keyboard behavior and constraints. Values remain timezone-free `HH:MM` strings; a separate readout shows either 12-hour or 24-hour formatting."
+  ],
+  "use": "<script src=\"time-picker.js\"></script>\n<sand-time-picker name=\"appointment\" label=\"Appointment time\" format=\"12\" min=\"09:00\" max=\"17:30\" step=\"900\" required></sand-time-picker>",
+  "js": "const time = document.querySelector('sand-time-picker');\ntime.addEventListener('change', () => saveTime(time.value));\ntime.format = '24';\ntime.value = '16:30';",
+  "attrs": [
+    [
+      "value",
+      "Initial time in 24-hour `HH:MM` form",
+      "empty"
+    ],
+    [
+      "label",
+      "Accessible name",
+      "Choose a time"
+    ],
+    [
+      "name",
+      "Form submission name",
+      "empty"
+    ],
+    [
+      "format",
+      "Readout format: `12` or `24`",
+      "24"
+    ],
+    [
+      "min / max",
+      "Inclusive time bounds in `HH:MM`",
+      "unset"
+    ],
+    [
+      "step",
+      "Native time step in seconds",
+      "60"
+    ],
+    [
+      "required",
+      "Require a time value",
+      "absent"
+    ],
+    [
+      "disabled",
+      "Disable selection and form participation",
+      "absent"
+    ],
+    [
+      "lang",
+      "Locale hint for native input presentation",
+      "en-US for 12-hour readout, en-GB for 24-hour"
+    ]
+  ],
+  "notes": [
+    "**Native time input:** the browser provides time selection and keyboard behavior; its visible controls follow browser and operating-system locale conventions.",
+    "**Deterministic value:** the component reads and submits a timezone-free `HH:MM` string. It does not create a `Date`, apply a timezone or convert the chosen time into an instant.",
+    "**12/24-hour display:** set `format=\"12\"` or `format=\"24\"` for the explicit readout. The component supplies an en-US/en-GB locale hint to the native control when no `lang` is specified; the exact native UI remains browser-controlled.",
+    "**Constraints:** min, max and step are passed to the native time input. Step is in seconds, so 900 means fifteen-minute increments."
+  ],
+  "happens": [
+    [
+      "choose a time",
+      "the stone moves around the dial to the corresponding minute of the day"
+    ],
+    [
+      "set format to 12",
+      "the readout displays AM/PM time"
+    ],
+    [
+      "set format to 24",
+      "the readout displays 00:00 through 23:59"
+    ],
+    [
+      "change timezone or DST settings",
+      "the raw `HH:MM` value does not shift because no date or timezone is attached"
+    ]
+  ],
+  "limits": [
+    "The operating system/browser may render the native time selection popup differently from the explicit 12/24-hour readout.",
+    "A time-only value has no date or timezone and cannot identify a unique point in time across daylight-saving transitions.",
+    "The clock dial is a visual indicator; the native time input remains the actual keyboard-accessible control."
+  ],
+  "manualDocs": true
+}
 ];
