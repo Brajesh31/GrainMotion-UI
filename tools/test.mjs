@@ -185,18 +185,80 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
 
 
 
+
+{ // select: native options, label, value and required validation
+  const select = document.querySelector('sand-select');
+  select.field.value = 'express';
+  select.field.dispatchEvent(new Event('change', { bubbles: true }));
+  check('select: native selection updates the host value', select.value === 'express');
+  check('select: selected value is the submitted option value', select.field.selectedOptions[0].textContent === 'Express');
+  select.field.value = '';
+  check('select: required empty choice is invalid', select.checkValidity() === false);
+  select.field.value = 'standard';
+  check('select: valid choice clears required error', select.checkValidity() === true);
+}
+{ // combobox: datalist suggestions, free text and committed suggestion event
+  const combo = document.querySelector('sand-combobox');
+  window.__phase3 = { selected: 0 };
+  combo.addEventListener('option-selected', event => { window.__phase3.selected++; window.__phase3.value = event.detail.value; });
+  combo.field.value = 'BLR';
+  combo.field.dispatchEvent(new Event('input', { bubbles: true }));
+  combo.field.dispatchEvent(new Event('change', { bubbles: true }));
+  check('combobox: committed exact suggestion emits option-selected', window.__phase3.selected === 1 && window.__phase3.value === 'BLR');
+  combo.field.value = 'A free text value';
+  combo.field.dispatchEvent(new Event('input', { bubbles: true }));
+  check('combobox: unlisted free text remains allowed', combo.value === 'A free text value');
+  check('combobox: native datalist is connected', combo.field.list === combo.list && combo.list.options.length >= 4);
+}
+{ // date picker: ISO date strings, limits and unavailable-day custom validity
+  const date = document.querySelector('sand-date-picker');
+  date.field.value = '2026-11-24';
+  date.field.dispatchEvent(new Event('input', { bubbles: true }));
+  check('date picker: native date is retained as ISO calendar string', date.value === '2026-11-24');
+  date.setAttribute('unavailable', '2026-11-24');
+  check('date picker: unavailable date fails validity', date.checkValidity() === false);
+  date.field.value = '2026-11-25';
+  date.field.dispatchEvent(new Event('input', { bubbles: true }));
+  check('date picker: available date passes validity', date.checkValidity() === true);
+  check('date picker: min/max bounds are applied to the native date input', date.field.min === '2026-01-01' && date.field.max === '2026-12-31');
+}
+{ // date range: ISO serialization, endpoint order, required fields and unavailable values
+  const range = document.querySelector('sand-date-range');
+  range.start = '2026-11-21'; range.end = '2026-11-25';
+  check('date range: value serializes start/end ISO strings', range.value === '2026-11-21/2026-11-25');
+  check('date range: both valid ordered endpoints pass validation', range.checkValidity() === true);
+  range.end = '2026-11-20';
+  check('date range: end before start is invalid', range.checkValidity() === false);
+  range.end = '2026-11-25';
+  range.setAttribute('unavailable', '2026-11-25');
+  check('date range: unavailable endpoint is invalid', range.checkValidity() === false);
+  range.removeAttribute('unavailable');
+  range.start = ''; range.end = '';
+  check('date range: required range needs both endpoints', range.checkValidity() === false);
+}
+{ // time picker: stable HH:MM value, 12/24 readout and native time constraints
+  const time = document.querySelector('sand-time-picker');
+  time.field.value = '16:30';
+  time.field.dispatchEvent(new Event('input', { bubbles: true }));
+  check('time picker: value remains timezone-free HH:MM', time.value === '16:30');
+  time.format = '12';
+  check('time picker: 12-hour readout includes AM/PM', time.readout.textContent === '04:30 PM');
+  time.format = '24';
+  check('time picker: 24-hour readout is deterministic', time.readout.textContent === '16:30');
+  check('time picker: min/max/step are applied', time.field.min === '09:00' && time.field.max === '18:00' && time.field.step === '900');
+}
 { // forms: verify all twelve form-associated components in a small isolated form
   const formResults = await ev(`(() => {
     const f = document.createElement('form');
     f.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;overflow:hidden';
-    f.innerHTML = '<sand-slider name="slider" value="30"></sand-slider><sand-toggle name="toggle" checked></sand-toggle><sand-checkbox name="checkbox" value="yes" checked></sand-checkbox><sand-radio-group name="radio" options="Small,Medium,Large" value="Medium"></sand-radio-group><sand-segmented name="segment" options="Day,Week,Month" value="Week"></sand-segmented><sand-range name="range" value="10,90"></sand-range><sand-rating name="rating" value="4"></sand-rating><sand-input name="input" value="hello"></sand-input><sand-textarea name="textarea" value="note"></sand-textarea><sand-password name="password" value="do-not-print-this"></sand-password><sand-search name="search" value="grain"></sand-search><sand-otp name="otp" value="123456" length="6"></sand-otp>';
+    f.innerHTML = '<sand-slider name="slider" value="30"></sand-slider><sand-toggle name="toggle" checked></sand-toggle><sand-checkbox name="checkbox" value="yes" checked></sand-checkbox><sand-radio-group name="radio" options="Small,Medium,Large" value="Medium"></sand-radio-group><sand-segmented name="segment" options="Day,Week,Month" value="Week"></sand-segmented><sand-range name="range" value="10,90"></sand-range><sand-rating name="rating" value="4"></sand-rating><sand-input name="input" value="hello"></sand-input><sand-textarea name="textarea" value="note"></sand-textarea><sand-password name="password" value="do-not-print-this"></sand-password><sand-search name="search" value="grain"></sand-search><sand-otp name="otp" value="123456" length="6"></sand-otp><sand-select name="select" value="express" options="standard:Standard,express:Express"></sand-select><sand-combobox name="combo" value="DEL" options="DEL:Delhi,BLR:Bengaluru"></sand-combobox><sand-date-picker name="date" value="2026-11-24"></sand-date-picker><sand-date-range name="dateRange" start="2026-11-21" end="2026-11-25"></sand-date-range><sand-time-picker name="time" value="16:30"></sand-time-picker>';
     document.body.append(f);
     const d = Object.fromEntries(new FormData(f));
-    const results = { slider: d.slider === '30', toggle: d.toggle === 'on', checkbox: d.checkbox === 'yes', radio: d.radio === 'Medium', segment: d.segment === 'Week', range: d.range === '10,90', rating: d.rating === '4', input: d.input === 'hello', textarea: d.textarea === 'note', password: d.password === 'do-not-print-this', search: d.search === 'grain', otp: d.otp === '123456' };
+    const results = { slider: d.slider === '30', toggle: d.toggle === 'on', checkbox: d.checkbox === 'yes', radio: d.radio === 'Medium', segment: d.segment === 'Week', range: d.range === '10,90', rating: d.rating === '4', input: d.input === 'hello', textarea: d.textarea === 'note', password: d.password === 'do-not-print-this', search: d.search === 'grain', otp: d.otp === '123456', select: d.select === 'express', combo: d.combo === 'DEL', date: d.date === '2026-11-24', dateRange: d.dateRange === '2026-11-21/2026-11-25', time: d.time === '16:30' };
     f.remove();
     return results;
   })()`);
-  check('forms: all twelve form-associated components serialize correctly', Object.values(formResults).every(Boolean), JSON.stringify(formResults));
+  check('forms: all seventeen form-associated components serialize correctly', Object.values(formResults).every(Boolean), JSON.stringify(formResults));
 }
 { // scaling: the height follows the width
   const got = await ev(`(() => { const e = document.createElement('sand-toggle'); e.style.width = '150px'; document.body.append(e); const b = e.getBoundingClientRect(); e.remove(); return b.width + ' ' + Math.round(b.height); })()`);
