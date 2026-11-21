@@ -155,7 +155,7 @@ ${SPEC.map((c) => `- [${c.name}](${SITE}/${c.id}/${c.id}.js): ${c.desc} \`<${c.t
 
 Install any one with the shadcn CLI: \`npx shadcn add ${REPO}/NAME\`, where NAME is ${SPEC.map((c) => c.id).join(', ')}. The file lands in \`public/grainmotion-ui/\`.
 
-Each scales to its CSS width and uses WebGL2 for its full sand shading. The original four have a simplified 2D fallback when WebGL2 is unavailable. They are drawn for a light page. Sound plays after the first touch or key on the page; GrainMotionUI.Sound.on = false silences them all. The original four respect prefers-reduced-motion.
+Each scales to its CSS width and needs WebGL2 to draw. They are drawn for a light page. Sound plays after the first touch or key on the page; GrainMotionUI.Sound.on = false silences them all. They do not stop moving for prefers-reduced-motion.
 
 ## The skill
 

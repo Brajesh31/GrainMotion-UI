@@ -30,8 +30,6 @@
   .piece .tag { margin: 2px 0 0; color: var(--mute); font-size: 13px; }
   .piece .tag code { font: 12px ui-monospace, monospace; }
   .stage { flex: 1; display: grid; place-items: center; align-content: center; gap: 10px; min-height: 230px; padding: 16px 0 10px; }
-  .preview-placeholder { width: min(100%, 440px); min-height: 86px; display: grid; place-items: center; border: 8px solid #715138; border-radius: 48px; background: radial-gradient(ellipse at 50% 35%, #f4e7c8, #d9c39a 62%, #c7af81); box-shadow: inset 0 1px 4px #fff9, 0 2px 4px #0002; color: #6f604d; font-size: 12px; }
-  .stage.is-pending { min-height: 230px; }
   .stage > :is(sand-slider, sand-signature) { width: 100%; }
   .stage > sand-toggle { width: 190px; } .stage > sand-thinking { width: 210px; }
   .stage > :is(sand-checkbox,sand-radio-group,sand-segmented,sand-range,sand-rating) { width: 100%; }
@@ -64,58 +62,58 @@
     </p>
   </header>
   <main class="grid" id="grid"></main>
-  <p class="note">The sand is simulated: every groove, heap and ripple is a height field that slumps to its angle of rest. Nearby previews stay active to respect browser GPU-context limits. Sound plays after your first touch; <code>GrainMotionUI.Sound.on = false</code> turns it off.</p>
+  <p class="note">The sand is simulated: every groove, heap and ripple is a height field that slumps to its angle of rest, lit on the GPU. Sound plays after your first touch; <code>GrainMotionUI.Sound.on = false</code> turns it off.</p>
 </div>
-<script src="../slider/slider.js?v=20261121-preview-budget-1"></script>
-<script src="../toggle/toggle.js?v=20261121-preview-budget-1"></script>
-<script src="../signature/signature.js?v=20261121-preview-budget-1"></script>
-<script src="../thinking/thinking.js?v=20261121-preview-budget-1"></script>
-<script src="../checkbox/checkbox.js?v=20261121-preview-budget-1"></script>
-<script src="../radio-group/radio-group.js?v=20261121-preview-budget-1"></script>
-<script src="../segmented/segmented.js?v=20261121-preview-budget-1"></script>
-<script src="../range/range.js?v=20261121-preview-budget-1"></script>
-<script src="../rating/rating.js?v=20261121-preview-budget-1"></script>
-<script src="../input/input.js?v=20261121-preview-budget-1"></script>
-<script src="../textarea/textarea.js?v=20261121-preview-budget-1"></script>
-<script src="../password/password.js?v=20261121-preview-budget-1"></script>
-<script src="../search/search.js?v=20261121-preview-budget-1"></script>
-<script src="../otp/otp.js?v=20261121-preview-budget-1"></script>
-<script src="../select/select.js?v=20261121-preview-budget-1"></script>
-<script src="../combobox/combobox.js?v=20261121-preview-budget-1"></script>
-<script src="../date-picker/date-picker.js?v=20261121-preview-budget-1"></script>
-<script src="../date-range/date-range.js?v=20261121-preview-budget-1"></script>
-<script src="../time-picker/time-picker.js?v=20261121-preview-budget-1"></script>
-<script src="../progress/progress.js?v=20261121-preview-budget-1"></script>
-<script src="../progress-ring/progress-ring.js?v=20261121-preview-budget-1"></script>
-<script src="../steps/steps.js?v=20261121-preview-budget-1"></script>
-<script src="../timer/timer.js?v=20261121-preview-budget-1"></script>
-<script src="../loader/loader.js?v=20261121-preview-budget-1"></script>
-<script src="../tabs/tabs.js?v=20261121-preview-budget-1"></script>
-<script src="../accordion/accordion.js?v=20261121-preview-budget-1"></script>
-<script src="../pagination/pagination.js?v=20261121-preview-budget-1"></script>
-<script src="../breadcrumbs/breadcrumbs.js?v=20261121-preview-budget-1"></script>
-<script src="../menu/menu.js?v=20261121-preview-budget-1"></script>
-<script src="../dropzone/dropzone.js?v=20261121-preview-budget-1"></script>
-<script src="../upload-queue/upload-queue.js?v=20261121-preview-budget-1"></script>
-<script src="../carousel/carousel.js?v=20261121-preview-budget-1"></script>
-<script src="../lightbox/lightbox.js?v=20261121-preview-budget-1"></script>
-<script src="../scrubber/scrubber.js?v=20261121-preview-budget-1"></script>
-<script src="../color-picker/color-picker.js?v=20261121-preview-budget-1"></script>
-<script src="../sortable/sortable.js?v=20261121-preview-budget-1"></script>
-<script src="../transfer-list/transfer-list.js?v=20261121-preview-budget-1"></script>
-<script src="../split-pane/split-pane.js?v=20261121-preview-budget-1"></script>
-<script src="../resizable/resizable.js?v=20261121-preview-budget-1"></script>
-<script src="../tree/tree.js?v=20261121-preview-budget-1"></script>
-<script src="../tooltip/tooltip.js?v=20261121-preview-budget-1"></script>
-<script src="../toast/toast.js?v=20261121-preview-budget-1"></script>
-<script src="../alert/alert.js?v=20261121-preview-budget-1"></script>
-<script src="../dialog/dialog.js?v=20261121-preview-budget-1"></script>
-<script src="../drawer/drawer.js?v=20261121-preview-budget-1"></script>
-<script src="../command/command.js?v=20261121-preview-budget-1"></script>
-<script src="../context-menu/context-menu.js?v=20261121-preview-budget-1"></script>
-<script src="../filter-builder/filter-builder.js?v=20261121-preview-budget-1"></script>
-<script src="../table/table.js?v=20261121-preview-budget-1"></script>
-<script src="../kanban/kanban.js?v=20261121-preview-budget-1"></script>
+<script src="../slider/slider.js"></script>
+<script src="../toggle/toggle.js"></script>
+<script src="../signature/signature.js"></script>
+<script src="../thinking/thinking.js"></script>
+<script src="../checkbox/checkbox.js"></script>
+<script src="../radio-group/radio-group.js"></script>
+<script src="../segmented/segmented.js"></script>
+<script src="../range/range.js"></script>
+<script src="../rating/rating.js"></script>
+<script src="../input/input.js"></script>
+<script src="../textarea/textarea.js"></script>
+<script src="../password/password.js"></script>
+<script src="../search/search.js"></script>
+<script src="../otp/otp.js"></script>
+<script src="../select/select.js"></script>
+<script src="../combobox/combobox.js"></script>
+<script src="../date-picker/date-picker.js"></script>
+<script src="../date-range/date-range.js"></script>
+<script src="../time-picker/time-picker.js"></script>
+<script src="../progress/progress.js"></script>
+<script src="../progress-ring/progress-ring.js"></script>
+<script src="../steps/steps.js"></script>
+<script src="../timer/timer.js"></script>
+<script src="../loader/loader.js"></script>
+<script src="../tabs/tabs.js"></script>
+<script src="../accordion/accordion.js"></script>
+<script src="../pagination/pagination.js"></script>
+<script src="../breadcrumbs/breadcrumbs.js"></script>
+<script src="../menu/menu.js"></script>
+<script src="../dropzone/dropzone.js"></script>
+<script src="../upload-queue/upload-queue.js"></script>
+<script src="../carousel/carousel.js"></script>
+<script src="../lightbox/lightbox.js"></script>
+<script src="../scrubber/scrubber.js"></script>
+<script src="../color-picker/color-picker.js"></script>
+<script src="../sortable/sortable.js"></script>
+<script src="../transfer-list/transfer-list.js"></script>
+<script src="../split-pane/split-pane.js"></script>
+<script src="../resizable/resizable.js"></script>
+<script src="../tree/tree.js"></script>
+<script src="../tooltip/tooltip.js"></script>
+<script src="../toast/toast.js"></script>
+<script src="../alert/alert.js"></script>
+<script src="../dialog/dialog.js"></script>
+<script src="../drawer/drawer.js"></script>
+<script src="../command/command.js"></script>
+<script src="../context-menu/context-menu.js"></script>
+<script src="../filter-builder/filter-builder.js"></script>
+<script src="../table/table.js"></script>
+<script src="../kanban/kanban.js"></script>
 <script>
 // The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
 const REPO = 'Brajesh31/GrainMotion-UI';
@@ -338,7 +336,7 @@ const prompt = (it) => [
   `1. Get the file from ${fileUrl(it.id)} and save it in my project as ${it.id}.js. Do not rewrite it or split it up: the sand engine and the sounds are inside it.`,
   `2. Load it with a plain script tag (not type="module").`,
   ...WIRE[it.id].map((l, i) => `${i + 3}. ${l}`),
-  `${WIRE[it.id].length + 3}. It scales to its CSS width and the height follows. WebGL2 provides its full sand lighting; a 2D canvas fallback is used when WebGL2 is unavailable. It is made for a light page. It plays sounds after the first touch on the page; GrainMotionUI.Sound.on = false turns them off.`,
+  `${WIRE[it.id].length + 3}. It scales to its CSS width and the height follows. It needs WebGL2 to draw, and it is made for a light page. It plays sounds after the first touch on the page; GrainMotionUI.Sound.on = false turns them off.`,
   `When you are done, show me where you put it and what listens to it. If something about it needs to look different, tell me instead of editing the sand code.`,
   ``,
   `These controls were made with my grainmotion-ui skill: ${SKILL.url}`,
@@ -346,126 +344,19 @@ const prompt = (it) => [
   `Read it before you start. For this job, follow its "Wire it in" section.`,
 ].join('\n');
 const grid = document.getElementById('grid');
-const MAX_ACTIVE_PREVIEWS = 8;
-const PREVIEW_ROOT_MARGIN = 180;
-const previewStates = [];
-const mountedPreviews = new Set();
-
-function previewDistance(state) {
-  const r = state.card.getBoundingClientRect();
-  return Math.abs(r.top + r.height / 2 - window.innerHeight / 2);
-}
-function releasePreview(state) {
-  const el = state.element;
-  if (el) {
-    const contexts = Array.from(el.querySelectorAll('canvas')).map((canvas) => {
-      try { return canvas.getContext('webgl2'); } catch { return null; }
-    }).filter(Boolean);
-    el.remove();
-    // Explicitly relinquish the GPU context. Removing a canvas alone does not reliably
-    // free one of the browser's small WebGL context slots.
-    for (const gl of contexts) {
-      try { gl.getExtension('WEBGL_lose_context')?.loseContext(); } catch {}
-    }
-  }
-  state.element = null;
-  state.mounted = false;
-  mountedPreviews.delete(state);
-  state.stage.classList.add('is-pending');
-  state.stage.replaceChildren(state.placeholder.cloneNode(true));
-}
-function mountPreview(state) {
-  if (state.mounted) return;
-  state.stage.replaceChildren(state.template.content.cloneNode(true));
-  const el = state.stage.querySelector(state.it.tag);
-  if (!el) {
-    state.stage.textContent = 'Preview could not be mounted.';
-    return;
-  }
-  state.stage.classList.remove('is-pending');
-  state.element = el;
-  state.mounted = true;
-  mountedPreviews.add(state);
-  try { state.it.wire(el, state.card); }
-  catch (error) {
-    console.error('GrainMotion-UI preview wiring failed:', state.it.id, error);
-    state.stage.replaceChildren(document.createTextNode('Preview failed to start.'));
-    state.element = null; state.mounted = false; mountedPreviews.delete(state);
-  }
-}
-function syncPreviews(preferred = null) {
-  let candidates = previewStates.filter((state) => state.near);
-  candidates.sort((a, b) => previewDistance(a) - previewDistance(b));
-  if (preferred) candidates = [preferred, ...candidates.filter((state) => state !== preferred)];
-  const selected = new Set(candidates.slice(0, MAX_ACTIVE_PREVIEWS));
-  for (const state of Array.from(mountedPreviews)) if (!selected.has(state)) releasePreview(state);
-  for (const state of candidates.slice(0, MAX_ACTIVE_PREVIEWS)) mountPreview(state);
-}
-function syncPreviewGeometry(preferred = null) {
-  for (const state of previewStates) {
-    const r = state.card.getBoundingClientRect();
-    state.near = r.bottom > -PREVIEW_ROOT_MARGIN && r.top < window.innerHeight + PREVIEW_ROOT_MARGIN;
-  }
-  if (preferred) preferred.near = true;
-  syncPreviews(preferred);
-}
 for (const it of ITEMS) {
   const card = document.createElement('section'); card.className = 'piece'; card.dataset.c = it.id;
-  card.innerHTML = `<h2>${it.name}</h2><p class="tag">${it.sub} <code>&lt;${it.tag}&gt;</code></p>
-    <div class="stage is-pending"></div>
+  card.innerHTML = `<h2>${it.name}</h2><p class="tag">${it.sub} <code>&lt;${it.tag}&gt;</code></p><div class="stage">${it.html}</div>
     <div class="acts"><a class="pill" href="../${it.id}/">Docs</a><button class="pill" type="button" data-copy="cmd">Copy install</button><button class="pill" type="button" data-copy="prompt">Copy a prompt</button></div>`;
   grid.append(card);
-  const stage = card.querySelector('.stage');
-  const template = document.createElement('template'); template.innerHTML = it.html;
-  const placeholder = document.createElement('div');
-  placeholder.className = 'preview-placeholder'; placeholder.textContent = 'Live preview loads when nearby';
-  stage.append(placeholder);
-  const state = { it, card, stage, template, placeholder, element: null, mounted: false, near: false };
-  previewStates.push(state);
+  it.wire(card.querySelector(it.tag), card);
   for (const b of card.querySelectorAll('[data-copy]')) b.addEventListener('click', async () => {
     const text = b.dataset.copy === 'cmd' ? `npx shadcn add ${REPO}/${it.id}` : prompt(it), was = b.textContent;
     try { await navigator.clipboard.writeText(text); b.textContent = 'Copied'; } catch { b.textContent = 'Could not copy'; }
     setTimeout(() => (b.textContent = was), 1400);
   });
 }
-
-window.__grainGalleryEnsureMounted = (tag) => {
-  const state = previewStates.find((item) => item.it.tag === tag || item.it.id === tag);
-  if (!state) return null;
-  // Do not scroll on every browser assertion. Re-scrolling an already mounted card can
-  // steal focus from menu/dialog controls and makes keyboard tests nondeterministic.
-  if (state.mounted && state.element) return state.element;
-  state.card.scrollIntoView({ block: 'center', inline: 'nearest' });
-  syncPreviewGeometry(state);
-  return state.element;
-};
-window.__grainGalleryActivePreviewCount = () => mountedPreviews.size;
-
-if ('IntersectionObserver' in window) {
-  const previewObserver = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      const state = previewStates.find((item) => item.card === entry.target);
-      if (state) state.near = entry.isIntersecting;
-    }
-    syncPreviews();
-  }, { rootMargin: `${PREVIEW_ROOT_MARGIN}px 0px`, threshold: 0.01 });
-  for (const state of previewStates) previewObserver.observe(state.card);
-} else {
-  let scheduled = false;
-  const schedule = () => {
-    if (scheduled) return;
-    scheduled = true;
-    requestAnimationFrame(() => { scheduled = false; syncPreviewGeometry(); });
-  };
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule);
-  syncPreviewGeometry();
-}
-document.getElementById('snd').onclick = (e) => {
-  const sound = window.GrainMotionUI?.Sound;
-  if (!sound) { e.target.textContent = 'Sound unavailable'; return; }
-  sound.wake(); e.target.textContent = sound.toggle() ? 'Sound on' : 'Sound off';
-};
+document.getElementById('snd').onclick = (e) => { GrainMotionUI.Sound.wake(); e.target.textContent = GrainMotionUI.Sound.toggle() ? 'Sound on' : 'Sound off'; };
 </script>
 </body>
 </html>

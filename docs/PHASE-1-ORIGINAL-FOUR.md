@@ -27,18 +27,20 @@ Those checks did not cover no-WebGL rendering or reduced-motion behavior. They w
 
 ## Latest validation evidence
 
-GitHub Actions [#511](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44885153121) on commit `59b96431c1921c9cd5b5daa01e81be5fdf7c2e9b`:
+GitHub Actions [#519](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44889040870) on latest main commit `1bb8a7ebc7ff44f14ef16f83c66e9e0f27880cdc`:
 
 - Standalone bundle synchronization passed.
 - Generated documentation and registry validation passed.
 - Structural inventory/assets/registry audit passed.
-- No-WebGL setup and visible-pixel checks passed for all four original controls.
-- Slider and Toggle public API checks passed in fallback mode.
+- All four original components initialized in the no-WebGL fallback path.
+- All four fallback canvases painted visible sand pixels.
+- Slider and Toggle fallback API assertions passed (`value: 72`, `target: 0.72`, `checked: true`).
 - Toggle reconnect checks passed.
 - Slider, Toggle, Signature undo, Signature clear and Thinking reduced-motion checks passed.
-- Full suite reported 246 passing assertions, 3 failures (Tooltip keyboard focus, Tooltip Escape dismissal, Toast polite status announcements).
-- No JavaScript runtime errors were reported.
+- Full suite reported 233 passing assertions and 21 failures, all in other components or the Scrubber media test harness. No original-four interaction or fallback assertion failed.
+- GitHub Pages deployment [#620](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44889040845) successfully deployed this commit.
 
+The separate [gallery rendering report](GALLERY-WEBGL-RENDERING.md) documents the white-preview issue, WebGL context budget fix and verification. The gallery-specific tests pass on this current commit.
 ## Validation still required
 
 - Desktop and narrow-mobile visual inspection against approved original running-component references, not just concept art.

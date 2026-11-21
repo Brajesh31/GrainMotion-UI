@@ -188,19 +188,3 @@ Never use a passing documentation-generation check as proof that component inter
 ## Phase 5 verification result
 
 The 29-component GitHub Actions mobile Chromium suite passed 125 browser assertions with zero failures. The 45 Phase 5 checks exercise all five navigation components and their principal state, keyboard, dynamic update and responsive behavior. Manual screen-reader and physical-device testing remains outstanding.
-
-
-## Gallery renderer budget and fallback verification
-
-The live gallery must not connect all fifty custom elements at once. Each connected component owns a WebGL2 context, and browser context limits can cause earlier previews to lose rendering while their overlay canvases remain visible.
-
-The gallery test suite verifies:
-
-- All fifty cards remain in the document.
-- Only up to eight component previews are mounted at the same time.
-- Off-screen previews are removed and their WebGL context is explicitly relinquished.
-- Browser-test selectors can request a preview to mount before exercising it.
-- The shared Canvas 2D renderer initializes and paints visible sand pixels when WebGL2 is unavailable.
-- A simulated `webglcontextlost` event switches to the 2D renderer, and a restore event returns to WebGL2.
-
-The 2D fallback is intentionally a compatibility renderer. It preserves the simulated sand surface and core interaction, but it is not pixel-identical to the full WebGL2 shader.

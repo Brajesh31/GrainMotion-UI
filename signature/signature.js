@@ -175,64 +175,24 @@ class SandTray extends HTMLElement {
   get reduced() { return reduced.matches; }
   // the form value, for the controls that have one (formAssociated)
   formValue(v) { this.internals?.setFormValue(v); }
-  disconnectedCallback() {
-    this.running = false;
-    this.resizeObserver?.disconnect();
-    this.resizeObserver = null;
-  }
+  disconnectedCallback() { this.running = false; }
   connectedCallback() {
-    if (this.c) {
-      if (!this.running) {
-        this.resizeObserver ||= new ResizeObserver(() => this.resize());
-        this.resizeObserver.observe(this);
-        this.running = true; this.last = performance.now(); requestAnimationFrame(this.tick);
-      }
-      return;
-    }
+    if (this.c) { if (!this.running) { this.running = true; this.last = performance.now(); requestAnimationFrame(this.tick); } return; }
     this.style.cssText += ';display:block;position:relative;touch-action:none;outline:none;-webkit-tap-highlight-color:transparent';
     this.c = document.createElement('canvas'); this.c.style.cssText = 'display:block;width:100%;height:auto;pointer-events:none';   // events come from the element itself
     this.o = document.createElement('canvas'); this.o.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none';
     this.append(this.c, this.o);
     this.ox = this.o.getContext('2d');
-    this.c.addEventListener('webglcontextlost', (event) => {
-      event.preventDefault();
-      this.nogl = true; this.c.style.visibility = 'hidden';
-      this.fallbackReady = false; this.dirty = true;
-    });
-    this.c.addEventListener('webglcontextrestored', () => {
-      try {
-        this.initGL();
-        if (this.gl && this.W && this.H) {
-          this.gl.bindTexture(this.gl.TEXTURE_2D, this.tex);
-          this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.R16F, this.W, this.H, 0, this.gl.RED, this.gl.FLOAT, null);
-        }
-        this.nogl = false; this.c.style.visibility = 'visible';
-        if (this.fallbackCanvas) this.fallbackCanvas.style.display = 'none';
-        this.dirty = true;
-      } catch (error) {
-        this.nogl = true; this.c.style.visibility = 'hidden';
-        console.error('GrainMotion-UI: WebGL context restore failed; using the 2D renderer.', error);
-      }
-    });
-    try { this.initGL(); }
-    catch (error) {
-      this.nogl = true; this.gl = null; this.u = {};
-      this.c.style.visibility = 'hidden';
-      console.error('GrainMotion-UI: WebGL initialization failed; using the 2D renderer.', error);
-    }
+    this.initGL();
     this.stone = null; this.moss = null;
     this.init?.();
-    this.resize();
-    this.resizeObserver = new ResizeObserver(() => this.resize());
-    this.resizeObserver.observe(this);
+    this.resize(); new ResizeObserver(() => this.resize()).observe(this);
     this.running = true; this.last = performance.now(); this.tick = this.tick.bind(this); requestAnimationFrame(this.tick);
   }
   get aspect() { return 0.2; }
   initGL() {
     const gl = this.gl = this.c.getContext('webgl2', { premultipliedAlpha: true, antialias: false });
-    if (!gl) { this.nogl = true; this.u = {}; this.c.style.visibility = 'hidden'; return; }
-    this.nogl = false; this.c.style.visibility = 'visible';
-    if (this.fallbackCanvas) this.fallbackCanvas.style.display = 'none';
+    if (!gl) { this.nogl = true; this.u = {}; return; }   // no WebGL2: the control still works, it just isn't drawn
     const sh = (t, src) => { const s = gl.createShader(t); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(s); return s; };
     const pr = this.prog = gl.createProgram();
     gl.attachShader(pr, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, FRAG)); gl.linkProgram(pr);
@@ -247,20 +207,10 @@ class SandTray extends HTMLElement {
   }
   resize() {
     const css = this.clientWidth || 300, dpr = Math.min(2, devicePixelRatio || 1);
-    const sizeChanged = this.css !== css, ratioChanged = this.k !== dpr;
-    if (!sizeChanged && !ratioChanged) return;
-    this.css = css; this.k = dpr;
-    if (!sizeChanged && this.W && this.H) {
-      this.c.width = this.o.width = Math.round(this.W * dpr);
-      this.c.height = this.o.height = Math.round(this.H * dpr);
-      if (this.fallbackCanvas) { this.fallbackCanvas.width = this.c.width; this.fallbackCanvas.height = this.c.height; this.fallbackReady = false; }
-      this.dirty = true; this.spriteKey = null;
-      return;
-    }
+    if (this.css === css) return; this.css = css;
     const W = Math.round(css), H = Math.round(css * this.aspect);
-    this.W = W; this.H = H;
+    this.W = W; this.H = H; this.k = dpr;
     this.c.width = this.o.width = Math.round(W * dpr); this.c.height = this.o.height = Math.round(H * dpr);
-    if (this.fallbackCanvas) { this.fallbackCanvas.width = this.c.width; this.fallbackCanvas.height = this.c.height; this.fallbackReady = false; }
     this.pad = Math.max(3, Math.round(H * (this.padRatio ?? 0.12)));
     this.h = new Float32Array(W * H);
     this.inside = new Uint8Array(W * H);
@@ -271,12 +221,8 @@ class SandTray extends HTMLElement {
     }
     this.talus = 0.115 * 208 / Math.max(H, 60);       // steepest slope the sand holds, per cell
     this.moved = [W, 0]; this.dirty = true;
-    const gl = this.gl;
-    if (gl && !gl.isContextLost()) {
-      gl.bindTexture(gl.TEXTURE_2D, this.tex);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.R16F, W, H, 0, gl.RED, gl.FLOAT, null);
-    }
-    this.fallbackReady = false;
+    const gl = this.gl; if (gl) { gl.bindTexture(gl.TEXTURE_2D, this.tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.R16F, W, H, 0, gl.RED, gl.FLOAT, null); }
     this.layout?.();
     this.spriteKey = null;
   }
@@ -334,98 +280,8 @@ class SandTray extends HTMLElement {
     }
     if (hi >= lo) { this.moved = [lo, hi]; this.dirty = true; } else this.moved = [W, 0];
   }
-  // Canvas 2D compatibility renderer. It draws the same height field and material frame
-  // when WebGL2 is unavailable or a browser has evicted a context.
-  renderFallback() {
-    if (!this.fallbackCanvas) {
-      this.fallbackCanvas = document.createElement('canvas');
-      this.fallbackCanvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none';
-      this.insertBefore(this.fallbackCanvas, this.o);
-    }
-    this.c.style.visibility = 'hidden';
-    this.fallbackCanvas.style.display = 'block';
-    const ctx = this.fallbackContext || (this.fallbackContext = this.fallbackCanvas.getContext('2d'));
-    if (!ctx || !this.h || !this.inside || !this.W || !this.H) return;
-
-    const W = this.W, H = this.H, k = this.k || 1;
-    const width = Math.round(W * k), height = Math.round(H * k);
-    if (this.fallbackCanvas.width !== width || this.fallbackCanvas.height !== height) {
-      this.fallbackCanvas.width = width; this.fallbackCanvas.height = height; this.fallbackReady = false;
-    }
-    if (!this.fallbackSand || this.fallbackSand.width !== W || this.fallbackSand.height !== H) {
-      this.fallbackSand = document.createElement('canvas');
-      this.fallbackSand.width = W; this.fallbackSand.height = H;
-      this.fallbackSandContext = this.fallbackSand.getContext('2d');
-      this.fallbackReady = false;
-    }
-    if (this.dirty || !this.fallbackReady) {
-      const paint = this.fallbackSandContext;
-      const image = paint.createImageData(W, H), pixels = image.data, h = this.h, inside = this.inside;
-      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-        const i = y * W + x;
-        if (!inside[i]) continue;
-        const z = h[i] || 0;
-        const left = x > 0 ? h[i - 1] : z, right = x + 1 < W ? h[i + 1] : z;
-        const up = y > 0 ? h[i - W] : z, down = y + 1 < H ? h[i + W] : z;
-        const grain = (((x * 73856093) ^ (y * 19349663)) >>> 0) & 15;
-        const shade = Math.max(0.66, Math.min(1.2, 0.91 + (left - right) * 0.15 + (up - down) * 0.12
-          + Math.max(-0.1, Math.min(0.1, z * 0.045)) + (grain - 7.5) * 0.0035));
-        const p = i * 4;
-        pixels[p] = Math.round(239 * shade); pixels[p + 1] = Math.round(223 * shade);
-        pixels[p + 2] = Math.round(191 * shade); pixels[p + 3] = 255;
-      }
-      paint.putImageData(image, 0, 0);
-      this.fallbackReady = true;
-      this.dirty = false;
-    }
-
-    const rounded = (g, x, y, w, h, radius) => {
-      const r = Math.max(0, Math.min(radius, w / 2, h / 2));
-      g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r);
-      g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r);
-      g.arcTo(x, y, x + w, y, r); g.closePath();
-    };
-    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, width, height);
-    ctx.save(); ctx.shadowColor = 'rgba(45,29,17,.32)'; ctx.shadowBlur = 7 * k; ctx.shadowOffsetY = 2 * k;
-    const wood = ctx.createLinearGradient(0, 0, 0, height);
-    wood.addColorStop(0, '#8b694c'); wood.addColorStop(0.22, '#6e4e36');
-    wood.addColorStop(0.78, '#553a2a'); wood.addColorStop(1, '#78563b');
-    rounded(ctx, 0.5 * k, 0.5 * k, width - k, height - k, height / 2);
-    ctx.fillStyle = wood; ctx.fill(); ctx.restore();
-
-    const pad = this.pad * k, x = pad, y = pad, w = width - 2 * pad, h = height - 2 * pad;
-    ctx.save(); rounded(ctx, x, y, w, h, h / 2); ctx.clip();
-    ctx.drawImage(this.fallbackSand, 0, 0, width, height); ctx.restore();
-    ctx.lineWidth = Math.max(1, k); rounded(ctx, x, y, w, h, h / 2);
-    ctx.strokeStyle = 'rgba(80,54,35,.72)'; ctx.stroke();
-
-    const drawStone = (stone) => {
-      if (!stone || !(stone[2] > 0) || !(stone[3] > 0)) return;
-      const [sx, sy, rx, ry] = stone;
-      ctx.save(); ctx.shadowColor = 'rgba(35,28,23,.42)'; ctx.shadowBlur = Math.max(rx, ry) * 0.22 * k;
-      ctx.shadowOffsetX = rx * 0.08 * k; ctx.shadowOffsetY = ry * 0.16 * k;
-      const grad = ctx.createRadialGradient((sx - rx * 0.28) * k, (sy - ry * 0.35) * k,
-        Math.max(1, rx * 0.08 * k), sx * k, sy * k, Math.max(rx, ry) * 1.2 * k);
-      grad.addColorStop(0, '#b9b9b1'); grad.addColorStop(0.55, '#85877f'); grad.addColorStop(1, '#51544f');
-      ctx.beginPath(); ctx.ellipse(sx * k, sy * k, rx * k, ry * k, -0.08, 0, Math.PI * 2);
-      ctx.fillStyle = grad; ctx.fill(); ctx.shadowColor = 'transparent';
-      ctx.strokeStyle = 'rgba(40,39,35,.55)'; ctx.lineWidth = Math.max(1, k); ctx.stroke(); ctx.restore();
-    };
-    drawStone(this.stone);
-    for (const stone of (this.stones || []).slice(0, 4)) drawStone(stone);
-    if (this.moss) {
-      const [mx, my, radius] = this.moss, r = Math.max(1, radius * k);
-      const grad = ctx.createRadialGradient(mx * k, my * k, r * 0.2, mx * k, my * k, r);
-      grad.addColorStop(0, 'rgba(81,116,65,.3)'); grad.addColorStop(1, 'rgba(81,116,65,0)');
-      ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(mx * k, my * k, r, 0, Math.PI * 2); ctx.fill();
-    }
-  }
   render() {
-    if (this.nogl || !this.gl || this.gl.isContextLost()) {
-      this.nogl = true; this.renderFallback(); return;
-    }
-    if (this.c.style.visibility === 'hidden') this.c.style.visibility = 'visible';
-    if (this.fallbackCanvas) this.fallbackCanvas.style.display = 'none';
+    if (this.nogl) return;
     const gl = this.gl, k = this.k;
     const key = this.stone ? this.stone.map(v => v.toFixed(2)).join() + '|' + (this.stoneShape || [0, 0]).join() + '|' + (this.lift ?? 1).toFixed(3) + '|' + (this.stoneA || [1, 1]).map(v => v.toFixed(3)).join() : '';
     const st = this.stones || [];                        // [x, y, rx, ry, lift, a, shadow] each
@@ -606,20 +462,17 @@ class SandSignature extends SandTray {
   }
   undo() {
     if (this.rake || !this.history.length) return;
-    const to = this.history.pop(); this.strokes.pop();
-    if (this.reduced) { this.fade = null; this.h.set(to); this.dirty = true; }
-    else { this.fade = { from: new Float32Array(this.h), to, t: 0 }; Sound.play('settle', 0.14, 1.15); }
+    this.fade = { from: new Float32Array(this.h), to: this.history.pop(), t: 0 };
+    this.strokes.pop();
+    Sound.play('settle', 0.14, 1.15);
     this.sync(); this.dispatchEvent(new Event('input', { bubbles: true }));
   }
   clear() {
     if (this.rake) return;
-    if (this.reduced) {
-      this.rake = null; this.fade = null; this.grains = []; this.h.set(this.base); this.dirty = true;
-    } else {
-      const r = this.inner; this.rake = { x: r.x0 - 14, t: 0, carry: new Float32Array(this.H) };
-      Sound.play('sweep', 0.3, 0.9);
-    }
+    const r = this.inner;
+    this.rake = { x: r.x0 - 14, t: 0, carry: new Float32Array(this.H) };
     this.strokes = []; this.history = []; this.pen = null;
+    Sound.play('sweep', 0.3, 0.9);
     this.sync(); this.dispatchEvent(new Event('input', { bubbles: true }));
   }
   // The signature as ink, for the document: variable-width strokes on a transparent image.
@@ -635,12 +488,6 @@ class SandSignature extends SandTray {
 
   step(dt) {
     const W = this.W, H = this.H, h = this.h;
-    if (this.reduced) {
-      if (this.fade) { h.set(this.fade.to); this.fade = null; this.dirty = true; }
-      if (this.rake) { h.set(this.base); this.rake = null; this.dirty = true; }
-      if (this.grains.length) this.grains = [];
-      return;
-    }
     // undo: the last line fills back in
     if (this.fade) {
       const f = this.fade; f.t += dt / 0.3; const u = ease(f.t);

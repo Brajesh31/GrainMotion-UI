@@ -53,9 +53,9 @@ el.thinking = true;       // the same as state = 'thinking' (false is idle)
 
 - **The change between states takes about two seconds,** the sweep included. A state that lasts less than that is barely seen.
 - **It is round,** and as high as it is wide.
-- **WebGL2 gives the full sand shader.** If WebGL2 is unavailable, this original control uses a simplified 2D sand fallback and keeps its interaction and accessibility API.
+- **Needs WebGL2** to draw the sand. Without it the control still works with keys and a screen reader, but nothing is drawn.
 - **One live tray per element.** Each is its own WebGL canvas, and browsers keep only about sixteen alive at once, so it is not for long lists.
-- **Respects `prefers-reduced-motion`.** The selected state is shown as a static sand motif rather than a continuously moving rake.
+- **It does not hold still for `prefers-reduced-motion`.** The sand still moves. If that matters on your page, use a plain control there.
 - **Drawn for a light page.** The sand and the walnut frame are warm and light; they look pasted on over a dark background.
 - **The sand is simulated at one cell per CSS pixel,** so a wider element costs more. Each scales to its CSS `width`; the height follows.
 - **Sound is on** after the first touch or key on the page. `GrainMotionUI.Sound.on = false` turns every control quiet.

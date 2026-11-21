@@ -60,12 +60,13 @@ The npm command above is the desired experience, not a claim that the package is
 **Repository:** `Brajesh31/GrainMotion-UI`  
 **Primary branch:** `main`  
 **Baseline Phase 0 handover commit:** `8a6c94d534c3d300bbff145e1d5bf5439504c3ef`  
-**Latest gallery rendering fix:** `8ee3b110ce30dd5826e034e01f4f89af3598327e`  
-**Latest Pages deployment:** [GitHub Actions #618](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44888474456), successful.  
-**Latest full mobile Chromium validation:** [GitHub Actions #517](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44888474444), 239 passing assertions and 15 failing assertions.  
+**Latest main commit:** `1bb8a7ebc7ff44f14ef16f83c66e9e0f27880cdc`  
+**Gallery rendering fix:** `8ee3b110ce30dd5826e034e01f4f89af3598327e`  
+**Latest Pages deployment:** [GitHub Actions #620](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44889040845), successful for the latest main commit.  
+**Latest full mobile Chromium validation:** [GitHub Actions #519](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44889040870), 233 passing assertions and 21 failing assertions.  
 **Phase 0:** Foundation work complete.  
-**Next active task:** Finish the remaining original-four fallback API check and visual/device/accessibility verification.  
-**Phase 1 status:** Gallery renderer-budget fix is deployed; original-four normal interaction and reduced-motion checks pass; implementation is not fully signed off.
+**Next active task:** Complete original-four visual/device/accessibility verification and track the unrelated component failures listed below.  
+**Phase 1 status:** Gallery renderer-budget fix is deployed; original-four interaction, reduced-motion and fallback API regressions pass; implementation is not fully signed off.
 
 At the Phase 0 audit, the repository contained:
 
@@ -95,25 +96,50 @@ The provisional token stylesheet is not yet consumed by the legacy component scr
 
 ### Latest recorded test evidence
 
-GitHub Actions run [#517](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44888474444), on commit `8ee3b110ce30dd5826e034e01f4f89af3598327e`:
+GitHub Actions run [#519](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44889040870), on the latest main commit `1bb8a7ebc7ff44f14ef16f83c66e9e0f27880cdc`:
 
 - Standalone component bundle synchronization passed.
 - Generated documentation and registry validation passed.
 - Structural inventory/assets/registry audit passed.
-- Full mobile Chromium reported **239 passing assertions and 15 failing assertions**.
-- Gallery-specific checks passed:
-  - All fifty cards remain in the DOM while previews are virtualized.
-  - Active preview count stayed within the eight-context budget (two active previews at the final assertion).
-  - Off-screen Slider preview was unmounted.
-  - All five sampled controls painted visible sand pixels through the 2D fallback when WebGL2 was unavailable.
-  - WebGL context-loss fallback and restoration checks passed.
-  - No JavaScript runtime errors were reported.
-- The original four passed their regular pointer/keyboard/state checks, Signature drawing/export/undo, Thinking state announcements, and reduced-motion checks.
-- One new fallback assertion remains failing: Slider and Toggle public API values after the fallback transition did not meet the test's expected final state.
-- Other current failures are: Breadcrumbs focus restoration after reconnect; Menu ArrowDown/End/Home focus movement; Toast polite/assertive live-region semantics; Alert polite/assertive semantics; Dialog modal top-layer/content, initial focus and confirm/focus restoration; Drawer Escape/focus restoration; Context Menu naming/initial focus and arrow navigation.
+- Full mobile Chromium reported **233 passing assertions and 21 failing assertions**.
+- Gallery and rendering checks passed:
+  - All fifty cards remain in the document while previews are virtualized.
+  - Only two previews were active at the final context-budget assertion, below the cap of eight.
+  - The off-screen Slider preview was unmounted.
+  - All four original controls and Checkbox initialized in the no-WebGL test.
+  - All five sampled controls painted visible pixels with the 2D fallback.
+  - Slider and Toggle fallback API checks passed: value 72, target 0.72 and checked true.
+  - WebGL context restoration returned the Slider to the GPU canvas.
+- Original-four pointer, keyboard, Signature drawing/export/undo and Thinking status checks passed. Reduced-motion checks for Slider, Toggle, Signature undo/clear and Thinking passed.
+- The deployment workflow [#620](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44889040845) completed both build and deploy jobs successfully for this exact commit.
 
-The exact live-gallery rendering defect is addressed and deployed. These remaining failures must not be waived. Keep them visible and fix them in the appropriate component work. Phase 1 remains open pending the fallback API assertion plus manual visual, real-device and assistive-technology verification.
+The 21 current failing assertions are outside the gallery preview-rendering correction and are listed here for the next relevant component work:
 
+1. Breadcrumbs: focusable ancestor link does not receive focus after reconnect.
+2. Menu: ArrowDown focus movement fails.
+3. Menu: End focus movement fails.
+4. Menu: Home focus movement fails.
+5. Scrubber: media duration/current-time binding fails.
+6. Scrubber: buffered media ridge fails.
+7. Scrubber: seeking/currentTime and seek event fail.
+8. Scrubber: play action delegation fails.
+9. Scrubber: media event reconnect binding fails.
+10. Toast: info/success polite status semantics fail.
+11. Toast: warning/error assertive alert semantics fail.
+12. Alert: info polite status semantics fail.
+13. Alert: error assertive alert semantics fail.
+14. Dialog: native modal top-layer/content check fails.
+15. Dialog: modal initial focus check fails.
+16. Dialog: confirm action/close/focus restoration fails.
+17. Dialog: Escape cancellation check fails.
+18. Drawer: Escape close/focus restoration fails.
+19. Context Menu: accessible name/initial focus check fails.
+20. Context Menu: arrow navigation skips disabled items incorrectly.
+21. Test runner's final no-script-errors assertion reports `Cannot set properties of null (setting 'media')` while setting up the Scrubber media test.
+
+Do not hide or waive these failures. Diagnose the actual source or test-harness cause in the appropriate later component phase. The gallery rendering-specific checks are passing.
+
+The exact white-preview issue shown in the earlier screenshot is addressed in the current deployment by limiting live gallery mounts to eight and releasing off-screen WebGL contexts, with a 2D renderer available when WebGL2 is unavailable or lost. Phase 1 remains open pending manual visual comparison, real-device touch checks, another browser engine, and assistive-technology verification.
 ## 5. Active release-recovery phase plan
 
 This is the **active release-hardening plan**. It is separate from the historical component-expansion phases in `docs/ROADMAP.md`. Do not confuse the two numbering systems.

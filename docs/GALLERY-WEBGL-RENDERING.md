@@ -40,8 +40,18 @@ The compatibility renderer preserves a meaningful sand image and interaction but
 
 ## Latest deployed verification
 
-The rendering fix is deployed from commit `8ee3b110ce30dd5826e034e01f4f89af3598327e`. GitHub Pages deployment [#618](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44888474456) succeeded.
+The gallery context-budget and fallback correction is included in the current main line. GitHub Pages deployment [#620](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44889040845) deployed commit `1bb8a7ebc7ff44f14ef16f83c66e9e0f27880cdc` successfully. Both the Pages build and deployment jobs completed successfully.
 
-GitHub Actions [#517](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44888474444) passed bundle synchronization, generated documentation/registry validation and structural audit. The mobile Chromium suite passed **239 assertions** and failed 15. The gallery-specific checks all passed: the full 50-card catalogue is retained, active previews remain under the cap of eight, off-screen Slider is unmounted, five sampled controls paint visible 2D fallback pixels, context loss/restoration is handled, and there are no JavaScript runtime errors.
+GitHub Actions [#519](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44889040870) on the same commit passed bundle synchronization, generated documentation/registry validation and the structural audit. The full mobile Chromium suite reported **233 passing assertions and 21 failures**. All gallery/rendering-specific checks passed:
 
-The remaining failures include one Slider/Toggle API assertion in fallback mode and unrelated focus/live-region checks in Breadcrumbs, Menu, Toast, Alert, Dialog, Drawer and Context Menu. These are tracked, not waived. The deployed blank-preview defect is addressed, but the complete suite is not green.
+- Fifty catalogue cards remain present while live previews are virtualized.
+- The active preview count was two at the final assertion, below the maximum of eight.
+- The off-screen Slider preview was unmounted.
+- Slider, Toggle, Signature, Thinking and Checkbox all initialized in the simulated no-WebGL path.
+- The five sampled fallback canvases painted visible pixels.
+- Slider and Toggle fallback value/state APIs passed.
+- WebGL context restoration returned the component to the GPU canvas.
+
+The 21 remaining failures are in Breadcrumbs, Menu, Scrubber, Toast, Alert, Dialog, Drawer, Context Menu and the final Scrubber test-harness media setup. They do not fail the gallery preview-budget assertions. They remain visible in CI and are not waived.
+
+The successful GitHub Pages deployment confirms the latest commit was published. I could not independently reopen the live GitHub Pages URL from this runtime, so this report does not claim a fresh visual screenshot inspection of the deployed page.
