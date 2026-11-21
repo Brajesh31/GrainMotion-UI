@@ -206,7 +206,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
     f.remove();
     return results;
   })()`);
-  check('forms: all twelve form-associated components serialize correctly', Object.values(formOk).every(Boolean), formOk);
+  check('forms: all twelve form-associated components serialize correctly', Object.values(formOk).every(Boolean), JSON.stringify(formOk));
 }
 { // scaling: the height follows the width
   const got = await ev(`(() => { const e = document.createElement('sand-toggle'); e.style.width = '150px'; document.body.append(e); const b = e.getBoundingClientRect(); e.remove(); return b.width + ' ' + Math.round(b.height); })()`);
