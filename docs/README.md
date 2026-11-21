@@ -2,7 +2,7 @@
 
 This directory is the project handbook. It documents the current implementation, the planned 50-component catalogue, design rules, architecture, accessibility expectations, performance constraints, testing, contribution workflow and component authoring process.
 
-> **Status:** The repository now contains fourteen implemented components across the original set and Phases 1 and 2. The remaining 36 entries in the 50-component roadmap are proposals, not available components yet.
+> **Status:** The repository now contains nineteen implemented components across the original set and Phases 1, 2 and 3. The remaining 31 entries in the 50-component roadmap are proposals, not available components yet.
 
 ## Documentation map
 
@@ -22,7 +22,7 @@ This directory is the project handbook. It documents the current implementation,
 
 ## Start here
 
-- To use a component, read its component-level README in its directory. The fourteen implemented component guides are: [Slider](../slider/README.md), [Toggle](../toggle/README.md), [Signature](../signature/README.md), [Thinking](../thinking/README.md), [Checkbox](../checkbox/README.md), [Radio Group](../radio-group/README.md), [Segmented](../segmented/README.md), [Range](../range/README.md), [Rating](../rating/README.md), [Text Field](../input/README.md), [Textarea](../textarea/README.md), [Password](../password/README.md), [Search](../search/README.md) and [OTP/PIN](../otp/README.md).
+- To use a component, read its component-level README in its directory. The nineteen implemented component guides are: [Slider](../slider/README.md), [Toggle](../toggle/README.md), [Signature](../signature/README.md), [Thinking](../thinking/README.md), [Checkbox](../checkbox/README.md), [Radio Group](../radio-group/README.md), [Segmented](../segmented/README.md), [Range](../range/README.md), [Rating](../rating/README.md), [Text Field](../input/README.md), [Textarea](../textarea/README.md), [Password](../password/README.md), [Search](../search/README.md) and [OTP/PIN](../otp/README.md), [Select](../select/README.md), [Combobox](../combobox/README.md), [Date Picker](../date-picker/README.md), [Date Range](../date-range/README.md) and [Time Picker](../time-picker/README.md).
 - To propose or build a new component, read the [roadmap](ROADMAP.md) and [component creation guide](COMPONENT-CREATION-GUIDE.md).
 - To understand the current renderer, read [architecture](ARCHITECTURE.md) and the existing [GrainMotion-UI skill](../skills/grainmotion-ui/SKILL.md).
 - To check what is implemented, consult the [component catalog](COMPONENT-CATALOG.md), not the proposed roadmap entries.
