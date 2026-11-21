@@ -505,7 +505,7 @@ class SandTree extends SandTray {
   set expanded(v) { this._expanded=new Set(Array.isArray(v)?v.map(String):[]);this.renderTree?.(); }
   init() {
     this.style.touchAction='pan-y';
-    this._items=this._items||[
+    if(!this._items)this.items=[
       {id:'workspace',label:'Workspace',children:[
         {id:'src',label:'src',children:[{id:'components',label:'components'},{id:'styles',label:'styles'}]},
         {id:'public',label:'public'},
@@ -581,6 +581,6 @@ class SandTree extends SandTray {
     this.stone=[this.W*.12,y,this.H*.045,this.H*.055];
   }
 }
-const copyNode = item => ({id:item.id,label:item.label,disabled:item.disabled,children:item.children.map(copyNode)});
+const copyNode = item => ({id:item.id,label:item.label,disabled:item.disabled,children:(item.children||[]).map(copyNode)});
 if (!customElements.get('sand-tree')) customElements.define('sand-tree',SandTree);
 })();
