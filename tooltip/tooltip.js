@@ -365,12 +365,18 @@ class SandTooltip extends SandTray {
   apply(){if(!this._bubble)return;this._bubble.hidden=!this._open||this.disabled||!this.text;if(this._open&&!this._bubble.hidden)this.position();}
   position(){
     if(!this._target||!this._bubble||this._bubble.hidden)return;
-    const rect=this._target.getBoundingClientRect(),box=this._bubble.getBoundingClientRect(),gap=8,vw=innerWidth,vh=innerHeight,place=this.getAttribute('placement')||'top';let left,top,transform='translate(-50%, -100%)';
-    if(place==='bottom'){left=rect.left+rect.width/2;top=rect.bottom+gap;transform='translate(-50%, 0)';}
-    else if(place==='left'){left=rect.left-gap;top=rect.top+rect.height/2;transform='translate(-100%, -50%)';}
-    else if(place==='right'){left=rect.right+gap;top=rect.top+rect.height/2;transform='translate(0, -50%)';}
-    else {left=rect.left+rect.width/2;top=rect.top-gap;transform='translate(-50%, -100%)';}
-    left=Math.max(12,Math.min(vw-12,left));top=Math.max(8,Math.min(vh-8,top));this._bubble.style.left=left+'px';this._bubble.style.top=top+'px';this._bubble.style.transform=transform;
+    const rect=this._target.getBoundingClientRect(),box=this._bubble.getBoundingClientRect(),gap=8,vw=innerWidth,vh=innerHeight;
+    let place=this.getAttribute('placement')||'top';
+    if(place==='top'&&rect.top<box.height+gap&&vh-rect.bottom>=box.height+gap)place='bottom';
+    else if(place==='bottom'&&vh-rect.bottom<box.height+gap&&rect.top>=box.height+gap)place='top';
+    else if(place==='left'&&rect.left<box.width+gap&&vw-rect.right>=box.width+gap)place='right';
+    else if(place==='right'&&vw-rect.right<box.width+gap&&rect.left>=box.width+gap)place='left';
+    let left,top,transform='translate(-50%, -100%)';
+    if(place==='bottom'){left=rect.left+rect.width/2;top=rect.bottom+gap;transform='translate(-50%, 0)';left=Math.max(8,Math.min(vw-box.width-8,left));top=Math.max(8,Math.min(vh-box.height-8,top));}
+    else if(place==='left'){left=rect.left-gap;top=rect.top+rect.height/2;transform='translate(-100%, -50%)';left=Math.max(box.width+8,Math.min(vw-8,left));top=Math.max(box.height/2+8,Math.min(vh-box.height/2-8,top));}
+    else if(place==='right'){left=rect.right+gap;top=rect.top+rect.height/2;transform='translate(0, -50%)';left=Math.max(8,Math.min(vw-box.width-8,left));top=Math.max(box.height/2+8,Math.min(vh-box.height/2-8,top));}
+    else {left=rect.left+rect.width/2;top=rect.top-gap;transform='translate(-50%, -100%)';left=Math.max(8,Math.min(vw-box.width-8,left));top=Math.max(box.height+8,Math.min(vh-8,top));}
+    this._bubble.dataset.placement=place;this._bubble.style.left=left+'px';this._bubble.style.top=top+'px';this._bubble.style.transform=transform;
   }
 }
 customElements.define('sand-tooltip',SandTooltip);
