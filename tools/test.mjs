@@ -131,8 +131,9 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
     return p[3] > 0;
   }))()`);
   check('shared 2D renderer paints visible sand for all five sample controls', Array.isArray(pixels) && pixels.length === 5 && pixels.every(Boolean), JSON.stringify(pixels));
-  await ev(`window.__grainFallbacks[0].value = 72; window.__grainFallbacks[1].checked = true`); await sleep(1400);
-  check('Slider and Toggle APIs remain usable in fallback mode', Math.abs(await ev(`window.__grainFallbacks[0].value`) - 72) < 0.1 && (await ev(`window.__grainFallbacks[1].checked`)) === true);
+  await ev(`window.__grainFallbacks[0].value = 72; window.__grainFallbacks[1].checked = true`); await sleep(2600);
+  const fallbackApiState = JSON.parse(await ev(`JSON.stringify({ value: window.__grainFallbacks[0].value, target: window.__grainFallbacks[0].target, checked: window.__grainFallbacks[1].checked })`));
+  check('Slider and Toggle APIs remain usable in fallback mode', Math.abs(fallbackApiState.value - 72) < 0.1 && Math.abs(fallbackApiState.target - 0.72) < 0.001 && fallbackApiState.checked === true, JSON.stringify(fallbackApiState));
   await ev(`window.__grainFallbacks.forEach(el => el.remove()); window.__grainFallbacks = null`);
 }
 { // shared core: a lost WebGL context switches to 2D and restores cleanly
