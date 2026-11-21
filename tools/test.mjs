@@ -183,22 +183,23 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('OTP: complete event fires without exposing the digits', (await ev("__phase2.complete === 1")) === true);
 }
 
-{ // forms: reuse gallery controls and verify all twelve form-associated values
-  const formOk = await ev(`(() => {
+
+{ // forms: associate existing gallery controls without disconnecting their renderers
+  const formResults = await ev(`(() => {
     const tags = ['sand-slider','sand-toggle','sand-checkbox','sand-radio-group','sand-segmented','sand-range','sand-rating','sand-input','sand-textarea','sand-password','sand-search','sand-otp'];
     const names = ['slider','toggle','checkbox','radio','segment','range','rating','input','textarea','password','search','otp'];
     const els = tags.map(tag => document.querySelector(tag));
-    const saved = els.map(el => ({ el, parent: el.parentNode, next: el.nextSibling, name: el.getAttribute('name'), value: Array.isArray(el.value) ? [...el.value] : el.value, checked: el.checked }));
+    const saved = els.map(el => ({ el, name: el.getAttribute('name'), form: el.getAttribute('form'), value: Array.isArray(el.value) ? [...el.value] : el.value, checked: el.checked }));
+    const f = document.createElement('form'); f.id = 'grainmotion-form-check'; document.body.append(f);
+    els.forEach((el, i) => { el.setAttribute('name', names[i]); el.setAttribute('form', f.id); });
     els[0].value = 30; els[1].checked = true; els[2].checked = true;
     els[3].value = 'Medium'; els[4].value = 'Week'; els[5].value = [10, 90]; els[6].value = 4;
     els[7].value = 'hello'; els[8].value = 'note'; els[9].value = 'do-not-print-this'; els[10].value = 'grain'; els[11].value = '123456';
-    els.forEach((el, i) => el.setAttribute('name', names[i]));
-    const f = document.createElement('form'); f.append(...els); document.body.append(f);
     const d = Object.fromEntries(new FormData(f));
     const results = { slider: d.slider === '30', toggle: d.toggle === 'on', checkbox: d.checkbox === 'yes', radio: d.radio === 'Medium', segment: d.segment === 'Week', range: d.range === '10,90', rating: d.rating === '4', input: d.input === 'hello', textarea: d.textarea === 'note', password: d.password === 'do-not-print-this', search: d.search === 'grain', otp: d.otp === '123456' };
     for (const s of saved) {
-      s.parent.insertBefore(s.el, s.next);
       if (s.name === null) s.el.removeAttribute('name'); else s.el.setAttribute('name', s.name);
+      if (s.form === null) s.el.removeAttribute('form'); else s.el.setAttribute('form', s.form);
       if (s.checked !== undefined) s.el.checked = s.checked;
       if (Array.isArray(s.value)) s.el.value = s.value;
       else if (s.value !== undefined) s.el.value = s.value;
@@ -206,7 +207,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
     f.remove();
     return results;
   })()`);
-  check('forms: all twelve form-associated components serialize correctly', Object.values(formOk).every(Boolean), JSON.stringify(formOk));
+  check('forms: all twelve form-associated components serialize correctly', Object.values(formResults).every(Boolean), JSON.stringify(formResults));
 }
 { // scaling: the height follows the width
   const got = await ev(`(() => { const e = document.createElement('sand-toggle'); e.style.width = '150px'; document.body.append(e); const b = e.getBoundingClientRect(); e.remove(); return b.width + ' ' + Math.round(b.height); })()`);
