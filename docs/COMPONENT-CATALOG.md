@@ -59,6 +59,10 @@ The five progress and activity controls now have standalone bundles, demos, expa
 | 23 | Hourglass Timer | `sand-timer` | Sand falls between two chambers with timer controls. | [README](../timer/README.md) · [Demo](../timer/) | Implemented, Chromium CI passed |
 | 24 | Loading Indicator | `sand-loader` | A miniature rake loops through a distinct loading pattern. | [README](../loader/README.md) · [Demo](../loader/) | Implemented, Chromium CI passed |
 
+## Phase 5 status
+
+Phase 5 navigation work has started. The five navigation components below remain **planned** until their source bundles, live demos, component guides, gallery/registry integration and automated verification are complete. See [Phase 5 implementation contract](PHASE-5-NAVIGATION-SPEC.md) for detailed interaction and acceptance requirements.
+
 ## Planned components
 
 The components below are roadmap candidates, not implemented features. Their physical concepts are preliminary and may be refined during design exploration.
