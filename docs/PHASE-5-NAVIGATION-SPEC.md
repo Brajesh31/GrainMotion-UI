@@ -1,6 +1,6 @@
 # Phase 5: Navigation Components
 
-> Status: **In progress**. This document is the implementation contract for components 25–29. It is not evidence that the components are implemented or released.
+> Status: **Implemented and browser-verified**. All five components have standalone bundles, demos, component guides, concept artwork, gallery/registry entries and targeted regression coverage. The full 29-component mobile Chromium run recorded 125 assertions with zero failures. Manual screen-reader and physical-device verification remains outstanding.
 
 ## Phase objective
 
@@ -125,3 +125,11 @@ Phase 5 is complete only when all five components have:
 8. A recorded browser/device test environment and an explicit list of unverified accessibility/browser checks.
 
 A component must remain marked **in progress** until its own acceptance checks pass. Phase 5 must not be marked complete based only on generated documentation or a visually convincing demo.
+
+
+## ✅ Recorded verification
+
+- **Automated browser suite:** 125 assertions passed, 0 failures, across the 29-component suite. The Phase 5 additions contribute 45 targeted assertions across the five controls.
+- **Coverage:** selected and expanded state, keyboard navigation, disabled states, dynamic updates, focus restoration, viewport placement, reconnect behavior, responsive layout and regression coverage for the original controls.
+- **Still unverified manually:** screen-reader behavior with supported assistive-technology/browser combinations, physical touch-device behavior, and cross-browser visual comparison outside the recorded headless Chromium environment.
+- **Visual direction:** the runtime controls use the shared sand renderer, walnut framing, carved/recessed wells and moving river-stone markers. The Phase 5 material pass deepens bevels, wood grain and sand-surface treatment without replacing the shared rendering engine.

@@ -114,7 +114,7 @@ Required coverage:
 
 **Target after phase:** 29 components total.
 
-**Implementation status:** Implemented; automated validation pending. Each component now has a standalone bundle, interactive demo, component guide, concept SVG, gallery integration and registry entry. The 29-component build/documentation/browser regression run is the release gate. See [PHASE-5-NAVIGATION-SPEC.md](PHASE-5-NAVIGATION-SPEC.md) for the detailed contract.
+**Implementation status:** Implemented; the recorded 29-component mobile Chromium run passed 125 assertions with zero failures, including 45 Phase 5-specific checks. Each component has a standalone bundle, interactive demo, component guide, concept SVG, gallery integration and registry entry. Manual screen-reader and physical-device verification remains outstanding. See [PHASE-5-NAVIGATION-SPEC.md](PHASE-5-NAVIGATION-SPEC.md) for the detailed contract.
 
 | # | Component | Element | Physical interaction |
 |---:|---|---|---|
