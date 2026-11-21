@@ -555,7 +555,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("(()=>{const e=document.querySelector('sand-command');e.search.value='search';e.search.dispatchEvent(new Event('input',{bubbles:true}));})()");
   check('command: filters label, description and keyword matches', await ev("(()=>{const e=document.querySelector('sand-command');return e.filtered().length===1&&e.filtered()[0].id==='beta'&&e.results.querySelectorAll('[role=option]').length===1})()")===true);
   await ev("(()=>{const e=document.querySelector('sand-command');e.search.value='';e.search.dispatchEvent(new Event('input',{bubbles:true}));e.search.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}));})()");
-  check('command: ArrowDown moves the active result', await ev("document.querySelector('sand-command')._active===1")===true);
+  check('command: ArrowDown moves the active result and reflects value', await ev("(()=>{const e=document.querySelector('sand-command');return e._active===1&&e.value==='beta'})()")===true);
   await ev("document.querySelector('sand-command').search.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}))");
   check('command: Enter emits the selected command and closes the modal', await ev("(()=>{const e=document.querySelector('sand-command');return window.__p9.command.join(',')==='beta'&&!e.dialog.open&&window.__p9.commandClose.at(-1)==='select'})()")===true);
   await ev("document.querySelector('sand-command').show();document.querySelector('sand-command').search.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}))");
@@ -576,6 +576,16 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("document.querySelector('sand-context-menu').setAttribute('disabled','')");
   check('context menu: disabled blocks programmatic opening', await ev("document.querySelector('sand-context-menu').showAt(10,10)===false")===true);
   await ev("document.querySelector('sand-context-menu').removeAttribute('disabled')");
+  await ev("(()=>{const e=document.querySelector('sand-context-menu'),target=e.targetButton;target.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',clientX:20,clientY:20,bubbles:true}));})()");
+  await new Promise(r=>setTimeout(r,25));
+  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent(new PointerEvent('pointermove',{pointerType:'touch',clientX:45,clientY:20,bubbles:true}));e.targetButton.dispatchEvent(new PointerEvent('pointerup',{pointerType:'touch',clientX:45,clientY:20,bubbles:true}));})()");
+  await new Promise(r=>setTimeout(r,590));
+  check('context menu: touch movement cancels a pending long-press', await ev("!document.querySelector('sand-context-menu').open")===true);
+  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',clientX:24,clientY:32,bubbles:true}));})()");
+  await new Promise(r=>setTimeout(r,590));
+  check('context menu: touch long-press opens the menu at the press point', await ev("document.querySelector('sand-context-menu').open")===true);
+  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent(new PointerEvent('pointerup',{pointerType:'touch',clientX:24,clientY:32,bubbles:true}));e.close('test');})()");
+
 
   await ev("(()=>{const e=document.querySelector('sand-filter-builder');e.fields=[{id:'status',label:'Status',type:'select',options:['Open','Done']},{id:'owner',label:'Owner',type:'text'}];e.filters=[{id:'f1',field:'status',operator:'is',value:'Open'}];e.logic='OR';e.addEventListener('change',()=>window.__p9.filter++);e.addEventListener('apply',()=>window.__p9.apply++);})()");
   check('filter builder: exposes editable field, operator and value conditions', await ev("(()=>{const e=document.querySelector('sand-filter-builder');return e.rows.querySelectorAll('.gm-filter-row').length===1&&e.toQuery().logic==='OR'&&e.toQuery().conditions[0].value==='Open'})()")===true);
@@ -611,6 +621,9 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
 
   await ev("(()=>{const e=document.querySelector('sand-kanban');e.columns=[{id:'todo',label:'To do',cards:[{id:'a',title:'Task A'},{id:'b',title:'Task B'},{id:'c',title:'Task C'}]},{id:'doing',label:'Doing',cards:[]}];e.addEventListener('move',x=>window.__p9.kanban.push(x.detail));})()");
   check('Kanban: renders labelled columns and stable task cards', await ev("(()=>{const e=document.querySelector('sand-kanban');return e.columnsRoot.querySelectorAll('.gm-kanban-column').length===2&&e.columnsRoot.querySelectorAll('[data-card-id]').length===3})()")===true);
+
+  await ev("(()=>{const e=document.querySelector('sand-kanban'),src=e.columnsRoot.querySelector('[data-card-id=a]'),dst=e.columnsRoot.querySelector('[data-card-id=c] [data-card-handle]');const start=new Event('dragstart',{bubbles:true,cancelable:true});Object.defineProperty(start,'dataTransfer',{value:{setData(){},effectAllowed:''}});src.dispatchEvent(start);const drop=new Event('drop',{bubbles:true,cancelable:true});Object.defineProperty(drop,'dataTransfer',{value:{getData(){return'a'},dropEffect:''}});dst.dispatchEvent(drop);})()");
+  check('Kanban: same-column drag drop computes insertion after source removal', await ev("document.querySelector('sand-kanban').columns[0].cards.map(x=>x.id).join(',')==='b,a,c'")===true);
   await ev("document.querySelector('sand-kanban').moveCard('a','todo',2)");
   check('Kanban: same-column move preserves requested order', await ev("document.querySelector('sand-kanban').columns[0].cards.map(x=>x.id).join(',')==='b,c,a'")===true);
   await ev("document.querySelector('sand-kanban').moveCard('b','doing')");
