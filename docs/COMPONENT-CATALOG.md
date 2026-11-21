@@ -25,15 +25,15 @@ The five selection controls have standalone source files, demos, component READM
 
 ## Phase 2 components
 
-These five native text and structured-input controls have standalone bundles, live demos, detailed READMEs, concept diagrams, gallery cards and registry entries. The Phase 2 interaction suite is not yet verified, so these are marked implemented with verification pending until CI passes.
+These five native text and structured-input controls have standalone bundles, live demos, detailed READMEs, concept diagrams, gallery cards and registry entries. The mobile Chromium suite passed all Phase 2 interaction and form assertions. Manual screen-reader and physical-device verification remains outstanding.
 
 | # | Component | Custom element | Main interaction | Documentation | Status |
 |---:|---|---|---|---|---|
-| 10 | Text Field | `sand-input` | A real native input with a bamboo stylus focus cue. | [README](../input/README.md) · [Demo](../input/) | Implemented, verification pending |
-| 11 | Textarea | `sand-textarea` | A native multiline input over shallow writing grooves. | [README](../textarea/README.md) · [Demo](../textarea/) | Implemented, verification pending |
-| 12 | Password Field | `sand-password` | A native masked credential field with a stone Show/Hide shutter. | [README](../password/README.md) · [Demo](../password/) | Implemented, verification pending |
-| 13 | Search Field | `sand-search` | A native search input with clear action and a moving busy rake. | [README](../search/README.md) · [Demo](../search/) | Implemented, verification pending |
-| 14 | OTP / PIN Input | `sand-otp` | One native numeric input across engraved digit wells. | [README](../otp/README.md) · [Demo](../otp/) | Implemented, verification pending |
+| 10 | Text Field | `sand-input` | A real native input with a bamboo stylus focus cue. | [README](../input/README.md) · [Demo](../input/) | Implemented, Chromium CI passed |
+| 11 | Textarea | `sand-textarea` | A native multiline input over shallow writing grooves. | [README](../textarea/README.md) · [Demo](../textarea/) | Implemented, Chromium CI passed |
+| 12 | Password Field | `sand-password` | A native masked credential field with a stone Show/Hide shutter. | [README](../password/README.md) · [Demo](../password/) | Implemented, Chromium CI passed |
+| 13 | Search Field | `sand-search` | A native search input with clear action and a moving busy rake. | [README](../search/README.md) · [Demo](../search/) | Implemented, Chromium CI passed |
+| 14 | OTP / PIN Input | `sand-otp` | One native numeric input across engraved digit wells. | [README](../otp/README.md) · [Demo](../otp/) | Implemented, Chromium CI passed |
 
 ## Planned components
 
