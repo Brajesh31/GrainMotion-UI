@@ -91,6 +91,8 @@ Required verification:
 
 **Target after phase:** 24 components total.
 
+**Implementation status:** All five Phase 4 controls have standalone source bundles, live demos, expanded READMEs, concept diagrams, gallery cards and build-manifest entries. Automated mobile Chromium verification is pending the first twenty-four-component CI run. Do not mark Phase 4 released until bundle synchronization, generated documentation and browser interaction checks pass.
+
 | # | Component | Element | Physical interaction |
 |---:|---|---|---|
 | 20 | Progress Bar | `sand-progress` | An automatically advancing rake leaves a growing trail in a sand channel. |
@@ -99,7 +101,14 @@ Required verification:
 | 23 | Hourglass Timer | `sand-timer` | Sand falls between two chambers to show remaining time. |
 | 24 | Loading Indicator | `sand-loader` | A miniature rake creates a looping, recognizable pattern distinct from AI Thinking. |
 
-Required coverage: determinate/indeterminate behavior, progress values, timer controls, pause/resume/cancel where relevant, completion and error states, reduced-motion behavior and accessible status.
+Required coverage:
+
+- Determinate and indeterminate progress, clamping, min/max and correct progressbar ARIA.
+- Step selection, native keyboard buttons, disabled state, active/completed/upcoming state and form serialization.
+- Timer start, pause, resume, reset, cancel, completion event and remaining-time status.
+- Loading active/inactive state, speed limits, status semantics and reduced-motion behavior.
+- FormData and disabled/reset behavior for form-associated Phase 4 controls.
+- Regression coverage for all nineteen earlier components.
 
 ## Phase 5: Navigation components
 
