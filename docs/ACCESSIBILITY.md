@@ -19,8 +19,22 @@ The following details are documented by the current component READMEs and source
 | Segmented Control | Radiogroup with visually hidden radio buttons, keyboard selection and individual focus treatment. | Options are capped at five in this version; screen-reader behavior remains unverified. |
 | Range Slider | Two visually hidden slider handles with independent values and keyboard controls; visible focus treatment on the matching rake. | Pointer/touch, screen-reader and range-boundary behavior still require runtime verification. |
 | Rating | Slider role with value text, arrow/Home/End keys, disabled behavior and visible focus treatment. | Fixed zero-to-five scale; assistive-technology behavior remains unverified. |
+| Text Field | A real native input with an accessible name, native editing, browser validation and form association. | Manual screen-reader/browser pairing and external-label patterns have not been verified. |
+| Textarea | A real native textarea with multiline editing, paste, selection and internal scrolling. | Manual screen-reader/browser pairing remains unverified. |
+| Password Field | A real native password input, masked by default, with a Show/Hide button and `aria-pressed` state. | Credential-manager/autofill behavior and manual screen-reader testing remain unverified. |
+| Search Field | A native search input with Enter search event, clear action and `aria-busy` while pending. | Application owns result announcements; manual searchbox announcements remain unverified. |
+| OTP / PIN Input | One native numeric text input, one-time-code autocomplete, paste sanitation and a complete event that exposes length only. | Separate digit fields are not used; manual autofill and screen-reader testing on mobile remain unverified. |
 
 The project documentation states that current tests run in headless Chromium and that real-device, Safari, Firefox and screen-reader testing has not been completed. See [Browser Support](BROWSER-SUPPORT.md).
+
+### Phase 2 native text controls
+
+Phase 2 deliberately layers actual browser-native inputs above the sand rendering. This preserves native typing, caret movement, selection, paste and built-in validation. The sand layer must never paint the entered text.
+
+- **Password:** remains masked by default. The Show/Hide control has a changing accessible name and an `aria-pressed` state. Never include password values in logs, analytics or screenshots.
+- **Search:** the search event requests work but does not create results. The integrating application is responsible for announcing result counts and errors. `aria-busy` only indicates that work is pending.
+- **OTP/PIN:** one input is used across the visual digit wells to preserve mobile one-time-code autofill and paste. The `complete` event exposes the configured length, not the code. The application must handle the code securely.
+- **Text Field and Textarea:** the accessible name is applied to the internal native control. The sand stylus is decorative focus feedback, not a substitute caret.
 
 ## Requirements for every new component
 
