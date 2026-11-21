@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">Combobox / Autocomplete concept study</title><desc id="desc">A thin bamboo rake follows the characters as the user types. Suggestions come from a real browser datalist connected to a native text input.</desc>
+<defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#f8f3e9"/><stop offset="1" stop-color="#e9e0d2"/></linearGradient><linearGradient id="sand" x2="0" y2="1"><stop stop-color="#f4e5c8"/><stop offset=".5" stop-color="#d2b183"/><stop offset="1" stop-color="#f0dfbd"/></linearGradient><radialGradient id="stone"><stop stop-color="#777a7b"/><stop offset=".7" stop-color="#45484a"/><stop offset="1" stop-color="#242627"/></radialGradient></defs>
+<rect width="1600" height="900" fill="url(#bg)"/>
+<text x="800" y="145" text-anchor="middle" font-family="Arial,sans-serif" font-size="62" font-weight="700" fill="#30271f">GrainMotion-UI · Combobox / Autocomplete</text>
+<text x="800" y="205" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" fill="#76634f">PHYSICAL INTERACTION CONCEPT · NOT A RUNTIME SCREENSHOT</text>
+<rect x="220" y="335" width="1160" height="230" rx="115" fill="#604632"/><rect x="245" y="360" width="1110" height="180" rx="90" fill="url(#sand)"/><path d="M350 450h610" stroke="#a98050" stroke-width="7" stroke-linecap="round"/><path d="M390 395l44-22" stroke="#b58c50" stroke-width="14" stroke-linecap="round"/><g fill="#806343"><circle cx="1080" cy="420" r="12"/><circle cx="1130" cy="450" r="12"/><circle cx="1080" cy="480" r="12"/></g>
+<text x="800" y="735" text-anchor="middle" font-family="Arial,sans-serif" font-size="27" fill="#4f3e2e">A thin bamboo rake follows the characters as the user types. Suggestions come from a real browser datalist connected to a native text input.</text>
+<text x="800" y="805" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" letter-spacing="4" fill="#8a765f">SAND · WALNUT · BAMBOO · RIVER STONE</text>
+</svg>
