@@ -485,17 +485,17 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
 
 
 { // Phase 8: focus hints, live feedback and native modal surfaces
-  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');window.__p8={toastAction:0,toastDismiss:0,alertAction:0,alertDismiss:0,dialogOpen:0,dialogClose:[],dialogConfirm:0,drawerOpen:0,drawerClose:[],drawerConfirm:0};return {described:b.getAttribute('aria-describedby'),tip:t._id,role:t._bubble.getAttribute('role')}})()");
+  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');window.__p8={tipId:t._id,toastAction:0,toastDismiss:0,alertAction:0,alertDismiss:0,dialogOpen:0,dialogClose:[],dialogConfirm:0,drawerOpen:0,drawerClose:[],drawerConfirm:0};return {described:b.getAttribute('aria-describedby'),tip:t._id,role:t._bubble.getAttribute('role')}})()");
   check('tooltip: trigger is associated with a role=tooltip message', await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');return t._target===b&&t._bubble.getAttribute('role')==='tooltip'&&b.getAttribute('aria-describedby').split(/\\s+/).includes(t._id)})()")===true);
-  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');b.dispatchEvent(new Event('focusin',{bubbles:true}));})()");
+  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');b.focus();})()");
   await new Promise(r=>setTimeout(r,320));
   check('tooltip: keyboard focus opens the hint without moving focus', await ev("(()=>{const t=document.querySelector('sand-tooltip');return t.open&&!t._bubble.hidden&&document.activeElement===document.getElementById('gm-tooltip-trigger')})()")===true);
   await ev("document.getElementById('gm-tooltip-trigger').dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}))");
   check('tooltip: Escape dismisses and leaves trigger focus unchanged', await ev("!document.querySelector('sand-tooltip').open&&document.activeElement===document.getElementById('gm-tooltip-trigger')")===true);
   await ev("(()=>{const t=document.querySelector('sand-tooltip');t.setAttribute('disabled','');t.scheduleShow();})()");
   check('tooltip: disabled state prevents programmatic display', await ev("document.querySelector('sand-tooltip').show()===false&&!document.querySelector('sand-tooltip').open")===true);
-  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger'),id=t._id;t.remove();return !((b.getAttribute('aria-describedby')||'').split(/\\s+/).includes(id))})()");
-  check('tooltip: disconnect removes only its described-by token', await ev("!document.getElementById('gm-tooltip-trigger').getAttribute('aria-describedby')?.includes(document.querySelector('sand-tooltip')?._id||'__detached__')")===true);
+  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');b.setAttribute('aria-describedby','existing-help');t.remove();return b.getAttribute('aria-describedby')==='existing-help'})()");
+  check('tooltip: disconnect restores the trigger’s existing description IDs', await ev("document.getElementById('gm-tooltip-trigger').getAttribute('aria-describedby')==='existing-help'")===true);
   await ev("(()=>{const c=document.querySelector('[data-c=tooltip]');const t=document.createElement('sand-tooltip');t.id='el-tooltip-restored';t.setAttribute('for','gm-tooltip-trigger');t.setAttribute('text','Restored hint');c.append(t);})()");
 
   await ev("(()=>{const t=document.querySelector('sand-toast');t.addEventListener('action',()=>window.__p8.toastAction++);t.addEventListener('dismiss',e=>{window.__p8.toastDismiss++;window.__p8.toastReason=e.detail.reason;});t.show();})()");
