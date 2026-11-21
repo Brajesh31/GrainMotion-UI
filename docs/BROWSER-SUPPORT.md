@@ -2,7 +2,7 @@
 
 ## Current verified scope
 
-All nineteen controls across Phases 1, 2 and 3 have passed the automated mobile Chromium workflow. The current run passed 65 browser assertions, including native select, datalist autocomplete, date/date-range validation, time formatting, forms and original-component regression checks. Physical mobile, desktop Safari/Firefox and manual assistive-technology testing remain unverified.
+All nineteen controls across Phases 1, 2 and 3 have passed the automated mobile Chromium workflow. Phase 4 adds five progress and activity controls; their first twenty-four-component validation run is pending. Physical mobile, desktop Safari/Firefox and manual assistive-technology testing remain unverified. Physical mobile, desktop Safari/Firefox and manual assistive-technology testing remain unverified.
 
 The existing notes explicitly say the project has not yet been broadly tested in:
 
