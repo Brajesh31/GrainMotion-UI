@@ -28,7 +28,7 @@ The test and screenshot utilities require Chrome or Chromium. Set `CHROME` if th
 
 ## Current test coverage
 
-`tools/test.mjs` covers all twenty-four controls in a mobile-sized Chromium viewport. The latest twenty-four-component CI run passed all 80 browser assertions with zero failures, including the original four-component regression checks. The original-control checks cover:
+`tools/test.mjs` now loads all twenty-nine controls in a mobile-sized Chromium viewport. The last passing twenty-four-component baseline recorded 80 browser assertions with zero failures. Phase 5 adds 23 targeted assertions for the five navigation controls; the final 29-component CI result is pending until the updated workflow completes. The original four-component regression checks remain part of the suite. The original-control checks cover:
 
 - Slider drag, input/change events, vertical-swipe handling and keyboard increments.
 - Toggle click, Space behavior, change events and vertical-swipe handling.
@@ -65,6 +65,12 @@ The Phase 2, Phase 3 and Phase 4 checks in the passing test runner cover:
 - Phase 4 Hourglass Timer: start, pause, resume, reset, cancel, completion event and form value.
 - Phase 4 Loading Indicator: status role, aria-busy, active/inactive state and configurable speed.
 - Phase 4 form serialization: Step Indicator and Hourglass Timer join the earlier form-associated controls.
+- Phase 5 Tabs: tablist/tab/tabpanel roles, panel visibility, change detail, manual activation and disabled-tab state.
+- Phase 5 Accordion: native disclosure state, panel labelling, single/multiple-open behavior and disabled items.
+- Phase 5 Pagination: named navigation, aria-current, page clamping, total reduction and disabled navigation.
+- Phase 5 Breadcrumbs: ancestor links, current-page state, structured property updates and unsafe URL scheme rejection.
+- Phase 5 Menu: menu-button semantics, open state, disabled commands, select event, Escape/focus restoration and outside-pointer dismissal.
+
 
 - Component sizing.
 - Horizontal overflow at the configured mobile viewport.
