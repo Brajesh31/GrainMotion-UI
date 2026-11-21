@@ -471,10 +471,10 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("document.querySelector('sand-tree').select('leaf',true)");
   check('tree: selected node is reflected and announced', await ev("document.querySelector('sand-tree').value==='leaf'&&window.__p7.select===1")===true);
   await ev("document.querySelector('sand-tree').toggle('branch',true)");
-  const treeAfterCollapse=await ev("JSON.stringify({nodes:document.querySelector('sand-tree').nodeButtons.map(b=>b.dataset.nodeId),expanded:document.querySelector('sand-tree').expanded,events:window.__p7.expand})");
-  check('tree: collapse hides descendants and emits expand state', await ev("document.querySelector('sand-tree').nodeButtons.some(b=>b.dataset.nodeId==='leaf')===false&&window.__p7.expand===1")===true, treeAfterCollapse);
+  const treeAfterCollapse=await ev("JSON.stringify({visible:document.querySelector('sand-tree').visibleNodes().map(x=>x.item.id),expanded:document.querySelector('sand-tree').expanded,events:window.__p7.expand})");
+  check('tree: collapse hides descendants and emits expand state', await ev("(()=>{const el=document.querySelector('sand-tree');return !el.visibleNodes().some(x=>x.item.id==='leaf')&&!el.expanded.includes('branch')&&window.__p7.expand===1})()")===true, treeAfterCollapse);
   await ev("document.querySelector('sand-tree').toggle('branch',true)");
-  check('tree: branch expands again without losing data', await ev("document.querySelector('sand-tree').nodeButtons.some(b=>b.dataset.nodeId==='leaf')===true")===true);
+  check('tree: branch expands again without losing data', await ev("document.querySelector('sand-tree').visibleNodes().some(x=>x.item.id==='leaf')===true")===true);
   await ev("(()=>{const el=document.querySelector('sand-tree'),b=el.nodeButtons.find(x=>x.dataset.nodeId==='root');b.focus();b.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true}));})()");
   check('tree: ArrowDown follows visible hierarchy order', await ev("document.activeElement?.dataset.nodeId==='branch'")===true);
   await ev("document.querySelector('sand-tree').setAttribute('disabled','')");
