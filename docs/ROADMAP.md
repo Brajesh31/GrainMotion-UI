@@ -6,7 +6,7 @@ Grow GrainMotion-UI into a carefully designed library of tactile interface contr
 
 **Target:** 50 components total, including the four already implemented. This means 46 new components.
 
-**Status update (through Phase 3 implementation):** Fifteen additions now have standalone source files, live demo pages, component READMEs and concept assets. Phases 1, 2 and 3 are wired into the main gallery, registry and AI-readable catalog. Phases 1 and 2 passed the mobile Chromium suite. Phase 3 automated verification is pending; manual assistive-technology and physical-device checks remain outstanding. The original four components remain in place.
+**Status update (through Phase 3 implementation):** Fifteen additions now have standalone source files, live demo pages, component READMEs and concept assets. Phases 1, 2 and 3 are wired into the main gallery, registry and AI-readable catalog. Phases 1, 2 and 3 passed the mobile Chromium suite with 65 passing browser assertions and no failures. Manual assistive-technology and physical-device checks remain outstanding. The original four components remain in place.
 
 This roadmap is not a completion report. A component is not release-complete until its functional and regression tests pass.
 
@@ -38,7 +38,7 @@ This roadmap is not a completion report. A component is not release-complete unt
 | Accessibility | Record existing semantics and known gaps | Baseline documented; remediation pending |
 | Performance | Identify WebGL context and simulation constraints | Known issues documented; profiling/remediation pending |
 | Testing | Record existing Chromium test coverage and required new checks | Baseline documented; broader coverage pending |
-| Documentation system | Keep `tools/spec.mjs` as source of generated component docs, registry and `llms.txt` | Extended for nine entries; five expanded component manuals are preserved through `manualDocs` |
+| Documentation system | Keep `tools/spec.mjs` as source of generated component docs, registry and `llms.txt` | Extended for nineteen entries; expanded Phase 1, Phase 2 and Phase 3 manuals are preserved through `manualDocs` |
 
 **Exit criteria:** design tokens and component contract approved in code/docs; lifecycle and WebGL constraints tested; accessibility and browser test strategy documented; the original four have a passing regression baseline; new-component scaffolding can be generated without altering their behavior.
 
@@ -76,7 +76,7 @@ Required coverage: labels, placeholders, input and change events, input constrai
 
 **Target after phase:** 19 components total.
 
-**Implementation status:** All five Phase 3 component bundles, live demo pages, technical READMEs and concept diagrams have been added. The gallery, registry, build manifest and AI-readable component catalogue now include all nineteen controls. Automated Phase 3 interaction and form tests are being added and have not yet passed CI. Do not mark Phase 3 released until those tests pass.
+**Implementation status:** All five Phase 3 component bundles, live demo pages, technical READMEs and concept diagrams are in place. The gallery, registry, build manifest and AI-readable component catalogue include all nineteen controls. The mobile Chromium validation passed 65 browser assertions, including Phase 3 interaction and form checks. Manual screen-reader and real-device verification remains outstanding.
 
 Required verification:
 
