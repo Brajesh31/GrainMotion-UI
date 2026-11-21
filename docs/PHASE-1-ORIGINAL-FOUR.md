@@ -1,6 +1,6 @@
 # Phase 1: Original four restoration
 
-**Status:** Implementation in progress. This is not a visual sign-off or release approval.
+**Status:** Automated original-four regression checks pass on GitHub Actions #511. Phase 1 remains in progress pending visual, device and assistive-technology sign-off.
 
 ## Scope
 
@@ -25,12 +25,27 @@ Those checks did not cover no-WebGL rendering or reduced-motion behavior. They w
 4. Thinking renders a static state-specific sand motif under reduced motion.
 5. The browser suite adds no-WebGL rendering, visible-pixel, reconnection and reduced-motion checks.
 
+## Latest validation evidence
+
+GitHub Actions [#511](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44885153121) on commit `59b96431c1921c9cd5b5daa01e81be5fdf7c2e9b`:
+
+- Standalone bundle synchronization passed.
+- Generated documentation and registry validation passed.
+- Structural inventory/assets/registry audit passed.
+- No-WebGL setup and visible-pixel checks passed for all four original controls.
+- Slider and Toggle public API checks passed in fallback mode.
+- Toggle reconnect checks passed.
+- Slider, Toggle, Signature undo, Signature clear and Thinking reduced-motion checks passed.
+- Full suite reported 246 passing assertions, 3 failures (Tooltip keyboard focus, Tooltip Escape dismissal, Toast polite status announcements).
+- No JavaScript runtime errors were reported.
+
 ## Validation still required
 
-- `node tools/build.mjs --check`, `node tools/docs.mjs --check`, and `node tools/audit.mjs`.
-- Full 50-component mobile Chromium suite. Existing failures in other components must remain visible and must not be waived.
 - Desktop and narrow-mobile visual inspection against approved original running-component references, not just concept art.
-- Real touch-device checks, another browser engine, and assistive-technology verification.
+- Real touch-device checks and verification in another browser engine.
+- Screen-reader/assistive-technology verification.
 - Sound/mute review and resize-continuity review.
+
+The automated gates for the original four are passing. Do not claim Phase 1 is fully complete until visual, real-device and accessibility evidence is added. The three unrelated full-suite failures should be tracked in the appropriate later Tooltip/Toast phases, not hidden or waived.
 
 Phase 1 remains **in progress** until these gates have evidence. Do not start Phase 2 or expand components 5-50 as part of this phase.
