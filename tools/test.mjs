@@ -497,6 +497,9 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');b.setAttribute('aria-describedby','existing-help');t.remove();return b.getAttribute('aria-describedby')==='existing-help'})()");
   check('tooltip: disconnect restores the trigger’s existing description IDs', await ev("document.getElementById('gm-tooltip-trigger').getAttribute('aria-describedby')==='existing-help'")===true);
   await ev("(()=>{const c=document.querySelector('[data-c=tooltip]');const t=document.createElement('sand-tooltip');t.id='el-tooltip-restored';t.setAttribute('for','gm-tooltip-trigger');t.setAttribute('text','Restored hint');c.append(t);})()");
+  await ev("(()=>{const t=document.querySelector('sand-tooltip'),b=document.getElementById('gm-tooltip-trigger');b.style.cssText='position:fixed;top:0;left:140px;width:120px;height:32px';t.setAttribute('placement','top');t.show();})()");
+  check('tooltip: preferred placement flips when the viewport edge has no room', await ev("document.querySelector('sand-tooltip')._bubble.dataset.placement==='bottom'")===true);
+  await ev("(()=>{const t=document.querySelector('sand-tooltip');t.hide();document.getElementById('gm-tooltip-trigger').style.cssText='';})()");
 
   await ev("(()=>{const t=document.querySelector('sand-toast');t.addEventListener('action',()=>window.__p8.toastAction++);t.addEventListener('dismiss',e=>{window.__p8.toastDismiss++;window.__p8.toastReason=e.detail.reason;});t.show();})()");
   check('toast: info and success announce as polite status', await ev("(()=>{const t=document.querySelector('sand-toast');return t.ui.getAttribute('role')==='status'&&t.ui.getAttribute('aria-live')==='polite'&&t.open})()")===true);
@@ -506,6 +509,8 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('toast: action event fires before action dismissal', await ev("window.__p8.toastAction===1&&window.__p8.toastDismiss===1&&window.__p8.toastReason==='action'&&!document.querySelector('sand-toast').open")===true);
   await ev("(()=>{const a=document.querySelector('sand-toast'),b=document.createElement('sand-toast');a.setAttribute('duration','5000');b.setAttribute('duration','5000');b.setAttribute('position','top-right');document.body.append(b);a.setAttribute('tone','success');a.show();b.show();window.__p8.extraToast=b;})()");
   check('toast: independent notifications stack at separate offsets', await ev("Math.abs(parseFloat(window.__p8.extraToast.style.top)-parseFloat(document.querySelector('sand-toast').style.top))>=90")===true);
+  await ev("window.__p8.extraToast.setAttribute('position','bottom-left')");
+  check('toast: an open notification can move to another corner', await ev("window.__p8.extraToast.style.left==='12px'&&window.__p8.extraToast.style.bottom==='18px'")===true);
   await ev("(()=>{const t=document.querySelector('sand-toast');t.ui.dispatchEvent(new Event('pointerenter'));})()");
   check('toast: auto-dismiss timer pauses on hover', await ev("(()=>{const t=document.querySelector('sand-toast');return t._timer===0&&t._remaining>0})()")===true);
   await ev("(()=>{document.querySelector('sand-toast').dismiss('test');window.__p8.extraToast.dismiss('test');window.__p8.extraToast.remove();})()");
