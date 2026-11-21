@@ -327,6 +327,7 @@ class SandAlert extends SandTray{
   get tone(){return this.getAttribute('tone')||'info';}
   get dismissed(){return this.hasAttribute('dismissed');}
   connectedCallback(){const reconnect=!!this.c;super.connectedCallback();if(reconnect&&this._ready)this.sync();}
+  step(){} // The host UI carries interaction; keep the shared tray loop valid.
   init(){this._ready=true;this.style.cssText+=';display:block;position:relative;width:100%;min-width:0';this.render();this.sync();}
   attributeChangedCallback(name,old,value){if(!this._ready||old===value)return;this.sync();}
   render(){
