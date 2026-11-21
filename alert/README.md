@@ -15,7 +15,7 @@ python3 -m http.server 8000     # from the repo folder
 
 ## Use it
 
-`alert.js` is the whole control: one file of about 30 KB with the sand engine and its sounds inside it, and no dependencies.
+`alert.js` is the whole control: one file of about 40 KB with the sand engine and its sounds inside it, and no dependencies.
 
 ```html
 <script src="alert.js"></script>\n<sand-alert tone="warning" title="Storage almost full" message="Remove unused files to continue." dismissible></sand-alert>

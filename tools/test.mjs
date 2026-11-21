@@ -42,7 +42,15 @@ await new Promise((r) => ws.addEventListener('open', r, { once: true }));
 let id = 0; const pending = new Map(); const logs = [];
 ws.addEventListener('message', (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } if (m.method === 'Runtime.exceptionThrown') logs.push('EXC ' + (m.params.exceptionDetails.exception?.description || m.params.exceptionDetails.text)); });
 const send = (method, params = {}) => new Promise((res, rej) => { const i = ++id; pending.set(i, (m) => (m.error ? rej(new Error(`${method}: ${m.error.message}`)) : res(m.result))); ws.send(JSON.stringify({ id: i, method, params })); });
-const ev = async (expr) => { const r = await send('Runtime.evaluate', { expression: expr, returnByValue: true }); if (r.exceptionDetails) logs.push('EVAL ' + (r.exceptionDetails.exception?.description || r.exceptionDetails.text)); return r.result.value; };
+const ev = async (expr) => {
+  const selectors = [...expr.matchAll(/document\.querySelector(?:All)?\(\s*(['"])(sand-[a-z0-9-]+)\1/g)].map(match => match[2]);
+  for (const tag of new Set(selectors)) {
+    await send('Runtime.evaluate', { expression: `window.__grainGalleryEnsureMounted?.(${JSON.stringify(tag)})`, returnByValue: true, awaitPromise: true });
+  }
+  const r = await send('Runtime.evaluate', { expression: expr, returnByValue: true, awaitPromise: true });
+  if (r.exceptionDetails) logs.push('EVAL ' + (r.exceptionDetails.exception?.description || r.exceptionDetails.text));
+  return r.result.value;
+};
 await send('Runtime.enable');
 await send('Emulation.setDeviceMetricsOverride', { width: 390, height: 900, deviceScaleFactor: 2, mobile: true });
 await send('Emulation.setTouchEmulationEnabled', { enabled: true });
@@ -103,6 +111,82 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev(`${E('sand-thinking')}.state = 'idle'`); await sleep(200);
   check('thinking: idle is Ready and not busy', (await ev(`${E('sand-thinking')}.getAttribute('aria-label') + ' ' + ${E('sand-thinking')}.getAttribute('aria-busy')`)) === 'Ready false');
 }
+{ // all original controls use the shared 2D fallback when WebGL2 is unavailable
+  const created = await ev(`(() => {
+    const native = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function(type, ...args) { return type === 'webgl2' ? null : native.call(this, type, ...args); };
+    try {
+      const tags = ['sand-slider', 'sand-toggle', 'sand-signature', 'sand-thinking', 'sand-checkbox'];
+      window.__grainFallbacks = tags.map(tag => { const el = document.createElement(tag); el.style.width = tag === 'sand-thinking' ? '190px' : '240px'; document.body.append(el); return el; });
+      return JSON.stringify(window.__grainFallbacks.map(el => ({ tag: el.localName, noWebGL: el.nogl === true, dimensions: el.c.width > 0 && el.c.height > 0 })));
+    } finally { HTMLCanvasElement.prototype.getContext = native; }
+  })()`);
+  const fallbackSetup = JSON.parse(created);
+  check('original four and a later component initialize without WebGL2', fallbackSetup.length === 5 && fallbackSetup.every(x => x.noWebGL && x.dimensions), created);
+  await sleep(180);
+  const pixels = await ev(`(() => window.__grainFallbacks.map(el => {
+    const c = el.fallbackContext, canvas = el.fallbackCanvas;
+    if (!c || !canvas) return false;
+    const p = c.getImageData(Math.floor(canvas.width/2), Math.floor(canvas.height/2), 1, 1).data;
+    return p[3] > 0;
+  }))()`);
+  check('shared 2D renderer paints visible sand for all five sample controls', Array.isArray(pixels) && pixels.length === 5 && pixels.every(Boolean), JSON.stringify(pixels));
+  await ev(`window.__grainFallbacks[0].value = 72; window.__grainFallbacks[1].checked = true`); await sleep(2600);
+  const fallbackApiState = JSON.parse(await ev(`JSON.stringify({ value: window.__grainFallbacks[0].value, target: window.__grainFallbacks[0].target, checked: window.__grainFallbacks[1].checked })`));
+  check('Slider and Toggle APIs remain usable in fallback mode', Math.abs(fallbackApiState.value - 72) < 0.1 && Math.abs(fallbackApiState.target - 0.72) < 0.001 && fallbackApiState.checked === true, JSON.stringify(fallbackApiState));
+  await ev(`window.__grainFallbacks.forEach(el => el.remove()); window.__grainFallbacks = null`);
+}
+{ // shared core: a lost WebGL context switches to 2D and restores cleanly
+  const prevented = await ev(`(() => {
+    const el = document.querySelector('sand-slider');
+    const event = new Event('webglcontextlost', { cancelable: true });
+    el.c.dispatchEvent(event);
+    return event.defaultPrevented;
+  })()`);
+  await sleep(80);
+  check('shared renderer: context loss is cancelled and handled', prevented === true && await ev(`(() => {
+    const el = document.querySelector('sand-slider');
+    return el.nogl === true && el.c.style.visibility === 'hidden' && el.fallbackCanvas?.style.display === 'block';
+  })()`) === true);
+  await ev(`document.querySelector('sand-slider').c.dispatchEvent(new Event('webglcontextrestored'))`);
+  await sleep(80);
+  check('shared renderer: restored WebGL context returns to the GPU canvas', await ev(`(() => {
+    const el = document.querySelector('sand-slider');
+    return el.nogl === false && el.c.style.visibility === 'visible' && el.fallbackCanvas?.style.display === 'none';
+  })()`) === true);
+}
+
+{ // original four: reconnect does not duplicate canvases or change listeners
+  const lifecycle = await ev(`(() => {
+    const el = document.createElement('sand-toggle'); el.style.width = '220px'; document.body.append(el);
+    const firstCount = el.querySelectorAll('canvas').length; let changes = 0; el.addEventListener('change', () => changes++);
+    el.remove(); document.body.append(el); el.checked = true;
+    const result = { canvasesStable: firstCount === 2 && el.querySelectorAll('canvas').length === firstCount, singleChange: changes === 1, valuePreserved: el.checked === true };
+    el.remove(); return JSON.stringify(result);
+  })()`);
+  const life = JSON.parse(lifecycle);
+  check('original toggle: reconnect reuses its canvases', life.canvasesStable, lifecycle);
+  check('original toggle: reconnect preserves one change event and state', life.singleChange && life.valuePreserved, lifecycle);
+}
+
+{ // original four: reduced-motion behavior
+  await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
+  await sleep(60);
+  await ev(`${E('sand-slider')}.value = 37`); await sleep(50);
+  check('slider: reduced motion applies the target without easing', Math.abs(await ev(`${E('sand-slider')}.value`) - 37) < 0.1 && (await ev(`${E('sand-slider')}.vel`)) === 0);
+  await ev(`${E('sand-toggle')}.checked = true`); await sleep(40);
+  check('toggle: reduced motion moves the stone to its state immediately', (await ev(`${E('sand-toggle')}.glide`)) === null && (await ev(`${E('sand-toggle')}.s`)) === 1);
+  const [sx, sy] = await at('sand-signature', 0.22, 0.52), [ex, ey] = await at('sand-signature', 0.72, 0.42);
+  await swipe(sx, sy, ex, ey); await sleep(100); await ev(`${E('sand-signature')}.undo()`); await sleep(40);
+  check('signature: reduced-motion undo completes immediately', (await ev(`${E('sand-signature')}.empty`)) === true && (await ev(`${E('sand-signature')}.fade`)) === null);
+  await swipe(sx, sy, ex, ey); await sleep(100); await ev(`${E('sand-signature')}.clear()`); await sleep(40);
+  check('signature: reduced-motion clear completes immediately', (await ev(`${E('sand-signature')}.empty`)) === true && (await ev(`${E('sand-signature')}.rake`)) === null);
+  await ev(`${E('sand-thinking')}.state = 'searching'`); await sleep(80);
+  check('thinking: reduced motion shows a static state motif', (await ev(`${E('sand-thinking')}.rk`)) === null && (await ev(`${E('sand-thinking')}._reducedState`)) === 'searching');
+  await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }] });
+  await sleep(80);
+}
+
 { // checkbox: visual checkmark state, click and Space toggle it
   const el = E('sand-checkbox');
   await tap('sand-checkbox'); await sleep(300);
@@ -636,23 +720,58 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("document.querySelector('sand-kanban').removeAttribute('disabled')");
 }
 
-{ // forms: verify all twenty form-associated components in a small isolated form
+{ // forms: verify all twenty form-associated components without exhausting GPU contexts
   const formResults = await ev(`(() => {
-    const f = document.createElement('form');
-    f.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;overflow:hidden';
-    f.innerHTML = '<sand-slider name="slider" value="30"></sand-slider><sand-toggle name="toggle" checked></sand-toggle><sand-checkbox name="checkbox" value="yes" checked></sand-checkbox><sand-radio-group name="radio" options="Small,Medium,Large" value="Medium"></sand-radio-group><sand-segmented name="segment" options="Day,Week,Month" value="Week"></sand-segmented><sand-range name="range" value="10,90"></sand-range><sand-rating name="rating" value="4"></sand-rating><sand-input name="input" value="hello"></sand-input><sand-textarea name="textarea" value="note"></sand-textarea><sand-password name="password" value="do-not-print-this"></sand-password><sand-search name="search" value="grain"></sand-search><sand-otp name="otp" value="123456" length="6"></sand-otp><sand-select name="select" value="express" options="standard:Standard,express:Express"></sand-select><sand-combobox name="combo" value="DEL" options="DEL:Delhi,BLR:Bengaluru"></sand-combobox><sand-date-picker name="date" value="2026-11-24"></sand-date-picker><sand-date-range name="dateRange" start="2026-11-21" end="2026-11-25"></sand-date-range><sand-time-picker name="time" value="16:30"></sand-time-picker><sand-steps name="steps" steps="A,B,C" value="1"></sand-steps><sand-timer name="timer" duration="45"></sand-timer><sand-color-picker name="color" value="#cc8844"></sand-color-picker>';
-    document.body.append(f);
-    const d = Object.fromEntries(new FormData(f));
-    const results = { slider: d.slider === '30', toggle: d.toggle === 'on', checkbox: d.checkbox === 'yes', radio: d.radio === 'Medium', segment: d.segment === 'Week', range: d.range === '10,90', rating: d.rating === '4', input: d.input === 'hello', textarea: d.textarea === 'note', password: d.password === 'do-not-print-this', search: d.search === 'grain', otp: d.otp === '123456', select: d.select === 'express', combo: d.combo === 'DEL', date: d.date === '2026-11-24', dateRange: d.dateRange === '2026-11-21/2026-11-25', time: d.time === '16:30', steps: d.steps === '1', timer: d.timer === '45', color: d.color === '#cc8844' };
-    f.remove();
-    return results;
+    const native = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function(type, ...args) {
+      return type === 'webgl2' ? null : native.call(this, type, ...args);
+    };
+    try {
+      const cases = [
+        ['slider','<sand-slider name="slider" value="30"></sand-slider>','30'],
+        ['toggle','<sand-toggle name="toggle" checked></sand-toggle>','on'],
+        ['checkbox','<sand-checkbox name="checkbox" value="yes" checked></sand-checkbox>','yes'],
+        ['radio','<sand-radio-group name="radio" options="Small,Medium,Large" value="Medium"></sand-radio-group>','Medium'],
+        ['segment','<sand-segmented name="segment" options="Day,Week,Month" value="Week"></sand-segmented>','Week'],
+        ['range','<sand-range name="range" value="10,90"></sand-range>','10,90'],
+        ['rating','<sand-rating name="rating" value="4"></sand-rating>','4'],
+        ['input','<sand-input name="input" value="hello"></sand-input>','hello'],
+        ['textarea','<sand-textarea name="textarea" value="note"></sand-textarea>','note'],
+        ['password','<sand-password name="password" value="do-not-print-this"></sand-password>','do-not-print-this'],
+        ['search','<sand-search name="search" value="grain"></sand-search>','grain'],
+        ['otp','<sand-otp name="otp" value="123456"></sand-otp>','123456'],
+        ['select','<sand-select name="select" value="express" options="standard:Standard,express:Express"></sand-select>','express'],
+        ['combo','<sand-combobox name="combo" value="DEL" options="DEL:Delhi,BLR:Bengaluru"></sand-combobox>','DEL'],
+        ['date','<sand-date-picker name="date" value="2026-11-24"></sand-date-picker>','2026-11-24'],
+        ['dateRange','<sand-date-range name="dateRange" start="2026-11-21" end="2026-11-25"></sand-date-range>','2026-11-21/2026-11-25'],
+        ['time','<sand-time-picker name="time" value="16:30"></sand-time-picker>','16:30'],
+        ['steps','<sand-steps name="steps" steps="A,B,C" value="1"></sand-steps>','1'],
+        ['timer','<sand-timer name="timer" duration="45"></sand-timer>','45'],
+        ['color','<sand-color-picker name="color" value="#cc8844"></sand-color-picker>','#cc8844']
+      ];
+      const results = {};
+      for (const [key, html, expected] of cases) {
+        const f = document.createElement('form');
+        f.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;overflow:hidden';
+        f.innerHTML = html; document.body.append(f);
+        results[key] = new FormData(f).get(key) === expected;
+        f.remove();
+      }
+      return results;
+    } finally { HTMLCanvasElement.prototype.getContext = native; }
   })()`);
-  check('forms: all nineteen form-associated components serialize correctly', Object.values(formResults).every(Boolean), JSON.stringify(formResults));
+  check('forms: all twenty form-associated components serialize correctly', Object.values(formResults).length === 20 && Object.values(formResults).every(Boolean), JSON.stringify(formResults));
 }
 { // scaling: the height follows the width
   const got = await ev(`(() => { const e = document.createElement('sand-toggle'); e.style.width = '150px'; document.body.append(e); const b = e.getBoundingClientRect(); e.remove(); return b.width + ' ' + Math.round(b.height); })()`);
   check('scaling: a toggle 150 wide is 66 high', got === '150 66', got);
 }
+const activePreviews = await ev('window.__grainGalleryActivePreviewCount?.() ?? -1');
+check('gallery: active preview count stays within the eight-context budget', activePreviews > 0 && activePreviews <= 8, activePreviews);
+const cardCount = await ev("document.querySelectorAll('#grid .piece').length");
+check('gallery: all fifty cards are present while previews are virtualized', cardCount === 50, cardCount);
+const sliderIsUnmounted = await ev("document.querySelector('#grid').querySelector('sand-slider') === null");
+check('gallery: off-screen previews release their mounted element', sliderIsUnmounted === true, sliderIsUnmounted);
 const wide = await ev('document.documentElement.scrollWidth'); check('no sideways scroll at 390', wide <= 390, wide);
 check('no script errors', !logs.length, logs.join(' | '));
 ws.close(); chrome.kill(); await sleep(300); try { rmSync(PROFILE, { recursive: true, force: true }); } catch {}

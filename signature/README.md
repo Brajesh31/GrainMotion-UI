@@ -53,9 +53,9 @@ el.undo(); el.clear();
 
 - **It needs a pointer to sign.** A keyboard can undo and clear but not write.
 - **Twelve undos** are kept.
-- **Needs WebGL2** to draw the sand. Without it the control still works with keys and a screen reader, but nothing is drawn.
+- **WebGL2 gives the full sand shader.** If WebGL2 is unavailable, this original control uses a simplified 2D sand fallback and keeps its interaction and accessibility API.
 - **One live tray per element.** Each is its own WebGL canvas, and browsers keep only about sixteen alive at once, so it is not for long lists.
-- **It does not hold still for `prefers-reduced-motion`.** The sand still moves. If that matters on your page, use a plain control there.
+- **Respects `prefers-reduced-motion`.** Undo and clear finish immediately instead of animating the rake or restoring the last stroke.
 - **Drawn for a light page.** The sand and the walnut frame are warm and light; they look pasted on over a dark background.
 - **The sand is simulated at one cell per CSS pixel,** so a wider element costs more. Each scales to its CSS `width`; the height follows.
 - **Sound is on** after the first touch or key on the page. `GrainMotionUI.Sound.on = false` turns every control quiet.

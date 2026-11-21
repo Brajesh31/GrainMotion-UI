@@ -15,7 +15,7 @@ python3 -m http.server 8000     # from the repo folder
 
 ## Use it
 
-`scrubber.js` is the whole control: one file of about 30 KB with the sand engine and its sounds inside it, and no dependencies.
+`scrubber.js` is the whole control: one file of about 40 KB with the sand engine and its sounds inside it, and no dependencies.
 
 ```html
 <script src="scrubber.js"></script>

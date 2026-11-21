@@ -51,9 +51,9 @@ el.checked = true;    // the stone glides there
 
 - **The symbol is a power symbol.** It is drawn in code, not taken from a font, and is not set by an attribute.
 - **The wake stays.** Switch it often and the tray shows it, like a real one.
-- **Needs WebGL2** to draw the sand. Without it the control still works with keys and a screen reader, but nothing is drawn.
+- **WebGL2 gives the full sand shader.** If WebGL2 is unavailable, this original control uses a simplified 2D sand fallback and keeps its interaction and accessibility API.
 - **One live tray per element.** Each is its own WebGL canvas, and browsers keep only about sixteen alive at once, so it is not for long lists.
-- **It does not hold still for `prefers-reduced-motion`.** The sand still moves. If that matters on your page, use a plain control there.
+- **Respects `prefers-reduced-motion`.** The stone moves directly to its on/off position instead of gliding across the tray.
 - **Drawn for a light page.** The sand and the walnut frame are warm and light; they look pasted on over a dark background.
 - **The sand is simulated at one cell per CSS pixel,** so a wider element costs more. Each scales to its CSS `width`; the height follows.
 - **Sound is on** after the first touch or key on the page. `GrainMotionUI.Sound.on = false` turns every control quiet.
