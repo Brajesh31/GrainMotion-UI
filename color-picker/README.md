@@ -54,6 +54,9 @@ picker.value = '#547d73';
 - Exact appearance of the native color dialog is browser/OS controlled.
 - CSS color names and rgb/hsl strings are normalized to 6-digit hex; alpha/transparency is not preserved.
 - **Needs WebGL2** to draw the sand. Without it the control still works with keys and a screen reader, but nothing is drawn.
-- **One live tray per element.** Each instance creates its own WebGL canvas and animation loop.
-- **Light backgrounds recommended.** The materials are drawn for a light page.
-- **No runtime dependencies.** Load the standalone script with a plain script tag, not as a module.
+- **One live tray per element.** Each is its own WebGL canvas, and browsers keep only about sixteen alive at once, so it is not for long lists.
+- **It does not hold still for `prefers-reduced-motion`.** The sand still moves. If that matters on your page, use a plain control there.
+- **Drawn for a light page.** The sand and the walnut frame are warm and light; they look pasted on over a dark background.
+- **The sand is simulated at one cell per CSS pixel,** so a wider element costs more. Each scales to its CSS `width`; the height follows.
+- **Sound is on** after the first touch or key on the page. `GrainMotionUI.Sound.on = false` turns every control quiet.
+- **Checked in headless Chromium** with real touch and key events, with the CPU slowed four times. Not tried in Safari or Firefox, on a real phone, or with a screen reader.
