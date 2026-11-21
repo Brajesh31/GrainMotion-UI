@@ -15,7 +15,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml/badge.svg" alt="Component validation"></a>
   <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
   <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
-  <img src="https://img.shields.io/badge/Components-50%20verified-C49A6C" alt="Fifty CI-verified components">
+  <img src="https://img.shields.io/badge/Components-50-C49A6C" alt="Fifty component source folders">
 </p>
 
 </div>
@@ -24,7 +24,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI ships 50 CI-verified standalone custom elements across the original set and Phases 1–9. All five Phase 9 controls pass the bundle, documentation, mobile Chromium and Pages deployment gates. The components simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI contains 50 standalone custom-element implementations across the original set and Phases 1–9. The source files, demos and component guides are present, but the project is in a release-hardening cycle. The latest full mobile Chromium validation has three failing assertions, so the collection is not currently described as fully verified or release-ready. The components simulate sand as a height field and render it with a WebGL2 shader.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -93,9 +93,9 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 | **Sand Drawer / Sheet** | A wood-framed sheet enters from one of the four viewport edges. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/drawer/) · [Documentation](drawer/README.md) |
 
 
-### Phase 9 · Productivity and composite controls (CI-verified)
+### Phase 9 · Productivity and composite controls (implementation present, validation open)
 
-The five controls are integrated with standalone source, demos, technical guides, concept artwork and registry entries. All Phase 9 release gates now pass: 50-component mobile Chromium validation completed 239 checks with zero failures, and GitHub Pages deployed successfully. Manual cross-browser, physical-device and screen-reader checks remain outstanding.
+The five controls are integrated with standalone source, demos, technical guides and registry entries. The latest full 50-component mobile Chromium run recorded 236 passing assertions and three failures: two tooltip focus/dismissal checks and one toast polite-live-region check. The bundle synchronization and generated documentation/registry checks passed. Manual cross-browser, physical-device and screen-reader checks remain outstanding.
 
 | Component | Physical interaction | Demo and documentation |
 |---|---|---|
