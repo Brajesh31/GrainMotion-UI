@@ -62,8 +62,10 @@ The current engine uses:
 - A height-field simulation stored in a `Float32Array`.
 - A simulation grid sized in relation to CSS dimensions.
 - Sand relaxation toward a talus/angle-of-rest threshold.
-- A WebGL2 shader for surface lighting and material appearance.
-- A 2D overlay canvas for sprites such as tools and other elements.
+- A WebGL2 shader for full surface lighting and material appearance.
+- A dedicated Canvas 2D compatibility renderer that draws the simulated height field, frame and stones when WebGL2 is unavailable or a context is lost.
+- A separate 2D overlay canvas for sprites such as tools and other elements.
+- WebGL context-loss/restoration handling, DPR-aware resizing and disconnection cleanup for the resize observer.
 - Optional stone rendering and shared sound playback via Web Audio.
 
 The engine is intentionally not a public framework abstraction. New components should use the documented GrainMotion-UI skill and inspect the actual engine source before depending on internal members.
@@ -101,19 +103,19 @@ Do not hand-edit generated files without also updating the source specification.
 
 ### 5. Gallery and hosting
 
-- `gallery/index.html` loads all fifty component scripts and wires their examples.
+- `gallery/index.html` loads all fifty standalone scripts but lazy-mounts only nearby component previews. It caps the gallery at eight active preview instances and explicitly releases WebGL contexts when previews are unmounted.
 - Component demo pages live in their component folders.
 - The site is deployed to GitHub Pages by `.github/workflows/pages.yml`.
 - The current repository does not define a framework-based bundling pipeline for the controls.
 
 ## Expansion architecture targets
 
-The following are recommendations, not current capabilities:
+The following remain targets or limitations, not fully solved capabilities:
 
-1. **Lifecycle:** define explicit initialization, visibility suspension, disconnection cleanup and re-connection behavior.
-2. **Renderer budgeting:** prevent the gallery from starting all expensive WebGL previews at once. Prefer lazy activation and measured limits.
-3. **Shared resources:** assess whether multiple components can safely share rendering resources without changing the standalone-file guarantee.
-4. **Fallbacks:** controls should preserve useful semantics and operation if WebGL2 or audio is unavailable.
+1. **Lifecycle:** the shared core now disconnects its resize observer and the gallery unmounts off-screen previews. Further profiling is still required for repeated mount/unmount and long-running sessions.
+2. **Renderer budgeting:** the live gallery limits itself to eight active previews. Applications mounting components outside the gallery must still manage the number of connected instances.
+3. **Shared resources:** standalone controls retain independent WebGL contexts. A shared renderer across multiple elements is not implemented.
+4. **Fallbacks:** the shared core has a simplified 2D sand fallback for missing/lost WebGL2. It does not reproduce the full shader's exact lighting or material detail. Audio remains optional.
 5. **Specification:** extend the existing `SPEC` structure with structured API definitions, accessibility requirements, test cases, asset references, demo metadata and known limitations.
 6. **Generated docs:** generate component catalog and registry output from the same validated specification.
 7. **Regression:** every shared-engine change must be exercised against all fifty controls, with particular attention to the original four reference components.

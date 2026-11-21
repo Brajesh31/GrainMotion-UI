@@ -576,10 +576,10 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [Design process and concept artwork](making-of/README.md)
 ## ⚠️ Known limitations
 
-- **WebGL2 required for rendering.** Without WebGL2, the controls may remain keyboard-operable, but the sand visuals will not render.
+- **WebGL2 provides the full sand shader.** If WebGL2 is unavailable or a browser evicts a context, the shared engine uses a simplified Canvas 2D sand renderer. Interactions remain available, with reduced material detail.
 - **Light backgrounds recommended.** The sand and walnut frame are designed for a light page.
-- **Multiple live canvases have a browser limit.** Each component creates its own WebGL canvas, so avoid mounting large numbers simultaneously.
-- **Reduced motion is not fully implemented.** The sand continues moving when `prefers-reduced-motion` is enabled.
+- **GPU contexts are limited.** Avoid mounting large numbers of components simultaneously. The live gallery lazy-mounts nearby previews and caps them at eight active previews, releasing contexts as cards leave the active area.
+- **Reduced-motion support is component-specific.** Check each component's guide for its current behavior.
 - **Browser and assistive technology coverage is limited.** The current project notes testing in headless Chromium; broader browser, real-device, and screen-reader testing is still needed.
 
 ## 📄 License
