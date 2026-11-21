@@ -428,7 +428,7 @@ class SandDateRange extends SandPickerBase {
  init(){
   this.ready=true;this.startField=document.createElement('input');this.endField=document.createElement('input');
   for(const [field,label,left] of [[this.startField,'Start date','4%'],[this.endField,'End date','54%']]){
-   field.type='date';field.setAttribute('aria-label',this.getAttribute(label==='Start date'?'start-label':'end-label')||label);
+   field.type='date';field.setAttribute('aria-label',this.getAttribute(label==='Start date'?'start-label':'end-label')||(this.getAttribute('label')||'Date range')+' '+label.toLowerCase());
    field.style.cssText='position:absolute;z-index:4;top:19%;bottom:19%;width:43%;border:0;border-radius:0;background:transparent;color:#423627;font:600 12px ui-sans-serif,system-ui,sans-serif;padding:0 2%;color-scheme:light;touch-action:manipulation;';
    field.style.left=left;this.append(field);
    field.addEventListener('input',()=>{this._start=this.startField.value;this._end=this.endField.value;this.updateRange();this.dispatchEvent(new Event('input',{bubbles:true}));this.spriteKey=null;});
@@ -443,10 +443,12 @@ class SandDateRange extends SandPickerBase {
  set value(v){const p=String(v||'').split('/');this._start=p[0]||'';this._end=p[1]||'';if(this.startField){this.startField.value=this._start;this.endField.value=this._end;this.updateRange();}}
  get start(){return this._start||'';}set start(v){this._start=String(v||'');if(this.startField)this.startField.value=this._start;this.updateRange();}
  get end(){return this._end||'';}set end(v){this._end=String(v||'');if(this.endField)this.endField.value=this._end;this.updateRange();}
- attributeChangedCallback(n,o,v){if(!this.ready||o===v)return;if(n==='value'){this.value=v||'/';return;}if(n==='start'){this.start=v||'';return;}if(n==='end'){this.end=v||'';return;}this.syncRangeAttrs();}
+ attributeChangedCallback(n,o,v){if(!this.ready||o===v)return;if(n==='value'){this.value=v||'/';return;}if(n==='start'){this.start=v||'';return;}if(n==='end'){this.end=v||'';return;}this.syncRangeAttrs();this.updateRange();}
  syncRangeAttrs(){
   if(!this.startField||!this.endField)return;
   for(const f of [this.startField,this.endField]){f.disabled=this.disabled;f.required=this.required;if(this.hasAttribute('min'))f.min=this.getAttribute('min');else f.removeAttribute('min');if(this.hasAttribute('max'))f.max=this.getAttribute('max');else f.removeAttribute('max');if(this.hasAttribute('lang'))f.lang=this.getAttribute('lang');}
+  this.startField.setAttribute('aria-label',this.getAttribute('start-label')||(this.getAttribute('label')||'Date range')+' start date');
+  this.endField.setAttribute('aria-label',this.getAttribute('end-label')||(this.getAttribute('label')||'Date range')+' end date');
  }
  updateRange(){
   if(!this.startField)return;
@@ -468,7 +470,7 @@ class SandDateRange extends SandPickerBase {
  }
  get unavailable(){return (this.getAttribute('unavailable')||'').split(',').map(x=>x.trim()).filter(Boolean);}
  formResetCallback(){this._start=this.getAttribute('start')||this.defaultValue.split('/')[0]||'';this._end=this.getAttribute('end')||this.defaultValue.split('/')[1]||'';if(this.startField){this.startField.value=this._start;this.endField.value=this._end;this.updateRange();}}
- formDisabledCallback(v){this._formDisabled=!!v;this.syncRangeAttrs();}
+ formDisabledCallback(v){this._formDisabled=!!v;this.syncRangeAttrs();this.updateRange();}
  checkValidity(){return this.internals?.checkValidity()??(this.startField?.checkValidity()&&this.endField?.checkValidity());}
  reportValidity(){return this.internals?.reportValidity()??(this.startField?.reportValidity()&&this.endField?.reportValidity());}
  focus(options){(this.startField?.value?this.endField:this.startField)?.focus(options);}
