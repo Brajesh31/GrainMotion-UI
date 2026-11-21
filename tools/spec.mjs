@@ -3,7 +3,7 @@
 export const REPO = 'Brajesh31/GrainMotion-UI';
 export const SITE = 'https://brajesh31.github.io/GrainMotion-UI';
 export const AUTHOR = 'Brajesh Kumar <https://github.com/Brajesh31>';
-export const COUNT = 'nine';
+export const COUNT = 'fourteen';
 
 // Limits every control shares; each README ends with its own, then these.
 export const COMMON_LIMITS = [
@@ -497,7 +497,88 @@ export const SPEC = [
       "**One value:** half-star and custom-step ratings are not currently supported."
     ],
     "manualDocs": true
+  },
+[
+  {
+    "id": "input",
+    "name": "Text Field",
+    "tag": "sand-input",
+    "categories": [
+      "input",
+      "text",
+      "form",
+      "sand",
+      "animation"
+    ],
+    "desc": "A native text input with a bamboo stylus-like focus marker and fine pressed guide line, retaining normal browser editing, selection and validation.",
+    "docs": "Use <sand-input name=\"displayName\" label=\"Display name\" placeholder=\"Your name\"></sand-input>. Read or set el.value; native input and change events bubble from its internal input. Supported types are text, email, tel, url and search.",
+    "manualDocs": true
+  },
+  {
+    "id": "textarea",
+    "name": "Textarea",
+    "tag": "sand-textarea",
+    "categories": [
+      "textarea",
+      "input",
+      "text",
+      "form",
+      "sand",
+      "animation"
+    ],
+    "desc": "A native multiline textarea over a wider sand tray, with shallow writing grooves and a moving stylus focus cue.",
+    "docs": "Use <sand-textarea name=\"message\" label=\"Message\" rows=\"4\" maxlength=\"500\"></sand-textarea>. Read or set el.value; native input and change events bubble from the internal textarea. Rows are clamped from 2 to 10.",
+    "manualDocs": true
+  },
+  {
+    "id": "password",
+    "name": "Password Field",
+    "tag": "sand-password",
+    "categories": [
+      "password",
+      "input",
+      "security",
+      "form",
+      "sand",
+      "animation"
+    ],
+    "desc": "A native password input with a physical Show/Hide stone shutter. The value remains masked by default and is never printed in the demo status text.",
+    "docs": "Use <sand-password name=\"password\" label=\"Password\" autocomplete=\"current-password\"></sand-password>. Read or set el.value. The revealed property or attribute toggles visibility; password is hidden by default.",
+    "manualDocs": true
+  },
+  {
+    "id": "search",
+    "name": "Search Field",
+    "tag": "sand-search",
+    "categories": [
+      "search",
+      "input",
+      "form",
+      "sand",
+      "animation"
+    ],
+    "desc": "A native search input with a small search well, a clear button, an Enter-to-search event and a moving sand rake while busy.",
+    "docs": "Use <sand-search name=\"q\" label=\"Search\" placeholder=\"Search\"></sand-search>. Pressing Enter dispatches a bubbling search event with detail.value. Set el.busy=true while your application fetches results; call el.clear() to reset.",
+    "manualDocs": true
+  },
+  {
+    "id": "otp",
+    "name": "OTP / PIN Input",
+    "tag": "sand-otp",
+    "categories": [
+      "otp",
+      "pin",
+      "input",
+      "security",
+      "form",
+      "sand",
+      "animation"
+    ],
+    "desc": "A numeric OTP/PIN input drawn across individual engraved wells. One native input preserves mobile one-time-code autofill, paste, selection and keyboard behavior.",
+    "docs": "Use <sand-otp name=\"verificationCode\" label=\"Verification code\" length=\"6\" autocomplete=\"one-time-code\" required></sand-otp>. Length is clamped from four to ten. The complete event exposes detail.length only, never the entered digits.",
+    "manualDocs": true
   }
+]
 ]
 
 ];
