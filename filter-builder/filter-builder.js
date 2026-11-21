@@ -324,7 +324,7 @@ const DEFAULT_FIELDS=[{id:'status',label:'Status',type:'select',options:['Planne
 const OPS=[['is','is'],['is-not','is not'],['contains','contains'],['starts-with','starts with'],['greater-than','greater than'],['less-than','less than'],['before','before'],['after','after'],['empty','is empty'],['not-empty','is not empty']];
 class SandFilterBuilder extends SandTray{
   static get observedAttributes(){return ['disabled','label'];}
-  constructor(){super();this._ready=false;this._fields=DEFAULT_FIELDS.map(x=>({...x,options:[...x.options]}));this._filters=[];this._logic='AND';}
+  constructor(){super();this._ready=false;this._fields=DEFAULT_FIELDS.map(x=>({...x,options:[...(x.options||[])]}));this._filters=[];this._logic='AND';}
   get aspect(){return .88;}get disabled(){return this.hasAttribute('disabled');}
   get fields(){return this._fields.map(x=>({...x,options:[...(x.options||[])]}));}
   set fields(v){const seen=new Set();this._fields=(Array.isArray(v)?v:[]).map((x,i)=>{const id=String(x?.id??'field-'+(i+1));if(seen.has(id))return null;seen.add(id);return{id,label:String(x?.label??id),type:['number','date','select'].includes(x?.type)?x.type:'text',options:Array.isArray(x?.options)?x.options.map(String):[]};}).filter(Boolean);this._filters=this._filters.map(f=>this._fields.some(x=>x.id===f.field)?f:{...f,field:this._fields[0]?.id||''});this.renderRows?.();}
