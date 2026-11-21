@@ -2,7 +2,7 @@
 
 A signature pad of smoothed sand. You write with a bamboo stick that cuts like a brush: linger and the line is wide and deep, hurry and it thins, and with a pen, pressing harder cuts wider. The sand it moves heaps up along both sides of the line, a quick flick throws a few grains, and the line tapers off as the stick lifts. Undo fills the last line back in. Clear sends a rake across the tray that smooths everything away, pushing a low ridge of sand ahead of it. What you get back is not a picture of sand: `toDataURL()` gives the signature as plain ink on a transparent PNG, ready for a document.
 
-One of fourteen files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of nineteen files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 
