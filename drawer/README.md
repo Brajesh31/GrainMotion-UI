@@ -2,7 +2,7 @@
 
 A wood-framed sheet moves in from the edge of the viewport, carrying a compact workspace or filter surface. It uses a native modal dialog for focus containment while the panel itself follows the selected edge.
 
-One of forty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of fifty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 
