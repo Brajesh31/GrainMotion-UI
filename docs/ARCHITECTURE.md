@@ -4,7 +4,7 @@
 
 GrainMotion-UI is currently a browser-native custom-element library. It is not a React or Vue component package. Each published control is a plain JavaScript file that registers a custom element and can be loaded through a normal script tag.
 
-The repository now contains nine controls. The original four remain the reference implementations:
+The repository now contains fourteen controls. The original four remain the reference implementations:
 
 - `slider/slider.js` registers `<sand-slider>`.
 - `toggle/toggle.js` registers `<sand-toggle>`.
@@ -20,6 +20,16 @@ Phase 1 adds five standalone controls:
 - `rating/rating.js` registers `<sand-rating>`.
 
 The Phase 1 controls reuse the same shared engine and embed only the sound assets configured for that control in `tools/build.mjs`.
+
+Phase 2 adds five text and structured-input controls:
+
+- `input/input.js` registers `<sand-input>`.
+- `textarea/textarea.js` registers `<sand-textarea>`.
+- `password/password.js` registers `<sand-password>`.
+- `search/search.js` registers `<sand-search>`.
+- `otp/otp.js` registers `<sand-otp>`.
+
+These five controls create a real browser-native `input` or `textarea` as a child of the custom element and position it above the sand canvases. The sand remains a separate visual layer. Typed content, password characters and OTP digits are not rendered into the sand texture or 2D concept artwork. Each standalone script contains a local `SandNativeField` helper, the shared engine and only its configured sound assets.
 
 ## Runtime layers
 
@@ -71,7 +81,7 @@ Do not hand-edit generated files without also updating the source specification.
 
 ### 5. Gallery and hosting
 
-- `gallery/index.html` loads all nine component scripts and wires their examples.
+- `gallery/index.html` loads all fourteen component scripts and wires their examples.
 - Component demo pages live in their component folders.
 - The site is deployed to GitHub Pages by `.github/workflows/pages.yml`.
 - The current repository does not define a framework-based bundling pipeline for the controls.
@@ -86,7 +96,7 @@ The following are recommendations, not current capabilities:
 4. **Fallbacks:** controls should preserve useful semantics and operation if WebGL2 or audio is unavailable.
 5. **Specification:** extend the existing `SPEC` structure with structured API definitions, accessibility requirements, test cases, asset references, demo metadata and known limitations.
 6. **Generated docs:** generate component catalog and registry output from the same validated specification.
-7. **Regression:** every shared-engine change must be exercised against all nine controls, with particular attention to the original four reference components.
+7. **Regression:** every shared-engine change must be exercised against all fourteen controls, with particular attention to the original four reference components.
 
 ## Safe change sequence
 
