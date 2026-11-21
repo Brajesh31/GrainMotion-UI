@@ -459,7 +459,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("document.querySelector('sand-resizable').resizeBoundary(0,8,true)");
   check('resizable: adjacent resize preserves 100 percent total', await ev("Math.abs(document.querySelector('sand-resizable').sizes.reduce((a,b)=>a+b,0)-100)<0.01")===true);
   check('resizable: boundary adjustment emits change', await ev("window.__p7.resize===1")===true);
-  await ev("(()=>{const el=document.querySelector('sand-resizable');el.ui.querySelector('[data-boundary="0"]').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));})()");
+  await ev("(()=>{const el=document.querySelector('sand-resizable');el.ui.querySelector('[role=separator]').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));})()");
   check('resizable: keyboard arrows adjust a boundary', await ev("window.__p7.resize===2")===true);
   await ev("document.querySelector('sand-resizable').setAttribute('disabled','')");
   check('resizable: disabled state disables every separator', await ev("Array.from(document.querySelector('sand-resizable').ui.querySelectorAll('[role=separator]')).every(b=>b.disabled)")===true);
