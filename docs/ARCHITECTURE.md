@@ -88,7 +88,7 @@ This creates a maintenance obligation: when the shared engine, sounds or embedde
 
 ### 4. Specification and generated documentation
 
-[`tools/spec.mjs`](../tools/spec.mjs) is the current source of truth for all twenty-four component descriptions, demos, usage snippets, attributes, interaction narratives and known component-specific limits. The five Phase 1 entries use `manualDocs` because their expanded READMEs and demo pages are maintained as full hand-authored technical documents; their metadata still feeds the generated registry and `llms.txt`.
+[`tools/spec.mjs`](../tools/spec.mjs) is the current source of truth for all twenty-four component descriptions, demos, usage snippets, attributes, interaction narratives and known component-specific limits. The the Phase 1 through Phase 4 entries use `manualDocs` because their expanded READMEs and demo pages are maintained as full hand-authored technical documents; their metadata still feeds the generated registry and `llms.txt`.
 
 [`tools/docs.mjs`](../tools/docs.mjs) generates:
 
@@ -116,7 +116,7 @@ The following are recommendations, not current capabilities:
 4. **Fallbacks:** controls should preserve useful semantics and operation if WebGL2 or audio is unavailable.
 5. **Specification:** extend the existing `SPEC` structure with structured API definitions, accessibility requirements, test cases, asset references, demo metadata and known limitations.
 6. **Generated docs:** generate component catalog and registry output from the same validated specification.
-7. **Regression:** every shared-engine change must be exercised against all nineteen controls, with particular attention to the original four reference components.
+7. **Regression:** every shared-engine change must be exercised against all twenty-four controls, with particular attention to the original four reference components.
 
 ## Safe change sequence
 
