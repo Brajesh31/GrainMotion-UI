@@ -28,7 +28,7 @@ The test and screenshot utilities require Chrome or Chromium. Set `CHROME` if th
 
 ## Current test coverage
 
-`tools/test.mjs` loads all forty-five implemented controls in a mobile-sized Chromium viewport. The latest 45-component GitHub Actions run passed **206 browser assertions with zero failures**, including 27 targeted Phase 7 checks and 26 targeted Phase 8 checks. Standalone bundle synchronization and generated documentation checks passed in the same run, and the corresponding GitHub Pages deployment succeeded. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818303) · [Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818321). Manual screen-reader, physical-device, Safari and Firefox testing remains outstanding. The original-control checks cover:
+`tools/test.mjs` now loads all fifty controls in a mobile-sized Chromium viewport. Forty-five controls are already CI-verified; the five Phase 9 additions are awaiting the next full run. The latest 45-component GitHub Actions run passed **206 browser assertions with zero failures**, including 27 targeted Phase 7 checks and 26 targeted Phase 8 checks. Standalone bundle synchronization and generated documentation checks passed in the same run, and the corresponding GitHub Pages deployment succeeded. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818303) · [Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818321). Manual screen-reader, physical-device, Safari and Firefox testing remains outstanding. The original-control checks cover:
 
 - Slider drag, input/change events, vertical-swipe handling and keyboard increments.
 - Toggle click, Space behavior, change events and vertical-swipe handling.
@@ -89,6 +89,19 @@ The Phase 2, Phase 3 and Phase 4 checks in the passing test runner cover:
 - Dialog / Modal: native modal top-layer semantics, caller-content preservation, focus containment, confirm/close return values, Escape and opt-in backdrop close.
 - Drawer / Sheet: native modal focus behavior, four-edge placement and bounded sizing, Escape/focus restoration, optional action and backdrop dismissal.
 
+
+
+### Phase 9 productivity and composite coverage (new, validation pending)
+
+The test runner now contains 30 targeted Phase 9 checks. They are committed but should not be described as passing until the 50-component Actions run completes.
+
+- Command Palette: native modal open/focus, label/description/keyword filtering, Arrow navigation, Enter selection event, close reason, Escape and disabled trigger.
+- Context Menu: menu role and initial focus, keyboard navigation that skips disabled actions, selection payload, Escape cleanup and disabled opening.
+- Filter Builder: field/operator/value conditions, query serialization, condition edits, add/remove/clear, apply/reset events and disabled controls.
+- Data Table: semantic headers, bounded pagination, ascending/descending stable sort, aria-sort, filtering, selection across pages, select-visible and disabled controls.
+- Kanban Board: stable card/column rendering, same-column order, cross-column move detail, ArrowRight movement and disabled drag/button state.
+
+The remaining test layers still require manual checks on physical touch devices, Safari and Firefox, and with named screen-reader/browser combinations.
 
 - Component sizing.
 - Horizontal overflow at the configured mobile viewport.
