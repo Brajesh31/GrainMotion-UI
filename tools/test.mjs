@@ -346,7 +346,8 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("document.querySelector('sand-breadcrumbs').items=[]");
   check('breadcrumbs: an empty path retains its labelled navigation landmark', await ev("document.querySelector('sand-breadcrumbs nav')?.getAttribute('aria-label')==='You are here'&&!document.querySelector('sand-breadcrumbs [aria-current=page]')")===true);
   await ev("(()=>{const el=document.querySelector('sand-breadcrumbs');el.items=[{label:'Home',href:'/'},{label:'Current'}];el.links[0].focus();const parent=el.parentNode;parent.removeChild(el);parent.appendChild(el);el.links[0].focus();})()");
-  check('breadcrumbs: ancestor links remain keyboard focusable after reconnect', await ev("document.activeElement===document.querySelector('sand-breadcrumbs').links[0]")===true);
+  const crumbFocus=await ev("(()=>{const el=document.querySelector('sand-breadcrumbs'),link=el.links[0];return JSON.stringify({focused:document.activeElement===link,active:document.activeElement?.outerHTML?.slice(0,160),href:link?.getAttribute('href'),tabIndex:link?.tabIndex,connected:link?.isConnected,linkCount:el.links.length})})()");
+  check('breadcrumbs: ancestor links remain keyboard focusable after reconnect', await ev("document.activeElement===document.querySelector('sand-breadcrumbs').links[0]")===true,crumbFocus);
 
   await ev("(()=>{const el=document.querySelector('sand-menu');el.open=true;el.menuItems[0].focus();el.menuItems[0].dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true}));})()");
   check('menu: ArrowDown moves focus to the next enabled menu item', await ev("document.activeElement===document.querySelector('sand-menu').menuItems[1]")===true);
