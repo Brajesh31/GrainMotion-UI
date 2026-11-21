@@ -30,6 +30,11 @@ export const SOUNDS = {
   'date-picker': one('stone', 'tap'),
   'date-range': one('stone'),
   'time-picker': one('tap', 'stone'),
+  progress: { ...LOOP, ...one('tap', 'settle') },
+  'progress-ring': one('stone', 'tap'),
+  steps: one('stone', 'tap'),
+  timer: one('tap', 'settle'),
+  loader: one('tap'),
 };
 // Images a control carries, as constants.
 export const ART = { thinking: { ROCK: 'rock.webp' } };
