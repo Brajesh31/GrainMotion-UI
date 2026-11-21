@@ -3,7 +3,7 @@
 export const REPO = 'Brajesh31/GrainMotion-UI';
 export const SITE = 'https://brajesh31.github.io/GrainMotion-UI';
 export const AUTHOR = 'Brajesh Kumar <https://github.com/Brajesh31>';
-export const COUNT = 'twenty-nine';
+export const COUNT = 'thirty-five';
 
 // Limits every control shares; each README ends with its own, then these.
 export const COMMON_LIMITS = [
@@ -1661,5 +1661,418 @@ export const SPEC = [
   "happens":[["open the trigger","the stone lifts and the anchored walnut option tray appears"],["select an enabled action","a select event is emitted and the menu closes unless keep-open is present"],["press Escape or click outside","the tray closes; Escape restores focus to the trigger"]],
   "limits":["Up to eight menu items.","This component is a command menu, not a modal dialog or general rich-content popover."],
   "manualDocs":true
+}
+{
+  "id": "dropzone",
+  "name": "File Dropzone",
+  "tag": "sand-dropzone",
+  "categories": [
+    "file",
+    "upload",
+    "dropzone",
+    "input",
+    "sand",
+    "animation"
+  ],
+  "sub": "A file tile lands in a recessed walnut tray.",
+  "desc": "A file dropzone with real drag-and-drop and native file selection, type and size checks, clearable file state and accessible rejection messages. A file tile settles into a sand tray when accepted.",
+  "docs": "Use <sand-dropzone accept=\"image/*,.pdf\" multiple max-size=\"10485760\" label=\"Project files\"></sand-dropzone>. Read files, call addFiles() or clear(), and listen for files-change and file-reject. max-size is in bytes; the component selects files but does not upload them.",
+  "intro": [
+    "A file is a small object arriving at a physical tray. Dragging over the frame raises a settled stone; dropping a valid file makes its tile land in the tray and the sand settle around it. The native file picker remains available for keyboard and touch users."
+  ],
+  "use": "<script src=\"dropzone.js\"></script>\n<sand-dropzone accept=\"image/*,.pdf\" multiple max-size=\"10485760\" label=\"Project files\"></sand-dropzone>",
+  "js": "const zone = document.querySelector('sand-dropzone');\nzone.addEventListener('files-change', event => queueFiles(event.detail.files));\nzone.addEventListener('file-reject', event => showRejected(event.detail.rejected));\n// zone.files returns a copy; zone.clear() empties the tray.",
+  "attrs": [
+    [
+      "accept",
+      "Comma-separated MIME types, wildcards or extensions",
+      "all files"
+    ],
+    [
+      "multiple",
+      "Accept more than one file",
+      "absent"
+    ],
+    [
+      "max-size",
+      "Maximum size of each file, in bytes",
+      "no limit"
+    ],
+    [
+      "disabled",
+      "Disable picker and drop handling",
+      "absent"
+    ],
+    [
+      "label",
+      "Accessible name for the file area",
+      "File upload area"
+    ]
+  ],
+  "notes": [
+    "The component validates file MIME types/extensions and individual file size before accepting a file. It does not inspect file contents or upload anything.",
+    "The files-change event contains files and rejected entries. file-reject contains only rejected entries and reasons.",
+    "The Choose files button opens a real input[type=file]; drag-and-drop is an additional pointer interaction, not the only way to select files."
+  ],
+  "happens": [
+    [
+      "drag files over the tray",
+      "the recessed border brightens and a stone tile rises"
+    ],
+    [
+      "drop an accepted file",
+      "the file appears as a tile and the sand settles"
+    ],
+    [
+      "drop an unsupported file",
+      "the file is rejected with a readable reason"
+    ],
+    [
+      "clear the tray",
+      "selected files and status are removed"
+    ]
+  ],
+  "limits": [
+    "The component stores File objects in memory for the lifetime of the element. It does not create previews, persist files or send network requests."
+  ],
+  "demo": {
+    "html": "<sand-dropzone id=\"el\" accept=\"image/*,.pdf\" multiple max-size=\"10485760\" label=\"Project files\"></sand-dropzone><p class=\"readout\" id=\"out\">Drop an image or PDF, or use Choose files.</p>",
+    "hint": "Try dropping a file or choosing one. Unsupported types and files above 10 MB are rejected.",
+    "script": "const out = document.getElementById('out'); el.addEventListener('files-change', e => out.textContent = e.detail.files.length + ' accepted file(s)'); el.addEventListener('file-reject', e => out.textContent = e.detail.rejected.map(x => x.name + ': ' + x.reason).join(' · '));"
+  }
+},
+{
+  "id": "upload-queue",
+  "name": "Upload Queue",
+  "tag": "sand-upload-queue",
+  "categories": [
+    "file",
+    "upload",
+    "queue",
+    "progress",
+    "sand",
+    "animation"
+  ],
+  "sub": "File tiles move through a walnut transfer channel.",
+  "desc": "A transport-agnostic upload queue with per-file progress, queued/uploading/complete/error/cancelled states, retry and removal controls. It emits requests so the host application can perform the actual transfer.",
+  "docs": "Use <sand-upload-queue label=\"Uploads\"></sand-upload-queue>. Call addFiles(files), update(id, {status, progress, error}), remove(id) or clear(). Listen for upload-request, upload-cancel, retry-request and queue-change. The host application owns the network transfer.",
+  "intro": [
+    "The queue is a small transfer channel: each file has its own tile, status and progress ridge. The component owns the queue's state and controls; your application owns the actual HTTP request, authentication, storage destination and retry policy."
+  ],
+  "use": "<script src=\"upload-queue.js\"></script>\n<sand-upload-queue label=\"Uploads\"></sand-upload-queue>",
+  "js": "const queue = document.querySelector('sand-upload-queue');\nqueue.addEventListener('upload-request', ({ detail }) => startYourUpload(detail.item));\n// From your transport callback:\nqueue.update(id, { status: 'uploading', progress: 46 });\nqueue.update(id, { status: 'complete', progress: 100 });",
+  "attrs": [
+    [
+      "label",
+      "Accessible queue name",
+      "Upload queue"
+    ]
+  ],
+  "notes": [
+    "addFiles(files) returns stable item IDs and emits upload-request once for each new item. It does not start a network request itself.",
+    "update(id, patch) accepts queued, uploading, complete, error and cancelled states. Progress is clamped to 0–100; reaching 100 while uploading completes the item.",
+    "Cancel and retry controls emit upload-cancel and retry-request. The host must cancel or restart the real transfer, then update queue state.",
+    "The queue-change event contains a snapshot of the item list. File objects are retained in memory and are not persisted."
+  ],
+  "happens": [
+    [
+      "add files",
+      "file tiles enter the queue with a waiting state"
+    ],
+    [
+      "report progress",
+      "a carved channel fills beneath the active tile"
+    ],
+    [
+      "complete a transfer",
+      "the tile settles and its status becomes complete"
+    ],
+    [
+      "cancel or retry",
+      "a request event is sent to the host application"
+    ]
+  ],
+  "limits": [
+    "No HTTP transport is built in. Connect upload-request, upload-cancel and retry-request to your own upload service.",
+    "Progress is supplied by the host; the queue does not infer progress from a File object."
+  ],
+  "demo": {
+    "html": "<sand-upload-queue id=\"el\" label=\"Uploads\"></sand-upload-queue><div class=\"row\"><button class=\"pill\" id=\"simulate\" type=\"button\">Add sample files</button></div><p class=\"readout\" id=\"out\">The demo simulates queue events, not a network upload.</p>",
+    "hint": "Add sample files. The queue emits upload-request; the demo simulates progress locally.",
+    "script": "const out = document.getElementById('out'); el.addEventListener('upload-request', e => out.textContent = 'Queued: ' + e.detail.item.name + '. Demo will simulate progress.'); document.getElementById('simulate').onclick = () => { const ids = el.addFiles([new File(['one'], 'brand-assets.zip', {type:'application/zip'}), new File(['two'], 'hero-image.png', {type:'image/png'})]); ids.forEach((id,i) => { el.update(id,{status:'uploading',progress:22}); setTimeout(()=>el.update(id,{status:'uploading',progress:68}),450+i*120); setTimeout(()=>el.update(id,{status:'complete',progress:100}),900+i*160); }); };"
+  }
+},
+{
+  "id": "carousel",
+  "name": "Image Carousel",
+  "tag": "sand-carousel",
+  "categories": [
+    "media",
+    "image",
+    "carousel",
+    "gallery",
+    "sand",
+    "animation"
+  ],
+  "sub": "Framed image plates travel along a sand track.",
+  "desc": "An image carousel that displays real images in a recessed walnut frame with previous/next buttons, indexed selection, touch swipes and keyboard navigation. It never fetches or transforms image sources.",
+  "docs": "Set el.items to an array of {src, alt, caption} objects. Read or set el.index and listen for change. Only HTTP(S), blob and data:image sources are accepted.",
+  "intro": [
+    "Photographs sit in framed walnut plates. The selected plate moves along a shallow sand track while the native controls and accessible text identify the current image."
+  ],
+  "use": "<script src=\"carousel.js\"></script>\n<sand-carousel id=\"photos\" label=\"Project photos\"></sand-carousel>\n<script>\nphotos.items = [{ src: '/images/one.jpg', alt: 'Studio', caption: 'Studio light' }];\n</script>",
+  "js": "const carousel = document.querySelector('sand-carousel');\ncarousel.items = [\n  { src: '/images/studio.jpg', alt: 'Studio', caption: 'Studio light' },\n  { src: '/images/material.jpg', alt: 'Material', caption: 'Walnut and sand' },\n];\ncarousel.addEventListener('change', event => showImage(event.detail.index));",
+  "attrs": [
+    [
+      "label",
+      "Accessible carousel name",
+      "Image carousel"
+    ],
+    [
+      "index",
+      "Initial/current image index (zero-based)",
+      "0"
+    ],
+    [
+      "disabled",
+      "Disable navigation controls",
+      "absent"
+    ],
+    [
+      "items",
+      "Property array of image objects",
+      "empty"
+    ]
+  ],
+  "notes": [
+    "items is a property array of {src, alt, caption}; the component does not parse an arbitrary HTML string into images.",
+    "Previous/next buttons, dot buttons, Left/Right keys and touch swipes change the selected image. Selection wraps at either end.",
+    "Only HTTP(S), blob and data:image URLs are accepted. Images use object-fit:cover within a beveled frame."
+  ],
+  "happens": [
+    [
+      "select another frame",
+      "the framed plate changes and the stone marker moves along the track"
+    ],
+    [
+      "swipe left or right",
+      "the next or previous image is selected"
+    ],
+    [
+      "press an arrow key",
+      "the carousel advances while focus remains within it"
+    ]
+  ],
+  "limits": [
+    "The component does not lazy-fetch remote images beyond the browser's normal image loading and does not implement video slides or automatic autoplay."
+  ],
+  "demo": {
+    "html": "<sand-carousel id=\"el\" label=\"Material study\"></sand-carousel><div class=\"readout\" id=\"out\">Image 1 of 3</div>",
+    "hint": "Use the arrows, dots, Left/Right keys or swipe across the framed image.",
+    "script": "el.items = [{src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1100&q=85',alt:'Mountain landscape',caption:'Stone and open sky'},{src:'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=1100&q=85',alt:'Warm interior',caption:'Quiet interior details'},{src:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1100&q=85',alt:'Mountain under stars',caption:'Night over the mountains'}]; const out=document.getElementById('out'); const show=()=>out.textContent='Image '+(el.index+1)+' of '+el.items.length;el.addEventListener('change',show);show();"
+  }
+},
+{
+  "id": "lightbox",
+  "name": "Lightbox Gallery",
+  "tag": "sand-lightbox",
+  "categories": [
+    "media",
+    "image",
+    "gallery",
+    "lightbox",
+    "dialog",
+    "sand"
+  ],
+  "sub": "A selected framed image opens above the tray.",
+  "desc": "A thumbnail gallery with a native modal dialog for expanded images, accessible previous/next navigation, Escape/backdrop dismissal and focus restoration.",
+  "docs": "Set el.items to {src, alt, caption} objects. Call openAt(index, opener) or close(), and listen for open, change and close. The expanded viewer uses the native dialog element.",
+  "intro": [
+    "A set of thumbnail plates sits inside a walnut gallery tray. Opening a plate lifts it into a full-screen viewing surface; the browser's native dialog supplies modal behavior and focus containment."
+  ],
+  "use": "<script src=\"lightbox.js\"></script>\n<sand-lightbox id=\"gallery\" label=\"Product gallery\"></sand-lightbox>\n<script>\ngallery.items = [{ src: '/images/one.jpg', alt: 'Detail', caption: 'Close detail' }];\n</script>",
+  "js": "const gallery = document.querySelector('sand-lightbox');\ngallery.items = [{ src: '/images/one.jpg', alt: 'Detail', caption: 'Close detail' }];\ngallery.openAt(0); // gallery.close() dismisses the dialog",
+  "attrs": [
+    [
+      "label",
+      "Accessible gallery/viewer name",
+      "Image gallery"
+    ],
+    [
+      "items",
+      "Property array of {src, alt, caption} objects",
+      "empty"
+    ]
+  ],
+  "notes": [
+    "The thumbnail grid uses actual images with alt text. Activating a thumbnail opens a native <dialog> using showModal().",
+    "Escape, Close and backdrop clicks dismiss the dialog. Focus returns to the element that opened the image when that opener remains connected.",
+    "Left/Right keys and Previous/Next buttons navigate images; open, change and close events expose the current index/item."
+  ],
+  "happens": [
+    [
+      "choose a thumbnail",
+      "a framed image opens above the page"
+    ],
+    [
+      "navigate",
+      "the displayed plate changes without closing the viewer"
+    ],
+    [
+      "press Escape or Close",
+      "the viewer closes and focus returns to the opener"
+    ]
+  ],
+  "limits": [
+    "The image URLs are supplied by the host and are not downloaded, proxied or cached by this component.",
+    "Browser-native dialog support is required for the modal viewer."
+  ],
+  "demo": {
+    "html": "<sand-lightbox id=\"el\" label=\"Material gallery\"></sand-lightbox><p class=\"readout\" id=\"out\">Select a thumbnail to open the viewer.</p>",
+    "hint": "Select a thumbnail, then navigate inside the viewer or close it with Escape.",
+    "script": "el.items=[{src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=90',alt:'Mountain landscape',caption:'Open sky above the ridge'},{src:'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=1200&q=90',alt:'Warm interior',caption:'A quiet interior'},{src:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=90',alt:'Night sky',caption:'Stars above the mountains'}];const out=document.getElementById('out');el.addEventListener('open',e=>out.textContent='Opened image '+(e.detail.index+1));el.addEventListener('close',()=>out.textContent='Viewer closed');"
+  }
+},
+{
+  "id": "scrubber",
+  "name": "Media Scrubber",
+  "tag": "sand-scrubber",
+  "categories": [
+    "media",
+    "audio",
+    "video",
+    "timeline",
+    "scrubber",
+    "sand"
+  ],
+  "sub": "A rake and stone mark the playhead in a media timeline.",
+  "desc": "A media timeline bound to an existing HTMLAudioElement or HTMLVideoElement, with play/pause, current position, buffered range visualization and keyboard-accessible seeking.",
+  "docs": "Assign el.media = document.querySelector('video') or an audio element. The scrubber does not fetch media; it reads duration/currentTime/buffered and writes currentTime when seeking.",
+  "intro": [
+    "A narrow raked channel becomes a media timeline. A stone marks the playhead, a pale ridge shows buffered content, and the native range input makes seeking available to touch, mouse and keyboard users."
+  ],
+  "use": "<script src=\"scrubber.js\"></script>\n<video id=\"clip\" controls src=\"/media/demo.mp4\"></video>\n<sand-scrubber id=\"timeline\" label=\"Clip position\"></sand-scrubber>\n<script>timeline.media = clip;</script>",
+  "js": "const media = document.querySelector('video');\nconst scrubber = document.querySelector('sand-scrubber');\nscrubber.media = media;\nscrubber.addEventListener('seek', event => logSeek(event.detail.time));",
+  "attrs": [
+    [
+      "label",
+      "Accessible timeline label",
+      "Media position"
+    ],
+    [
+      "disabled",
+      "Disable play and seek controls",
+      "absent"
+    ],
+    [
+      "media",
+      "HTMLAudioElement/HTMLVideoElement property",
+      "null"
+    ]
+  ],
+  "notes": [
+    "Assign a real audio or video element to the media property. The component listens for timeupdate, durationchange, progress, play, pause, seeking, seeked, loadedmetadata and ended.",
+    "Play/Pause delegates to the media element. Seeking writes its currentTime and emits seek while adjusting and seeked when committed.",
+    "Buffered width is derived from the media element's TimeRanges. The component does not own the source URL or network loading."
+  ],
+  "happens": [
+    [
+      "play media",
+      "the play button reflects the media element's state"
+    ],
+    [
+      "seek",
+      "the stone playhead and media currentTime move together"
+    ],
+    [
+      "buffer media",
+      "the buffered ridge advances along the carved channel"
+    ]
+  ],
+  "limits": [
+    "Duration/currentTime and buffered data are browser media APIs; live streams with unknown duration may not show a seekable range.",
+    "The component does not implement a media player, source selection, captions or transport controls beyond play/pause."
+  ],
+  "demo": {
+    "html": "<video id=\"media\" controls muted playsinline preload=\"metadata\" src=\"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4\" style=\"width:min(100%,440px);border-radius:12px\"></video><sand-scrubber id=\"el\" label=\"Video position\"></sand-scrubber><p class=\"readout\" id=\"out\">Loading media metadata…</p>",
+    "hint": "Load the sample clip, play it, then seek using the stone timeline or keyboard.",
+    "script": "const media=document.getElementById('media'),out=document.getElementById('out');el.media=media;const show=()=>out.textContent=media.duration?Math.floor(media.currentTime)+'s / '+Math.floor(media.duration)+'s':'Waiting for media metadata';media.addEventListener('loadedmetadata',show);media.addEventListener('timeupdate',show);show();"
+  }
+},
+{
+  "id": "color-picker",
+  "name": "Color Picker",
+  "tag": "sand-color-picker",
+  "categories": [
+    "color",
+    "picker",
+    "input",
+    "form",
+    "sand",
+    "palette"
+  ],
+  "sub": "Mineral pigment stones select a usable color value.",
+  "desc": "A color control with the native browser color dialog and a palette of tactile mineral swatches. Supports hexadecimal, RGB and HSL readouts plus form submission.",
+  "docs": "Use <sand-color-picker name=\"accent\" value=\"#c28b55\" format=\"hex\"></sand-color-picker>. Read or set value; input and change events expose both formatted value and normalized hex.",
+  "intro": [
+    "A pigment well holds a mineral sample. The native color input opens the browser's color chooser, while named mineral stones provide quick selections without replacing native keyboard and platform behavior."
+  ],
+  "use": "<script src=\"color-picker.js\"></script>\n<sand-color-picker name=\"accent\" value=\"#c28b55\" format=\"hex\" label=\"Accent color\"></sand-color-picker>",
+  "js": "const picker = document.querySelector('sand-color-picker');\npicker.addEventListener('input', event => preview(event.detail.hex));\npicker.addEventListener('change', event => save(event.detail.value));\npicker.value = '#547d73';",
+  "attrs": [
+    [
+      "value",
+      "Selected CSS color; normalized to #rrggbb",
+      "#c28b55"
+    ],
+    [
+      "format",
+      "hex, rgb or hsl readout and submitted value",
+      "hex"
+    ],
+    [
+      "label",
+      "Accessible name for the native color control",
+      "Choose a colour"
+    ],
+    [
+      "name",
+      "Form field name",
+      "absent"
+    ],
+    [
+      "disabled",
+      "Disable color input and mineral swatches",
+      "absent"
+    ]
+  ],
+  "notes": [
+    "The browser's native input[type=color] opens the platform color chooser. The component does not emulate a custom hue/saturation canvas.",
+    "Preset mineral stones select named values. input and change events expose detail.value in the selected format and detail.hex in normalized hexadecimal.",
+    "When a name is present, the normalized selected value is submitted through ElementInternals. The component participates in form reset and disabled-state callbacks."
+  ],
+  "happens": [
+    [
+      "choose a pigment stone",
+      "the sample well changes to that mineral color"
+    ],
+    [
+      "open the native chooser",
+      "the browser color dialog is used"
+    ],
+    [
+      "change format",
+      "the displayed and submitted value is represented as hex, rgb or hsl"
+    ]
+  ],
+  "limits": [
+    "Exact appearance of the native color dialog is browser/OS controlled.",
+    "CSS color names and rgb/hsl strings are normalized to 6-digit hex; alpha/transparency is not preserved."
+  ],
+  "demo": {
+    "html": "<sand-color-picker id=\"el\" name=\"accent\" value=\"#c28b55\" format=\"hex\" label=\"Accent color\"></sand-color-picker><p class=\"readout\" id=\"out\">#c28b55</p>",
+    "hint": "Choose one of the mineral swatches or open the native browser color chooser.",
+    "script": "const out=document.getElementById('out');el.addEventListener('input',e=>out.textContent=e.detail.hex);"
+  }
 }
 ];

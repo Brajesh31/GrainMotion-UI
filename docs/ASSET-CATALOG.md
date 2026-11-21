@@ -45,6 +45,13 @@ This catalog records assets found in the current repository tree. It does not as
 | `breadcrumbs/assets/concept.svg` | SVG | Stepping-stone hierarchy and current-location concept study, not a runtime screenshot. |
 | `menu/assets/concept.svg` | SVG | Lifting stone trigger and walnut option-tray concept study, not a runtime screenshot. |
 
+| `dropzone/assets/concept.svg` | SVG | File tile landing in a walnut dropzone tray; concept study, not runtime screenshot. |
+| `upload-queue/assets/concept.svg` | SVG | File tiles and per-file progress along a carved transfer channel; concept study. |
+| `carousel/assets/concept.svg` | SVG | Framed image plate and moving sand-track marker; concept study. |
+| `lightbox/assets/concept.svg` | SVG | Thumbnail and expanded modal image frame; concept study. |
+| `scrubber/assets/concept.svg` | SVG | Media playhead and buffered ridge in a raked timeline; concept study. |
+| `color-picker/assets/concept.svg` | SVG | Mineral pigment sample and swatch palette; concept study. |
+
 ### Audio assets
 
 The following files exist under `sounds/`:
@@ -61,7 +68,7 @@ The following files exist under `sounds/`:
 | `sounds/sweep.mp3` | MP3 | Sweep sound. |
 | `sounds/tap.mp3`, `sounds/tap-b.mp3` | MP3 | Paired tap sounds. |
 
-Phase 5 reuses the existing paired stone and tap recordings, embedded per component rather than added as separate new source assets. Exact per-component embedding is configured in [tools/build.mjs](../tools/build.mjs). Review that file before changing an asset assignment.
+Phase 5 and Phase 6 reuse the existing paired stone, tap and settle recordings, embedded per component rather than added as separate new source assets. Exact per-component embedding is configured in [tools/build.mjs](../tools/build.mjs). Review that file before changing an asset assignment.
 
 ## Asset categories to add as the library grows
 

@@ -359,14 +359,75 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('menu: disconnect closes the overlay and releases transient state', await ev("!document.querySelector('sand-menu').open&&document.querySelector('sand-menu .gm-menu-popup').hidden")===true);
 }
 
-{ // forms: verify all nineteen form-associated components in a small isolated form
+
+{ // Phase 6: files, image media, media timeline and mineral color
+  await ev(`(()=>{const el=document.querySelector('sand-dropzone');el.setAttribute('accept','image/png,.pdf');el.setAttribute('multiple','');el.setAttribute('max-size','10');window.__p6Drop={accepted:0,rejected:0};el.addEventListener('files-change',e=>window.__p6Drop.accepted=e.detail.files.length);el.addEventListener('file-reject',e=>window.__p6Drop.rejected=e.detail.rejected.length);el.addFiles([new File(['x'],'cover.png',{type:'image/png'}),new File(['x'],'notes.jpg',{type:'image/jpeg'}),new File(['01234567890'],'large.png',{type:'image/png'})]);})()`);
+  check('dropzone: accepts matching MIME types', await ev("document.querySelector('sand-dropzone').files.length===1&&document.querySelector('sand-dropzone').files[0].name==='cover.png'")===true);
+  check('dropzone: rejects unsupported type and oversize file with reasons', await ev("window.__p6Drop.rejected===2")===true);
+  check('dropzone: files-change and file-reject events reach the host', await ev("window.__p6Drop.accepted===1&&window.__p6Drop.rejected===2")===true);
+  await ev("document.querySelector('sand-dropzone').clear()");
+  check('dropzone: clear removes all selected files', await ev("document.querySelector('sand-dropzone').files.length===0")===true);
+  await ev("(()=>{const el=document.querySelector('sand-dropzone');el.addFiles([new File(['x'],'again.png',{type:'image/png'})]);el.setAttribute('disabled','');})()");
+  check('dropzone: disabled prevents picker and clears native input availability', await ev("document.querySelector('sand-dropzone').input.disabled&&document.querySelector('sand-dropzone').pick.disabled")===true);
+  await ev("(()=>{const el=document.querySelector('sand-dropzone');el.removeAttribute('disabled');const p=el.parentNode;p.removeChild(el);p.appendChild(el);})()");
+  check('dropzone: selection API remains available after reconnect', await ev("document.querySelector('sand-dropzone').files.length===1")===true);
+
+  await ev(`(()=>{const el=document.querySelector('sand-upload-queue');window.__p6Queue={requests:0,cancels:0,retries:0};el.addEventListener('upload-request',()=>window.__p6Queue.requests++);el.addEventListener('upload-cancel',()=>window.__p6Queue.cancels++);el.addEventListener('retry-request',()=>window.__p6Queue.retries++);window.__p6QueueId=el.addFiles([new File(['archive'],'project.zip',{type:'application/zip'})])[0];el.update(window.__p6QueueId,{status:'uploading',progress:43});})()`);
+  check('upload queue: addFiles creates an item and emits upload-request', await ev("document.querySelector('sand-upload-queue').items.length===1&&window.__p6Queue.requests===1")===true);
+  check('upload queue: host-supplied progress updates the queue item', await ev("document.querySelector('sand-upload-queue').items[0].progress===43&&document.querySelector('sand-upload-queue').items[0].status==='uploading'")===true);
+  await ev("document.querySelector('sand-upload-queue').list.querySelector('[data-action=cancel]').click()");
+  check('upload queue: cancel button emits upload-cancel and changes status', await ev("window.__p6Queue.cancels===1&&document.querySelector('sand-upload-queue').items[0].status==='cancelled'")===true);
+  await ev("document.querySelector('sand-upload-queue').list.querySelector('[data-action=retry]').click()");
+  check('upload queue: retry emits retry-request and returns item to queued', await ev("window.__p6Queue.retries===1&&document.querySelector('sand-upload-queue').items[0].status==='queued'")===true);
+  await ev("document.querySelector('sand-upload-queue').clear()");
+  check('upload queue: clear removes queue items', await ev("document.querySelector('sand-upload-queue').items.length===0")===true);
+
+  await ev(`(()=>{const el=document.querySelector('sand-carousel');el.items=[{src:'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==',alt:'First plate',caption:'First'},{src:'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==',alt:'Second plate',caption:'Second'},{src:'javascript:alert(1)',alt:'Unsafe'}];})()`);
+  check('carousel: accepts safe image sources and filters unsafe schemes', await ev("document.querySelector('sand-carousel').items.length===2")===true);
+  check('carousel: real image alt text and caption follow the selected item', await ev("document.querySelector('sand-carousel img').alt==='First plate'&&document.querySelector('sand-carousel .gm-car-caption').textContent==='First'")===true);
+  await ev("document.querySelector('sand-carousel').go(1)");
+  check('carousel: next selection updates index and emits change', await ev("document.querySelector('sand-carousel').index===1&&document.querySelector('sand-carousel img').alt==='Second plate'")===true);
+  await ev("(()=>{const el=document.querySelector('sand-carousel');el.ui.querySelector('.gm-car-arrow[aria-label=\"Next image\"]').focus();el.ui.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));})()");
+  check('carousel: keyboard arrow navigation wraps to the first image', await ev("document.querySelector('sand-carousel').index===0")===true);
+
+  await ev(`(()=>{const el=document.querySelector('sand-lightbox');el.items=[{src:'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==',alt:'One',caption:'First'},{src:'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==',alt:'Two',caption:'Second'}];})()`);
+  check('lightbox: renders thumbnails with accessible labels', await ev("document.querySelectorAll('sand-lightbox .gm-light-thumb').length===2&&document.querySelector('sand-lightbox .gm-light-thumb').getAttribute('aria-label')==='View One'")===true);
+  await ev("(()=>{const el=document.querySelector('sand-lightbox'),opener=el.grid.querySelector('button');opener.focus();el.openAt(0,opener);})()");
+  check('lightbox: opens a native modal dialog and focuses its close control', await ev("document.querySelector('sand-lightbox dialog').open&&document.activeElement===document.querySelector('sand-lightbox .gm-light-close')")===true);
+  await ev("document.querySelector('sand-lightbox').move(1)");
+  check('lightbox: previous/next navigation changes the displayed image', await ev("document.querySelector('sand-lightbox').index===1&&document.querySelector('sand-lightbox .gm-light-large').alt==='Two'")===true);
+  await ev("document.querySelector('sand-lightbox').close()");
+  await sleep(100);
+  check('lightbox: close restores focus to the image opener', await ev("!document.querySelector('sand-lightbox dialog').open&&document.activeElement===document.querySelector('sand-lightbox .gm-light-thumb')")===true);
+
+  await ev(`(()=>{const el=document.querySelector('sand-scrubber');const media=document.createElement('video');Object.defineProperties(media,{duration:{configurable:true,value:100},currentTime:{configurable:true,writable:true,value:12},paused:{configurable:true,writable:true,value:true},buffered:{configurable:true,value:{length:1,end:()=>60}}});media.play=async()=>{Object.defineProperty(media,'paused',{configurable:true,writable:true,value:false});media.dispatchEvent(new Event('play'));};media.pause=()=>{Object.defineProperty(media,'paused',{configurable:true,writable:true,value:true});media.dispatchEvent(new Event('pause'));};document.body.append(media);el.media=media;window.__p6Media=media;window.__p6Seek=0;el.addEventListener('seek',()=>window.__p6Seek++);})()`);
+  check('scrubber: binds to HTML media duration and current time', await ev("document.querySelector('sand-scrubber input[type=range]').max==='100'&&document.querySelector('sand-scrubber input[type=range]').value==='12'")===true);
+  check('scrubber: buffered media is represented as a separate ridge', await ev("document.querySelector('sand-scrubber .gm-scrub-buffer').style.width==='60%'")===true);
+  await ev("(()=>{const el=document.querySelector('sand-scrubber');el.range.value='25';el.range.dispatchEvent(new Event('input',{bubbles:true}));})()");
+  check('scrubber: seeking updates media currentTime and emits seek', await ev("window.__p6Media.currentTime===25&&window.__p6Seek===1")===true);
+  await ev("document.querySelector('sand-scrubber').playButton.click()");
+  check('scrubber: play button delegates to the media element', await ev("window.__p6Media.paused===false&&document.querySelector('sand-scrubber .gm-scrub-play').getAttribute('aria-label')==='Pause media'")===true);
+  await ev("(()=>{const el=document.querySelector('sand-scrubber'),p=el.parentNode;p.removeChild(el);p.appendChild(el);window.__p6Media.dispatchEvent(new Event('timeupdate'));})()");
+  check('scrubber: media event binding survives component reconnect', await ev("document.querySelector('sand-scrubber').range.value==='25'")===true);
+
+  await ev("(()=>{const el=document.querySelector('sand-color-picker');window.__p6Color={input:0,change:0};el.addEventListener('input',()=>window.__p6Color.input++);el.addEventListener('change',()=>window.__p6Color.change++);el.value='#ff8800';})()");
+  check('color picker: accepts and normalizes hexadecimal value', await ev("document.querySelector('sand-color-picker').value==='#ff8800'&&document.querySelector('sand-color-picker input[type=color]').value==='#ff8800'")===true);
+  await ev("document.querySelector('sand-color-picker').setAttribute('format','rgb')");
+  check('color picker: RGB format is reflected in its value and readout', await ev("document.querySelector('sand-color-picker').value==='rgb(255, 136, 0)'&&document.querySelector('sand-color-picker output').textContent==='rgb(255, 136, 0)'")===true);
+  await ev("document.querySelector('sand-color-picker').palette.querySelector('[data-color=\"#b85c3c\"]').click()");
+  check('color picker: mineral swatch changes color and emits input/change', await ev("document.querySelector('sand-color-picker').value==='rgb(184, 92, 60)'&&window.__p6Color.input===1&&window.__p6Color.change===1")===true);
+  await ev("document.querySelector('sand-color-picker').setAttribute('disabled','')");
+  check('color picker: disabled state reaches native and preset controls', await ev("document.querySelector('sand-color-picker').input.disabled&&Array.from(document.querySelector('sand-color-picker').palette.querySelectorAll('button')).every(b=>b.disabled)")===true);
+}
+
+{ // forms: verify all twenty form-associated components in a small isolated form
   const formResults = await ev(`(() => {
     const f = document.createElement('form');
     f.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;overflow:hidden';
-    f.innerHTML = '<sand-slider name="slider" value="30"></sand-slider><sand-toggle name="toggle" checked></sand-toggle><sand-checkbox name="checkbox" value="yes" checked></sand-checkbox><sand-radio-group name="radio" options="Small,Medium,Large" value="Medium"></sand-radio-group><sand-segmented name="segment" options="Day,Week,Month" value="Week"></sand-segmented><sand-range name="range" value="10,90"></sand-range><sand-rating name="rating" value="4"></sand-rating><sand-input name="input" value="hello"></sand-input><sand-textarea name="textarea" value="note"></sand-textarea><sand-password name="password" value="do-not-print-this"></sand-password><sand-search name="search" value="grain"></sand-search><sand-otp name="otp" value="123456" length="6"></sand-otp><sand-select name="select" value="express" options="standard:Standard,express:Express"></sand-select><sand-combobox name="combo" value="DEL" options="DEL:Delhi,BLR:Bengaluru"></sand-combobox><sand-date-picker name="date" value="2026-11-24"></sand-date-picker><sand-date-range name="dateRange" start="2026-11-21" end="2026-11-25"></sand-date-range><sand-time-picker name="time" value="16:30"></sand-time-picker><sand-steps name="steps" steps="A,B,C" value="1"></sand-steps><sand-timer name="timer" duration="45"></sand-timer>';
+    f.innerHTML = '<sand-slider name="slider" value="30"></sand-slider><sand-toggle name="toggle" checked></sand-toggle><sand-checkbox name="checkbox" value="yes" checked></sand-checkbox><sand-radio-group name="radio" options="Small,Medium,Large" value="Medium"></sand-radio-group><sand-segmented name="segment" options="Day,Week,Month" value="Week"></sand-segmented><sand-range name="range" value="10,90"></sand-range><sand-rating name="rating" value="4"></sand-rating><sand-input name="input" value="hello"></sand-input><sand-textarea name="textarea" value="note"></sand-textarea><sand-password name="password" value="do-not-print-this"></sand-password><sand-search name="search" value="grain"></sand-search><sand-otp name="otp" value="123456" length="6"></sand-otp><sand-select name="select" value="express" options="standard:Standard,express:Express"></sand-select><sand-combobox name="combo" value="DEL" options="DEL:Delhi,BLR:Bengaluru"></sand-combobox><sand-date-picker name="date" value="2026-11-24"></sand-date-picker><sand-date-range name="dateRange" start="2026-11-21" end="2026-11-25"></sand-date-range><sand-time-picker name="time" value="16:30"></sand-time-picker><sand-steps name="steps" steps="A,B,C" value="1"></sand-steps><sand-timer name="timer" duration="45"></sand-timer><sand-color-picker name="color" value="#cc8844"></sand-color-picker>';
     document.body.append(f);
     const d = Object.fromEntries(new FormData(f));
-    const results = { slider: d.slider === '30', toggle: d.toggle === 'on', checkbox: d.checkbox === 'yes', radio: d.radio === 'Medium', segment: d.segment === 'Week', range: d.range === '10,90', rating: d.rating === '4', input: d.input === 'hello', textarea: d.textarea === 'note', password: d.password === 'do-not-print-this', search: d.search === 'grain', otp: d.otp === '123456', select: d.select === 'express', combo: d.combo === 'DEL', date: d.date === '2026-11-24', dateRange: d.dateRange === '2026-11-21/2026-11-25', time: d.time === '16:30', steps: d.steps === '1', timer: d.timer === '45' };
+    const results = { slider: d.slider === '30', toggle: d.toggle === 'on', checkbox: d.checkbox === 'yes', radio: d.radio === 'Medium', segment: d.segment === 'Week', range: d.range === '10,90', rating: d.rating === '4', input: d.input === 'hello', textarea: d.textarea === 'note', password: d.password === 'do-not-print-this', search: d.search === 'grain', otp: d.otp === '123456', select: d.select === 'express', combo: d.combo === 'DEL', date: d.date === '2026-11-24', dateRange: d.dateRange === '2026-11-21/2026-11-25', time: d.time === '16:30', steps: d.steps === '1', timer: d.timer === '45', color: d.color === '#cc8844' };
     f.remove();
     return results;
   })()`);

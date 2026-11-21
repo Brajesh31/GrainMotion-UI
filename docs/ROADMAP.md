@@ -130,6 +130,8 @@ Required coverage: active state, nested/expanded behavior, keyboard navigation, 
 
 **Target after phase:** 35 components total.
 
+**Implementation status:** Implementation is in progress on `main`. Six standalone custom elements, concept diagrams and a full test expansion are being integrated. The final phase will be marked complete only after build synchronization, generated documentation and the 35-component mobile Chromium suite pass. See [PHASE-6-MEDIA-FILES-SPEC.md](PHASE-6-MEDIA-FILES-SPEC.md).
+
 | # | Component | Element | Physical interaction |
 |---:|---|---|---|
 | 30 | File Dropzone | `sand-dropzone` | A file tile drops into a tray and produces an impact and settling effect. |
@@ -139,7 +141,7 @@ Required coverage: active state, nested/expanded behavior, keyboard navigation, 
 | 34 | Media Scrubber | `sand-scrubber` | A rake moves along a playback timeline, showing position and buffered ranges. |
 | 35 | Color Picker | `sand-color-picker` | Mineral pigment stones represent colors and selection. |
 
-Required coverage: MIME/type and size restrictions, preview lifecycle, upload progress/error/cancel, keyboard navigation, previous/next controls, media API integration, color value formats and accessible labels.
+Required coverage: MIME/type and size restrictions, upload progress/error/cancel request events, actual image source rendering, modal focus restoration, media API integration, color value formats, accessible labels, lifecycle and responsive layout.
 
 ## Phase 7: Lists, drag-and-drop and layout
 

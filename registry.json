@@ -642,6 +642,144 @@
         }
       ],
       "docs": "GrainMotion-UI Menu / Popover is a plain script that registers a custom element. Load /grainmotion-ui/menu.js with a script tag (not a module), Use <sand-menu items=\"new:New project,duplicate:Duplicate\"></sand-menu>. Listen for the bubbling select event to run an action. The open property and attribute control the menu visibility. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "dropzone",
+      "type": "registry:file",
+      "title": "GrainMotion-UI File Dropzone",
+      "description": "A file dropzone with real drag-and-drop and native file selection, type and size checks, clearable file state and accessible rejection messages. A file tile settles into a sand tray when accepted. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-dropzone>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "file",
+        "upload",
+        "dropzone",
+        "input",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "dropzone/dropzone.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/dropzone.js"
+        }
+      ],
+      "docs": "GrainMotion-UI File Dropzone is a plain script that registers a custom element. Load /grainmotion-ui/dropzone.js with a script tag (not a module), Use <sand-dropzone accept=\"image/*,.pdf\" multiple max-size=\"10485760\" label=\"Project files\"></sand-dropzone>. Read files, call addFiles() or clear(), and listen for files-change and file-reject. max-size is in bytes; the component selects files but does not upload them. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "upload-queue",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Upload Queue",
+      "description": "A transport-agnostic upload queue with per-file progress, queued/uploading/complete/error/cancelled states, retry and removal controls. It emits requests so the host application can perform the actual transfer. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-upload-queue>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "file",
+        "upload",
+        "queue",
+        "progress",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "upload-queue/upload-queue.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/upload-queue.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Upload Queue is a plain script that registers a custom element. Load /grainmotion-ui/upload-queue.js with a script tag (not a module), Use <sand-upload-queue label=\"Uploads\"></sand-upload-queue>. Call addFiles(files), update(id, {status, progress, error}), remove(id) or clear(). Listen for upload-request, upload-cancel, retry-request and queue-change. The host application owns the network transfer. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "carousel",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Image Carousel",
+      "description": "An image carousel that displays real images in a recessed walnut frame with previous/next buttons, indexed selection, touch swipes and keyboard navigation. It never fetches or transforms image sources. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-carousel>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "media",
+        "image",
+        "carousel",
+        "gallery",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "carousel/carousel.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/carousel.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Image Carousel is a plain script that registers a custom element. Load /grainmotion-ui/carousel.js with a script tag (not a module), Set el.items to an array of {src, alt, caption} objects. Read or set el.index and listen for change. Only HTTP(S), blob and data:image sources are accepted. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "lightbox",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Lightbox Gallery",
+      "description": "A thumbnail gallery with a native modal dialog for expanded images, accessible previous/next navigation, Escape/backdrop dismissal and focus restoration. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-lightbox>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "media",
+        "image",
+        "gallery",
+        "lightbox",
+        "dialog",
+        "sand"
+      ],
+      "files": [
+        {
+          "path": "lightbox/lightbox.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/lightbox.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Lightbox Gallery is a plain script that registers a custom element. Load /grainmotion-ui/lightbox.js with a script tag (not a module), Set el.items to {src, alt, caption} objects. Call openAt(index, opener) or close(), and listen for open, change and close. The expanded viewer uses the native dialog element. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "scrubber",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Media Scrubber",
+      "description": "A media timeline bound to an existing HTMLAudioElement or HTMLVideoElement, with play/pause, current position, buffered range visualization and keyboard-accessible seeking. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-scrubber>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "media",
+        "audio",
+        "video",
+        "timeline",
+        "scrubber",
+        "sand"
+      ],
+      "files": [
+        {
+          "path": "scrubber/scrubber.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/scrubber.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Media Scrubber is a plain script that registers a custom element. Load /grainmotion-ui/scrubber.js with a script tag (not a module), Assign el.media = document.querySelector('video') or an audio element. The scrubber does not fetch media; it reads duration/currentTime/buffered and writes currentTime when seeking. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Color Picker",
+      "description": "A color control with the native browser color dialog and a palette of tactile mineral swatches. Supports hexadecimal, RGB and HSL readouts plus form submission. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-color-picker>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "color",
+        "picker",
+        "input",
+        "form",
+        "sand",
+        "palette"
+      ],
+      "files": [
+        {
+          "path": "color-picker/color-picker.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/color-picker.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Color Picker is a plain script that registers a custom element. Load /grainmotion-ui/color-picker.js with a script tag (not a module), Use <sand-color-picker name=\"accent\" value=\"#c28b55\" format=\"hex\"></sand-color-picker>. Read or set value; input and change events expose both formatted value and normalized hex. More: https://brajesh31.github.io/GrainMotion-UI"
     }
   ]
 }

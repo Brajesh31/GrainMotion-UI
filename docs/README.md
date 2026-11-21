@@ -2,7 +2,7 @@
 
 This directory is the project handbook. It documents the current implementation, the planned 50-component catalogue, design rules, architecture, accessibility expectations, performance constraints, testing, contribution workflow and component authoring process.
 
-> **Status:** The repository now contains twenty-nine implemented components across the original set and Phases 1 through 5. The remaining 21 entries in the 50-component roadmap are proposals, not available components yet.
+> **Status:** The repository now contains thirty-five implemented components across the original set and Phases 1 through 6. The remaining 15 entries in the 50-component roadmap are proposals, not available components yet.
 
 ## Documentation map
 
@@ -10,6 +10,7 @@ This directory is the project handbook. It documents the current implementation,
 |---|---|
 | [Roadmap](ROADMAP.md) | Phases, component targets, dependencies and completion gates |
 | [Component catalog](COMPONENT-CATALOG.md) | Existing components and the full proposed library |
+| [Phase 6 implementation spec](PHASE-6-MEDIA-FILES-SPEC.md) | Media and file component APIs, interactions and acceptance requirements |
 | [Architecture](ARCHITECTURE.md) | Current sand engine, custom elements, build and documentation generation |
 | [Design system](DESIGN-SYSTEM.md) | Existing visual language and rules for new work |
 | [Asset catalog](ASSET-CATALOG.md) | Current asset inventory and asset creation standards |
@@ -22,7 +23,7 @@ This directory is the project handbook. It documents the current implementation,
 
 ## Start here
 
-- To use a component, read its component-level README in its directory. The twenty-nine implemented component guides are: [Slider](../slider/README.md), [Toggle](../toggle/README.md), [Signature](../signature/README.md), [Thinking](../thinking/README.md), [Checkbox](../checkbox/README.md), [Radio Group](../radio-group/README.md), [Segmented](../segmented/README.md), [Range](../range/README.md), [Rating](../rating/README.md), [Text Field](../input/README.md), [Textarea](../textarea/README.md), [Password](../password/README.md), [Search](../search/README.md) and [OTP/PIN](../otp/README.md), [Select](../select/README.md), [Combobox](../combobox/README.md), [Date Picker](../date-picker/README.md), [Date Range](../date-range/README.md) and [Time Picker](../time-picker/README.md), [Progress Bar](../progress/README.md), [Progress Ring](../progress-ring/README.md), [Step Indicator](../steps/README.md), [Hourglass Timer](../timer/README.md), [Loading Indicator](../loader/README.md), [Tabs](../tabs/README.md), [Accordion](../accordion/README.md), [Pagination](../pagination/README.md), [Breadcrumbs](../breadcrumbs/README.md) and [Menu / Popover](../menu/README.md).
+- To use a component, read its component-level README in its directory. The thirty-five implemented component guides are: [Slider](../slider/README.md), [Toggle](../toggle/README.md), [Signature](../signature/README.md), [Thinking](../thinking/README.md), [Checkbox](../checkbox/README.md), [Radio Group](../radio-group/README.md), [Segmented](../segmented/README.md), [Range](../range/README.md), [Rating](../rating/README.md), [Text Field](../input/README.md), [Textarea](../textarea/README.md), [Password](../password/README.md), [Search](../search/README.md) and [OTP/PIN](../otp/README.md), [Select](../select/README.md), [Combobox](../combobox/README.md), [Date Picker](../date-picker/README.md), [Date Range](../date-range/README.md) and [Time Picker](../time-picker/README.md), [Progress Bar](../progress/README.md), [Progress Ring](../progress-ring/README.md), [Step Indicator](../steps/README.md), [Hourglass Timer](../timer/README.md), [Loading Indicator](../loader/README.md), [Tabs](../tabs/README.md), [Accordion](../accordion/README.md), [Pagination](../pagination/README.md), [Breadcrumbs](../breadcrumbs/README.md) and [Menu / Popover](../menu/README.md), [File Dropzone](../dropzone/README.md), [Upload Queue](../upload-queue/README.md), [Image Carousel](../carousel/README.md), [Lightbox Gallery](../lightbox/README.md), [Media Scrubber](../scrubber/README.md) and [Color Picker](../color-picker/README.md).
 - To propose or build a new component, read the [roadmap](ROADMAP.md) and [component creation guide](COMPONENT-CREATION-GUIDE.md).
 - To understand the current renderer, read [architecture](ARCHITECTURE.md) and the existing [GrainMotion-UI skill](../skills/grainmotion-ui/SKILL.md).
 - To check what is implemented, consult the [component catalog](COMPONENT-CATALOG.md), not the proposed roadmap entries.

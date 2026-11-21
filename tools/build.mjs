@@ -40,6 +40,12 @@ export const SOUNDS = {
   pagination: one('stone', 'tap'),
   breadcrumbs: one('stone', 'tap'),
   menu: one('stone', 'tap'),
+  dropzone: one('tap', 'settle'),
+  'upload-queue': one('stone', 'settle', 'tap'),
+  carousel: one('stone', 'tap'),
+  lightbox: one('stone', 'tap'),
+  scrubber: one('tap', 'settle'),
+  'color-picker': one('stone', 'tap'),
 };
 // Images a control carries, as constants.
 export const ART = { thinking: { ROCK: 'rock.webp' } };

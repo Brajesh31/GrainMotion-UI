@@ -4,7 +4,7 @@
 
 ### Interfaces shaped by sand, motion, and interaction.
 
-A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray.
+A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray. Phase 6 adds six media and file controls with real file selection, media timelines, framed images and mineral pigment choices.
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
@@ -15,7 +15,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml/badge.svg" alt="Component validation"></a>
   <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
   <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
-  <img src="https://img.shields.io/badge/Components-29-C49A6C" alt="Twenty-nine components">
+  <img src="https://img.shields.io/badge/Components-35-C49A6C" alt="Thirty-five components">
 </p>
 
 </div>
@@ -24,7 +24,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI currently includes twenty-nine standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI currently includes thirty-five standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -67,6 +67,14 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 | **Sand Pagination** | A river stone marks the active numbered well along a carved track. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/pagination/) · [Documentation](pagination/README.md) |
 | **Sand Breadcrumbs** | Stepping stones connect ancestor links to a dark current-location marker. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/breadcrumbs/) · [Documentation](breadcrumbs/README.md) |
 | **Sand Menu / Popover** | A stone trigger lifts a walnut-framed command tray. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/menu/) · [Documentation](menu/README.md) |
+
+
+| **Sand File Dropzone** | Real file selection and drag/drop with type and size checks; accepted tiles settle into a walnut tray. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/dropzone/) · [Documentation](dropzone/README.md) |
+| **Sand Upload Queue** | Per-file queue state and host-supplied transfer progress through a carved channel. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/upload-queue/) · [Documentation](upload-queue/README.md) |
+| **Sand Image Carousel** | Real framed images with previous/next, dots, keyboard navigation and touch swipes. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/carousel/) · [Documentation](carousel/README.md) |
+| **Sand Lightbox Gallery** | Thumbnail plates open into a native modal image viewer with focus restoration. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/lightbox/) · [Documentation](lightbox/README.md) |
+| **Sand Media Scrubber** | A stone playhead follows an existing audio/video element and its buffered range. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/scrubber/) · [Documentation](scrubber/README.md) |
+| **Sand Color Picker** | Native color chooser and named mineral pigment swatches with hex/RGB/HSL values. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/color-picker/) · [Documentation](color-picker/README.md) |
 
 > The gallery image above shows the component set together. The concept artwork below documents visual exploration and design direction, not additional live component screenshots.
 
@@ -145,7 +153,7 @@ Each new control also has its own physical-interaction concept sheet. These are 
     </td>
     <td align="center" width="50%">
       <strong>One material language</strong>
-      <br>Sand, walnut, bamboo and river stone carry through all twenty-four controls.
+      <br>Sand, walnut, bamboo and river stone carry through all thirty-five controls.
     </td>
   </tr>
 </table>
@@ -249,6 +257,21 @@ The next five studies show how native browser fields sit above the sand renderer
 </div>
 
 See [making-of/](making-of/) for the design notes, concept images, and prompts behind the visual direction.
+
+
+### Phase 6 media, file and visual concepts
+
+The six studies below show the material direction for file arrival, transfer state, image framing, expanded viewing, media position and mineral pigment. These are design concepts, not screenshots of the running components.
+
+<div align="center">
+
+<table>
+<tr><td align="center"><img src="dropzone/assets/concept.svg" alt="File tile landing in a walnut dropzone tray" width="100%"><br><strong>File Dropzone</strong></td><td align="center"><img src="upload-queue/assets/concept.svg" alt="File tiles in a progress channel" width="100%"><br><strong>Upload Queue</strong></td></tr>
+<tr><td align="center"><img src="carousel/assets/concept.svg" alt="Framed image moving along a sand track" width="100%"><br><strong>Image Carousel</strong></td><td align="center"><img src="lightbox/assets/concept.svg" alt="Expanded image in a modal frame" width="100%"><br><strong>Lightbox Gallery</strong></td></tr>
+<tr><td align="center"><img src="scrubber/assets/concept.svg" alt="Stone playhead on a raked media timeline" width="100%"><br><strong>Media Scrubber</strong></td><td align="center"><img src="color-picker/assets/concept.svg" alt="Mineral pigment swatches" width="100%"><br><strong>Color Picker</strong></td></tr>
+</table>
+
+</div>
 
 ## ⚙️ How it works
 
@@ -451,6 +474,12 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [Date Range Picker documentation](date-range/README.md)
 - [Time Picker documentation](time-picker/README.md)
 - [Loading Indicator documentation](loader/README.md)
+- [File Dropzone documentation](dropzone/README.md)
+- [Upload Queue documentation](upload-queue/README.md)
+- [Image Carousel documentation](carousel/README.md)
+- [Lightbox Gallery documentation](lightbox/README.md)
+- [Media Scrubber documentation](scrubber/README.md)
+- [Color Picker documentation](color-picker/README.md)
 - [Hourglass Timer documentation](timer/README.md)
 - [Step Indicator documentation](steps/README.md)
 - [Progress Ring documentation](progress-ring/README.md)

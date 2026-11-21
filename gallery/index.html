@@ -196,6 +196,28 @@ ITEMS.push(
     wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('select',e=>o.textContent='Selected: '+e.detail.label); } }
 );
 
+
+ITEMS.push(
+  { id: 'dropzone', name: 'File Dropzone', tag: 'sand-dropzone', sub: 'A file tile drops into a recessed walnut tray.',
+    html: '<sand-dropzone accept="image/*,.pdf" multiple max-size="10485760" label="Project files"></sand-dropzone><div class="readout">Drop an image or PDF, or choose a file.</div>',
+    wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('files-change',e=>o.textContent=e.detail.files.length+' file(s) accepted');el.addEventListener('file-reject',e=>o.textContent=e.detail.rejected.map(x=>x.name+': '+x.reason).join(' · ')); } },
+  { id: 'upload-queue', name: 'Upload Queue', tag: 'sand-upload-queue', sub: 'File tiles travel through a carved transfer channel.',
+    html: '<sand-upload-queue label="Uploads"></sand-upload-queue><div class="mini"><button class="pill" type="button" data-add>Queue sample files</button></div><div class="readout">Demo simulates progress; no network upload is made.</div>',
+    wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('upload-request',e=>o.textContent='Queued '+e.detail.item.name);card.querySelector('[data-add]').onclick=()=>{const ids=el.addFiles([new File(['one'],'design-assets.zip',{type:'application/zip'}),new File(['two'],'cover-image.png',{type:'image/png'})]);ids.forEach((id,i)=>{el.update(id,{status:'uploading',progress:22});setTimeout(()=>el.update(id,{status:'uploading',progress:68}),450+i*120);setTimeout(()=>el.update(id,{status:'complete',progress:100}),900+i*160);});}; } },
+  { id: 'carousel', name: 'Image Carousel', tag: 'sand-carousel', sub: 'Framed image plates move along a sand track.',
+    html: '<sand-carousel label="Material study"></sand-carousel><div class="readout">Image 1 of 3</div>',
+    wire: (el, card) => { el.items=[{src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1000&q=80',alt:'Mountain landscape',caption:'Stone and open sky'},{src:'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=1000&q=80',alt:'Warm interior',caption:'Walnut and warm light'},{src:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1000&q=80',alt:'Night landscape',caption:'Night over the mountains'}];const o=card.querySelector('.readout'),show=()=>o.textContent='Image '+(el.index+1)+' of '+el.items.length;el.addEventListener('change',show);show(); } },
+  { id: 'lightbox', name: 'Lightbox Gallery', tag: 'sand-lightbox', sub: 'Select a framed image to lift it into a modal viewer.',
+    html: '<sand-lightbox label="Material gallery"></sand-lightbox><div class="readout">Select a thumbnail to enlarge.</div>',
+    wire: (el, card) => { el.items=[{src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=85',alt:'Mountain landscape',caption:'Open sky above the ridge'},{src:'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=1200&q=85',alt:'Warm interior',caption:'A quiet interior'},{src:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=85',alt:'Night sky',caption:'Stars above the mountains'}];const o=card.querySelector('.readout');el.addEventListener('open',e=>o.textContent='Opened image '+(e.detail.index+1));el.addEventListener('close',()=>o.textContent='Viewer closed'); } },
+  { id: 'scrubber', name: 'Media Scrubber', tag: 'sand-scrubber', sub: 'A stone playhead follows a real media timeline.',
+    html: '<video controls muted playsinline preload="metadata" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" style="width:100%;max-width:480px;border-radius:10px"></video><sand-scrubber label="Video position"></sand-scrubber><div class="readout">Loading media metadata…</div>',
+    wire: (el, card) => { const media=card.querySelector('video'),o=card.querySelector('.readout');el.media=media;const show=()=>o.textContent=Number.isFinite(media.duration)?Math.floor(media.currentTime)+'s / '+Math.floor(media.duration)+'s':'Waiting for metadata';media.addEventListener('loadedmetadata',show);media.addEventListener('timeupdate',show);show(); } },
+  { id: 'color-picker', name: 'Color Picker', tag: 'sand-color-picker', sub: 'Mineral pigment stones select a color value.',
+    html: '<sand-color-picker name="accent" value="#c28b55" format="hex" label="Accent color"></sand-color-picker><div class="readout">#c28b55</div>',
+    wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('input',e=>o.textContent=e.detail.hex); } }
+);
+
 // What each prompt says about wiring its control in. The rest of the prompt is the same for all of them.
 
 const WIRE = {
@@ -236,6 +258,14 @@ const WIRE = {
   pagination: ['Use <sand-pagination page="1" total="24"></sand-pagination> and listen for change to load the requested page in your application.', 'Read or set el.page. Configure sibling-count and boundary-count; the component does not fetch results or change the URL.', 'A river stone marks the current numbered well along the shallow sand track.'],
   breadcrumbs: ['Use <sand-breadcrumbs items="Home|/;Library|/library;Current"></sand-breadcrumbs>. Ancestors use Label|URL and the last entry is the current location.', 'Set the items property to an array for labels or URLs containing delimiters. Only HTTP(S) and safe relative links are rendered as anchors.', 'Stepping stones cross a raked sand path; the current location is a darker settled stone.'],
   menu: ['Use <sand-menu items="new:New project,duplicate:Duplicate"></sand-menu> and listen for the select event to execute actions.', 'Use el.open to control visibility. Arrow keys, Home/End and Escape work in the menu; outside pointer presses dismiss it and Escape restores trigger focus.', 'A stone trigger lifts to reveal an anchored walnut option tray.'],
+
+  dropzone: ['Use <sand-dropzone accept="image/*,.pdf" multiple max-size="10485760"></sand-dropzone> for file selection.', 'Read el.files, call el.addFiles(files) or el.clear(), and listen for files-change and file-reject. It validates type and maximum file size but never uploads the file.', 'Drag a file into the tray or use the native Choose files button.'],
+  'upload-queue': ['Use <sand-upload-queue></sand-upload-queue> to display application-managed transfers.', 'Call addFiles(files), then update(id, {status, progress, error}) from your upload transport. Handle upload-request, upload-cancel and retry-request; the component does not send network requests.', 'Each file becomes a tile with its own state and progress ridge.'],
+  carousel: ['Use <sand-carousel></sand-carousel> and assign items as an array of {src, alt, caption} objects.', 'Read or set el.index and listen for change. Previous/next buttons, dot buttons, Left/Right keys and touch swipes are supported.', 'The component displays the supplied image sources in a framed plate; it does not download or transform them.'],
+  lightbox: ['Use <sand-lightbox></sand-lightbox> and assign an array of {src, alt, caption} objects.', 'Call openAt(index, opener) or close(), and listen for open, change and close. The expanded viewer is a native dialog with Escape handling and focus restoration.', 'Thumbnail plates open into a full-screen framed image viewer.'],
+  scrubber: ['Use <sand-scrubber></sand-scrubber> beside an existing <video> or <audio> element, then assign el.media = mediaElement.', 'The scrubber reads duration, currentTime and buffered ranges, delegates play/pause, and sets currentTime during seeking. Listen for seek and seeked.', 'A stone playhead follows the media position while a lighter ridge represents buffered media.'],
+  'color-picker': ['Use <sand-color-picker name="accent" value="#c28b55" format="hex"></sand-color-picker>.', 'Read or set el.value. The format attribute selects hex, rgb or hsl readout; input and change expose detail.value and detail.hex. With name, the normalized color is submitted in a form.', 'The native browser color chooser and named mineral swatches share the same selected pigment.'],
+
 };
 const SKILL = { url: new URL('../skills/grainmotion-ui/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };
 const fileUrl = (id) => new URL(`../${id}/${id}.js`, location.href).href;

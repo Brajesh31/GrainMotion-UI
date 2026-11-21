@@ -71,6 +71,19 @@ The five navigation components now have standalone bundles, interactive demos, d
 | 28 | Breadcrumbs | `sand-breadcrumbs` | Stepping stones join ancestor links and the current-location marker. | [README](../breadcrumbs/README.md) · [Demo](../breadcrumbs/) · [Concept](../breadcrumbs/assets/concept.svg) | Implemented, CI passed |
 | 29 | Menu / Popover | `sand-menu` | A stone trigger lifts a walnut-framed command tray. | [README](../menu/README.md) · [Demo](../menu/) · [Concept](../menu/assets/concept.svg) | Implemented, CI passed |
 
+## Phase 6 components
+
+The six media and file components use the shared sand simulation, walnut frames and physical markers. Upload transport and media source ownership stay with the host application; the controls expose explicit events and native platform behavior.
+
+| # | Component | Custom element | Main interaction | Documentation | Status |
+|---:|---|---|---|---|---|
+| 30 | File Dropzone | `sand-dropzone` | File selection and drag/drop with type and size validation; accepted tiles settle into a tray. | [README](../dropzone/README.md) · [Demo](../dropzone/) · [Concept](../dropzone/assets/concept.svg) | In progress |
+| 31 | Upload Queue | `sand-upload-queue` | Per-file queue states and host-supplied progress along a carved channel. | [README](../upload-queue/README.md) · [Demo](../upload-queue/) · [Concept](../upload-queue/assets/concept.svg) | In progress |
+| 32 | Image Carousel | `sand-carousel` | Actual framed images with keyboard, touch and previous/next navigation. | [README](../carousel/README.md) · [Demo](../carousel/) · [Concept](../carousel/assets/concept.svg) | In progress |
+| 33 | Lightbox Gallery | `sand-lightbox` | A thumbnail opens into a native modal viewer with keyboard navigation. | [README](../lightbox/README.md) · [Demo](../lightbox/) · [Concept](../lightbox/assets/concept.svg) | In progress |
+| 34 | Media Scrubber | `sand-scrubber` | A stone playhead follows HTML media time and buffered ranges. | [README](../scrubber/README.md) · [Demo](../scrubber/) · [Concept](../scrubber/assets/concept.svg) | In progress |
+| 35 | Color Picker | `sand-color-picker` | Native color chooser and mineral swatches with form value support. | [README](../color-picker/README.md) · [Demo](../color-picker/) · [Concept](../color-picker/assets/concept.svg) | In progress |
+
 ## Planned components
 
 The components below are roadmap candidates, not implemented features. Their physical concepts are preliminary and may be refined during design exploration.
