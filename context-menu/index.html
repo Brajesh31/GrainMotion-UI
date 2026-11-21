@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GrainMotion-UI · Context Menu</title>
+<meta name="description" content="Open a contextual action menu using pointer, touch or keyboard input.">
+<link rel="icon" href="data:,">
+<style>
+:root{color-scheme:light;--page:#e9e1d4;--ink:#322b22;--muted:#776b5a}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--page);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,sans-serif;display:grid;place-items:center;padding:22px}main{width:min(600px,100%);text-align:center}h1{font-size:26px;margin:0}p{color:var(--muted)}.stage{min-height:230px;display:grid;place-items:center;padding:18px 0}.stage sand-context-menu{width:min(520px,100%)}.readout{min-height:24px;font-size:13px}
+</style>
+</head>
+<body><main>
+<h1>🪵 Context Menu</h1>
+<p>Right-click, long-press the target on a touch device, or press Shift + F10.</p>
+<div class="stage"><sand-context-menu id="menu"></sand-context-menu></div>
+<p id="readout" class="readout" aria-live="polite">Choose an action from the contextual tray.</p>
+<p><a href="../">← All components</a> · <a href="https://github.com/Brajesh31/GrainMotion-UI/blob/main/context-menu/README.md">Documentation</a></p>
+</main>
+<script src="context-menu.js"></script>
+<script>
+const menu=document.getElementById('menu'),out=document.getElementById('readout');
+menu.items=[{id:'open',label:'Open'},{id:'rename',label:'Rename',shortcut:'R'},{separator:true},{id:'duplicate',label:'Duplicate'},{id:'archive',label:'Archive',disabled:true}];
+menu.addEventListener('select',e=>out.textContent='Selected: '+e.detail.label+'. The application owns the action.');
+</script>
+</body>
+</html>
