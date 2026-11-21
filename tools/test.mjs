@@ -420,6 +420,81 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('color picker: disabled state reaches native and preset controls', await ev("document.querySelector('sand-color-picker').input.disabled&&Array.from(document.querySelector('sand-color-picker').palette.querySelectorAll('button')).every(b=>b.disabled)")===true);
 }
 
+
+{ // Phase 7: advanced ordering, transfer, pane sizing and nested hierarchy
+  const sort=document.querySelector('sand-sortable');
+  sort.items=[{id:'a',label:'First'},{id:'b',label:'Second'},{id:'c',label:'Third'}];
+  window.__p7={reorder:0,transfer:0,split:0,resize:0,select:0,expand:0};
+  sort.addEventListener('reorder',()=>window.__p7.reorder++);
+  check('sortable: renders each stable item as a list row', await ev("document.querySelector('sand-sortable').list.querySelectorAll('[role=listitem]').length===3")===true);
+  await ev("document.querySelector('sand-sortable').move(2,0)");
+  check('sortable: move updates stable ID order', await ev("document.querySelector('sand-sortable').value.join(',')==='c,a,b'")===true);
+  check('sortable: reorder event exposes new order', await ev("window.__p7.reorder===1")===true);
+  await ev("(()=>{const el=document.querySelector('sand-sortable');el.list.querySelector('[data-id=a] [data-action=handle]').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true}));})()");
+  check('sortable: keyboard ArrowDown reorders a row', await ev("document.querySelector('sand-sortable').value.join(',')==='c,b,a'")===true);
+  await ev("document.querySelector('sand-sortable').setAttribute('disabled','')");
+  check('sortable: disabled blocks API reorder and disables controls', await ev("(()=>{const el=document.querySelector('sand-sortable');return el.move(0,2)===false&&Array.from(el.list.querySelectorAll('button')).every(b=>b.disabled)})()")===true);
+  await ev("document.querySelector('sand-sortable').removeAttribute('disabled')");
+
+  const transfer=document.querySelector('sand-transfer-list');
+  transfer.items=[{id:'one',label:'One',side:'left'},{id:'two',label:'Two',side:'left'},{id:'three',label:'Three',side:'right'}];
+  transfer.addEventListener('transfer',()=>window.__p7.transfer++);
+  transfer.select(['one','two']);
+  check('transfer: multi-selection is represented in state', await ev("document.querySelector('sand-transfer-list').selected.length===2")===true);
+  await ev("document.querySelector('sand-transfer-list').moveSelected('right')");
+  check('transfer: selected items move into other tray', await ev("document.querySelector('sand-transfer-list').items.filter(x=>x.side==='right').length===3")===true);
+  check('transfer: transfer event reaches the host', await ev("window.__p7.transfer===1")===true);
+  await ev("document.querySelector('sand-transfer-list').moveAll('left')");
+  check('transfer: moveAll returns enabled items', await ev("document.querySelector('sand-transfer-list').items.every(x=>x.side==='left')")===true);
+  await ev("document.querySelector('sand-transfer-list').setAttribute('disabled','')");
+  check('transfer: disabled state disables selection and actions', await ev("document.querySelector('sand-transfer-list').toRight.disabled&&document.querySelector('sand-transfer-list').leftList.querySelector('button').disabled")===true);
+  await ev("document.querySelector('sand-transfer-list').removeAttribute('disabled')");
+
+  const split=document.querySelector('sand-split-pane');
+  split.value=65;
+  check('split pane: value sets first pane percentage', await ev("Math.round(document.querySelector('sand-split-pane').value)===65")===true);
+  check('split pane: separator exposes role, orientation and value', await ev("(()=>{const b=document.querySelector('sand-split-pane .gm-split-divider');return b.getAttribute('role')==='separator'&&b.getAttribute('aria-valuenow')==='65'&&b.getAttribute('aria-orientation')==='vertical'})()")===true);
+  split.addEventListener('input',()=>window.__p7.split++);
+  await ev("(()=>{const el=document.querySelector('sand-split-pane');el.divider.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));})()");
+  check('split pane: keyboard separator adjusts size and emits input', await ev("document.querySelector('sand-split-pane').value===67&&window.__p7.split===1")===true);
+  await ev("document.querySelector('sand-split-pane').setAttribute('axis','vertical')");
+  check('split pane: vertical axis changes separator orientation', await ev("document.querySelector('sand-split-pane .gm-split-divider').getAttribute('aria-orientation')==='horizontal'")===true);
+  await ev("document.querySelector('sand-split-pane').value=97");
+  check('split pane: value respects maximum', await ev("document.querySelector('sand-split-pane').value===80")===true);
+
+  const resize=document.querySelector('sand-resizable');
+  resize.panels=[{id:'a',label:'A',content:'Panel A',min:20,max:60},{id:'b',label:'B',content:'Panel B',min:20,max:60},{id:'c',label:'C',content:'Panel C',min:20,max:60}];
+  check('resizable: renders panels and separators', await ev("document.querySelector('sand-resizable').ui.querySelectorAll('.gm-res-panel').length===3&&document.querySelector('sand-resizable').ui.querySelectorAll('[role=separator]').length===2")===true);
+  resize.addEventListener('change',()=>window.__p7.resize++);
+  await ev("document.querySelector('sand-resizable').resizeBoundary(0,8,true)");
+  check('resizable: adjacent resize preserves 100 percent total', await ev("Math.abs(document.querySelector('sand-resizable').sizes.reduce((a,b)=>a+b,0)-100)<0.01")===true);
+  check('resizable: boundary adjustment emits change', await ev("window.__p7.resize===1")===true);
+  await ev("(()=>{const el=document.querySelector('sand-resizable');el.ui.querySelector('[data-boundary=0]').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));})()");
+  check('resizable: keyboard arrows adjust a boundary', await ev("window.__p7.resize===2")===true);
+  await ev("document.querySelector('sand-resizable').setAttribute('disabled','')");
+  check('resizable: disabled state disables every separator', await ev("Array.from(document.querySelector('sand-resizable').ui.querySelectorAll('[role=separator]')).every(b=>b.disabled)")===true);
+  await ev("document.querySelector('sand-resizable').removeAttribute('disabled')");
+
+  const tree=document.querySelector('sand-tree');
+  tree.items=[{id:'root',label:'Root',children:[{id:'branch',label:'Branch',children:[{id:'leaf',label:'Leaf'}]},{id:'other',label:'Other'}]},{id:'loose',label:'Loose'}];
+  tree.expanded=['root','branch'];
+  tree.addEventListener('select',()=>window.__p7.select++);
+  tree.addEventListener('expand',()=>window.__p7.expand++);
+  check('tree: nested nodes expose treeitem levels', await ev("document.querySelector('sand-tree').nodeButtons.find(b=>b.dataset.nodeId==='leaf')?.getAttribute('aria-level')==='3'")===true);
+  await ev("document.querySelector('sand-tree').select('leaf',true)");
+  check('tree: selected node is reflected and announced', await ev("document.querySelector('sand-tree').value==='leaf'&&window.__p7.select===1")===true);
+  await ev("document.querySelector('sand-tree').toggle('branch',true)");
+  check('tree: collapse hides descendants and emits expand state', await ev("document.querySelector('sand-tree').nodeButtons.some(b=>b.dataset.nodeId==='leaf')===false&&window.__p7.expand===1")===true);
+  await ev("document.querySelector('sand-tree').toggle('branch',true)");
+  check('tree: branch expands again without losing data', await ev("document.querySelector('sand-tree').nodeButtons.some(b=>b.dataset.nodeId==='leaf')===true")===true);
+  await ev("(()=>{const el=document.querySelector('sand-tree'),b=el.nodeButtons.find(x=>x.dataset.nodeId==='root');b.focus();b.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true}));})()");
+  check('tree: ArrowDown follows visible hierarchy order', await ev("document.activeElement?.dataset.nodeId==='branch'")===true);
+  await ev("document.querySelector('sand-tree').setAttribute('disabled','')");
+  check('tree: disabled state disables every tree item', await ev("Array.from(document.querySelector('sand-tree').nodeButtons).every(b=>b.disabled)")===true);
+  await ev("document.querySelector('sand-tree').removeAttribute('disabled')");
+}
+
+
 { // forms: verify all twenty form-associated components in a small isolated form
   const formResults = await ev(`(() => {
     const f = document.createElement('form');
