@@ -6,7 +6,7 @@ Grow GrainMotion-UI into a carefully designed library of tactile interface contr
 
 **Target:** 50 components total, including the four already implemented. This means 46 new components.
 
-**Status update (through Phase 2):** The first ten additions now have standalone source files, live demo pages, component READMEs and concept assets. Phases 1 and 2 are wired into the main gallery, registry and AI-readable catalog. Phase 1 passed the mobile Chromium suite. Phase 2 implementation is in place and its automated verification is in progress; manual assistive-technology and physical-device checks remain outstanding. The original four components remain in place.
+**Status update (through Phase 2):** The first ten additions now have standalone source files, live demo pages, component READMEs and concept assets. Phases 1 and 2 are wired into the main gallery, registry and AI-readable catalog. Phases 1 and 2 passed the mobile Chromium suite. Manual assistive-technology and physical-device checks remain outstanding. The original four components remain in place.
 
 This roadmap is not a completion report. A component is not release-complete until its functional and regression tests pass.
 
@@ -70,7 +70,7 @@ Required coverage: checked/unchecked and selected states, disabled options, keyb
 
 Required coverage: labels, placeholders, input and change events, input constraints, paste behavior, autocomplete, validation messages, password reveal behavior, focus and keyboard support.
 
-**Implementation status:** The five Phase 2 controls now have standalone bundles, live demos, complete component guides and concept assets. The gallery, registry and AI-readable catalog have been extended to fourteen components. Automated Chromium coverage is being added before Phase 2 can be marked fully verified. Sensitive values must not be written to logs or exposed in visual assets.
+**Implementation status:** The five Phase 2 controls now have standalone bundles, live demos, complete component guides and concept assets. The gallery, registry and AI-readable catalog have been extended to fourteen components. The mobile Chromium suite passes the Phase 2 interaction and form checks. Manual screen-reader and real-device verification remains required. Sensitive values must not be written to logs or exposed in visual assets.
 
 ## Phase 3: Selection, calendar and time controls
 
