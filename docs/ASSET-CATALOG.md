@@ -39,6 +39,11 @@ This catalog records assets found in the current repository tree. It does not as
 | `steps/assets/concept.svg` | SVG | Completed, current and upcoming stepping-stone concept diagram, not a runtime screenshot. |
 | `timer/assets/concept.svg` | SVG | Two-chamber hourglass and falling sand concept diagram, not a runtime screenshot. |
 | `loader/assets/concept.svg` | SVG | Repeating rake and loading pattern concept diagram, not a runtime screenshot. |
+| `tabs/assets/concept.svg` | SVG | River-stone tab marker and inset panel concept study, not a runtime screenshot. |
+| `accordion/assets/concept.svg` | SVG | Walnut lids and exposed compartment concept study, not a runtime screenshot. |
+| `pagination/assets/concept.svg` | SVG | Numbered wells and moving page-stone concept study, not a runtime screenshot. |
+| `breadcrumbs/assets/concept.svg` | SVG | Stepping-stone hierarchy and current-location concept study, not a runtime screenshot. |
+| `menu/assets/concept.svg` | SVG | Lifting stone trigger and walnut option-tray concept study, not a runtime screenshot. |
 
 ### Audio assets
 
@@ -56,7 +61,7 @@ The following files exist under `sounds/`:
 | `sounds/sweep.mp3` | MP3 | Sweep sound. |
 | `sounds/tap.mp3`, `sounds/tap-b.mp3` | MP3 | Paired tap sounds. |
 
-Exact per-component embedding is configured in [tools/build.mjs](../tools/build.mjs). Review that file before changing an asset assignment.
+Phase 5 reuses the existing paired stone and tap recordings, embedded per component rather than added as separate new source assets. Exact per-component embedding is configured in [tools/build.mjs](../tools/build.mjs). Review that file before changing an asset assignment.
 
 ## Asset categories to add as the library grows
 
