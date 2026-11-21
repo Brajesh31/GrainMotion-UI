@@ -364,7 +364,7 @@ class SandColorPicker extends SandTray{
  formResetCallback(){this.value=this.getAttribute('value')||'#c28b55';}
  formDisabledCallback(v){this.toggleAttribute('disabled',v);}
  layout(){const r=this.inner;for(let y=r.y0;y<r.y1;y++)for(let x=r.x0;x<r.x1;x++){const i=y*this.W+x;if(this.inside[i])this.h[i]=this.lines(x,y,4,41)*.045;}this.relax(r.x0,r.x1,3);this.dirty=true;}
- step(){const n=Math.max(1,this.swatches?.children.length||8);this.stones=Array.from({length:Math.min(4,n)},(_,i)=>[this.inner.x0+(i+.5)*(this.inner.x1-this.inner.x0)/Math.min(4,n),this.H*.82,this.H*.04,this.H*.06,1,1,.5]);}
+ step(){const n=Math.max(1,this.swatches?.length||8);this.stones=Array.from({length:Math.min(4,n)},(_,i)=>[this.inner.x0+(i+.5)*(this.inner.x1-this.inner.x0)/Math.min(4,n),this.H*.82,this.H*.04,this.H*.06,1,1,.5]);}
 }
 if(!customElements.get('sand-color-picker'))customElements.define('sand-color-picker',SandColorPicker);
 
