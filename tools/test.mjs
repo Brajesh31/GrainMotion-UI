@@ -459,7 +459,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("document.querySelector('sand-resizable').resizeBoundary(0,8,true)");
   check('resizable: adjacent resize preserves 100 percent total', await ev("Math.abs(document.querySelector('sand-resizable').sizes.reduce((a,b)=>a+b,0)-100)<0.01")===true);
   check('resizable: boundary adjustment emits change', await ev("window.__p7.resize===1")===true);
-  await ev("(()=>{const el=document.querySelector('sand-resizable');el.ui.querySelector('[data-boundary=0]').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));})()");
+  await ev("(()=>{const el=document.querySelector('sand-resizable');el.ui.querySelector('[data-boundary="0"]').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));})()");
   check('resizable: keyboard arrows adjust a boundary', await ev("window.__p7.resize===2")===true);
   await ev("document.querySelector('sand-resizable').setAttribute('disabled','')");
   check('resizable: disabled state disables every separator', await ev("Array.from(document.querySelector('sand-resizable').ui.querySelectorAll('[role=separator]')).every(b=>b.disabled)")===true);
@@ -471,7 +471,8 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("document.querySelector('sand-tree').select('leaf',true)");
   check('tree: selected node is reflected and announced', await ev("document.querySelector('sand-tree').value==='leaf'&&window.__p7.select===1")===true);
   await ev("document.querySelector('sand-tree').toggle('branch',true)");
-  check('tree: collapse hides descendants and emits expand state', await ev("document.querySelector('sand-tree').nodeButtons.some(b=>b.dataset.nodeId==='leaf')===false&&window.__p7.expand===1")===true);
+  const treeAfterCollapse=await ev("JSON.stringify({nodes:document.querySelector('sand-tree').nodeButtons.map(b=>b.dataset.nodeId),expanded:document.querySelector('sand-tree').expanded,events:window.__p7.expand})");
+  check('tree: collapse hides descendants and emits expand state', await ev("document.querySelector('sand-tree').nodeButtons.some(b=>b.dataset.nodeId==='leaf')===false&&window.__p7.expand===1")===true, treeAfterCollapse);
   await ev("document.querySelector('sand-tree').toggle('branch',true)");
   check('tree: branch expands again without losing data', await ev("document.querySelector('sand-tree').nodeButtons.some(b=>b.dataset.nodeId==='leaf')===true")===true);
   await ev("(()=>{const el=document.querySelector('sand-tree'),b=el.nodeButtons.find(x=>x.dataset.nodeId==='root');b.focus();b.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true}));})()");
