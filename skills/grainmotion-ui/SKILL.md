@@ -55,7 +55,7 @@ class SandThing extends SandTray {
 
 ## Current component set
 
-The repository includes nineteen controls: Slider, Toggle, Signature, Thinking, Checkbox, Radio Group, Segmented Control, Range Slider, Rating, Text Field, Textarea, Password Field, Search Field, OTP/PIN Input, Select, Combobox, Date Picker, Date Range Picker and Time Picker. Read each component README before changing or integrating its public API.
+The repository includes twenty-four controls: Slider, Toggle, Signature, Thinking, Checkbox, Radio Group, Segmented Control, Range Slider, Rating, Text Field, Textarea, Password Field, Search Field, OTP/PIN Input, Select, Combobox, Date Picker, Date Range Picker and Time Picker. Read each component README before changing or integrating its public API.
 
 ## Phase 2 native text controls
 
@@ -84,6 +84,19 @@ Select, Combobox, Date Picker, Date Range Picker and Time Picker use native brow
 - Preserve min/max/step, required/disabled state, native keyboard behavior, form association and validation.
 
 See the individual component READMEs for supported APIs and known platform limitations.
+
+## Phase 4 progress, loading and activity controls
+
+Progress Bar, Progress Ring, Step Indicator, Hourglass Timer and Loading Indicator use the same SandTray lifecycle but communicate different status models.
+
+- Progress Bar and Progress Ring accept numeric value/min/max. Add indeterminate when the total is unknown; omit aria-valuenow in that state. Do not invent percentages.
+- Step Indicator uses native buttons, an accessible group label, aria-current=step and a zero-based active index. Keep the visible set to five steps or fewer.
+- Hourglass Timer uses requestAnimationFrame delta time, not setInterval. Expose start(), pause(), reset() and cancel(); emit timer-tick at whole-second boundaries and complete once at zero. It is not a precision alarm clock.
+- Loading Indicator is indeterminate. Set active=false when work ends; set speed between 0.25 and 4. When prefers-reduced-motion is active, hold the rake still.
+- Keep timer and step actions as real native buttons. The sand drawing never replaces keyboard operation or status semantics.
+- Avoid updating aria-live on every animation frame. Announce meaningful state changes and whole-second timer ticks only.
+
+See each component README for the exact public API and limitations.
 
 ## Wire it in
 
