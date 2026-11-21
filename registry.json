@@ -429,6 +429,113 @@
         }
       ],
       "docs": "GrainMotion-UI Time Picker is a plain script that registers a custom element. Load /grainmotion-ui/time-picker.js with a script tag (not a module), Use <sand-time-picker name=\"appointment\" label=\"Appointment time\" format=\"12\" min=\"09:00\" max=\"17:30\" step=\"900\"></sand-time-picker>. Read or set el.value in 24-hour `HH:MM` form. The `format` property controls a 12/24-hour readout; native input presentation follows browser locale. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "progress",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Progress Bar",
+      "description": "A bamboo rake advances through a sand channel, leaving a growing trail and a soft ridge ahead of its tines. Supports determinate and indeterminate progress. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-progress>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "progress",
+        "status",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "progress/progress.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/progress.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Progress Bar is a plain script that registers a custom element. Load /grainmotion-ui/progress.js with a script tag (not a module), Use <sand-progress value=\"42\" label=\"Upload progress\"></sand-progress>. Set value, min and max; add indeterminate for unknown progress. The element exposes progressbar semantics and aria-valuetext. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "progress-ring",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Progress Ring",
+      "description": "A circular progress indicator with a river pebble travelling around an engraved sand groove. Supports determinate and indeterminate states. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-progress-ring>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "progress",
+        "status",
+        "ring",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "progress-ring/progress-ring.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/progress-ring.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Progress Ring is a plain script that registers a custom element. Load /grainmotion-ui/progress-ring.js with a script tag (not a module), Use <sand-progress-ring value=\"68\" label=\"Processing\"></sand-progress-ring>. Set value, min and max, or add indeterminate for a looping marker. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "steps",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Step Indicator",
+      "description": "A multi-step indicator using stepping stones and native buttons. Completed, current and upcoming steps are visually distinct and keyboard operable. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-steps>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "steps",
+        "navigation",
+        "progress",
+        "sand"
+      ],
+      "files": [
+        {
+          "path": "steps/steps.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/steps.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Step Indicator is a plain script that registers a custom element. Load /grainmotion-ui/steps.js with a script tag (not a module), Use <sand-steps steps=\"Account,Details,Review,Done\" value=\"1\" label=\"Setup progress\"></sand-steps>. Read or set value as a zero-based active step index. The element submits that index when name is supplied. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "timer",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Hourglass Timer",
+      "description": "A countdown timer rendered as a two-chamber hourglass. Sand falls through a narrow waist; pause, resume, reset and cancel controls remain native buttons. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-timer>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "timer",
+        "time",
+        "status",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "timer/timer.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/timer.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Hourglass Timer is a plain script that registers a custom element. Load /grainmotion-ui/timer.js with a script tag (not a module), Use <sand-timer duration=\"90\" label=\"Break timer\"></sand-timer>. Call start(), pause(), reset() or cancel(); read remaining and listen for timer-tick and complete. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "loader",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Loading Indicator",
+      "description": "An indeterminate loading indicator with a miniature rake that loops through a recognizable sand pattern, distinct from the AI Thinking state. One file of about 20 KB with its sand engine and sounds inside it, no dependencies, defines <sand-loader>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "loading",
+        "status",
+        "animation",
+        "sand"
+      ],
+      "files": [
+        {
+          "path": "loader/loader.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/loader.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Loading Indicator is a plain script that registers a custom element. Load /grainmotion-ui/loader.js with a script tag (not a module), Use <sand-loader label=\"Loading results\"></sand-loader>. Set active=false when work completes and speed to adjust the animation rate. Reduced motion holds the rake still. More: https://brajesh31.github.io/GrainMotion-UI"
     }
   ]
 }
