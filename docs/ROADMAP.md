@@ -6,7 +6,7 @@ Grow GrainMotion-UI into a carefully designed library of tactile interface contr
 
 **Target:** 50 components total, including the four already implemented. This means 46 new components.
 
-**Status update:** Phases 1–4 have 20 implemented additions on top of the original four. Phase 5 adds five navigation components, bringing the implementation set to 29. Phase 5 source bundles, interactive demos, component guides, concept SVGs, gallery cards, registry entries and 23 targeted Chromium assertions are now committed. The final 29-component validation run is pending; manual assistive-technology and physical-device checks remain outstanding.
+**Status update:** Phases 1–4 have 20 implemented additions on top of the original four. Phase 5 adds five navigation components, bringing the implementation set to 29. Phase 5 source bundles, interactive demos, component guides, concept SVGs, gallery cards, registry entries and 45 targeted Chromium assertions are now committed. The final 29-component validation run is pending; manual assistive-technology and physical-device checks remain outstanding.
 
 This roadmap is not a completion report. A component is not release-complete until its functional and regression tests pass.
 
