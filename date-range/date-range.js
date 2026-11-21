@@ -470,6 +470,7 @@ class SandDateRange extends SandPickerBase {
  }
  get unavailable(){return (this.getAttribute('unavailable')||'').split(',').map(x=>x.trim()).filter(Boolean);}
  formResetCallback(){this._start=this.getAttribute('start')||this.defaultValue.split('/')[0]||'';this._end=this.getAttribute('end')||this.defaultValue.split('/')[1]||'';if(this.startField){this.startField.value=this._start;this.endField.value=this._end;this.updateRange();}}
+ formStateRestoreCallback(state){this.value=state||'/';}
  formDisabledCallback(v){this._formDisabled=!!v;this.syncRangeAttrs();this.updateRange();}
  checkValidity(){return this.internals?.checkValidity()??(this.startField?.checkValidity()&&this.endField?.checkValidity());}
  reportValidity(){return this.internals?.reportValidity()??(this.startField?.reportValidity()&&this.endField?.reportValidity());}
