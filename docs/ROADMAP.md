@@ -6,7 +6,7 @@ Grow GrainMotion-UI into a carefully designed library of tactile interface contr
 
 **Target:** 50 components total, including the four already implemented. This means 46 new components.
 
-**Status update (through Phase 2):** The first ten additions now have standalone source files, live demo pages, component READMEs and concept assets. Phases 1 and 2 are wired into the main gallery, registry and AI-readable catalog. Phases 1 and 2 passed the mobile Chromium suite. Manual assistive-technology and physical-device checks remain outstanding. The original four components remain in place.
+**Status update (through Phase 3 implementation):** Fifteen additions now have standalone source files, live demo pages, component READMEs and concept assets. Phases 1, 2 and 3 are wired into the main gallery, registry and AI-readable catalog. Phases 1 and 2 passed the mobile Chromium suite. Phase 3 automated verification is pending; manual assistive-technology and physical-device checks remain outstanding. The original four components remain in place.
 
 This roadmap is not a completion report. A component is not release-complete until its functional and regression tests pass.
 
@@ -76,15 +76,16 @@ Required coverage: labels, placeholders, input and change events, input constrai
 
 **Target after phase:** 19 components total.
 
-| # | Component | Element | Physical interaction |
-|---:|---|---|---|
-| 15 | Select / Dropdown | `sand-select` | A stone moves within a tray of selectable options. |
-| 16 | Combobox / Autocomplete | `sand-combobox` | A rake navigates a filtered list of options. |
-| 17 | Date Picker | `sand-date-picker` | An engraved calendar with a pebble marking the selected day. |
-| 18 | Date Range Picker | `sand-date-range` | Two stones mark the start and end dates, with the interval visible between them. |
-| 19 | Time Picker | `sand-time-picker` | A circular time surface with a movable selector and readable time output. |
+**Implementation status:** All five Phase 3 component bundles, live demo pages, technical READMEs and concept diagrams have been added. The gallery, registry, build manifest and AI-readable component catalogue now include all nineteen controls. Automated Phase 3 interaction and form tests are being added and have not yet passed CI. Do not mark Phase 3 released until those tests pass.
 
-Required coverage: localization, keyboard calendar navigation, minimum/maximum values, unavailable dates, range validation, 12/24-hour formats, accessible announcements and deterministic timezone handling.
+Required verification:
+
+- Select: value/label parsing, native select keyboard behavior, required/disabled and form submission.
+- Combobox: datalist suggestions, free text, exact option event, keyboard/paste and form submission.
+- Date Picker: ISO values, min/max, unavailable dates, required validation and timezone-stable calendar behavior.
+- Date Range: endpoint access, start/end ordering, incomplete range, unavailable dates, ISO serialization and form reset.
+- Time Picker: native time entry, min/max/step, 12/24-hour readout and timezone-free HH:MM serialization.
+- Regression: preserve and retest all fourteen existing components.
 
 ## Phase 4: Progress, loading and activity
 
