@@ -223,18 +223,50 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('time picker: 24-hour readout is deterministic', (await ev("window.__phase3Time.twentyFour")) === true);
   check('time picker: min/max/step are applied', (await ev("window.__phase3Time.constraints")) === true);
 }
+
+{ // progress bar: determinate bounds and indeterminate accessibility
+  await ev("window.__phase4Progress={value:false,clamped:false,indeterminate:false};const p=document.querySelector('sand-progress');p.value=64;window.__phase4Progress.value=p.getAttribute('aria-valuenow')==='64'&&p.getAttribute('role')==='progressbar';p.value=140;window.__phase4Progress.clamped=p.value===100&&p.getAttribute('aria-valuenow')==='100';p.setAttribute('indeterminate','');window.__phase4Progress.indeterminate=!p.hasAttribute('aria-valuenow')&&p.getAttribute('aria-valuetext')==='In progress';");
+  check('progress: value updates progressbar ARIA', (await ev("window.__phase4Progress.value"))===true);
+  check('progress: value clamps to max', (await ev("window.__phase4Progress.clamped"))===true);
+  check('progress: indeterminate omits aria-valuenow', (await ev("window.__phase4Progress.indeterminate"))===true);
+}
+{ // progress ring: determinate marker and indeterminate state
+  await ev("window.__phase4Ring={value:false,indeterminate:false};const p=document.querySelector('sand-progress-ring');p.value=35;window.__phase4Ring.value=p.getAttribute('aria-valuenow')==='35'&&p.getAttribute('role')==='progressbar';p.setAttribute('indeterminate','');window.__phase4Ring.indeterminate=!p.hasAttribute('aria-valuenow')&&p.getAttribute('aria-valuetext')==='In progress';");
+  check('progress ring: exposes numeric progress', (await ev("window.__phase4Ring.value"))===true);
+  check('progress ring: indeterminate mode omits numeric value', (await ev("window.__phase4Ring.indeterminate"))===true);
+}
+{ // steps: accessible native buttons, active step and change event
+  await ev("window.__phase4Steps={changes:0};const s=document.querySelector('sand-steps');s.addEventListener('change',()=>window.__phase4Steps.changes++);s.buttons[2].click();");
+  check('steps: native button selects the requested step', (await ev("document.querySelector('sand-steps').value"))===2);
+  check('steps: active step exposes aria-current', (await ev("document.querySelector('sand-steps').buttons[2].getAttribute('aria-current')"))==='step');
+  check('steps: change event bubbles on selection', (await ev("window.__phase4Steps.changes"))===1);
+  await ev("document.querySelector('sand-steps').disabled=true");
+  check('steps: disabled state disables every step button', (await ev("document.querySelector('sand-steps').buttons.every(b=>b.disabled)"))===true);
+}
+{ // hourglass timer: start, pause, resume, reset, cancel and completion
+  await ev("window.__phase4Timer={complete:0};const t=document.querySelector('sand-timer');t.addEventListener('complete',()=>window.__phase4Timer.complete++);t.start();const started=t.running;t.pause();const paused=!t.running;t.pause();const resumed=t.running;t.cancel();const cancelled=!t.running&&t.cancelled&&t.remaining===0;t.reset();const reset=t.remaining===t.duration&&!t.cancelled;t.remaining=.01;t.running=true;t.step(.02);window.__phase4Timer.states={started,paused,resumed,cancelled,reset,complete:window.__phase4Timer.complete,finished:!t.running&&t.remaining===0};");
+  check('timer: start, pause, resume, cancel and reset work', (await ev("Object.values(window.__phase4Timer.states).slice(0,5).every(Boolean)"))===true);
+  check('timer: reaching zero emits complete once', (await ev("window.__phase4Timer.states.finished&&window.__phase4Timer.states.complete===1"))===true);
+}
+{ // loading indicator: status semantics, active state and speed
+  await ev("window.__phase4Loader={};const l=document.querySelector('sand-loader');window.__phase4Loader.initial=l.getAttribute('role')==='status'&&l.getAttribute('aria-busy')==='true';l.speed=2.5;l.active=false;window.__phase4Loader.stopped=l.getAttribute('aria-busy')==='false'&&l.getAttribute('aria-label')==='Loading complete';window.__phase4Loader.speed=l.speed===2.5;l.active=true;window.__phase4Loader.restarted=l.getAttribute('aria-busy')==='true';");
+  check('loader: announces active status', (await ev("window.__phase4Loader.initial"))===true);
+  check('loader: active=false clears aria-busy', (await ev("window.__phase4Loader.stopped"))===true);
+  check('loader: speed property is configurable', (await ev("window.__phase4Loader.speed"))===true);
+  check('loader: active=true resumes busy state', (await ev("window.__phase4Loader.restarted"))===true);
+}
 { // forms: verify all twelve form-associated components in a small isolated form
   const formResults = await ev(`(() => {
     const f = document.createElement('form');
     f.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;overflow:hidden';
-    f.innerHTML = '<sand-slider name="slider" value="30"></sand-slider><sand-toggle name="toggle" checked></sand-toggle><sand-checkbox name="checkbox" value="yes" checked></sand-checkbox><sand-radio-group name="radio" options="Small,Medium,Large" value="Medium"></sand-radio-group><sand-segmented name="segment" options="Day,Week,Month" value="Week"></sand-segmented><sand-range name="range" value="10,90"></sand-range><sand-rating name="rating" value="4"></sand-rating><sand-input name="input" value="hello"></sand-input><sand-textarea name="textarea" value="note"></sand-textarea><sand-password name="password" value="do-not-print-this"></sand-password><sand-search name="search" value="grain"></sand-search><sand-otp name="otp" value="123456" length="6"></sand-otp><sand-select name="select" value="express" options="standard:Standard,express:Express"></sand-select><sand-combobox name="combo" value="DEL" options="DEL:Delhi,BLR:Bengaluru"></sand-combobox><sand-date-picker name="date" value="2026-11-24"></sand-date-picker><sand-date-range name="dateRange" start="2026-11-21" end="2026-11-25"></sand-date-range><sand-time-picker name="time" value="16:30"></sand-time-picker>';
+    f.innerHTML = '<sand-slider name="slider" value="30"></sand-slider><sand-toggle name="toggle" checked></sand-toggle><sand-checkbox name="checkbox" value="yes" checked></sand-checkbox><sand-radio-group name="radio" options="Small,Medium,Large" value="Medium"></sand-radio-group><sand-segmented name="segment" options="Day,Week,Month" value="Week"></sand-segmented><sand-range name="range" value="10,90"></sand-range><sand-rating name="rating" value="4"></sand-rating><sand-input name="input" value="hello"></sand-input><sand-textarea name="textarea" value="note"></sand-textarea><sand-password name="password" value="do-not-print-this"></sand-password><sand-search name="search" value="grain"></sand-search><sand-otp name="otp" value="123456" length="6"></sand-otp><sand-select name="select" value="express" options="standard:Standard,express:Express"></sand-select><sand-combobox name="combo" value="DEL" options="DEL:Delhi,BLR:Bengaluru"></sand-combobox><sand-date-picker name="date" value="2026-11-24"></sand-date-picker><sand-date-range name="dateRange" start="2026-11-21" end="2026-11-25"></sand-date-range><sand-time-picker name="time" value="16:30"></sand-time-picker><sand-steps name="steps" steps="A,B,C" value="1"></sand-steps><sand-timer name="timer" duration="45"></sand-timer>';
     document.body.append(f);
     const d = Object.fromEntries(new FormData(f));
-    const results = { slider: d.slider === '30', toggle: d.toggle === 'on', checkbox: d.checkbox === 'yes', radio: d.radio === 'Medium', segment: d.segment === 'Week', range: d.range === '10,90', rating: d.rating === '4', input: d.input === 'hello', textarea: d.textarea === 'note', password: d.password === 'do-not-print-this', search: d.search === 'grain', otp: d.otp === '123456', select: d.select === 'express', combo: d.combo === 'DEL', date: d.date === '2026-11-24', dateRange: d.dateRange === '2026-11-21/2026-11-25', time: d.time === '16:30' };
+    const results = { slider: d.slider === '30', toggle: d.toggle === 'on', checkbox: d.checkbox === 'yes', radio: d.radio === 'Medium', segment: d.segment === 'Week', range: d.range === '10,90', rating: d.rating === '4', input: d.input === 'hello', textarea: d.textarea === 'note', password: d.password === 'do-not-print-this', search: d.search === 'grain', otp: d.otp === '123456', select: d.select === 'express', combo: d.combo === 'DEL', date: d.date === '2026-11-24', dateRange: d.dateRange === '2026-11-21/2026-11-25', time: d.time === '16:30', steps: d.steps === '1', timer: d.timer === '45' };
     f.remove();
     return results;
   })()`);
-  check('forms: all seventeen form-associated components serialize correctly', Object.values(formResults).every(Boolean), JSON.stringify(formResults));
+  check('forms: all nineteen form-associated components serialize correctly', Object.values(formResults).every(Boolean), JSON.stringify(formResults));
 }
 { // scaling: the height follows the width
   const got = await ev(`(() => { const e = document.createElement('sand-toggle'); e.style.width = '150px'; document.body.append(e); const b = e.getBoundingClientRect(); e.remove(); return b.width + ' ' + Math.round(b.height); })()`);
