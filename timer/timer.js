@@ -321,17 +321,17 @@ const { Sound, SandTray } = window.GrainMotionUI;
 
 class SandTimer extends SandTray {
  static formAssociated=true;static observedAttributes=['duration','label','disabled'];get aspect(){return .95}
- constructor(){super();this.duration=60;this.remaining=60;this.running=false;this.cancelled=false;this.lastAnnounce=-1;this.phase=0;this._completed=false}
+ constructor(){super();this.duration=60;this.remaining=60;this.running=false;this.cancelled=false;this.hasStarted=false;this.lastAnnounce=-1;this.phase=0;this._completed=false}
  get disabled(){return this.hasAttribute('disabled')||!!this._formDisabled}
  init(){this._ready=true;this.duration=Math.max(1,Number(this.getAttribute('duration')||60));this.remaining=this.duration;this.setAttribute('role','timer');this.setAttribute('aria-label',this.getAttribute('label')||'Countdown timer');this.setAttribute('aria-live','off');this.makeControls();this.formValue(String(this.remaining))}
  attributeChangedCallback(n,o,v){if(!this._ready||o===v)return;if(n==='duration'){this.duration=Math.max(1,Number(v)||60);this.reset()}if(n==='label')this.setAttribute('aria-label',v||'Countdown timer');if(n==='disabled')this.syncControls()}
  makeControls(){this.controls=document.createElement('div');this.controls.style.cssText='position:absolute;z-index:3;left:0;right:0;bottom:5px;display:flex;justify-content:center;gap:6px';this.pauseButton=this.button('Pause',()=>this.pause());this.resetButton=this.button('Reset',()=>this.reset());this.cancelButton=this.button('Cancel',()=>this.cancel());this.controls.append(this.pauseButton,this.resetButton,this.cancelButton);this.append(this.controls);this.syncControls()}
  button(label,fn){const b=document.createElement('button');b.type='button';b.textContent=label;b.style.cssText='border:1px solid #bca98e;border-radius:99px;background:#f1ede5;color:#33291f;padding:4px 10px;font:12px system-ui';b.addEventListener('click',fn);return b}
- syncControls(){for(const b of [this.pauseButton,this.resetButton,this.cancelButton])if(b)b.disabled=this.disabled;if(this.pauseButton)this.pauseButton.textContent=this.running?'Pause':'Resume'}
- start(){if(this.disabled||this.remaining<=0)return;this.running=true;this.cancelled=false;this.syncControls();Sound.play('tap',.3)}
+ syncControls(){for(const b of [this.pauseButton,this.resetButton,this.cancelButton])if(b)b.disabled=this.disabled;if(this.pauseButton)this.pauseButton.textContent=this.running?'Pause':this.hasStarted?'Resume':'Start'}
+ start(){if(this.disabled||this.remaining<=0)return;this.running=true;this.cancelled=false;this.hasStarted=true;this.syncControls();Sound.play('tap',.3)}
  pause(){if(this.running){this.running=false;this.syncControls()}else this.start()}
- reset(){this.running=false;this.cancelled=false;this._completed=false;this.remaining=this.duration;this.updateStatus();this.syncControls()}
- cancel(){this.running=false;this.cancelled=true;this.remaining=0;this.updateStatus();this.syncControls()}
+ reset(){this.running=false;this.cancelled=false;this.hasStarted=false;this._completed=false;this.remaining=this.duration;this.updateStatus();this.syncControls()}
+ cancel(){this.running=false;this.cancelled=true;this.hasStarted=false;this.remaining=0;this.updateStatus();this.syncControls()}
  formDisabledCallback(v){this._formDisabled=!!v;this.syncControls()}
  formResetCallback(){this.reset()}
  updateStatus(){const seconds=Math.ceil(this.remaining);this.setAttribute('aria-valuetext',this.cancelled?'Cancelled':seconds<=0?'Complete':seconds+' seconds remaining');this.formValue(String(seconds));if(seconds!==this.lastAnnounce){this.lastAnnounce=seconds;this.dispatchEvent(new CustomEvent('timer-tick',{bubbles:true,detail:{remaining:seconds}}))}}
