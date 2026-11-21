@@ -108,7 +108,7 @@ The five feedback and overlay controls are complete on `main`. The 45-component 
 | 44 | Dialog / Modal | `sand-dialog` | Opens a native modal surface with focus containment and explicit actions. | Implemented, Chromium CI passed |
 | 45 | Drawer / Sheet | `sand-drawer` | Opens a responsive modal sheet from any screen edge. | Implemented, Chromium CI passed |
 
-## Phase 9 components (CI-verified complete)
+## Phase 9 components (implementation present, validation open)
 
 | # | Component | Custom element | Preliminary interaction | Status |
 |---:|---|---|---|---|
