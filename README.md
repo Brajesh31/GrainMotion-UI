@@ -4,7 +4,7 @@
 
 ### Interfaces shaped by sand, motion, and interaction.
 
-A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 adds five selection controls, each with its own physical interaction.
+A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 adds five native text and structured-input controls, each with its own physical interaction.
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
@@ -15,7 +15,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml/badge.svg" alt="Component validation"></a>
   <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
   <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
-  <img src="https://img.shields.io/badge/Components-9-C49A6C" alt="Nine components">
+  <img src="https://img.shields.io/badge/Components-14-C49A6C" alt="Fourteen components">
 </p>
 
 </div>
@@ -24,7 +24,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI currently includes nine standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI currently includes fourteen standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -47,6 +47,11 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 | **Sand Segmented** | A flat stone marker glides between carved sections. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/segmented/) · [Documentation](segmented/README.md) |
 | **Sand Range** | Two bamboo rakes set the lower and upper bounds of an interval. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/range/) · [Documentation](range/README.md) |
 | **Sand Rating** | Five river stones occupy separate wells; one marks the chosen rating. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/rating/) · [Documentation](rating/README.md) |
+| **Sand Text Field** | A real browser text input with a bamboo stylus focus cue. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/input/) · [Documentation](input/README.md) |
+| **Sand Textarea** | A wider native writing area over shallow sand grooves. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/textarea/) · [Documentation](textarea/README.md) |
+| **Sand Password** | A native masked credential input with a physical Show/Hide shutter. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/password/) · [Documentation](password/README.md) |
+| **Sand Search** | A native search field with a search well, clear action and busy rake. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/search/) · [Documentation](search/README.md) |
+| **Sand OTP / PIN** | One native numeric field framed by separate engraved digit wells. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/otp/) · [Documentation](otp/README.md) |
 
 > The gallery image above shows the component set together. The concept artwork below documents visual exploration and design direction, not additional live component screenshots.
 
@@ -132,6 +137,47 @@ Each new control also has its own physical-interaction concept sheet. These are 
 
 </div>
 
+### Phase 2 text-input concepts
+
+The next five studies show how native browser fields sit above the sand renderer. The visual surface is not used to store or draw entered text, especially for passwords and one-time codes.
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="input/assets/concept.svg" alt="Native text field and stylus guide concept" width="100%">
+      <br><strong>Text Field · Stylus cue</strong>
+    </td>
+    <td align="center" width="50%">
+      <img src="textarea/assets/concept.svg" alt="Multiline textarea with sand writing grooves concept" width="100%">
+      <br><strong>Textarea · Writing grooves</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="password/assets/concept.svg" alt="Masked password with stone shutter concept" width="100%">
+      <br><strong>Password · Stone shutter</strong>
+    </td>
+    <td align="center" width="50%">
+      <img src="search/assets/concept.svg" alt="Search well and rake concept" width="100%">
+      <br><strong>Search · Moving rake</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="otp/assets/concept.svg" alt="OTP input with engraved digit wells concept" width="100%">
+      <br><strong>OTP / PIN · Digit wells</strong>
+    </td>
+    <td align="center" width="50%">
+      <strong>Native input first</strong>
+      <br>Keyboard, paste, selection and autofill stay with the browser's real input.
+    </td>
+  </tr>
+</table>
+
+</div>
+
 See [making-of/](making-of/) for the design notes, concept images, and prompts behind the visual direction.
 
 ## ⚙️ How it works
@@ -162,6 +208,11 @@ npx shadcn add Brajesh31/GrainMotion-UI/radio-group
 npx shadcn add Brajesh31/GrainMotion-UI/segmented
 npx shadcn add Brajesh31/GrainMotion-UI/range
 npx shadcn add Brajesh31/GrainMotion-UI/rating
+npx shadcn add Brajesh31/GrainMotion-UI/input
+npx shadcn add Brajesh31/GrainMotion-UI/textarea
+npx shadcn add Brajesh31/GrainMotion-UI/password
+npx shadcn add Brajesh31/GrainMotion-UI/search
+npx shadcn add Brajesh31/GrainMotion-UI/otp
 ```
 
 The files are intended to be placed in `public/grainmotion-ui/`.
@@ -201,6 +252,21 @@ Other elements:
 
 <script src="/grainmotion-ui/rating.js"></script>
 <sand-rating label="Rating" value="4"></sand-rating>
+
+<script src="/grainmotion-ui/input.js"></script>
+<sand-input label="Display name" placeholder="Your name"></sand-input>
+
+<script src="/grainmotion-ui/textarea.js"></script>
+<sand-textarea label="Message" rows="4"></sand-textarea>
+
+<script src="/grainmotion-ui/password.js"></script>
+<sand-password label="Password" autocomplete="current-password"></sand-password>
+
+<script src="/grainmotion-ui/search.js"></script>
+<sand-search label="Search" placeholder="Search"></sand-search>
+
+<script src="/grainmotion-ui/otp.js"></script>
+<sand-otp label="Verification code" length="6" autocomplete="one-time-code"></sand-otp>
 ```
 
 For the thinking component, update its state as your agent works:
@@ -284,6 +350,11 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [Segmented Control documentation](segmented/README.md)
 - [Range Slider documentation](range/README.md)
 - [Rating documentation](rating/README.md)
+- [Text Field documentation](input/README.md)
+- [Textarea documentation](textarea/README.md)
+- [Password Field documentation](password/README.md)
+- [Search Field documentation](search/README.md)
+- [OTP / PIN documentation](otp/README.md)
 - [Agent skill](skills/grainmotion-ui/SKILL.md)
 - [AI-readable project guide](llms.txt)
 - [Design process and concept artwork](making-of/README.md)
