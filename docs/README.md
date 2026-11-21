@@ -2,12 +2,14 @@
 
 This directory is the project handbook. It documents the current implementation, the planned 50-component catalogue, design rules, architecture, accessibility expectations, performance constraints, testing, contribution workflow and component authoring process.
 
-> **Status:** All 50 components are implemented and CI-verified across the original set and Phases 1–9. Phase 9 adds Command Palette, Context Menu, Filter Builder, Data Table and Kanban Board, each with a standalone source bundle, demo, technical guide, concept artwork and registry entry. The 50-component mobile Chromium suite passed 239 checks with zero failures, including 33 targeted Phase 9 checks. Standalone bundle synchronization and generated documentation/registry validation passed. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878408790) · [Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878408728). Manual screen-reader, physical-device, Safari and Firefox checks remain outstanding.
+> **Current status (2026-11-21):** 50 component source folders, demos and README files are present. The latest full mobile Chromium validation on `main` (run [#486](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878968524), commit `901599d`) recorded **236 passing assertions and 3 failures**. The failures are the tooltip keyboard-focus check, tooltip Escape-dismissal check and toast polite-live-region check. Standalone bundle synchronization and generated documentation/registry validation passed before the browser suite failed. The live gallery deployment succeeded separately, but a successful Pages deployment is not proof that every component is release-ready. Safari, Firefox, physical-device and screen-reader checks remain unverified.
 
 ## Documentation map
 
 | Document | Purpose |
 |---|---|
+| [Phase 0 foundation audit](PHASE-0-FOUNDATION-AUDIT.md) | Repository inventory, verified baseline, known blockers and Phase 0 exit criteria |
+| [Component contract](COMPONENT-CONTRACT.md) | Required component APIs, lifecycle, accessibility, visual quality, documentation and test evidence |
 | [Roadmap](ROADMAP.md) | Phases, component targets, dependencies and completion gates |
 | [Component catalog](COMPONENT-CATALOG.md) | Existing components and the full proposed library |
 | [Phase 6 implementation spec](PHASE-6-MEDIA-FILES-SPEC.md) | Media and file component APIs, interactions and acceptance requirements |
@@ -16,6 +18,7 @@ This directory is the project handbook. It documents the current implementation,
 | [Phase 9 implementation spec](PHASE-9-ADVANCED-PRODUCTIVITY-SPEC.md) | Command palette, context menu, filter builder, data table and Kanban APIs, accessibility and acceptance gates |
 | [Architecture](ARCHITECTURE.md) | Current sand engine, custom elements, build and documentation generation |
 | [Design system](DESIGN-SYSTEM.md) | Existing visual language and rules for new work |
+| [Design tokens](../design/tokens.css) | Provisional shared color and motion tokens, not yet wired into legacy component styles |
 | [Asset catalog](ASSET-CATALOG.md) | Current asset inventory and asset creation standards |
 | [Accessibility](ACCESSIBILITY.md) | Existing behavior, requirements and verification criteria |
 | [Performance](PERFORMANCE.md) | Known rendering constraints and optimization plan |
