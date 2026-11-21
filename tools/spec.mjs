@@ -3,7 +3,7 @@
 export const REPO = 'Brajesh31/GrainMotion-UI';
 export const SITE = 'https://brajesh31.github.io/GrainMotion-UI';
 export const AUTHOR = 'Brajesh Kumar <https://github.com/Brajesh31>';
-export const COUNT = 'twenty-four';
+export const COUNT = 'twenty-nine';
 
 // Limits every control shares; each README ends with its own, then these.
 export const COMMON_LIMITS = [
@@ -1585,5 +1585,80 @@ export const SPEC = [
     "The loader is intentionally indeterminate; it does not accept a percentage."
   ],
   "manualDocs": true
+}
+{
+  "id":"tabs","name":"Tabs","tag":"sand-tabs",
+  "categories":["navigation","tabs","sand","animation"],
+  "sub":"A river stone glides between carved tab wells.",
+  "desc":"A tactile tab system with a flat river-stone marker moving between carved tab wells. Real HTML tab buttons and content panels preserve native interaction and accessible semantics.",
+  "docs":"Use <sand-tabs tabs=\"overview:Overview,activity:Activity\" value=\"overview\"></sand-tabs>. Put template[data-panel] elements inside for real panel content. Read or set value and listen for the bubbling change event.",
+  "intro":["A low river stone rests in one of several carved wells. The selected well is active, while the panel beneath remains actual HTML content."],
+  "use":"<script src=\"tabs.js\"></script>\n<sand-tabs tabs=\"overview:Overview,activity:Activity\" value=\"overview\"><template data-panel=\"overview\"><p>Overview content</p></template><template data-panel=\"activity\"><p>Activity content</p></template></sand-tabs>",
+  "js":"const tabs = document.querySelector('sand-tabs');\ntabs.value = 'activity';\ntabs.addEventListener('change', event => console.log(event.detail.value));",
+  "attrs":[["tabs","Comma-separated id:Label entries, up to six","Overview, Activity, Settings"],["value","Selected tab identifier","First enabled tab"],["label","Accessible tab group name","Content tabs"],["orientation","horizontal or vertical","horizontal"],["activation","automatic or manual keyboard activation","automatic"],["disabled-tabs","Comma-separated disabled tab IDs","none"]],
+  "notes":["Panel bodies are supplied as template[data-panel] elements and cloned during refresh().","Horizontal arrow keys move between tabs. Vertical orientation uses Up/Down. Home and End move to the edges; manual mode activates with Enter or Space.","A change event exposes value, previousValue and index."],
+  "happens":[["select a tab","the stone marker glides to its carved well and the matching panel is revealed"],["change orientation","the tab list and keyboard direction switch between horizontal and vertical"],["disable a tab","the disabled option is removed from keyboard selection"]],
+  "limits":["Up to six tab entries. Attribute definitions reserve comma and colon as delimiters.","The component does not provide routing, data fetching or lazy loading."],
+  "manualDocs":true
+},
+{
+  "id":"accordion","name":"Accordion","tag":"sand-accordion",
+  "categories":["disclosure","navigation","sand","animation"],
+  "sub":"Walnut lids lift to reveal separate sand compartments.",
+  "desc":"An accordion made from walnut lids with small stone pulls. Opening a lid reveals a sand-toned compartment containing preserved native HTML content.",
+  "docs":"Use <sand-accordion items=\"shipping:Shipping,returns:Returns\" value=\"shipping\"></sand-accordion> with template[data-panel] children. Add multiple for simultaneous panels and collapsible to allow all panels to close.",
+  "intro":["Walnut lids sit over separate sand compartments. Opening a lid lifts it from the frame and reveals the content below without rebuilding it on every toggle."],
+  "use":"<script src=\"accordion.js\"></script>\n<sand-accordion items=\"shipping:Shipping,returns:Returns\" value=\"shipping\"><template data-panel=\"shipping\"><p>Delivery information</p></template><template data-panel=\"returns\"><p>Return information</p></template></sand-accordion>",
+  "js":"const accordion = document.querySelector('sand-accordion');\naccordion.toggle('returns');\naccordion.addEventListener('change', event => console.log(event.detail.openItems));",
+  "attrs":[["items","Comma-separated id:Label entries, optional :disabled suffix","Shipping, Returns, Care"],["value","Open item ID or comma-separated IDs in multiple mode","First enabled item"],["label","Accessible group name","Expandable sections"],["multiple","Allow multiple panels to remain open","absent"],["collapsible","Allow all panels to close","absent"],["disabled-items","Comma-separated disabled item IDs","none"],["disabled","Disable every header","absent"]],
+  "notes":["Each panel is populated from a matching template[data-panel] child. Collapsing a panel hides its existing DOM instead of destroying form state.","Each header is a real button with aria-expanded and aria-controls; each panel is a labelled region.","The change event exposes value and openItems."],
+  "happens":[["open a section","the walnut lid lifts and its sand compartment is revealed"],["enable multiple","more than one lid may remain open"],["disable a section","its header button is disabled"]],
+  "limits":["Up to five accordion items. Attribute definitions reserve comma and colon as delimiters.","This is a disclosure control, not a nested tree view."],
+  "manualDocs":true
+},
+{
+  "id":"pagination","name":"Pagination","tag":"sand-pagination",
+  "categories":["navigation","pagination","sand","animation"],
+  "sub":"A stone marks the current page along a carved sand track.",
+  "desc":"A pagination control with numbered sand wells and a moving river-stone page marker. Page state and navigation are native buttons; data loading remains the host application's responsibility.",
+  "docs":"Use <sand-pagination page=\"4\" total=\"24\"></sand-pagination>. Read or set page, configure sibling-count and boundary-count, and listen for change to load the selected page.",
+  "intro":["A row of numbered wells is carved into a shallow sand track. The low river stone marks the current 1-based page."],
+  "use":"<script src=\"pagination.js\"></script>\n<sand-pagination page=\"4\" total=\"24\" sibling-count=\"1\" boundary-count=\"1\" show-first-last label=\"Search results\"></sand-pagination>",
+  "js":"const pages = document.querySelector('sand-pagination');\npages.addEventListener('change', event => loadResults(event.detail.page));\npages.page = 5;",
+  "attrs":[["page","Current 1-based page","1"],["total","Total page count, minimum 1","1"],["sibling-count","Adjacent page buttons, 0 to 3","1"],["boundary-count","Buttons at each end, 1 to 3","1"],["show-first-last","Include first/last navigation buttons","absent"],["disabled","Disable all page buttons","absent"],["label","Navigation landmark name","Pagination"]],
+  "notes":["Ellipses are decorative separators. A single-page gap is rendered as its missing page number.","The change event exposes page, previousPage and total. The component does not fetch data or change browser history.","The current page uses aria-current=page. Navigation edges use disabled buttons."],
+  "happens":[["select a page","the stone marker moves to that page's well and change is dispatched"],["reach the first or last page","the previous or next control is disabled"],["reduce the page window","the number of visible sibling and boundary buttons changes"]],
+  "limits":["Page values are clamped to the inclusive 1..total range.","The control is a single-row pagination bar, not infinite scrolling or cursor pagination."],
+  "manualDocs":true
+},
+{
+  "id":"breadcrumbs","name":"Breadcrumbs","tag":"sand-breadcrumbs",
+  "categories":["navigation","breadcrumbs","sand","animation"],
+  "sub":"Stepping stones form a navigable hierarchy through raked sand.",
+  "desc":"A breadcrumb navigation trail with real ancestor links and a non-interactive current page marker. River stones sit along a shallow raked path.",
+  "docs":"Use <sand-breadcrumbs items=\"Home|/;Library|/library;Current\"></sand-breadcrumbs>. Supply semicolon-separated Label|URL ancestors and a plain current label, or assign the items array property.",
+  "intro":["A hierarchy becomes a path of stepping stones across raked sand. Ancestors are links; the final stone marks the current location."],
+  "use":"<script src=\"breadcrumbs.js\"></script>\n<sand-breadcrumbs items=\"Home|/;Library|/library;Components|/components;Breadcrumbs\"></sand-breadcrumbs>",
+  "js":"const crumbs = document.querySelector('sand-breadcrumbs');\ncrumbs.items = [{ label: 'Home', href: '/' }, { label: 'Current' }];",
+  "attrs":[["items","Semicolon-separated Label|URL entries or an array of objects","Home, Library, Current project"],["label","Navigation landmark name","Breadcrumb"],["separator","Visible separator glyph","›"]],
+  "notes":["Ancestors render as native anchors. The final label is a span with aria-current=page.","Only HTTP(S) and safe relative destinations become links. javascript:, data:, protocol-relative and other schemes are rejected.","The items property accepts an array of {label, href} objects and supports labels/URLs containing delimiters."],
+  "happens":[["navigate an ancestor","the browser follows the supplied href as a normal link"],["change the item array","the breadcrumb path and stepping-stone positions are rebuilt"],["reach the final item","it is marked aria-current=page and is not a link"]],
+  "limits":["Up to eight breadcrumb items.","The component does not create routes or intercept navigation."],
+  "manualDocs":true
+},
+{
+  "id":"menu","name":"Menu / Popover","tag":"sand-menu",
+  "categories":["navigation","menu","popover","overlay","sand"],
+  "sub":"A stone trigger lifts a walnut-framed command tray.",
+  "desc":"A compact command menu with a lifting stone trigger, anchored walnut tray, keyboard navigation, outside dismissal and focus restoration. Commands are emitted as events for the host application.",
+  "docs":"Use <sand-menu items=\"new:New project,duplicate:Duplicate\"></sand-menu>. Listen for the bubbling select event to run an action. The open property and attribute control the menu visibility.",
+  "intro":["A small river stone lifts from a carved trigger well and reveals a walnut-framed option tray. Actions remain native buttons and are reported to the host application."],
+  "use":"<script src=\"menu.js\"></script>\n<sand-menu label=\"Project actions\" items=\"new:New project,duplicate:Duplicate,archive:Archive\"></sand-menu>",
+  "js":"const menu = document.querySelector('sand-menu');\nmenu.addEventListener('select', event => runAction(event.detail.value));\nmenu.open = true;",
+  "attrs":[["items","Comma-separated value:Label definitions, optional :disabled suffix","New project, Duplicate, Archive"],["label","Trigger and menu accessible name","Actions"],["open","Reflects open visibility","absent"],["disabled","Disable trigger and prevent opening","absent"],["keep-open","Keep menu open after a selection","absent"]],
+  "notes":["ArrowDown/ArrowUp open and focus the first/last enabled item. Up/Down move inside; Home/End move to edges; Escape closes and restores trigger focus.","Tab closes without trapping focus. Outside pointer press dismisses. The tray repositions on scroll and resize and stays within the viewport.","The select event exposes value and label; the component never executes the action itself."],
+  "happens":[["open the trigger","the stone lifts and the anchored walnut option tray appears"],["select an enabled action","a select event is emitted and the menu closes unless keep-open is present"],["press Escape or click outside","the tray closes; Escape restores focus to the trigger"]],
+  "limits":["Up to eight menu items.","This component is a command menu, not a modal dialog or general rich-content popover."],
+  "manualDocs":true
 }
 ];
