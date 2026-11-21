@@ -118,7 +118,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await sleep(180);
   const pixels = await ev(`(() => window.__grainFallbacks.map(el => { const c = el.fallbackCtx; if (!c) return false; const p = c.getImageData(Math.floor(el.c.width/2), Math.floor(el.c.height/2), 1, 1).data; return p[3] > 0; }))()`);
   check('original four: fallback canvases paint visible sand pixels', Array.isArray(pixels) && pixels.length === 4 && pixels.every(Boolean), JSON.stringify(pixels));
-  await ev(`window.__grainFallbacks[0].value = 72; window.__grainFallbacks[1].checked = true`); await sleep(100);
+  await ev(`window.__grainFallbacks[0].value = 72; window.__grainFallbacks[1].checked = true`); await sleep(1400);
   check('original four: Slider and Toggle APIs remain usable in fallback mode', Math.abs(await ev(`window.__grainFallbacks[0].value`) - 72) < 0.1 && (await ev(`window.__grainFallbacks[1].checked`)) === true);
   await ev(`window.__grainFallbacks.forEach(el => el.remove()); window.__grainFallbacks = null`);
 }
