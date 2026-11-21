@@ -2,7 +2,7 @@
 
 A row of small stone tiles rests in individually carved grooves. Drag a tile to another position, use the keyboard to move it, or press the raised arrow controls. The data order is real and is reported to the host application; the sand marker simply follows the active row.
 
-One of forty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of fifty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 
