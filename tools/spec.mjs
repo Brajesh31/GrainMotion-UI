@@ -313,7 +313,8 @@ export const SPEC = [
     "limits": [
       "**The change between states takes about two seconds,** the sweep included. A state that lasts less than that is barely seen.",
       "**It is round,** and as high as it is wide."
-    ]
+    ],
+    "manualDocs": true
   },
   {
     "id": "checkbox",
