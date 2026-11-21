@@ -28,7 +28,7 @@ The test and screenshot utilities require Chrome or Chromium. Set `CHROME` if th
 
 ## Current test coverage
 
-`tools/test.mjs` now loads all twenty-nine controls in a mobile-sized Chromium viewport. The last passing twenty-four-component baseline recorded 80 browser assertions with zero failures. Phase 5 adds 45 targeted assertions for the five navigation controls; the final 29-component CI result is pending until the updated workflow completes. The original four-component regression checks remain part of the suite. The original-control checks cover:
+`tools/test.mjs` now loads all twenty-nine controls in a mobile-sized Chromium viewport. The last passing twenty-four-component baseline recorded 80 browser assertions with zero failures. Phase 5 adds 45 targeted assertions for the five navigation controls; the final 29-component CI run passed 125 assertions with zero failures. The original four-component regression checks remain part of the suite. The original-control checks cover:
 
 - Slider drag, input/change events, vertical-swipe handling and keyboard increments.
 - Toggle click, Space behavior, change events and vertical-swipe handling.
@@ -152,3 +152,8 @@ Every component release should record:
 - Whether the original four passed regression checks.
 
 Never use a passing documentation-generation check as proof that component interactions work. Build consistency, functional tests, accessibility tests and visual review are separate checks.
+
+
+## Phase 5 verification result
+
+The 29-component GitHub Actions mobile Chromium suite passed 125 browser assertions with zero failures. The 45 Phase 5 checks exercise all five navigation components and their principal state, keyboard, dynamic update and responsive behavior. Manual screen-reader and physical-device testing remains outstanding.
