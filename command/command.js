@@ -330,8 +330,8 @@ class SandCommand extends SandTray{
   set disabled(v){this.toggleAttribute('disabled',!!v);this.syncDisabled?.();}
   get commands(){return this._commands.map(x=>({...x}));}
   set commands(v){const seen=new Set();this._commands=(Array.isArray(v)?v:[]).map((x,i)=>{const id=String(x?.id??'command-'+(i+1));if(seen.has(id))return null;seen.add(id);return{id,label:String(x?.label??id),description:String(x?.description||''),keywords:String(x?.keywords||''),shortcut:String(x?.shortcut||''),disabled:!!x?.disabled};}).filter(Boolean);this.renderResults?.();}
-  get value(){return this._value||'';}
-  set value(v){this._value=String(v??'');this.syncActive?.();}
+  get value(){return this.filtered?.()[this._active]?.id||'';}
+  set value(v){const index=this.filtered?.().findIndex(item=>item.id===String(v));if(index>=0){this._active=index;this.syncActive?.();}}
   attributeChangedCallback(name,old,value){if(!this._ready||old===value)return;if(name==='open'){if(value!==null)this.show();else this.hide('attribute');}else if(name==='disabled')this.syncDisabled();else this.syncLabels();}
   init(){
     this._ready=true;this.style.touchAction='pan-y';
