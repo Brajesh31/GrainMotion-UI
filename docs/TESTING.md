@@ -91,9 +91,9 @@ The Phase 2, Phase 3 and Phase 4 checks in the passing test runner cover:
 
 
 
-### Phase 9 productivity and composite coverage (new, validation pending)
+### Phase 9 productivity and composite coverage (CI-verified)
 
-The test runner now contains 33 targeted Phase 9 checks. They are committed but should not be described as passing until the 50-component Actions run completes.
+The test runner contains 33 targeted Phase 9 checks. All 33 passed as part of the 50-component mobile Chromium suite, which completed 239 checks with zero failures. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878408790).
 
 - Command Palette: native modal open/focus, label/description/keyword filtering, Arrow navigation, Enter selection event, close reason, Escape and disabled trigger.
 - Context Menu: menu role and initial focus, keyboard navigation that skips disabled actions, selection payload, Escape cleanup, disabled opening, touch long-press opening and movement cancellation.
