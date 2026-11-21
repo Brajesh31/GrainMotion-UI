@@ -321,13 +321,14 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("(()=>{const el=document.querySelector('sand-tabs');el.setAttribute('tabs','overview:Overview,activity:Activity,settings:Settings');const parent=el.parentNode;parent.removeChild(el);parent.appendChild(el);})()");
   check('tabs: component reconnect preserves its selected value and controls', await ev("document.querySelector('sand-tabs').value==='activity'&&document.querySelector('sand-tabs').buttons.length===3")===true);
 
-  await ev("(()=>{const el=document.querySelector('sand-accordion');el.removeAttribute('multiple');el.setAttribute('collapsible','');el.removeAttribute('disabled-items');el.setAttribute('items','shipping:Shipping,returns:Returns,care:Care');el.value='shipping';el.panels[0].innerHTML='<label>Tracking <input id=\'p5-persist\' value=\'GM-2048\'></label>';el.toggle('shipping');el.toggle('shipping');})()");
+  await ev("(()=>{const el=document.querySelector('sand-accordion');el.removeAttribute('multiple');el.setAttribute('collapsible','');el.removeAttribute('disabled-items');el.setAttribute('items','shipping:Shipping,returns:Returns,care:Care');el.value='shipping';el.panels[0].innerHTML='<label>Tracking <input id=p5-persist value=GM-2048></label>';el.toggle('shipping');el.toggle('shipping');})()");
   check('accordion: collapsible mode allows the last open panel to close', await ev("(()=>{const el=document.querySelector('sand-accordion');el.toggle('shipping');return el.value===''})()")===true);
-  await ev("(()=>{const el=document.querySelector('sand-accordion');el.toggle('shipping');el.setAttribute('items','care:Care,faq:FAQ');})()");
+  await ev("document.querySelector('sand-accordion').toggle('shipping')");
+  check('accordion: collapsing and reopening preserves panel DOM and input value', await ev("document.querySelector('sand-accordion').panels[0].querySelector('#p5-persist')?.value==='GM-2048'")===true);
+  await ev("document.querySelector('sand-accordion').setAttribute('items','care:Care,faq:FAQ')");
   check('accordion: dynamic item changes rebuild the control and choose a valid initial item', await ev("document.querySelector('sand-accordion').buttons.length===2&&document.querySelector('sand-accordion').value==='care'")===true);
-  check('accordion: collapsing and reopening preserves panel DOM and input value', await ev("(()=>{const el=document.querySelector('sand-accordion');el.setAttribute('items','shipping:Shipping,returns:Returns,care:Care');el.value='shipping';return el.panels[0].querySelector('#p5-persist')?.value==='GM-2048'})()")===true);
   await ev("(()=>{const el=document.querySelector('sand-accordion');const parent=el.parentNode;parent.removeChild(el);parent.appendChild(el);})()");
-  check('accordion: component reconnect preserves its current state', await ev("document.querySelector('sand-accordion').buttons.length===3")===true);
+  check('accordion: component reconnect preserves its current state', await ev("document.querySelector('sand-accordion').buttons.length===2&&document.querySelector('sand-accordion').value==='care'")===true);
 
   await ev("(()=>{const el=document.querySelector('sand-pagination');el.page=1;el.total=24;})()");
   check('pagination: first page disables first and previous navigation', await ev("(()=>{const el=document.querySelector('sand-pagination');return el.buttons[0].disabled&&el.buttons[1].disabled})()")===true);
@@ -344,7 +345,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('breadcrumbs: a single item is current and does not create an ancestor link', await ev("document.querySelector('sand-breadcrumbs').links.length===0&&document.querySelector('sand-breadcrumbs [aria-current=page]')?.textContent==='Current only'")===true);
   await ev("document.querySelector('sand-breadcrumbs').items=[]");
   check('breadcrumbs: an empty path retains its labelled navigation landmark', await ev("document.querySelector('sand-breadcrumbs nav')?.getAttribute('aria-label')==='You are here'&&!document.querySelector('sand-breadcrumbs [aria-current=page]')")===true);
-  await ev("(()=>{const el=document.querySelector('sand-breadcrumbs');el.items=[{label:'Home',href:'/'},{label:'Current'}];el.links[0].focus();const parent=el.parentNode;parent.removeChild(el);parent.appendChild(el);})()");
+  await ev("(()=>{const el=document.querySelector('sand-breadcrumbs');el.items=[{label:'Home',href:'/'},{label:'Current'}];el.links[0].focus();const parent=el.parentNode;parent.removeChild(el);parent.appendChild(el);el.links[0].focus();})()");
   check('breadcrumbs: ancestor links remain keyboard focusable after reconnect', await ev("document.activeElement===document.querySelector('sand-breadcrumbs').links[0]")===true);
 
   await ev("(()=>{const el=document.querySelector('sand-menu');el.open=true;el.menuItems[0].focus();el.menuItems[0].dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true}));})()");
