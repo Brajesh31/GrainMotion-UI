@@ -195,7 +195,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
     els.forEach((el, i) => el.setAttribute('name', names[i]));
     const f = document.createElement('form'); f.append(...els); document.body.append(f);
     const d = Object.fromEntries(new FormData(f));
-    const ok = d.slider === '30' && d.toggle === 'on' && d.checkbox === 'yes' && d.radio === 'Medium' && d.segment === 'Week' && d.range === '10,90' && d.rating === '4' && d.input === 'hello' && d.textarea === 'note' && d.password === 'do-not-print-this' && d.search === 'grain' && d.otp === '123456';
+    const results = { slider: d.slider === '30', toggle: d.toggle === 'on', checkbox: d.checkbox === 'yes', radio: d.radio === 'Medium', segment: d.segment === 'Week', range: d.range === '10,90', rating: d.rating === '4', input: d.input === 'hello', textarea: d.textarea === 'note', password: d.password === 'do-not-print-this', search: d.search === 'grain', otp: d.otp === '123456' };
     for (const s of saved) {
       s.parent.insertBefore(s.el, s.next);
       if (s.name === null) s.el.removeAttribute('name'); else s.el.setAttribute('name', s.name);
@@ -204,9 +204,9 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
       else if (s.value !== undefined) s.el.value = s.value;
     }
     f.remove();
-    return ok;
+    return results;
   })()`);
-  check('forms: all twelve form-associated components serialize correctly', formOk === true);
+  check('forms: all twelve form-associated components serialize correctly', Object.values(formOk).every(Boolean), formOk);
 }
 { // scaling: the height follows the width
   const got = await ev(`(() => { const e = document.createElement('sand-toggle'); e.style.width = '150px'; document.body.append(e); const b = e.getBoundingClientRect(); e.remove(); return b.width + ' ' + Math.round(b.height); })()`);
