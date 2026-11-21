@@ -103,6 +103,57 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev(`${E('sand-thinking')}.state = 'idle'`); await sleep(200);
   check('thinking: idle is Ready and not busy', (await ev(`${E('sand-thinking')}.getAttribute('aria-label') + ' ' + ${E('sand-thinking')}.getAttribute('aria-busy')`)) === 'Ready false');
 }
+{ // original four: visible 2D fallback when WebGL2 is unavailable
+  const created = await ev(`(() => {
+    const native = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function(type, ...args) { return type === 'webgl2' ? null : native.apply(this, args); };
+    try {
+      const tags = ['sand-slider', 'sand-toggle', 'sand-signature', 'sand-thinking'];
+      window.__grainFallbacks = tags.map(tag => { const el = document.createElement(tag); el.style.width = tag === 'sand-thinking' ? '190px' : '240px'; document.body.append(el); return el; });
+      return JSON.stringify(window.__grainFallbacks.map(el => ({ tag: el.localName, noWebGL: el.nogl === true, dimensions: el.c.width > 0 && el.c.height > 0 })));
+    } finally { HTMLCanvasElement.prototype.getContext = native; }
+  })()`);
+  const fallbackSetup = JSON.parse(created);
+  check('original four: each initializes its no-WebGL path', fallbackSetup.length === 4 && fallbackSetup.every(x => x.noWebGL && x.dimensions), created);
+  await sleep(180);
+  const pixels = await ev(`(() => window.__grainFallbacks.map(el => { const c = el.fallbackCtx; if (!c) return false; const p = c.getImageData(Math.floor(el.c.width/2), Math.floor(el.c.height/2), 1, 1).data; return p[3] > 0; }))()`);
+  check('original four: fallback canvases paint visible sand pixels', Array.isArray(pixels) && pixels.length === 4 && pixels.every(Boolean), JSON.stringify(pixels));
+  await ev(`window.__grainFallbacks[0].value = 72; window.__grainFallbacks[1].checked = true`); await sleep(100);
+  check('original four: Slider and Toggle APIs remain usable in fallback mode', Math.abs(await ev(`window.__grainFallbacks[0].value`) - 72) < 0.1 && (await ev(`window.__grainFallbacks[1].checked`)) === true);
+  await ev(`window.__grainFallbacks.forEach(el => el.remove()); window.__grainFallbacks = null`);
+}
+
+{ // original four: reconnect does not duplicate canvases or change listeners
+  const lifecycle = await ev(`(() => {
+    const el = document.createElement('sand-toggle'); el.style.width = '220px'; document.body.append(el);
+    const firstCount = el.querySelectorAll('canvas').length; let changes = 0; el.addEventListener('change', () => changes++);
+    el.remove(); document.body.append(el); el.checked = true;
+    const result = { canvasesStable: firstCount === 2 && el.querySelectorAll('canvas').length === firstCount, singleChange: changes === 1, valuePreserved: el.checked === true };
+    el.remove(); return JSON.stringify(result);
+  })()`);
+  const life = JSON.parse(lifecycle);
+  check('original toggle: reconnect reuses its canvases', life.canvasesStable, lifecycle);
+  check('original toggle: reconnect preserves one change event and state', life.singleChange && life.valuePreserved, lifecycle);
+}
+
+{ // original four: reduced-motion behavior
+  await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
+  await sleep(60);
+  await ev(`${E('sand-slider')}.value = 37`); await sleep(50);
+  check('slider: reduced motion applies the target without easing', Math.abs(await ev(`${E('sand-slider')}.value`) - 37) < 0.1 && (await ev(`${E('sand-slider')}.vel`)) === 0);
+  await ev(`${E('sand-toggle')}.checked = true`); await sleep(40);
+  check('toggle: reduced motion moves the stone to its state immediately', (await ev(`${E('sand-toggle')}.glide`)) === null && (await ev(`${E('sand-toggle')}.s`)) === 1);
+  const [sx, sy] = await at('sand-signature', 0.22, 0.52), [ex, ey] = await at('sand-signature', 0.72, 0.42);
+  await swipe(sx, sy, ex, ey); await sleep(100); await ev(`${E('sand-signature')}.undo()`); await sleep(40);
+  check('signature: reduced-motion undo completes immediately', (await ev(`${E('sand-signature')}.empty`)) === true && (await ev(`${E('sand-signature')}.fade`)) === null);
+  await swipe(sx, sy, ex, ey); await sleep(100); await ev(`${E('sand-signature')}.clear()`); await sleep(40);
+  check('signature: reduced-motion clear completes immediately', (await ev(`${E('sand-signature')}.empty`)) === true && (await ev(`${E('sand-signature')}.rake`)) === null);
+  await ev(`${E('sand-thinking')}.state = 'searching'`); await sleep(80);
+  check('thinking: reduced motion shows a static state motif', (await ev(`${E('sand-thinking')}.rk`)) === null && (await ev(`${E('sand-thinking')}._reducedState`)) === 'searching');
+  await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }] });
+  await sleep(80);
+}
+
 { // checkbox: visual checkmark state, click and Space toggle it
   const el = E('sand-checkbox');
   await tap('sand-checkbox'); await sleep(300);

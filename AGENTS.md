@@ -59,11 +59,12 @@ The npm command above is the desired experience, not a claim that the package is
 
 **Repository:** `Brajesh31/GrainMotion-UI`  
 **Primary branch:** `main`  
-**Last recorded Phase 0 handover commit:** `8a6c94d534c3d300bbff145e1d5bf5439504c3ef`  
-**Last recorded full validation run:** [GitHub Actions #502](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44883655931)  
+**Baseline Phase 0 handover commit:** `8a6c94d534c3d300bbff145e1d5bf5439504c3ef`  
+**Latest implementation base:** `47e6c90b284dc8989ecd19e0eb71e5ac4eb83df1`  
+**Latest recorded full validation run:** [GitHub Actions #502](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44883655931)  
 **Phase 0:** Foundation work complete.  
-**Next active task:** Phase 1, restore and verify the original four components.  
-**Phase 1 status:** Not started.
+**Next active task:** Complete Phase 1 visual and cross-browser verification for the original four.  
+**Phase 1 status:** Implementation in progress; not yet signed off.
 
 At the Phase 0 audit, the repository contained:
 
@@ -80,6 +81,7 @@ At the Phase 0 audit, the repository contained:
 ### Phase 0 deliverables
 
 - `docs/PHASE-0-FOUNDATION-AUDIT.md`
+- `docs/PHASE-1-ORIGINAL-FOUR.md`
 - `docs/COMPONENT-CONTRACT.md`
 - `design/tokens.css`
 - `design/README.md`
@@ -114,7 +116,9 @@ The latest recorded browser run reported **228 passing assertions and 11 failing
 
 These are the latest recorded test results, not a guarantee that the failures persist identically on every run. Re-run the suite from the latest `main` before acting on them. Do not hide or waive the failures. Diagnose the current source, fix the real cause and retain meaningful tests.
 
-The original four had passing limited automated checks in the earlier baseline. This is not a visual sign-off and does not override the user's report that they are not working/rendering as intended.
+The original four passed their limited functional checks in run #502, but that baseline did not test no-WebGL rendering, reduced motion, or reconnection. New Phase 1 browser regressions cover these cases.
+- Phase 1 implementation now adds a 2D fallback for the original four, reduced-motion behavior, reconnect checks, and focused regression coverage. Record the new commit and its CI result after the workflow finishes.
+- Visual comparison against approved original references, real-device touch verification, and screen-reader verification are still outstanding. Do not mark Phase 1 complete until these are evidenced.
 
 ## 5. Active release-recovery phase plan
 
@@ -213,4 +217,4 @@ Keep the latest known CI run number, commit SHA, pass/fail count, failure names 
 
 Use this prompt when opening a new chat:
 
-> Continue the existing GrainMotion-UI project. First read the root `AGENTS.md` file and follow it as the source of truth. Also inspect the current `main` branch, `docs/ROADMAP.md`, and the latest GitHub Actions results before changing anything. **Do not create a branch, pull request, fork or duplicate repository. Directly edit the existing files on `main` and commit there.** Work on one active release-recovery phase at a time. The last recorded state is Phase 0 complete and Phase 1, restoring the original four components, not started. Verify current status before proceeding. Do not start the next phase automatically.
+> Continue the existing GrainMotion-UI project. First read the root `AGENTS.md` file and follow it as the source of truth. Also inspect the current `main` branch, `docs/ROADMAP.md`, and the latest GitHub Actions results before changing anything. **Do not create a branch, pull request, fork or duplicate repository. Directly edit the existing files on `main` and commit there.** Work on one active release-recovery phase at a time. The current state is Phase 0 complete and Phase 1 in progress. Read `docs/PHASE-1-ORIGINAL-FOUR.md`, inspect the latest commit and CI result, then complete remaining visual/device/accessibility verification. Do not start Phase 2 automatically.

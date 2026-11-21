@@ -19,6 +19,7 @@ export const COMMON_LIMITS = [
 export const SPEC = [
   {
     "id": "slider",
+    "manualDocs": true,
     "name": "Slider",
     "tag": "sand-slider",
     "categories": [
@@ -95,6 +96,7 @@ export const SPEC = [
   },
   {
     "id": "toggle",
+    "manualDocs": true,
     "name": "Toggle",
     "tag": "sand-toggle",
     "categories": [
@@ -167,6 +169,7 @@ export const SPEC = [
   },
   {
     "id": "signature",
+    "manualDocs": true,
     "name": "Signature",
     "tag": "sand-signature",
     "categories": [

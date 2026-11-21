@@ -328,6 +328,53 @@ window.GrainMotionUI.Sound.add({
 });
 // <<< sounds
 const { Sound, SandTray } = window.GrainMotionUI;
+
+function renderSandFallback(el) {
+  const ctx = el.fallbackCtx || (el.fallbackCtx = el.c.getContext('2d'));
+  if (!ctx || !el.h || !el.inside) return;
+  const W = el.W, H = el.H, k = el.k || 1, width = el.c.width, height = el.c.height;
+  if (!el.fallbackSand || el.fallbackSand.width !== W || el.fallbackSand.height !== H) {
+    el.fallbackSand = document.createElement('canvas');
+    el.fallbackSand.width = W; el.fallbackSand.height = H;
+    el.fallbackSandContext = el.fallbackSand.getContext('2d'); el.fallbackReady = false;
+  }
+  if (el.dirty || !el.fallbackReady) {
+    const paint = el.fallbackSandContext, image = paint.createImageData(W, H), pixels = image.data, h = el.h, inside = el.inside;
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const i = y * W + x; if (!inside[i]) continue;
+      const z = h[i] || 0, l = x ? h[i - 1] : z, r = x + 1 < W ? h[i + 1] : z;
+      const u = y ? h[i - W] : z, d = y + 1 < H ? h[i + W] : z;
+      const grain = (((x * 73856093) ^ (y * 19349663)) >>> 0) & 15;
+      const shade = Math.max(0.66, Math.min(1.2, 0.91 + (l - r) * 0.15 + (u - d) * 0.12 + Math.max(-0.1, Math.min(0.1, z * 0.045)) + (grain - 7.5) * 0.0035));
+      const p = i * 4; pixels[p] = Math.round(239 * shade); pixels[p + 1] = Math.round(223 * shade); pixels[p + 2] = Math.round(191 * shade); pixels[p + 3] = 255;
+    }
+    paint.putImageData(image, 0, 0); el.fallbackReady = true; el.dirty = false;
+  }
+  const rounded = (g, x, y, w, h, radius) => {
+    const q = Math.max(0, Math.min(radius, w / 2, h / 2));
+    g.beginPath(); g.moveTo(x + q, y); g.arcTo(x + w, y, x + w, y + h, q);
+    g.arcTo(x + w, y + h, x, y + h, q); g.arcTo(x, y + h, x, y, q);
+    g.arcTo(x, y, x + w, y, q); g.closePath();
+  };
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, width, height);
+  ctx.save(); ctx.shadowColor = 'rgba(45,29,17,.3)'; ctx.shadowBlur = 7 * k; ctx.shadowOffsetY = 2 * k;
+  const wood = ctx.createLinearGradient(0, 0, 0, height);
+  wood.addColorStop(0, '#8b694c'); wood.addColorStop(0.22, '#6e4e36'); wood.addColorStop(0.78, '#553a2a'); wood.addColorStop(1, '#78563b');
+  rounded(ctx, 0.5 * k, 0.5 * k, width - k, height - k, height / 2); ctx.fillStyle = wood; ctx.fill(); ctx.restore();
+  const pad = el.pad * k, ix = pad, iy = pad, iw = width - 2 * pad, ih = height - 2 * pad;
+  ctx.save(); rounded(ctx, ix, iy, iw, ih, ih / 2); ctx.clip(); ctx.drawImage(el.fallbackSand, 0, 0, width, height); ctx.restore();
+  ctx.lineWidth = Math.max(1, k); rounded(ctx, ix, iy, iw, ih, ih / 2); ctx.strokeStyle = 'rgba(80,54,35,.7)'; ctx.stroke();
+  const stone = el.stone;
+  if (stone && stone[2] > 0 && stone[3] > 0) {
+    const [x, y, rx, ry] = stone;
+    ctx.save(); ctx.shadowColor = 'rgba(35,28,23,.42)'; ctx.shadowBlur = Math.max(rx, ry) * 0.22 * k;
+    ctx.shadowOffsetX = rx * 0.08 * k; ctx.shadowOffsetY = ry * 0.16 * k;
+    const grad = ctx.createRadialGradient((x - rx * 0.28) * k, (y - ry * 0.35) * k, Math.max(1, rx * 0.08 * k), x * k, y * k, Math.max(rx, ry) * 1.2 * k);
+    grad.addColorStop(0, '#b9b9b1'); grad.addColorStop(0.55, '#85877f'); grad.addColorStop(1, '#51544f');
+    ctx.beginPath(); ctx.ellipse(x * k, y * k, rx * k, ry * k, -0.08, 0, Math.PI * 2); ctx.fillStyle = grad; ctx.fill();
+    ctx.shadowColor = 'transparent'; ctx.strokeStyle = 'rgba(40,39,35,.55)'; ctx.lineWidth = Math.max(1, k); ctx.stroke(); ctx.restore();
+  }
+}
 const easeInOut = (u) => 0.5 - 0.5 * Math.cos(Math.PI * u);
 
 class SandToggle extends SandTray {
@@ -363,6 +410,7 @@ class SandToggle extends SandTray {
     this.style.touchAction = 'pan-y';
     this.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); Sound.wake(); this.set(!this.on); } });
   }
+  render() { if (this.nogl) { renderSandFallback(this); return; } super.render(); }
   get checked() { return this.on; }
   set checked(v) { this.set(!!v); }
   set(on) {
@@ -370,7 +418,8 @@ class SandToggle extends SandTray {
     this.on = on; this.setAttribute('aria-checked', on); this.formValue(on ? this.getAttribute('value') || 'on' : null);
     const to = on ? 1 : 0, dist = Math.abs(to - this.s);
     // a gentle push: eased in and out, slower for longer journeys
-    if (dist > 0.001) this.glide = { from: this.s, to, t: 0, dur: 0.35 + 1.0 * dist };
+    if (this.reduced) { this.glide = null; this.s = to; this.vel = 0; }
+    else if (dist > 0.001) this.glide = { from: this.s, to, t: 0, dur: 0.35 + 1.0 * dist };
     if (on !== was) this.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
@@ -454,6 +503,16 @@ class SandToggle extends SandTray {
   }
 
   step(dt) {
+    if (this.reduced) {
+      const next = this.dragTo != null ? this.dragTo : this.glide ? this.glide.to : this.s;
+      this.s = Math.min(1, Math.max(0, next)); this.glide = null; this.vel = 0;
+      const cx = this.sx(this.s), from = this.lastCx == null ? cx : this.lastCx;
+      const n = Math.ceil(Math.abs(cx - from)), dir = Math.sign(cx - from);
+      for (let i = 1; i <= n; i++) this.footprint(from + (cx - from) * i / n, dir);
+      this.lastCx = cx;
+      this.relax(Math.min(cx - this.rx * 2.6, this.moved[0] - 3), Math.max(cx + this.rx * 2.6, this.moved[1] + 3), 2);
+      this.stone = [cx, this.cy, this.rx, this.ry]; this.moss = null; return;
+    }
     const prev = this.s;
     if (this.dragTo != null) {
       // held: the stone follows the finger, unhurried
