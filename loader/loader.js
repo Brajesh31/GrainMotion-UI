@@ -320,9 +320,10 @@ const { Sound, SandTray } = window.GrainMotionUI;
 
 class SandLoader extends SandTray {
  static observedAttributes=['label','active','speed'];get aspect(){return .48}
- constructor(){super();this.phase=0;this.active=true;this._speed=1}
+ constructor(){super();this.phase=0;this._active=true;this._speed=1}
+ get active(){return this._active}set active(v){this._active=!!v;if(this._ready)this.updateStatus()}
  get speed(){return this._speed}set speed(v){this._speed=Math.max(.25,Math.min(4,Number(v)||1))}
- attributeChangedCallback(n,o,v){if(!this._ready||o===v)return;if(n==='label')this.setAttribute('aria-label',v||'Loading');if(n==='active')this.active=v!==null&&v!=='false';if(n==='speed')this.speed=v;this.updateStatus()}
+ attributeChangedCallback(n,o,v){if(!this._ready||o===v)return;if(n==='label')this.setAttribute('aria-label',v||'Loading');if(n==='active')this._active=v!==null&&v!=='false';if(n==='speed')this.speed=v;this.updateStatus()}
  init(){this._ready=true;this.active=this.hasAttribute('active')?this.getAttribute('active')!=='false':true;this.speed=Number(this.getAttribute('speed')||1);this.setAttribute('role','status');this.setAttribute('aria-live','polite');this.setAttribute('aria-label',this.getAttribute('label')||'Loading');this.updateStatus()}
  updateStatus(){if(!this._ready)return;this.setAttribute('aria-label',this.getAttribute('label')||(this.active?'Loading':'Loading complete'));this.setAttribute('aria-busy',String(this.active))}
  layout(){const r=this.inner;for(let y=r.y0;y<r.y1;y++)for(let x=r.x0;x<r.x1;x++){const i=y*this.W+x;if(this.inside[i])this.h[i]=this.lines(x,y,5,4)*.16}this.relax(r.x0,r.x1,2);this.dirty=true}
