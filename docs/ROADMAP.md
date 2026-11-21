@@ -6,7 +6,7 @@ Grow GrainMotion-UI into a carefully designed library of tactile interface contr
 
 **Target:** 50 components total, including the four already implemented. This means 46 new components.
 
-**Status update:** Phases 1–8 now deliver 45 implemented components of the 50-component roadmap. Phase 8 adds tooltips, toasts, persistent alerts, native modal dialogs and edge drawers. The final 45-component GitHub Actions mobile Chromium run passed **206 assertions with zero failures**; standalone bundle synchronization, generated documentation validation and GitHub Pages deployment also passed. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818303) · [Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818321). Manual screen-reader, physical-device, Safari and Firefox checks remain outstanding.
+**Status update:** Phases 1–8 now deliver 45 implemented components of the 50-component roadmap. Phase 8 adds tooltips, toasts, persistent alerts, native modal dialogs and edge drawers. The final 45-component GitHub Actions mobile Chromium run passed **206 assertions with zero failures**; standalone bundle synchronization, generated documentation validation and GitHub Pages deployment also passed. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818303) · [Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44873818321). Manual screen-reader, physical-device, Safari and Firefox checks remain outstanding. Phase 9 is now in progress on main with all five source files, individual demos and guides, visual concepts, registry records and 30 targeted Chromium assertions committed. The final 50-component validation and Pages release gates are pending.
 
 This roadmap is not a completion report. A component is not release-complete until its functional and regression tests pass.
 
@@ -176,6 +176,8 @@ Required coverage: ordering, transfer, selection, nested data, keyboard alternat
 Required coverage: focus trapping where appropriate, Escape behavior, dismissal rules, stacking, live-region announcements, action controls, backdrop interaction and mobile positioning.
 
 ## Phase 9: Advanced productivity and composite components
+
+**Status: In progress on `main`.** Five source components, demos, guides, concept sheets, registry entries and 30 targeted browser assertions are committed. Bundle, documentation, full regression and Pages release checks remain pending.
 
 **Target after phase:** 50 components total.
 
