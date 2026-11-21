@@ -4,7 +4,7 @@
 
 ### Interfaces shaped by sand, motion, and interaction.
 
-A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray. Phase 6 adds six media and file controls with real file selection, media timelines, framed images and mineral pigment choices. Phase 7 adds five advanced list and layout controls: sorting, item transfer, split panes, resizable panels and nested tree navigation. Phase 8 adds five feedback and overlay controls: tooltips, toasts, persistent alerts, native modal dialogs and edge drawers.
+A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray. Phase 6 adds six media and file controls with real file selection, media timelines, framed images and mineral pigment choices. Phase 7 adds five advanced list and layout controls: sorting, item transfer, split panes, resizable panels and nested tree navigation. Phase 8 adds five feedback and overlay controls: tooltips, toasts, persistent alerts, native modal dialogs and edge drawers. Phase 9 is integrating five productivity controls: command palette, context menu, filter builder, data table and Kanban board.
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
@@ -15,7 +15,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml/badge.svg" alt="Component validation"></a>
   <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
   <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
-  <img src="https://img.shields.io/badge/Components-45-C49A6C" alt="Forty-five components">
+  <img src="https://img.shields.io/badge/Components-45%20verified%20%2B%205%20in%20progress-C49A6C" alt="45 verified components, five in progress">
 </p>
 
 </div>
@@ -24,7 +24,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI currently has forty-five CI-verified standalone custom elements across the original set and Phases 1–8. The components simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI currently ships 45 CI-verified standalone custom elements across the original set and Phases 1–8. Phase 9 adds five more components on main, but they remain in progress until bundle, documentation, browser and Pages checks pass. The components simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -91,6 +91,20 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 | **Sand Alert Banner** | A persistent raised sand strip carries an announcement and an action. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/alert/) · [Documentation](alert/README.md) |
 | **Sand Dialog / Modal** | A framed native modal surface appears above the page. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/dialog/) · [Documentation](dialog/README.md) |
 | **Sand Drawer / Sheet** | A wood-framed sheet enters from one of the four viewport edges. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/drawer/) · [Documentation](drawer/README.md) |
+
+
+### Phase 9 · Productivity and composite controls (in progress)
+
+The five new controls are implemented with standalone source, demos, docs and concept artwork. They are awaiting the full 50-component validation and release gates.
+
+| Component | Physical interaction | Demo and documentation |
+|---|---|---|
+| **Command Palette** | A central stone filters a searchable list of actions. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/command/) · [Documentation](command/README.md) |
+| **Context Menu** | A carved walnut tray appears at the pointer, touch hold or keyboard target. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/context-menu/) · [Documentation](context-menu/README.md) |
+| **Filter Builder** | Condition stones connect along AND/OR logical grooves. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/filter-builder/) · [Documentation](filter-builder/README.md) |
+| **Data Table** | Selected row stones sit inside a sortable and paginated walnut frame. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/table/) · [Documentation](table/README.md) |
+| **Kanban Board** | Task cards travel between workflow columns and settle into place. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/kanban/) · [Documentation](kanban/README.md) |
+
 
 > The gallery image above shows the component set together. The concept artwork below documents visual exploration and design direction, not additional live component screenshots.
 
@@ -317,6 +331,20 @@ These studies distinguish transient notifications, persistent alerts, non-intera
 
 </div>
 
+### Phase 9 productivity and composite concepts
+
+These five concept illustrations describe the new command, contextual action, query composition, tabular data and task workflow surfaces. They are design studies rather than screenshots of the live controls.
+
+<div align="center">
+
+<table>
+<tr><td align="center"><img src="command/assets/concept.svg" alt="Searchable command palette in a walnut frame" width="100%"><br><strong>Command Palette</strong></td><td align="center"><img src="context-menu/assets/concept.svg" alt="Contextual walnut action menu at a point of contact" width="100%"><br><strong>Context Menu</strong></td></tr>
+<tr><td align="center"><img src="filter-builder/assets/concept.svg" alt="Connected filter condition stones with logical grouping" width="100%"><br><strong>Filter Builder</strong></td><td align="center"><img src="table/assets/concept.svg" alt="Sortable and selectable rows in a tactile data table" width="100%"><br><strong>Data Table</strong></td></tr>
+<tr><td align="center"><img src="kanban/assets/concept.svg" alt="Task cards arranged across Kanban workflow columns" width="100%"><br><strong>Kanban Board</strong></td><td align="center"><strong>One cohesive material language</strong><br>Search, filter, sort and move actions remain functional controls rather than decorative animations.</td></tr>
+</table>
+
+</div>
+
 ## ⚙️ How it works
 
 The sand is simulated, not a static texture. A height field stores the sand surface, JavaScript updates it as controls move, and a WebGL2 shader lights the surface to reveal grooves, ridges, shadows, and highlights.
@@ -490,6 +518,7 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [Component catalog and implementation status](docs/COMPONENT-CATALOG.md)
 - [Phase 7 advanced layout implementation spec](docs/PHASE-7-ADVANCED-LAYOUT-SPEC.md)
 - [Phase 8 feedback and overlay implementation spec](docs/PHASE-8-FEEDBACK-OVERLAYS-SPEC.md)
+- [Phase 9 productivity and composite implementation spec](docs/PHASE-9-ADVANCED-PRODUCTIVITY-SPEC.md)
 - [Architecture and shared sand engine](docs/ARCHITECTURE.md)
 - [Design system and visual standards](docs/DESIGN-SYSTEM.md)
 - [Asset catalog and creation standards](docs/ASSET-CATALOG.md)
@@ -531,6 +560,11 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [Split Pane documentation](split-pane/README.md)
 - [Resizable Panels documentation](resizable/README.md)
 - [Tree View documentation](tree/README.md)
+- [Command Palette documentation](command/README.md)
+- [Context Menu documentation](context-menu/README.md)
+- [Filter Builder documentation](filter-builder/README.md)
+- [Data Table documentation](table/README.md)
+- [Kanban Board documentation](kanban/README.md)
 - [Hourglass Timer documentation](timer/README.md)
 - [Step Indicator documentation](steps/README.md)
 - [Progress Ring documentation](progress-ring/README.md)
