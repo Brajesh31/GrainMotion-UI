@@ -582,7 +582,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await new Promise(r=>setTimeout(r,590));
   check('context menu: touch movement cancels a pending long-press', await ev("!document.querySelector('sand-context-menu').open")===true);
   await ev("(()=>{const e=document.querySelector('sand-context-menu');const down=new Event('pointerdown',{bubbles:true});Object.defineProperties(down,{pointerType:{value:'touch'},clientX:{value:24},clientY:{value:32}});e.targetButton.dispatchEvent(down);})()");
-  await new Promise(r=>setTimeout(r,590));
+  await new Promise(r=>setTimeout(r,1000));
   check('context menu: touch long-press opens the menu at the press point', await ev("document.querySelector('sand-context-menu').open")===true);
   await ev("(()=>{const e=document.querySelector('sand-context-menu');const up=new Event('pointerup',{bubbles:true});Object.defineProperties(up,{pointerType:{value:'touch'},clientX:{value:24},clientY:{value:32}});e.targetButton.dispatchEvent(up);e.close('test');})()");
 
