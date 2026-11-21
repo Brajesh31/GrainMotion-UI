@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GrainMotion-UI</title>
 <link rel="icon" href="data:,">
-<meta name="description" content="Fourteen tactile UI controls made from simulated sand, including selection, text, password, search and one-time-code inputs.">
+<meta name="description" content="Nineteen tactile UI controls made from simulated sand, including selection, text, calendar and time inputs.">
 <meta property="og:title" content="GrainMotion-UI">
-<meta property="og:description" content="Fourteen tactile controls made from simulated sand, including text entry, password, search and one-time-code inputs.">
+<meta property="og:description" content="Nineteen tactile controls made from simulated sand, including selection, text, calendar and time controls.">
 <meta property="og:image" content="title.svg">
 <style>
   /* The gallery: every control live on one page, with its install line and a prompt for a coding agent. */
@@ -34,6 +34,8 @@
   .stage > sand-toggle { width: 190px; } .stage > sand-thinking { width: 210px; }
   .stage > :is(sand-checkbox,sand-radio-group,sand-segmented,sand-range,sand-rating) { width: 100%; }
   .stage > :is(sand-input,sand-textarea,sand-password,sand-search,sand-otp) { width: 100%; }
+  .stage > :is(sand-select,sand-combobox,sand-date-picker,sand-date-range) { width: 100%; }
+  .stage > sand-time-picker { width: min(280px, 100%); }
   .stage > sand-checkbox { max-width: 190px; }
   .field { width: 100%; display: flex; justify-content: space-between; font-size: 14px; font-weight: 500; } .field output { color: var(--mute); font-variant-numeric: tabular-nums; }
   .mini { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
@@ -48,7 +50,7 @@
 <div class="wrap">
   <header>
     <h1>GrainMotion-UI</h1>
-    <p class="lede">Fourteen tactile controls made of sand that moves like sand. Rake it, push a stone through it, choose options, write, search and enter a code. Each component is a standalone file with no runtime dependencies.</p>
+    <p class="lede">Nineteen tactile controls made of sand that moves like sand. Rake it, push a stone through it, select, write, search, choose dates and times. Each component is a standalone file with no runtime dependencies.</p>
     <p class="links">
       <button class="pill dark" type="button" id="snd">Sound on</button>
       <a class="pill" href="https://github.com/Brajesh31/GrainMotion-UI" target="_blank" rel="noopener">The repo on GitHub <span aria-hidden="true">&#8599;</span></a>
@@ -71,6 +73,11 @@
 <script src="../password/password.js"></script>
 <script src="../search/search.js"></script>
 <script src="../otp/otp.js"></script>
+<script src="../select/select.js"></script>
+<script src="../combobox/combobox.js"></script>
+<script src="../date-picker/date-picker.js"></script>
+<script src="../date-range/date-range.js"></script>
+<script src="../time-picker/time-picker.js"></script>
 <script>
 // The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
 const REPO = 'Brajesh31/GrainMotion-UI';
@@ -123,6 +130,23 @@ ITEMS.push(
     html: '<sand-otp label="Verification code" length="6" placeholder="Six-digit code"></sand-otp><div class="readout">Enter a six-digit code</div>',
     wire: (el, card) => { const o = card.querySelector('.readout'); el.addEventListener('complete', event => { o.textContent = event.detail.length + '-digit code entered'; }); el.addEventListener('input', () => { if (el.value.length < el.length) o.textContent = 'Code entry in progress'; }); } }
 );
+ITEMS.push(
+  { id: 'select', name: 'Select / Dropdown', tag: 'sand-select', sub: 'A river stone settles into the chosen option well.',
+    html: '<sand-select label="Delivery speed" options="standard:Standard,express:Express,overnight:Overnight" placeholder="Choose delivery" value="standard"></sand-select><div class="readout"></div>',
+    wire: (el, card) => { const o=card.querySelector('.readout'),show=()=>o.textContent=el.value||'No option selected';el.addEventListener('change',show);show(); } },
+  { id: 'combobox', name: 'Combobox / Autocomplete', tag: 'sand-combobox', sub: 'A bamboo rake follows the typed query.',
+    html: '<sand-combobox label="City" options="DEL:Delhi,BLR:Bengaluru,HYD:Hyderabad,PNQ:Pune" placeholder="Start typing a city"></sand-combobox><div class="readout">Type or choose a suggestion</div>',
+    wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('input',()=>o.textContent=el.value?'Query: '+el.value:'Type or choose a suggestion');el.addEventListener('option-selected',e=>o.textContent='Selected: '+e.detail.label); } },
+  { id: 'date-picker', name: 'Date Picker', tag: 'sand-date-picker', sub: 'An engraved calendar grid holds the selected day.',
+    html: '<sand-date-picker label="Start date" value="2026-11-24" min="2026-01-01" max="2026-12-31" unavailable="2026-12-25"></sand-date-picker><div class="readout"></div>',
+    wire: (el, card) => { const o=card.querySelector('.readout'),show=()=>o.textContent=el.value||'Choose a date';el.addEventListener('change',show);show(); } },
+  { id: 'date-range', name: 'Date Range Picker', tag: 'sand-date-range', sub: 'Two stones mark the start and end of an interval.',
+    html: '<sand-date-range label="Stay dates" start="2026-11-21" end="2026-11-25" min="2026-01-01" max="2026-12-31"></sand-date-range><div class="readout"></div>',
+    wire: (el, card) => { const o=card.querySelector('.readout'),show=()=>o.textContent=el.start&&el.end?el.start+' → '+el.end:'Choose both dates';el.addEventListener('date-range-change',show);show(); } },
+  { id: 'time-picker', name: 'Time Picker', tag: 'sand-time-picker', sub: 'A circular sand dial marks the selected time.',
+    html: '<sand-time-picker label="Appointment" value="16:30" format="12" min="09:00" max="18:00" step="900"></sand-time-picker><div class="readout"></div>',
+    wire: (el, card) => { const o=card.querySelector('.readout'),show=()=>o.textContent=el.value?el.readout.textContent:'Choose a time';el.addEventListener('input',show);show(); } }
+);
 
 // What each prompt says about wiring its control in. The rest of the prompt is the same for all of them.
 const WIRE = {
@@ -148,6 +172,11 @@ const WIRE = {
   password: ['Use <sand-password label="Password" autocomplete="current-password"></sand-password> for a masked credential field.', 'Read el.value. Use el.revealed to toggle visibility; the built-in Show/Hide button is accessible and starts hidden.', 'A river-stone shutter sits beside the native password input. Never log the password or expose it in analytics.'],
   search: ['Use <sand-search label="Search" placeholder="Search"></sand-search> for a native search field.', 'Pressing Enter emits a bubbling search event with detail.value. Set el.busy=true while your application works; call el.clear() to clear the field.', 'A search well anchors the left edge; a small rake moves through the sand while busy.'],
   otp: ['Use <sand-otp label="Verification code" length="6" autocomplete="one-time-code"></sand-otp> for numeric OTP/PIN entry.', 'One native input preserves mobile one-time-code autofill and paste. Non-digits are removed and the value is capped to length. The complete event exposes detail.length only.', 'Individual engraved wells frame the code. Do not log the OTP/PIN value or include it in analytics.'],
+  select: ['Use <sand-select label="Delivery speed" options="standard:Standard,express:Express"></sand-select> for a native select with a sand selection marker.', 'Read or set el.value. Options are comma-separated; use value:Label for separate submitted values and labels. Native select and change events bubble.', 'The browser owns the popup and keyboard behavior. A river stone marks the selected option.'],
+  combobox: ['Use <sand-combobox label="City" options="DEL:Delhi,BLR:Bengaluru"></sand-combobox> for native autocomplete suggestions.', 'Read or set el.value. The control uses an input and datalist, so free text is allowed. A matching suggestion committed by change emits option-selected with value and label.', 'A bamboo rake follows the typed query; the browser owns the suggestion popup.'],
+  'date-picker': ['Use <sand-date-picker label="Start date" min="2026-01-01" max="2026-12-31"></sand-date-picker> for a calendar date.', 'Read or set el.value as YYYY-MM-DD. min/max are inclusive. Add comma-separated ISO dates to unavailable to reject individual days. Dates are not converted through local time.', 'A pebble marks the chosen day in an engraved calendar grid; the browser owns its native calendar UI.'],
+  'date-range': ['Use <sand-date-range label="Stay dates" name="stay"></sand-date-range> for a start and end date.', 'Read or set el.start and el.end; el.value and the form value use YYYY-MM-DD/YYYY-MM-DD. The end may not precede the start. date-range-change emits start and end on committed changes.', 'Two river stones mark the inclusive date interval. The inner fields are native date inputs.'],
+  'time-picker': ['Use <sand-time-picker label="Appointment" format="12" step="900"></sand-time-picker> for a timezone-free time of day.', 'Read or set el.value as HH:MM. format controls the explicit 12/24-hour readout; native popup presentation follows browser locale. min/max are times and step is seconds.', 'A stone hand follows the time around a small engraved clock dial. No local timezone conversion is performed.'],
 };
 const SKILL = { url: new URL('../skills/grainmotion-ui/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };
 const fileUrl = (id) => new URL(`../${id}/${id}.js`, location.href).href;
