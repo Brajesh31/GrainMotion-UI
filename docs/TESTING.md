@@ -28,7 +28,7 @@ The test and screenshot utilities require Chrome or Chromium. Set `CHROME` if th
 
 ## Current test coverage
 
-`tools/test.mjs` now loads all twenty-nine controls in a mobile-sized Chromium viewport. The last passing twenty-four-component baseline recorded 80 browser assertions with zero failures. Phase 5 adds 23 targeted assertions for the five navigation controls; the final 29-component CI result is pending until the updated workflow completes. The original four-component regression checks remain part of the suite. The original-control checks cover:
+`tools/test.mjs` now loads all twenty-nine controls in a mobile-sized Chromium viewport. The last passing twenty-four-component baseline recorded 80 browser assertions with zero failures. Phase 5 adds 45 targeted assertions for the five navigation controls; the final 29-component CI result is pending until the updated workflow completes. The original four-component regression checks remain part of the suite. The original-control checks cover:
 
 - Slider drag, input/change events, vertical-swipe handling and keyboard increments.
 - Toggle click, Space behavior, change events and vertical-swipe handling.
