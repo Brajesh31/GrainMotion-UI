@@ -463,8 +463,8 @@ class SandDateRange extends SandPickerBase {
   try{
    if(bad)this.internals?.setValidity({valueMissing:true},'Choose both a start and end date.',!this._start?this.startField:this.endField);
    else if(message||this.startField.validationMessage)this.internals?.setValidity({customError:true},message||this.startField.validationMessage,message?this.endField:this.startField);
-   else if(!this.startField.validity.valid)this.internals?.setValidity({rangeUnderflow:true},this.startField.validationMessage,this.startField);
-   else if(!this.endField.validity.valid)this.internals?.setValidity({rangeOverflow:true},this.endField.validationMessage,this.endField);
+   else if(!this.startField.validity.valid){const flags={};for(const key of ['rangeUnderflow','rangeOverflow','badInput','valueMissing','customError'])if(this.startField.validity[key])flags[key]=true;this.internals?.setValidity(flags,this.startField.validationMessage,this.startField);}
+   else if(!this.endField.validity.valid){const flags={};for(const key of ['rangeUnderflow','rangeOverflow','badInput','valueMissing','customError'])if(this.endField.validity[key])flags[key]=true;this.internals?.setValidity(flags,this.endField.validationMessage,this.endField);}
    else this.internals?.setValidity({});
   }catch{}
  }
