@@ -34,6 +34,11 @@ This catalog records assets found in the current repository tree. It does not as
 | `date-picker/assets/concept.svg` | SVG | Engraved calendar and selected-day pebble concept diagram, not a runtime screenshot. |
 | `date-range/assets/concept.svg` | SVG | Date-range endpoint stones and interval groove concept diagram, not a runtime screenshot. |
 | `time-picker/assets/concept.svg` | SVG | Clock-dial and time marker concept diagram, not a runtime screenshot. |
+| `progress/assets/concept.svg` | SVG | Progress bar rake and growing trail concept diagram, not a runtime screenshot. |
+| `progress-ring/assets/concept.svg` | SVG | Circular progress groove and pebble marker concept diagram, not a runtime screenshot. |
+| `steps/assets/concept.svg` | SVG | Completed, current and upcoming stepping-stone concept diagram, not a runtime screenshot. |
+| `timer/assets/concept.svg` | SVG | Two-chamber hourglass and falling sand concept diagram, not a runtime screenshot. |
+| `loader/assets/concept.svg` | SVG | Repeating rake and loading pattern concept diagram, not a runtime screenshot. |
 
 ### Audio assets
 
