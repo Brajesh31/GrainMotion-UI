@@ -900,7 +900,7 @@
       "name": "tooltip",
       "type": "registry:file",
       "title": "GrainMotion-UI Tooltip",
-      "description": "A non-interactive tooltip anchored to a trigger by element ID, with pointer and keyboard activation, Escape dismissal, configurable placement and delay, and aria-describedby token preservation. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-tooltip>.",
+      "description": "A non-interactive tooltip anchored to a trigger by element ID, with pointer and keyboard activation, Escape dismissal, configurable placement and delay, and aria-describedby token preservation. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-tooltip>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "tooltip",
