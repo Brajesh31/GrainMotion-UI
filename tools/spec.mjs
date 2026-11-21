@@ -1661,7 +1661,7 @@ export const SPEC = [
   "happens":[["open the trigger","the stone lifts and the anchored walnut option tray appears"],["select an enabled action","a select event is emitted and the menu closes unless keep-open is present"],["press Escape or click outside","the tray closes; Escape restores focus to the trigger"]],
   "limits":["Up to eight menu items.","This component is a command menu, not a modal dialog or general rich-content popover."],
   "manualDocs":true
-}
+},
 {
   "id": "dropzone",
   "name": "File Dropzone",
