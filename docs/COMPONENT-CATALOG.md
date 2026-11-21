@@ -37,15 +37,15 @@ These five native text and structured-input controls have standalone bundles, li
 
 ## Phase 3 components
 
-The five selection, calendar and time controls now have standalone bundles, live demos, expanded component READMEs, concept artwork, gallery cards and registry entries. Automated interaction verification is pending until the Phase 3 CI run passes.
+The five selection, calendar and time controls have standalone bundles, live demos, expanded component READMEs, concept artwork, gallery cards and registry entries. All five passed the mobile Chromium interaction and form checks in the nineteen-component validation workflow. Manual screen-reader and physical-device verification remains outstanding.
 
 | # | Component | Custom element | Main interaction | Documentation | Status |
 |---:|---|---|---|---|---|
-| 15 | Select / Dropdown | `sand-select` | A river stone settles into the chosen option well. | [README](../select/README.md) · [Demo](../select/) | Implemented, verification pending |
-| 16 | Combobox / Autocomplete | `sand-combobox` | A bamboo rake follows the typed query as native suggestions appear. | [README](../combobox/README.md) · [Demo](../combobox/) | Implemented, verification pending |
-| 17 | Date Picker | `sand-date-picker` | An engraved calendar grid holds a pebble on the selected day. | [README](../date-picker/README.md) · [Demo](../date-picker/) | Implemented, verification pending |
-| 18 | Date Range Picker | `sand-date-range` | Two river stones mark the start and end of a date interval. | [README](../date-range/README.md) · [Demo](../date-range/) | Implemented, verification pending |
-| 19 | Time Picker | `sand-time-picker` | A circular sand dial marks the selected time. | [README](../time-picker/README.md) · [Demo](../time-picker/) | Implemented, verification pending |
+| 15 | Select / Dropdown | `sand-select` | A river stone settles into the chosen option well. | [README](../select/README.md) · [Demo](../select/) | Implemented, Chromium CI passed |
+| 16 | Combobox / Autocomplete | `sand-combobox` | A bamboo rake follows the typed query as native suggestions appear. | [README](../combobox/README.md) · [Demo](../combobox/) | Implemented, Chromium CI passed |
+| 17 | Date Picker | `sand-date-picker` | An engraved calendar grid holds a pebble on the selected day. | [README](../date-picker/README.md) · [Demo](../date-picker/) | Implemented, Chromium CI passed |
+| 18 | Date Range Picker | `sand-date-range` | Two river stones mark the start and end of a date interval. | [README](../date-range/README.md) · [Demo](../date-range/) | Implemented, Chromium CI passed |
+| 19 | Time Picker | `sand-time-picker` | A circular sand dial marks the selected time. | [README](../time-picker/README.md) · [Demo](../time-picker/) | Implemented, Chromium CI passed |
 
 ## Planned components
 
