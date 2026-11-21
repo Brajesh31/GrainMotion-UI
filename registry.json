@@ -201,18 +201,118 @@
       "docs": "GrainMotion-UI Rating is a plain script that registers a custom element. Load /grainmotion-ui/rating.js with a script tag (not a module), Use <sand-rating name=\"product-rating\" label=\"Product rating\" value=\"4\"></sand-rating>. Read el.value and listen for input/change. The supported scale is zero through five. More: https://brajesh31.github.io/GrainMotion-UI"
     },
     {
+      "name": "input",
       "type": "registry:file",
-      "title": "GrainMotion-UI undefined",
-      "description": "undefined One file of about undefined KB with its sand engine and sounds inside it, no dependencies, defines <undefined>.",
+      "title": "GrainMotion-UI Text Field",
+      "description": "A native text input with a bamboo stylus-like focus marker and fine pressed guide line, retaining normal browser editing, selection and validation. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-input>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "input",
+        "text",
+        "form",
+        "sand",
+        "animation"
+      ],
       "files": [
         {
-          "path": "undefined/undefined.js",
+          "path": "input/input.js",
           "type": "registry:file",
-          "target": "~/public/grainmotion-ui/undefined.js"
+          "target": "~/public/grainmotion-ui/input.js"
         }
       ],
-      "docs": "GrainMotion-UI undefined is a plain script that registers a custom element. Load /grainmotion-ui/undefined.js with a script tag (not a module), undefined More: https://brajesh31.github.io/GrainMotion-UI"
+      "docs": "GrainMotion-UI Text Field is a plain script that registers a custom element. Load /grainmotion-ui/input.js with a script tag (not a module), Use <sand-input name=\"displayName\" label=\"Display name\" placeholder=\"Your name\"></sand-input>. Read or set el.value; native input and change events bubble from its internal input. Supported types are text, email, tel, url and search. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "textarea",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Textarea",
+      "description": "A native multiline textarea over a wider sand tray, with shallow writing grooves and a moving stylus focus cue. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-textarea>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "textarea",
+        "input",
+        "text",
+        "form",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "textarea/textarea.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/textarea.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Textarea is a plain script that registers a custom element. Load /grainmotion-ui/textarea.js with a script tag (not a module), Use <sand-textarea name=\"message\" label=\"Message\" rows=\"4\" maxlength=\"500\"></sand-textarea>. Read or set el.value; native input and change events bubble from the internal textarea. Rows are clamped from 2 to 10. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "password",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Password Field",
+      "description": "A native password input with a physical Show/Hide stone shutter. The value remains masked by default and is never printed in the demo status text. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-password>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "password",
+        "input",
+        "security",
+        "form",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "password/password.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/password.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Password Field is a plain script that registers a custom element. Load /grainmotion-ui/password.js with a script tag (not a module), Use <sand-password name=\"password\" label=\"Password\" autocomplete=\"current-password\"></sand-password>. Read or set el.value. The revealed property or attribute toggles visibility; password is hidden by default. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "search",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Search Field",
+      "description": "A native search input with a small search well, a clear button, an Enter-to-search event and a moving sand rake while busy. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-search>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "search",
+        "input",
+        "form",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "search/search.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/search.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Search Field is a plain script that registers a custom element. Load /grainmotion-ui/search.js with a script tag (not a module), Use <sand-search name=\"q\" label=\"Search\" placeholder=\"Search\"></sand-search>. Pressing Enter dispatches a bubbling search event with detail.value. Set el.busy=true while your application fetches results; call el.clear() to reset. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "otp",
+      "type": "registry:file",
+      "title": "GrainMotion-UI OTP / PIN Input",
+      "description": "A numeric OTP/PIN input drawn across individual engraved wells. One native input preserves mobile one-time-code autofill, paste, selection and keyboard behavior. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-otp>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "otp",
+        "pin",
+        "input",
+        "security",
+        "form",
+        "sand",
+        "animation"
+      ],
+      "files": [
+        {
+          "path": "otp/otp.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/otp.js"
+        }
+      ],
+      "docs": "GrainMotion-UI OTP / PIN Input is a plain script that registers a custom element. Load /grainmotion-ui/otp.js with a script tag (not a module), Use <sand-otp name=\"verificationCode\" label=\"Verification code\" length=\"6\" autocomplete=\"one-time-code\" required></sand-otp>. Length is clamped from four to ten. The complete event exposes detail.length only, never the entered digits. More: https://brajesh31.github.io/GrainMotion-UI"
     }
   ]
 }
