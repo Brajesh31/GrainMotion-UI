@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+<defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#f8f3e9"/><stop offset="1" stop-color="#e9e0d2"/></linearGradient><linearGradient id="sand" x2="0" y2="1"><stop stop-color="#f4e5c8"/><stop offset=".5" stop-color="#d2b183"/><stop offset="1" stop-color="#f0dfbd"/></linearGradient><radialGradient id="stone"><stop stop-color="#777a7b"/><stop offset="1" stop-color="#242627"/></radialGradient></defs>
+<rect width="1200" height="700" fill="url(#bg)"/>
+<text x="600" y="110" text-anchor="middle" font-family="Arial" font-size="48" font-weight="700" fill="#30271f">GrainMotion-UI · Text Field</text>
+<text x="600" y="155" text-anchor="middle" font-family="Arial" font-size="18" fill="#76634f">PHYSICAL INTERACTION CONCEPT · NOT A RUNTIME SCREENSHOT</text>
+<rect x="120" y="280" width="960" height="180" rx="80" fill="#604632"/><rect x="140" y="300" width="920" height="140" rx="65" fill="url(#sand)"/>
+<path d="M230 380h740" stroke="#a98050" stroke-width="7" stroke-linecap="round"/>
+<path d="M270 340l35-18" stroke="#b58c50" stroke-width="14" stroke-linecap="round"/>
+<ellipse cx="890" cy="370" rx="70" ry="52" fill="url(#stone)"/>
+<text x="600" y="560" text-anchor="middle" font-family="Arial" font-size="22" fill="#4f3e2e">A bamboo stylus rests at the edge of a familiar text field. The native input remains fully editable; a subtle pressed guide and stylus follow focus and caret movement.</text>
+</svg>
