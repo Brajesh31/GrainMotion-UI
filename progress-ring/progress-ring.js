@@ -325,9 +325,9 @@ class SandProgressRing extends SandTray {
  get min(){return Number(this.getAttribute('min')||0)} get max(){return Math.max(this.min+1,Number(this.getAttribute('max')||100))}
  get value(){return this._value} set value(v){this._value=Math.max(this.min,Math.min(this.max,Number(v)||0));this.target=(this._value-this.min)/(this.max-this.min);this.reflect()}
  get indeterminate(){return this.hasAttribute('indeterminate')}
- attributeChangedCallback(n,o,v){if(!this._ready||o===v)return;if(n==='value'){this._value=Number(v||0);this.target=(this._value-this.min)/(this.max-this.min)}else if(n==='min'||n==='max')this.value=this._value;this.reflect()}
+ attributeChangedCallback(n,o,v){if(!this._ready||o===v)return;if(n==='value')this.value=v??0;else if(n==='min'||n==='max')this.value=this._value;this.reflect()}
  reflect(){if(!this._ready)return;this.setAttribute('role','progressbar');this.setAttribute('aria-label',this.getAttribute('label')||'Progress');this.setAttribute('aria-valuemin',this.min);this.setAttribute('aria-valuemax',this.max);if(this.indeterminate)this.removeAttribute('aria-valuenow');else this.setAttribute('aria-valuenow',String(this._value));this.setAttribute('aria-valuetext',this.indeterminate?'In progress':Math.round(this.target*100)+'%')}
- init(){this._ready=true;this._value=Number(this.getAttribute('value')||0);this.target=(this._value-this.min)/(this.max-this.min);this.pos=this.target;this.reflect()}
+ init(){this._ready=true;this._value=this.min;this.value=this.getAttribute('value')??0;this.pos=this.target;this.reflect()}
  layout(){const r=this.inner,cx=this.W/2,cy=this.H/2,rad=Math.min(this.W,this.H)*.34;this.cx=cx;this.cy=cy;this.rad=rad;for(let y=r.y0;y<r.y1;y++)for(let x=r.x0;x<r.x1;x++){const i=y*this.W+x;if(!this.inside[i])continue;const d=Math.abs(Math.hypot(x-cx,y-cy)-rad);if(d<3)this.h[i]-=.26*(1-d/3);else if(d<5)this.h[i]+=.035*(1-(d-3)/2)}this.relax(r.x0,r.x1,3);this.dirty=true}
  step(dt){this.phase+=dt;const t=this.indeterminate?((this.phase*.18)%1):this.target;this.pos+=(t-this.pos)*Math.min(1,dt*4);const a=-Math.PI/2+this.pos*Math.PI*2;this.stone=[this.cx+Math.cos(a)*this.rad,this.cy+Math.sin(a)*this.rad,this.H*.075,this.H*.075]}
 }
