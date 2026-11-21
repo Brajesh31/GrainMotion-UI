@@ -13,7 +13,7 @@ The four original components establish the reference language:
 
 ## Observed visual baseline
 
-The values below are taken from current repository styles and shader source. Some material colors are approximations from the shader's RGB values, not a formal token system yet.
+The values below are taken from the existing design-system record and current component/shader source. Material colors marked approximate are a visual baseline, not a guarantee that every current component uses one shared token. The canonical provisional token file is [`design/tokens.css`](../design/tokens.css). It is intentionally not imported by existing component scripts yet, so Phase 0 does not change their rendered appearance.
 
 | Token | Current value / approximation | Observed use |
 |---|---|---|
@@ -89,19 +89,11 @@ The values below are taken from current repository styles and shader source. Som
 - Do not communicate selected/error/success only by color or sound.
 - Provide keyboard and non-drag alternatives for interactions that otherwise require precision pointer movement.
 
-## Proposed component-level tokens
+## Shared token source
 
-A formal token file is not present yet. When implemented, define shared tokens for:
+[`design/tokens.css`](../design/tokens.css) now defines the provisional shared color palette and the two motion durations already described by the original interaction designs. The file is a design-system source artifact, not an active stylesheet: existing standalone component bundles do not import it yet. That separation is deliberate. Phase 0 must not change the original visual output while the token map is being established.
 
-- Page/card/surface/text/muted/border colors.
-- Sand, walnut, bamboo, stone and moss material colors.
-- Frame thickness, corner radii and inset depths.
-- Lighting direction, shadow softness and highlight intensity.
-- Tool widths, stone dimensions and minimum hit targets.
-- Transition curves and motion durations by interaction type.
-- Sound names, gain defaults and mute behavior.
-
-Do not duplicate token values independently across every demo and component. One validated token source should drive reusable styles where feasible.
+The following still need to be measured and normalized before a library-wide migration: frame thickness, corner radii, inset depths, light direction, shadow softness, highlight intensity, tool widths, stone dimensions, minimum hit targets and component-specific transition curves. These must be extracted from working reference visuals and source behavior, not guessed. Migrate components to shared tokens only during their individual audit phase, with screenshot regression evidence.
 
 ## Review questions
 
