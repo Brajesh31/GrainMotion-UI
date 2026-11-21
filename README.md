@@ -130,7 +130,7 @@ Each new control also has its own physical-interaction concept sheet. These are 
     </td>
     <td align="center" width="50%">
       <strong>One material language</strong>
-      <br>Sand, walnut, bamboo and river stone carry through all nine controls.
+      <br>Sand, walnut, bamboo and river stone carry through all fourteen controls.
     </td>
   </tr>
 </table>
