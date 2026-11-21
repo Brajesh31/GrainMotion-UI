@@ -2,7 +2,7 @@
 
 ## Current verified scope
 
-The Phase 1 selection controls have a successful automated mobile Chromium baseline with pointer, keyboard, form and regression checks. Phase 2 adds native text-field, password, search and OTP/PIN assertions to the same workflow. Physical mobile, desktop Safari/Firefox and manual assistive-technology testing remain unverified.
+The Phase 1 selection controls and Phase 2 native text controls have passed the automated mobile Chromium workflow, including pointer, keyboard, native validation, password visibility, OTP sanitation, search events, form serialization and original-component regression checks. Physical mobile, desktop Safari/Firefox and manual assistive-technology testing remain unverified.
 
 The existing notes explicitly say the project has not yet been broadly tested in:
 
