@@ -444,9 +444,10 @@ class SandDateRange extends SandPickerBase {
  get start(){return this._start||'';}set start(v){this._start=String(v||'');if(this.startField)this.startField.value=this._start;this.updateRange();}
  get end(){return this._end||'';}set end(v){this._end=String(v||'');if(this.endField)this.endField.value=this._end;this.updateRange();}
  attributeChangedCallback(n,o,v){if(!this.ready||o===v)return;if(n==='value'){this.value=v||'/';return;}if(n==='start'){this.start=v||'';return;}if(n==='end'){this.end=v||'';return;}this.syncRangeAttrs();this.updateRange();}
+ syncControl(){this.syncRangeAttrs();this.updateRange();}
  syncRangeAttrs(){
   if(!this.startField||!this.endField)return;
-  for(const f of [this.startField,this.endField]){f.disabled=this.disabled;f.required=this.required;if(this.hasAttribute('min'))f.min=this.getAttribute('min');else f.removeAttribute('min');if(this.hasAttribute('max'))f.max=this.getAttribute('max');else f.removeAttribute('max');if(this.hasAttribute('lang'))f.lang=this.getAttribute('lang');}
+  for(const f of [this.startField,this.endField]){f.disabled=this.disabled;f.required=this.required;f.readOnly=this.readOnly;if(this.hasAttribute('min'))f.min=this.getAttribute('min');else f.removeAttribute('min');if(this.hasAttribute('max'))f.max=this.getAttribute('max');else f.removeAttribute('max');if(this.hasAttribute('lang'))f.lang=this.getAttribute('lang');}
   this.startField.setAttribute('aria-label',this.getAttribute('start-label')||(this.getAttribute('label')||'Date range')+' start date');
   this.endField.setAttribute('aria-label',this.getAttribute('end-label')||(this.getAttribute('label')||'Date range')+' end date');
  }
