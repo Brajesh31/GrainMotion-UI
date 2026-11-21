@@ -84,6 +84,18 @@ The six media and file components use the shared sand simulation, walnut frames 
 | 34 | Media Scrubber | `sand-scrubber` | A stone playhead follows HTML media time and buffered ranges. | [README](../scrubber/README.md) · [Demo](../scrubber/) · [Concept](../scrubber/assets/concept.svg) | Implemented, CI verified |
 | 35 | Color Picker | `sand-color-picker` | Native color chooser and mineral swatches with form value support. | [README](../color-picker/README.md) · [Demo](../color-picker/) · [Concept](../color-picker/assets/concept.svg) | Implemented, CI verified |
 
+## Phase 7 components (implementation in progress)
+
+Five advanced list and layout controls extend the material language into real data ordering, two-sided transfer, pane sizing and nested navigation. All components are present in source and in the live gallery; generated component guides and full 40-component CI verification are still being finalized.
+
+| # | Component | Custom element | Main interaction | Documentation | Status |
+|---:|---|---|---|---|---|
+| 36 | Sortable List | `sand-sortable` | Stable-ID list reordering with drag, keyboard and button controls. | [README](../sortable/README.md) · [Demo](../sortable/) · [Concept](../sortable/assets/concept.svg) | In progress |
+| 37 | Transfer List | `sand-transfer-list` | Multi-selection and moving items between two compartments. | [README](../transfer-list/README.md) · [Demo](../transfer-list/) · [Concept](../transfer-list/assets/concept.svg) | In progress |
+| 38 | Split Pane | `sand-split-pane` | Pointer and keyboard divider for two slotted content panes. | [README](../split-pane/README.md) · [Demo](../split-pane/) · [Concept](../split-pane/assets/concept.svg) | In progress |
+| 39 | Resizable Panels | `sand-resizable` | Adjacent panel resizing with bounded shares and keyboard separators. | [README](../resizable/README.md) · [Demo](../resizable/) · [Concept](../resizable/assets/concept.svg) | In progress |
+| 40 | Tree View | `sand-tree` | Expandable nested nodes, selection and arrow-key navigation. | [README](../tree/README.md) · [Demo](../tree/) · [Concept](../tree/assets/concept.svg) | In progress |
+
 ## Planned components
 
 The components below are roadmap candidates, not implemented features. Their physical concepts are preliminary and may be refined during design exploration.

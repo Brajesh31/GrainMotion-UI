@@ -4,7 +4,7 @@
 
 ### Interfaces shaped by sand, motion, and interaction.
 
-A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray. Phase 6 adds six media and file controls with real file selection, media timelines, framed images and mineral pigment choices.
+A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray. Phase 6 adds six media and file controls with real file selection, media timelines, framed images and mineral pigment choices. Phase 7 adds five advanced list and layout controls: sorting, item transfer, split panes, resizable panels and nested tree navigation.
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
@@ -15,7 +15,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml/badge.svg" alt="Component validation"></a>
   <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
   <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
-  <img src="https://img.shields.io/badge/Components-35-C49A6C" alt="Thirty-five components">
+  <img src="https://img.shields.io/badge/Components-40-C49A6C" alt="Forty components">
 </p>
 
 </div>
@@ -24,7 +24,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI currently includes thirty-five standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI currently includes forty standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -75,6 +75,12 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 | **Sand Lightbox Gallery** | Thumbnail plates open into a native modal image viewer with focus restoration. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/lightbox/) · [Documentation](lightbox/README.md) |
 | **Sand Media Scrubber** | A stone playhead follows an existing audio/video element and its buffered range. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/scrubber/) · [Documentation](scrubber/README.md) |
 | **Sand Color Picker** | Native color chooser and named mineral pigment swatches with hex/RGB/HSL values. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/color-picker/) · [Documentation](color-picker/README.md) |
+
+| **Sand Sortable List** | Stone tiles reorder through carved grooves with drag, keyboard and move-button alternatives. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/sortable/) · [Documentation](sortable/README.md) |
+| **Sand Transfer List** | Selected stones move between two recessed sand compartments. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/transfer-list/) · [Documentation](transfer-list/README.md) |
+| **Sand Split Pane** | A draggable and keyboard-accessible stone divider balances two content panes. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/split-pane/) · [Documentation](split-pane/README.md) |
+| **Sand Resizable Panels** | Walnut partitions resize two to four adjacent dashboard panels. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/resizable/) · [Documentation](resizable/README.md) |
+| **Sand Tree View** | Branching paths expand and collapse while a stone marks the selected node. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/tree/) · [Documentation](tree/README.md) |
 
 > The gallery image above shows the component set together. The concept artwork below documents visual exploration and design direction, not additional live component screenshots.
 
@@ -153,7 +159,7 @@ Each new control also has its own physical-interaction concept sheet. These are 
     </td>
     <td align="center" width="50%">
       <strong>One material language</strong>
-      <br>Sand, walnut, bamboo and river stone carry through all thirty-five controls.
+      <br>Sand, walnut, bamboo and river stone carry through all forty controls.
     </td>
   </tr>
 </table>
@@ -269,6 +275,20 @@ The six studies below show the material direction for file arrival, transfer sta
 <tr><td align="center"><img src="dropzone/assets/concept.svg" alt="File tile landing in a walnut dropzone tray" width="100%"><br><strong>File Dropzone</strong></td><td align="center"><img src="upload-queue/assets/concept.svg" alt="File tiles in a progress channel" width="100%"><br><strong>Upload Queue</strong></td></tr>
 <tr><td align="center"><img src="carousel/assets/concept.svg" alt="Framed image moving along a sand track" width="100%"><br><strong>Image Carousel</strong></td><td align="center"><img src="lightbox/assets/concept.svg" alt="Expanded image in a modal frame" width="100%"><br><strong>Lightbox Gallery</strong></td></tr>
 <tr><td align="center"><img src="scrubber/assets/concept.svg" alt="Stone playhead on a raked media timeline" width="100%"><br><strong>Media Scrubber</strong></td><td align="center"><img src="color-picker/assets/concept.svg" alt="Mineral pigment swatches" width="100%"><br><strong>Color Picker</strong></td></tr>
+</table>
+
+</div>
+
+### Phase 7 list and layout concepts
+
+These five studies illustrate ordering, transfer, split layout, multi-panel resizing and nested navigation. They document the physical language behind the controls and are concept artwork rather than runtime screenshots.
+
+<div align="center">
+
+<table>
+<tr><td align="center"><img src="sortable/assets/concept.svg" alt="Sortable task tiles moving through sand grooves" width="100%"><br><strong>Sortable List</strong></td><td align="center"><img src="transfer-list/assets/concept.svg" alt="Selected stones moving between two sand compartments" width="100%"><br><strong>Transfer List</strong></td></tr>
+<tr><td align="center"><img src="split-pane/assets/concept.svg" alt="Stone divider between two adjustable work surfaces" width="100%"><br><strong>Split Pane</strong></td><td align="center"><img src="resizable/assets/concept.svg" alt="Three resizable panels separated by walnut partitions" width="100%"><br><strong>Resizable Panels</strong></td></tr>
+<tr><td align="center"><img src="tree/assets/concept.svg" alt="Nested project tree etched into sand" width="100%"><br><strong>Tree View</strong></td><td align="center"><strong>One interaction language</strong><br>Every divider, list row and branch has an explicit data API and keyboard alternative.</td></tr>
 </table>
 
 </div>
@@ -444,6 +464,7 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [Complete project documentation index](docs/README.md)
 - [50-component expansion roadmap](docs/ROADMAP.md)
 - [Component catalog and implementation status](docs/COMPONENT-CATALOG.md)
+- [Phase 7 advanced layout implementation spec](docs/PHASE-7-ADVANCED-LAYOUT-SPEC.md)
 - [Architecture and shared sand engine](docs/ARCHITECTURE.md)
 - [Design system and visual standards](docs/DESIGN-SYSTEM.md)
 - [Asset catalog and creation standards](docs/ASSET-CATALOG.md)
@@ -480,6 +501,11 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [Lightbox Gallery documentation](lightbox/README.md)
 - [Media Scrubber documentation](scrubber/README.md)
 - [Color Picker documentation](color-picker/README.md)
+- [Sortable List documentation](sortable/README.md)
+- [Transfer List documentation](transfer-list/README.md)
+- [Split Pane documentation](split-pane/README.md)
+- [Resizable Panels documentation](resizable/README.md)
+- [Tree View documentation](tree/README.md)
 - [Hourglass Timer documentation](timer/README.md)
 - [Step Indicator documentation](steps/README.md)
 - [Progress Ring documentation](progress-ring/README.md)

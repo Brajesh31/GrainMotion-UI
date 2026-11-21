@@ -147,6 +147,8 @@ Required coverage: MIME/type and size restrictions, upload progress/error/cancel
 
 **Target after phase:** 40 components total.
 
+**Implementation status:** Five component source files, demos and gallery wiring are on `main`. The standalone build manifest, central spec, generated registry/docs and 40-component mobile Chromium run are being finalized. Phase 7 will be closed only after all automated release gates pass. See [PHASE-7-ADVANCED-LAYOUT-SPEC.md](PHASE-7-ADVANCED-LAYOUT-SPEC.md).
+
 | # | Component | Element | Physical interaction |
 |---:|---|---|---|
 | 36 | Sortable List | `sand-sortable` | Stone tiles reorder inside carved grooves. |
