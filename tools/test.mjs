@@ -255,7 +255,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('loader: speed property is configurable', (await ev("window.__phase4Loader.speed"))===true);
   check('loader: active=true resumes busy state', (await ev("window.__phase4Loader.restarted"))===true);
 }
-{ // forms: verify all twelve form-associated components in a small isolated form
+{ // forms: verify all nineteen form-associated components in a small isolated form
   const formResults = await ev(`(() => {
     const f = document.createElement('form');
     f.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;overflow:hidden';
