@@ -106,7 +106,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
 { // original four: visible 2D fallback when WebGL2 is unavailable
   const created = await ev(`(() => {
     const native = HTMLCanvasElement.prototype.getContext;
-    HTMLCanvasElement.prototype.getContext = function(type, ...args) { return type === 'webgl2' ? null : native.apply(this, args); };
+    HTMLCanvasElement.prototype.getContext = function(type, ...args) { return type === 'webgl2' ? null : native.call(this, type, ...args); };
     try {
       const tags = ['sand-slider', 'sand-toggle', 'sand-signature', 'sand-thinking'];
       window.__grainFallbacks = tags.map(tag => { const el = document.createElement(tag); el.style.width = tag === 'sand-thinking' ? '190px' : '240px'; document.body.append(el); return el; });
