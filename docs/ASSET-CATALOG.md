@@ -24,6 +24,11 @@ This catalog records assets found in the current repository tree. It does not as
 | `segmented/assets/concept.svg` | SVG | Segmented-control carved-tray concept diagram, not a runtime screenshot. |
 | `range/assets/concept.svg` | SVG | Two-rake interval concept diagram, not a runtime screenshot. |
 | `rating/assets/concept.svg` | SVG | Five-well pebble rating concept diagram, not a runtime screenshot. |
+| `input/assets/concept.svg` | SVG | Native text field and stylus focus concept diagram, not a runtime screenshot. |
+| `textarea/assets/concept.svg` | SVG | Multiline writing surface concept diagram, not a runtime screenshot. |
+| `password/assets/concept.svg` | SVG | Masked password and stone shutter concept diagram, not a runtime screenshot. |
+| `search/assets/concept.svg` | SVG | Search well and busy-rake concept diagram, not a runtime screenshot. |
+| `otp/assets/concept.svg` | SVG | OTP/PIN engraved digit-well concept diagram, not a runtime screenshot. |
 
 ### Audio assets
 
