@@ -449,13 +449,13 @@ class SandOtp extends SandNativeField {
   init(){
     this.initNativeField('input','One-time code','position:absolute;z-index:3;inset:0;width:100%;height:100%;box-sizing:border-box;border:0;border-radius:0;background:transparent;color:#423627;font:600 clamp(14px,4.2vw,23px)/1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.48em;text-align:center;padding:0 9%;caret-color:#493522;touch-action:auto;');
     this.field.type='text';this.field.inputMode='numeric';this.field.autocomplete=this.getAttribute('autocomplete')||'one-time-code';
-    this.field.maxLength=this.length;this.field.minLength=this.length;this.field.pattern='[0-9]{'+this.length+'}';
+    this.field.maxLength=64;this.field.minLength=this.length;this.field.pattern='[0-9]{'+this.length+'}';
     this.field.addEventListener('paste',()=>setTimeout(()=>this.sanitize(),0));
     this.onNativeInput=()=>this.sanitize(true);
     this.applyMask();
     this.sanitize(false);
   }
-  attributeChangedCallback(name,oldValue,newValue){super.attributeChangedCallback(name,oldValue,newValue);if(this._ready&&name==='length'){this.field.maxLength=this.length;this.field.minLength=this.length;this.field.pattern='[0-9]{'+this.length+'}';if(this.value.length>this.length)this.setValue(this.value.slice(0,this.length),false);this.layout();this.spriteKey=null;}if(this._ready&&name==='masked')this.applyMask();}
+  attributeChangedCallback(name,oldValue,newValue){super.attributeChangedCallback(name,oldValue,newValue);if(this._ready&&name==='length'){this.field.maxLength=64;this.field.minLength=this.length;this.field.pattern='[0-9]{'+this.length+'}';if(this.value.length>this.length)this.setValue(this.value.slice(0,this.length),false);this.layout();this.spriteKey=null;}if(this._ready&&name==='masked')this.applyMask();}
   applyMask(){if(this.field)this.field.style.webkitTextSecurity=this.masked?'disc':'none';}
   setValue(value,notify=false){const clean=String(value??'').replace(/[^0-9]/g,'').slice(0,this.length);super.setValue(clean,notify);}
   sanitize(announce=false){
