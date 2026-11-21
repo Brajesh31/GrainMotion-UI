@@ -300,7 +300,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
 }
 { // Phase 5 Menu: opening, keyboard focus, dismissal and selected action
   await ev("(()=>{window.__p5Menu={selected:0};document.querySelector('sand-menu').addEventListener('select',e=>{window.__p5Menu.selected++;window.__p5Menu.value=e.detail.value;});})()");
-  check('menu: trigger and menu expose menu-button semantics', await ev("document.querySelector('sand-menu .gm-menu-trigger')?.tagName==='BUTTON'&&document.querySelector('sand-menu .gm-menu-trigger')?.getAttribute('aria-haspopup')==='menu'&&!!document.querySelector('sand-menu [role="menu"]')")===true);
+  check('menu: trigger and menu expose menu-button semantics', await ev("document.querySelector('sand-menu .gm-menu-trigger')?.tagName==='BUTTON'&&document.querySelector('sand-menu .gm-menu-trigger')?.getAttribute('aria-haspopup')==='menu'&&!!document.querySelector('sand-menu [role=menu]')")===true);
   await ev("document.querySelector('sand-menu').open=true;");
   check('menu: open property reveals tray and updates expanded state', await ev("document.querySelector('sand-menu').open===true&&!document.querySelector('sand-menu .gm-menu-popup').hidden&&document.querySelector('sand-menu .gm-menu-trigger').getAttribute('aria-expanded')==='true'")===true);
   check('menu: disabled command remains disabled', await ev("document.querySelector('sand-menu').menuItems[2].disabled")===true);
