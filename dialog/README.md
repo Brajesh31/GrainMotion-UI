@@ -2,7 +2,7 @@
 
 A framed walnut surface rises above the page while the rest of the document falls behind a quiet backdrop. The component uses the browser's native modal dialog, so focus containment and the top layer are genuine browser behavior.
 
-One of forty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of fifty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 
