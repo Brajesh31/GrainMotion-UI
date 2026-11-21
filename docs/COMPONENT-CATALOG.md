@@ -96,11 +96,27 @@ Five advanced list and layout controls extend the material language into real da
 | 39 | Resizable Panels | `sand-resizable` | Adjacent panel resizing with bounded shares and keyboard separators. | [README](../resizable/README.md) · [Demo](../resizable/) · [Concept](../resizable/assets/concept.svg) | Complete |
 | 40 | Tree View | `sand-tree` | Expandable nested nodes, selection and arrow-key navigation. | [README](../tree/README.md) · [Demo](../tree/) · [Concept](../tree/assets/concept.svg) | Complete |
 
-## Planned components
+## Phase 8 components (implementation in progress)
 
-The components below are roadmap candidates, not implemented features. Their physical concepts are preliminary and may be refined during design exploration.
+The five feedback and overlay controls are being implemented against the [Phase 8 spec](PHASE-8-FEEDBACK-OVERLAYS-SPEC.md). Until their full CI gates pass, they are in progress rather than released.
 
+| # | Component | Custom element | Main interaction | Status |
+|---:|---|---|---|---|
+| 41 | Tooltip | `sand-tooltip` | Shows a described hint on pointer hover or keyboard focus. | In progress |
+| 42 | Toast Notification | `sand-toast` | Announces a timed status message with action and dismissal controls. | In progress |
+| 43 | Alert Banner | `sand-alert` | Presents persistent, tone-aware status with optional actions. | In progress |
+| 44 | Dialog / Modal | `sand-dialog` | Opens a native modal surface with focus containment and explicit actions. | In progress |
+| 45 | Drawer / Sheet | `sand-drawer` | Opens a responsive modal sheet from any screen edge. | In progress |
 
+## Phase 9 proposals
+
+| # | Component | Custom element | Preliminary interaction | Status |
+|---:|---|---|---|---|
+| 46 | Command Palette | `sand-command` | A central stone navigates a searchable command list. | Planned |
+| 47 | Context Menu | `sand-context-menu` | A carved menu appears at a context-menu or long-press position. | Planned |
+| 48 | Filter Builder | `sand-filter-builder` | Filter conditions are represented by stones connected by logical grooves. | Planned |
+| 49 | Data Table | `sand-table` | A structured board uses sand markers for selection, sorting and filtering. | Planned |
+| 50 | Kanban Board | `sand-kanban` | Cards move between columns with material movement and settling. | Planned |
 
 ## Naming and API conventions
 

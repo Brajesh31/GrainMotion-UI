@@ -163,6 +163,8 @@ Required coverage: ordering, transfer, selection, nested data, keyboard alternat
 
 **Target after phase:** 45 components total.
 
+**Status:** Implementation in progress on `main`. See [PHASE-8-FEEDBACK-OVERLAYS-SPEC.md](PHASE-8-FEEDBACK-OVERLAYS-SPEC.md) for the API, accessibility, dismissal, stacking and acceptance contract.
+
 | # | Component | Element | Physical interaction |
 |---:|---|---|---|
 | 41 | Tooltip | `sand-tooltip` | A small information stone appears beside the focused or hovered element. |
