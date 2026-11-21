@@ -59,7 +59,7 @@ Events: `timer-tick` with `{ remaining }`, and `complete` once when zero is reac
 
 A countdown timer rendered as a two-chamber hourglass. Sand falls through a narrow waist; pause, resume, reset and cancel controls remain native buttons.
 
-The countdown advances from requestAnimationFrame delta time. Pause stops elapsed-time reduction; Resume continues; Reset restores the duration; Cancel stops and marks the timer cancelled. Reduced-motion preferences hold the hourglass artwork still while the timer state remains accurate.
+The countdown advances from requestAnimationFrame delta time. Pause stops elapsed-time reduction; Resume continues; Reset restores the duration; Cancel stops and marks the timer cancelled. Reduced-motion preferences remove the falling stream animation; the hourglass still reflects meaningful countdown state changes.
 
 ## Accessibility
 
