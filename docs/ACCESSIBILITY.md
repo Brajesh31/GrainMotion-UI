@@ -129,7 +129,7 @@ A checklist is a requirement, not evidence by itself. Mark items complete only a
 
 ### Phase 4 progress and activity controls
 
-- **Progress Bar and Progress Ring:** expose role=progressbar, min/max and a current value only in determinate mode. Indeterminate mode must omit aria-valuenow rather than announcing a fabricated percentage.
+- **Progress Bar and Progress Ring:** expose role=progressbar, min/max and a current value only in determinate mode. Indeterminate mode must omit aria-valuenow rather than announcing a fabricated percentage. Hold the rake/pebble still when prefers-reduced-motion is active.
 - **Step Indicator:** each step is a real button with a meaningful accessible name. The active step uses aria-current=step. Do not rely on stone color alone to communicate completion.
 - **Hourglass Timer:** expose a timer role and concise aria-valuetext. Pause, resume, reset and cancel are native buttons. Avoid announcing every animation frame; the timer-tick event is emitted at whole-second boundaries.
 - **Loading Indicator:** use role=status, aria-live=polite and aria-busy. Set active=false when the operation completes. Respect prefers-reduced-motion by holding the rake still.
