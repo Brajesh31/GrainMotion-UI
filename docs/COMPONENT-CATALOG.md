@@ -61,15 +61,15 @@ The five progress and activity controls now have standalone bundles, demos, expa
 
 ## Phase 5 components
 
-The five navigation components now have standalone bundles, interactive demos, detailed component guides, hand-authored concept SVGs, gallery cards and shadcn registry entries. The shared build and documentation checks and 23 new Phase 5 browser assertions are wired into the validation pipeline. Final CI execution is pending, and manual assistive-technology and physical-device verification remains outstanding. See [Phase 5 implementation contract](PHASE-5-NAVIGATION-SPEC.md) for requirements and known limits.
+The five navigation components now have standalone bundles, interactive demos, detailed component guides, hand-authored concept SVGs, gallery cards and shadcn registry entries. The shared build and documentation checks passed. The final 29-component mobile Chromium suite passed **125 assertions with zero failures**. Manual assistive-technology and physical-device verification remains outstanding. See [Phase 5 implementation contract](PHASE-5-NAVIGATION-SPEC.md) for requirements and known limits.
 
 | # | Component | Custom element | Main interaction | Documentation | Status |
 |---:|---|---|---|---|---|
-| 25 | Tabs | `sand-tabs` | A flat river stone moves between tab wells; content remains native HTML. | [README](../tabs/README.md) · [Demo](../tabs/) · [Concept](../tabs/assets/concept.svg) | Implemented, CI pending |
-| 26 | Accordion | `sand-accordion` | Walnut lids with stone pulls uncover separate sand compartments. | [README](../accordion/README.md) · [Demo](../accordion/) · [Concept](../accordion/assets/concept.svg) | Implemented, CI pending |
-| 27 | Pagination | `sand-pagination` | A river stone marks the active numbered well in a carved track. | [README](../pagination/README.md) · [Demo](../pagination/) · [Concept](../pagination/assets/concept.svg) | Implemented, CI pending |
-| 28 | Breadcrumbs | `sand-breadcrumbs` | Stepping stones join ancestor links and the current-location marker. | [README](../breadcrumbs/README.md) · [Demo](../breadcrumbs/) · [Concept](../breadcrumbs/assets/concept.svg) | Implemented, CI pending |
-| 29 | Menu / Popover | `sand-menu` | A stone trigger lifts a walnut-framed command tray. | [README](../menu/README.md) · [Demo](../menu/) · [Concept](../menu/assets/concept.svg) | Implemented, CI pending |
+| 25 | Tabs | `sand-tabs` | A flat river stone moves between tab wells; content remains native HTML. | [README](../tabs/README.md) · [Demo](../tabs/) · [Concept](../tabs/assets/concept.svg) | Implemented, CI passed |
+| 26 | Accordion | `sand-accordion` | Walnut lids with stone pulls uncover separate sand compartments. | [README](../accordion/README.md) · [Demo](../accordion/) · [Concept](../accordion/assets/concept.svg) | Implemented, CI passed |
+| 27 | Pagination | `sand-pagination` | A river stone marks the active numbered well in a carved track. | [README](../pagination/README.md) · [Demo](../pagination/) · [Concept](../pagination/assets/concept.svg) | Implemented, CI passed |
+| 28 | Breadcrumbs | `sand-breadcrumbs` | Stepping stones join ancestor links and the current-location marker. | [README](../breadcrumbs/README.md) · [Demo](../breadcrumbs/) · [Concept](../breadcrumbs/assets/concept.svg) | Implemented, CI passed |
+| 29 | Menu / Popover | `sand-menu` | A stone trigger lifts a walnut-framed command tray. | [README](../menu/README.md) · [Demo](../menu/) · [Concept](../menu/assets/concept.svg) | Implemented, CI passed |
 
 ## Planned components
 
