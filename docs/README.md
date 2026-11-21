@@ -2,7 +2,7 @@
 
 This directory is the project handbook. It documents the current implementation, the planned 50-component catalogue, design rules, architecture, accessibility expectations, performance constraints, testing, contribution workflow and component authoring process.
 
-> **Current status (2026-11-21):** 50 component source folders, demos and README files are present. The latest full mobile Chromium validation on `main` (run [#486](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878968524), commit `901599d`) recorded **236 passing assertions and 3 failures**. The failures are the tooltip keyboard-focus check, tooltip Escape-dismissal check and toast polite-live-region check. Standalone bundle synchronization and generated documentation/registry validation passed before the browser suite failed. The live gallery deployment succeeded separately, but a successful Pages deployment is not proof that every component is release-ready. Safari, Firefox, physical-device and screen-reader checks remain unverified.
+> **Current status (2026-11-21):** 50 component source folders, demos and README files are present. The latest full mobile Chromium validation on `main` (run [#498](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44883477540), commit `68ec65a`) recorded **235 passing assertions and 4 failures**: tooltip keyboard focus, tooltip Escape dismissal, toast polite-live-region announcement and context-menu touch long-press. Standalone bundle synchronization, generated documentation/registry validation and the new Phase 0 structural audit all passed. The Pages deployment for this exact commit is still pending at the time of this update. Safari, Firefox, physical-device and screen-reader checks remain unverified.
 
 ## Documentation map
 
