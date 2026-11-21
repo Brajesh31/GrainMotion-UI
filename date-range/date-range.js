@@ -411,9 +411,13 @@ function parseOptions(text){
 }
 function dateOrdinal(value){
  const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(value||'');if(!m)return null;
- const y=+m[1],mo=+m[2],d=+m[3],n=Date.UTC(y,mo-1,d)/86400000;
- const dt=new Date(Date.UTC(y,mo-1,d));
- return dt.getUTCFullYear()===y&&dt.getUTCMonth()===mo-1&&dt.getUTCDate()===d?n:null;
+ const y=+m[1],mo=+m[2],d=+m[3];
+ const md=[31,((y%4===0&&y%100!==0)||y%400===0)?29:28,31,30,31,30,31,31,30,31,30,31];
+ if(mo<1||mo>12||d<1||d>md[mo-1])return null;
+ const prev=y-1;
+ let total=365*prev+Math.floor(prev/4)-Math.floor(prev/100)+Math.floor(prev/400);
+ for(let i=0;i<mo-1;i++)total+=md[i];
+ return total+d;
 }
 function timeMinutes(value){const m=/^(\d{2}):(\d{2})$/.exec(value||'');return m&&+m[1]<24&&+m[2]<60?+m[1]*60+ +m[2]:null;}
 
