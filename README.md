@@ -4,7 +4,7 @@
 
 ### Interfaces shaped by sand, motion, and interaction.
 
-A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 adds five progress, loading and activity controls, each with its own physical interaction.
+A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray.
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
@@ -15,7 +15,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml/badge.svg" alt="Component validation"></a>
   <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
   <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
-  <img src="https://img.shields.io/badge/Components-24-C49A6C" alt="Twenty-four components">
+  <img src="https://img.shields.io/badge/Components-29-C49A6C" alt="Twenty-nine components">
 </p>
 
 </div>
@@ -24,7 +24,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI currently includes twenty-four standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI currently includes twenty-nine standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -62,6 +62,11 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 | **Sand Step Indicator** | Stepping stones distinguish completed, current and upcoming steps. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/steps/) · [Documentation](steps/README.md) |
 | **Sand Hourglass Timer** | Sand falls between two chambers with pause and reset controls. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/timer/) · [Documentation](timer/README.md) |
 | **Sand Loading Indicator** | A miniature rake loops through a changing sand pattern. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/loader/) · [Documentation](loader/README.md) |
+| **Sand Tabs** | A river stone glides between carved tab wells; the selected panel remains real HTML. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/tabs/) · [Documentation](tabs/README.md) |
+| **Sand Accordion** | Walnut lids with stone pulls uncover separate sand compartments. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/accordion/) · [Documentation](accordion/README.md) |
+| **Sand Pagination** | A river stone marks the active numbered well along a carved track. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/pagination/) · [Documentation](pagination/README.md) |
+| **Sand Breadcrumbs** | Stepping stones connect ancestor links to a dark current-location marker. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/breadcrumbs/) · [Documentation](breadcrumbs/README.md) |
+| **Sand Menu / Popover** | A stone trigger lifts a walnut-framed command tray. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/menu/) · [Documentation](menu/README.md) |
 
 > The gallery image above shows the component set together. The concept artwork below documents visual exploration and design direction, not additional live component screenshots.
 
