@@ -2,7 +2,7 @@
 
 A small walnut tray receives a river stone, announces a status message and settles out of view. Notifications can coexist, pause their timer while the user points at or focuses them, and expose an optional action.
 
-One of forty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of fifty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 
