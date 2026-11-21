@@ -576,15 +576,15 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("document.querySelector('sand-context-menu').setAttribute('disabled','')");
   check('context menu: disabled blocks programmatic opening', await ev("document.querySelector('sand-context-menu').showAt(10,10)===false")===true);
   await ev("document.querySelector('sand-context-menu').removeAttribute('disabled')");
-  await ev("(()=>{const e=document.querySelector('sand-context-menu'),target=e.targetButton;target.dispatchEvent((e=>e.targetButton.dispatchEvent(e))((()=>{const e=new Event('pointerdown',{bubbles:true});Object.defineProperties(e,{pointerType:{value:'touch'},clientX:{value:20},clientY:{value:20}});return e;})()));})()");
+  await ev("(()=>{const e=document.querySelector('sand-context-menu'),target=e.targetButton;const down=new Event('pointerdown',{bubbles:true});Object.defineProperties(down,{pointerType:{value:'touch'},clientX:{value:20},clientY:{value:20}});target.dispatchEvent(down);})()");
   await new Promise(r=>setTimeout(r,25));
-  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent((e=>e.targetButton.dispatchEvent(e))((()=>{const e=new Event('pointermove',{bubbles:true});Object.defineProperties(e,{pointerType:{value:'touch'},clientX:{value:45},clientY:{value:20}});return e;})()));e.targetButton.dispatchEvent((e=>e.targetButton.dispatchEvent(e))((()=>{const e=new Event('pointerup',{bubbles:true});Object.defineProperties(e,{pointerType:{value:'touch'},clientX:{value:45},clientY:{value:20}});return e;})()));})()");
+  await ev("(()=>{const e=document.querySelector('sand-context-menu');const move=new Event('pointermove',{bubbles:true});Object.defineProperties(move,{pointerType:{value:'touch'},clientX:{value:45},clientY:{value:20}});e.targetButton.dispatchEvent(move);const up=new Event('pointerup',{bubbles:true});Object.defineProperties(up,{pointerType:{value:'touch'},clientX:{value:45},clientY:{value:20}});e.targetButton.dispatchEvent(up);})()");
   await new Promise(r=>setTimeout(r,590));
   check('context menu: touch movement cancels a pending long-press', await ev("!document.querySelector('sand-context-menu').open")===true);
-  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent((e=>e.targetButton.dispatchEvent(e))((()=>{const e=new Event('pointerdown',{bubbles:true});Object.defineProperties(e,{pointerType:{value:'touch'},clientX:{value:24},clientY:{value:32}});return e;})()));})()");
+  await ev("(()=>{const e=document.querySelector('sand-context-menu');const down=new Event('pointerdown',{bubbles:true});Object.defineProperties(down,{pointerType:{value:'touch'},clientX:{value:24},clientY:{value:32}});e.targetButton.dispatchEvent(down);})()");
   await new Promise(r=>setTimeout(r,590));
   check('context menu: touch long-press opens the menu at the press point', await ev("document.querySelector('sand-context-menu').open")===true);
-  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent((e=>e.targetButton.dispatchEvent(e))((()=>{const e=new Event('pointerup',{bubbles:true});Object.defineProperties(e,{pointerType:{value:'touch'},clientX:{value:24},clientY:{value:32}});return e;})()));e.close('test');})()");
+  await ev("(()=>{const e=document.querySelector('sand-context-menu');const up=new Event('pointerup',{bubbles:true});Object.defineProperties(up,{pointerType:{value:'touch'},clientX:{value:24},clientY:{value:32}});e.targetButton.dispatchEvent(up);e.close('test');})()");
 
 
   await ev("(()=>{const e=document.querySelector('sand-filter-builder');e.fields=[{id:'status',label:'Status',type:'select',options:['Open','Done']},{id:'owner',label:'Owner',type:'text'}];e.filters=[{id:'f1',field:'status',operator:'is',value:'Open'}];e.logic='OR';e.addEventListener('change',()=>window.__p9.filter++);e.addEventListener('apply',()=>window.__p9.apply++);})()");
