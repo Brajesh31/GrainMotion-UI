@@ -128,7 +128,7 @@ put('registry.json', JSON.stringify({
 // ---- llms.txt
 put('llms.txt', `# GrainMotion-UI
 
-> ${COUNT[0].toUpperCase() + COUNT.slice(1)} tactile UI controls made from simulated sand, stones, bamboo and walnut. The original four establish the physical design language: Slider, Toggle, Signature and Thinking. Phase 1 adds Checkbox, Radio Group, Segmented Control, Range Slider and Rating. Every control is a standalone custom element with the sand engine and its required sound assets embedded. No runtime framework is required. MIT licensed.
+> ${COUNT[0].toUpperCase() + COUNT.slice(1)} tactile UI controls made from simulated sand, stones, bamboo and walnut. The original four establish the physical design language: Slider, Toggle, Signature and Thinking. Phase 1 adds Checkbox, Radio Group, Segmented Control, Range Slider and Rating. Phase 2 adds Text Field, Textarea, Password Field, Search Field and OTP/PIN Input. Every control is a standalone custom element with the sand engine and its required sound assets embedded. No runtime framework is required. MIT licensed.
 
 Live gallery: ${SITE}
 Source: https://github.com/${REPO}
