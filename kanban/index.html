@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GrainMotion-UI · Kanban Board</title>
+<meta name="description" content="Move Kanban cards between workflow columns with drag, buttons or keyboard controls.">
+<link rel="icon" href="data:,">
+<style>
+:root{color-scheme:light;--page:#e9e1d4;--ink:#322b22;--muted:#776b5a}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--page);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,sans-serif;display:grid;place-items:center;padding:22px}main{width:min(760px,100%);text-align:center}h1{font-size:26px;margin:0}p{color:var(--muted)}.stage{min-height:430px;display:grid;place-items:center;padding:18px 0}.stage sand-kanban{width:min(720px,100%);height:390px}.readout{min-height:24px;font-size:13px}
+</style>
+</head>
+<body><main>
+<h1>🗂️ Kanban Board</h1>
+<p>Move a card by dragging it or using its arrow controls. Focus a card and use the keyboard arrows.</p>
+<div class="stage"><sand-kanban id="board"></sand-kanban></div>
+<p id="readout" class="readout" aria-live="polite">Board changes appear here.</p>
+<p><a href="../">← All components</a> · <a href="https://github.com/Brajesh31/GrainMotion-UI/blob/main/kanban/README.md">Documentation</a></p>
+</main>
+<script src="kanban.js"></script>
+<script>
+const board=document.getElementById('board'),out=document.getElementById('readout');
+board.addEventListener('move',e=>out.textContent=e.detail.card.title+': '+e.detail.from+' → '+e.detail.to);
+</script>
+</body>
+</html>
