@@ -525,7 +525,7 @@ class SandThinking extends SandTray {
       for (let y = -this.R * 0.72; y <= this.R * 0.72; y += spacing) {
         for (let x = -this.R * 0.82; x <= this.R * 0.82; x += Math.max(2, this.tr * 0.9)) {
           if (Math.hypot(x, y) < this.radAvg + this.p * 0.6) continue;
-          const bend = Math.sign(y || 1) * this.radAvg * 0.5 * Math.exp(-((Math.abs(x) - this.radAvg) / Math.max(1, this.radAvg * 0.65)) ** 2);
+          const bend = Math.sign(y || 1) * this.radAvg * 0.5 * Math.exp(-1 * (((Math.abs(x) - this.radAvg) / Math.max(1, this.radAvg * 0.65)) ** 2));
           this.cut(this.cx + x, this.cy + y + bend, this.tr, 1, 0);
         }
       }
