@@ -262,9 +262,9 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('tabs: selected tab controls the visible panel', await ev("document.querySelector('sand-tabs [role=tab][aria-selected=true]')?.dataset.value==='overview'&&!document.querySelector('sand-tabs [role=tabpanel][hidden]')?.id.endsWith('overview')")===true);
   await ev("document.querySelector('sand-tabs').buttons[1].click()");
   check('tabs: selecting a tab updates value and change detail', await ev("document.querySelector('sand-tabs').value==='activity'&&window.__p5Tabs.changes===1&&window.__p5Tabs.last==='activity'")===true);
-  await ev("const t=document.querySelector('sand-tabs');t.setAttribute('activation','manual');t.buttons[2].focus();t.buttons[2].dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));");
+  await ev("(()=>{const tabs=document.querySelector('sand-tabs');tabs.setAttribute('activation','manual');tabs.buttons[2].focus();tabs.buttons[2].dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));})()");
   check('tabs: manual activation keeps arrow focus separate from selected state', await ev("document.querySelector('sand-tabs').value==='activity'")===true);
-  await ev("document.querySelector('sand-tabs').buttons[2].dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));");
+  await ev("document.activeElement.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));");
   check('tabs: Enter activates a manually focused tab', await ev("document.querySelector('sand-tabs').value==='settings'")===true);
   await ev("document.querySelector('sand-tabs').setAttribute('disabled-tabs','activity')");
   check('tabs: disabled tab cannot be focused by arrow navigation', await ev("document.querySelector('sand-tabs').buttons[1].disabled")===true);
@@ -274,7 +274,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('accordion: native headers expose expanded state and labelled panels', await ev("document.querySelector('sand-accordion').buttons[0].getAttribute('aria-expanded')==='true'&&document.querySelector('sand-accordion').panels[0].getAttribute('aria-labelledby')===document.querySelector('sand-accordion').buttons[0].id")===true);
   await ev("document.querySelector('sand-accordion').toggle('returns',true)");
   check('accordion: single-open selection closes the previous compartment', await ev("document.querySelector('sand-accordion').openItems.join(',')==='returns'&&window.__p5Accordion.changes===1")===true);
-  await ev("const a=document.querySelector('sand-accordion');a.setAttribute('multiple','');a.toggle('care',true);");
+  await ev("(()=>{const accordion=document.querySelector('sand-accordion');accordion.setAttribute('multiple','');accordion.toggle('care',true);})()");
   check('accordion: multiple mode keeps more than one compartment open', await ev("document.querySelector('sand-accordion').openItems.includes('returns')&&document.querySelector('sand-accordion').openItems.includes('care')")===true);
   await ev("document.querySelector('sand-accordion').setAttribute('disabled-items','shipping')");
   check('accordion: disabled item is not operable', await ev("document.querySelector('sand-accordion').buttons[0].disabled")===true);
@@ -290,24 +290,24 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('pagination: disabled state disables all navigation buttons', await ev("document.querySelector('sand-pagination').buttons.every(b=>b.disabled)")===true);
 }
 { // Phase 5 Breadcrumbs: native links, current item and URL scheme safety
-  await ev("const b5=document.querySelector('sand-breadcrumbs');window.__p5Crumbs={initial:b5.links.length,current:b5.nav.querySelector('[aria-current=page]')?.textContent};");
+  await ev("(()=>{const crumbs=document.querySelector('sand-breadcrumbs');window.__p5Crumbs={initial:crumbs.links.length,current:crumbs.nav.querySelector('[aria-current=page]')?.textContent};})()");
   check('breadcrumbs: ancestors are links and current location is not a link', await ev("window.__p5Crumbs.initial===3&&window.__p5Crumbs.current==='Breadcrumbs'")===true);
-  await ev("const b=document.querySelector('sand-breadcrumbs');b.items=[{label:'Home',href:'/'},{label:'Bad scheme',href:'javascript:alert(1)'},{label:'Current'}];");
+  await ev("(()=>{const crumbs=document.querySelector('sand-breadcrumbs');crumbs.items=[{label:'Home',href:'/'},{label:'Bad scheme',href:'javascript:alert(1)'},{label:'Current'}];})()");
   check('breadcrumbs: unsafe schemes never become clickable anchors', await ev("document.querySelector('sand-breadcrumbs').links.length===1&&document.querySelector('sand-breadcrumbs nav [aria-current=page]')?.textContent==='Current'")===true);
   await ev("document.querySelector('sand-breadcrumbs').items=[{label:'Home',href:'/'},{label:'Library',href:'/library'},{label:'Components',href:'/components'},{label:'Current'}]");
   check('breadcrumbs: structured item property rebuilds the link trail', await ev("document.querySelector('sand-breadcrumbs').links.length===3")===true);
 }
 { // Phase 5 Menu: opening, keyboard focus, dismissal and selected action
-  await ev("window.__p5Menu={selected:0};const m5=document.querySelector('sand-menu');m5.addEventListener('select',e=>{window.__p5Menu.selected++;window.__p5Menu.value=e.detail.value;});");
-  check('menu: trigger and menu expose menu-button semantics', await ev("document.querySelector('sand-menu trigger')===null&&document.querySelector('sand-menu .gm-menu-trigger')?.getAttribute('aria-haspopup')==='menu'")===true);
-  await ev("const m=document.querySelector('sand-menu');m.open=true;");
+  await ev("(()=>{window.__p5Menu={selected:0};document.querySelector('sand-menu').addEventListener('select',e=>{window.__p5Menu.selected++;window.__p5Menu.value=e.detail.value;});})()");
+  check('menu: trigger and menu expose menu-button semantics', await ev("document.querySelector('sand-menu .gm-menu-trigger')?.tagName==='BUTTON'&&document.querySelector('sand-menu .gm-menu-trigger')?.getAttribute('aria-haspopup')==='menu'&&!!document.querySelector('sand-menu [role="menu"]')")===true);
+  await ev("document.querySelector('sand-menu').open=true;");
   check('menu: open property reveals tray and updates expanded state', await ev("document.querySelector('sand-menu').open===true&&!document.querySelector('sand-menu .gm-menu-popup').hidden&&document.querySelector('sand-menu .gm-menu-trigger').getAttribute('aria-expanded')==='true'")===true);
   check('menu: disabled command remains disabled', await ev("document.querySelector('sand-menu').menuItems[2].disabled")===true);
   await ev("document.querySelector('sand-menu').menuItems[1].click()");
   check('menu: selection emits value and label, then closes', await ev("window.__p5Menu.selected===1&&window.__p5Menu.value==='duplicate'&&!document.querySelector('sand-menu').open")===true);
-  await ev("const m=document.querySelector('sand-menu');m.open=true;m.menuItems[0].focus();m.menuItems[0].dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));");
+  await ev("(()=>{const menu=document.querySelector('sand-menu');menu.open=true;menu.menuItems[0].focus();menu.menuItems[0].dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));})()");
   check('menu: Escape dismisses and restores focus to trigger', await ev("!document.querySelector('sand-menu').open&&document.activeElement===document.querySelector('sand-menu .gm-menu-trigger')")===true);
-  await ev("const m=document.querySelector('sand-menu');m.open=true;document.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}));");
+  await ev("(()=>{document.querySelector('sand-menu').open=true;document.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}));})()");
   check('menu: outside pointer press dismisses the option tray', await ev("!document.querySelector('sand-menu').open")===true);
 }
 
