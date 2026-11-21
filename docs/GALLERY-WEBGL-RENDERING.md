@@ -36,3 +36,12 @@ The mobile Chromium test runner checks:
 - Existing pointer, keyboard, form serialization, lifecycle and component interaction checks still run.
 
 The compatibility renderer preserves a meaningful sand image and interaction but is not intended to match the exact lighting and texture of the full WebGL2 shader.
+
+
+## Latest deployed verification
+
+The rendering fix is deployed from commit `8ee3b110ce30dd5826e034e01f4f89af3598327e`. GitHub Pages deployment [#618](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44888474456) succeeded.
+
+GitHub Actions [#517](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44888474444) passed bundle synchronization, generated documentation/registry validation and structural audit. The mobile Chromium suite passed **239 assertions** and failed 15. The gallery-specific checks all passed: the full 50-card catalogue is retained, active previews remain under the cap of eight, off-screen Slider is unmounted, five sampled controls paint visible 2D fallback pixels, context loss/restoration is handled, and there are no JavaScript runtime errors.
+
+The remaining failures include one Slider/Toggle API assertion in fallback mode and unrelated focus/live-region checks in Breadcrumbs, Menu, Toast, Alert, Dialog, Drawer and Context Menu. These are tracked, not waived. The deployed blank-preview defect is addressed, but the complete suite is not green.

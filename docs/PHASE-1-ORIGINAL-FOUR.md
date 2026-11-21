@@ -49,3 +49,10 @@ GitHub Actions [#511](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/4
 The automated gates for the original four are passing. Do not claim Phase 1 is fully complete until visual, real-device and accessibility evidence is added. The three unrelated full-suite failures should be tracked in the appropriate later Tooltip/Toast phases, not hidden or waived.
 
 Phase 1 remains **in progress** until these gates have evidence. Do not start Phase 2 or expand components 5-50 as part of this phase.
+
+
+## Gallery-wide rendering correction
+
+The deployed gallery previously mounted all fifty previews at once, exhausting the browser's WebGL context budget. The shared core and gallery were corrected as recorded in [GALLERY-WEBGL-RENDERING.md](GALLERY-WEBGL-RENDERING.md). The gallery now caps active previews at eight, unmounts off-screen controls and releases their GPU contexts. A shared 2D renderer preserves visible sand when WebGL2 is absent or lost.
+
+On GitHub Actions #517, the four original controls passed their regular interaction and reduced-motion checks. All five sampled no-WebGL fallback controls painted visible sand. One fallback API assertion for Slider/Toggle remains open. Manual reference-image, real-device, cross-browser and assistive-technology sign-off also remains open.

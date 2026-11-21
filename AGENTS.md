@@ -60,11 +60,12 @@ The npm command above is the desired experience, not a claim that the package is
 **Repository:** `Brajesh31/GrainMotion-UI`  
 **Primary branch:** `main`  
 **Baseline Phase 0 handover commit:** `8a6c94d534c3d300bbff145e1d5bf5439504c3ef`  
-**Latest Phase 1 implementation commit:** `59b96431c1921c9cd5b5daa01e81be5fdf7c2e9b`  
-**Latest full mobile Chromium validation:** [GitHub Actions #511](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44885153121)  
+**Latest gallery rendering fix:** `8ee3b110ce30dd5826e034e01f4f89af3598327e`  
+**Latest Pages deployment:** [GitHub Actions #618](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44888474456), successful.  
+**Latest full mobile Chromium validation:** [GitHub Actions #517](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44888474444), 239 passing assertions and 15 failing assertions.  
 **Phase 0:** Foundation work complete.  
-**Next active task:** Complete Phase 1 visual, real-device and assistive-technology verification for the original four.  
-**Phase 1 status:** Original-four automated regression checks pass; implementation not yet signed off.
+**Next active task:** Finish the remaining original-four fallback API check and visual/device/accessibility verification.  
+**Phase 1 status:** Gallery renderer-budget fix is deployed; original-four normal interaction and reduced-motion checks pass; implementation is not fully signed off.
 
 At the Phase 0 audit, the repository contained:
 
@@ -82,6 +83,7 @@ At the Phase 0 audit, the repository contained:
 
 - `docs/PHASE-0-FOUNDATION-AUDIT.md`
 - `docs/PHASE-1-ORIGINAL-FOUR.md`
+- `docs/GALLERY-WEBGL-RENDERING.md`
 - `docs/COMPONENT-CONTRACT.md`
 - `design/tokens.css`
 - `design/README.md`
@@ -93,25 +95,24 @@ The provisional token stylesheet is not yet consumed by the legacy component scr
 
 ### Latest recorded test evidence
 
-In GitHub Actions run #511, at commit `59b96431c1921c9cd5b5daa01e81be5fdf7c2e9b`:
+GitHub Actions run [#517](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44888474444), on commit `8ee3b110ce30dd5826e034e01f4f89af3598327e`:
 
-- Standalone bundle synchronization passed.
+- Standalone component bundle synchronization passed.
 - Generated documentation and registry validation passed.
 - Structural inventory/assets/registry audit passed.
-- The no-WebGL test initialized all four original components in fallback mode.
-- The fallback rendered visible sand pixels for Slider, Toggle, Signature and Thinking.
-- Slider and Toggle public APIs remained usable in fallback mode.
-- Toggle reconnect reused its canvases and preserved a single change event and state.
-- Reduced-motion checks passed for Slider, Toggle, Signature undo, Signature clear and Thinking's static state motif.
-- The browser log reported **246 passing assertions and 3 failing assertions**. The three current failures are outside the original four:
-  1. Tooltip: keyboard focus does not open the hint as expected.
-  2. Tooltip: Escape does not dismiss the hint while preserving trigger focus.
-  3. Toast: info/success notifications do not pass the polite status announcement check.
-- No JavaScript runtime errors were reported.
+- Full mobile Chromium reported **239 passing assertions and 15 failing assertions**.
+- Gallery-specific checks passed:
+  - All fifty cards remain in the DOM while previews are virtualized.
+  - Active preview count stayed within the eight-context budget (two active previews at the final assertion).
+  - Off-screen Slider preview was unmounted.
+  - All five sampled controls painted visible sand pixels through the 2D fallback when WebGL2 was unavailable.
+  - WebGL context-loss fallback and restoration checks passed.
+  - No JavaScript runtime errors were reported.
+- The original four passed their regular pointer/keyboard/state checks, Signature drawing/export/undo, Thinking state announcements, and reduced-motion checks.
+- One new fallback assertion remains failing: Slider and Toggle public API values after the fallback transition did not meet the test's expected final state.
+- Other current failures are: Breadcrumbs focus restoration after reconnect; Menu ArrowDown/End/Home focus movement; Toast polite/assertive live-region semantics; Alert polite/assertive semantics; Dialog modal top-layer/content, initial focus and confirm/focus restoration; Drawer Escape/focus restoration; Context Menu naming/initial focus and arrow navigation.
 
-The earlier run #502 had 11 failures in overlays and feedback components; the current run shows that most of those checks now pass, but the three listed above remain. Do not hide or waive them. Diagnose them in the appropriate later component phases.
-
-The original-four automated regression coverage passes on the latest recorded run. This is not visual sign-off. Visual comparison against approved original references, real-device touch verification, additional-browser testing and screen-reader verification are still outstanding. Do not mark Phase 1 complete until these are evidenced.
+The exact live-gallery rendering defect is addressed and deployed. These remaining failures must not be waived. Keep them visible and fix them in the appropriate component work. Phase 1 remains open pending the fallback API assertion plus manual visual, real-device and assistive-technology verification.
 
 ## 5. Active release-recovery phase plan
 
@@ -210,4 +211,4 @@ Keep the latest known CI run number, commit SHA, pass/fail count, failure names 
 
 Use this prompt when opening a new chat:
 
-> Continue the existing GrainMotion-UI project. First read the root `AGENTS.md` file and follow it as the source of truth. Also inspect the current `main` branch, `docs/ROADMAP.md`, and the latest GitHub Actions results before changing anything. **Do not create a branch, pull request, fork or duplicate repository. Directly edit the existing files on `main` and commit there.** Work on one active release-recovery phase at a time. The current state is Phase 0 complete and Phase 1 in progress. Read `docs/PHASE-1-ORIGINAL-FOUR.md`, inspect the latest commit and CI result, then complete remaining visual/device/accessibility verification. Do not start Phase 2 automatically.
+> Continue the existing GrainMotion-UI project. First read the root `AGENTS.md` file and follow it as the source of truth. Also inspect the current `main` branch, `docs/ROADMAP.md`, and the latest GitHub Actions results before changing anything. **Do not create a branch, pull request, fork or duplicate repository. Directly edit the existing files on `main` and commit there.** Work on one active release-recovery phase at a time. The gallery context-budget and 2D fallback fix is deployed; read `docs/GALLERY-WEBGL-RENDERING.md` and `docs/PHASE-1-ORIGINAL-FOUR.md`, inspect latest CI #517, fix the Slider/Toggle fallback API assertion and remaining current failures, then complete visual/device/accessibility verification. Do not start Phase 2 automatically.
