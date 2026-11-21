@@ -347,12 +347,12 @@ class SandToast extends SandTray{
   activate(){if(this._open){this.sync();return;}this._open=true;activeToasts.add(this);this.style.display='block';this.style.visibility='visible';this.style.pointerEvents='auto';this._remaining=this.durationMs();this.sync();reflow();this.startTimer();Sound.play('stone',.16);}
   deactivate(reason){if(!this._open){this.sync();return;}this._open=false;this.clearTimer();activeToasts.delete(this);this.sync();reflow();if(reason!=='attribute')emit(this,'dismiss',{reason});}
   show(message){if(message!==undefined)this.message=message;this.setAttribute('open','');if(!this._open)this.activate();return true;}
-  dismiss(reason='programmatic'){if(this._open){this.removeAttribute('open');if(this._open)this.deactivate(reason);}return true;}
+  dismiss(reason='programmatic'){if(!this._open){if(this.hasAttribute('open'))this.removeAttribute('open');return false;}this.deactivate(reason);if(this.hasAttribute('open'))this.removeAttribute('open');return true;}
   clearTimer(){if(this._timer){clearTimeout(this._timer);this._timer=0;}}
   startTimer(){this.clearTimer();if(!this._open||this.durationMs()===0)return;if(!this._remaining)this._remaining=this.durationMs();this._started=Date.now();this._timer=setTimeout(()=>{this._timer=0;this.dismiss('timeout');},this._remaining);}
   pauseTimer(){if(!this._timer)return;clearTimeout(this._timer);this._timer=0;this._remaining=Math.max(0,this._remaining-(Date.now()-this._started));}
   resumeTimer(){if(this._open&&this.durationMs()>0&&this._remaining>0)this.startTimer();}
-  place(index,position){const [v,h]=position.split('-');this.style.left=h==='left'?'12px':'auto';this.style.right=h==='right'?'12px':'auto';this.style.top=v==='top'?(18+index*82)+'px':'auto';this.style.bottom=v==='bottom'?(18+index*82)+'px':'auto';}
+  place(index,position){const [v,h]=position.split('-');this.style.left=h==='left'?'12px':'auto';this.style.right=h==='right'?'12px':'auto';this.style.top=v==='top'?(18+index*96)+'px':'auto';this.style.bottom=v==='bottom'?(18+index*82)+'px':'auto';}
 }
 customElements.define('sand-toast',SandToast);
 })();
