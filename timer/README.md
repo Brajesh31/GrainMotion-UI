@@ -78,7 +78,7 @@ The control scales with its CSS width. The demo uses a responsive light layout a
 - The sand surface requires WebGL2.
 - Manual screen-reader and physical-device testing remains outstanding.
 - Progress and loading indicators are status components, not form inputs.
-- The timer uses animation-frame timing and is not a precision alarm clock.
+- The timer uses animation-frame timing; background-tab throttling can slow its countdown, so it is not a precision alarm clock.
 - Step Indicator supports up to five visible steps.
 
 ## Related documentation
