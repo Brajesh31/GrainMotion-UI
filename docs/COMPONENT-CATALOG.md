@@ -47,6 +47,18 @@ The five selection, calendar and time controls have standalone bundles, live dem
 | 18 | Date Range Picker | `sand-date-range` | Two river stones mark the start and end of a date interval. | [README](../date-range/README.md) · [Demo](../date-range/) | Implemented, Chromium CI passed |
 | 19 | Time Picker | `sand-time-picker` | A circular sand dial marks the selected time. | [README](../time-picker/README.md) · [Demo](../time-picker/) | Implemented, Chromium CI passed |
 
+## Phase 4 components
+
+The five progress and activity controls now have standalone bundles, demos, expanded READMEs, concept diagrams, gallery cards and registry entries. Their mobile Chromium interaction and form checks are part of the twenty-four-component suite. Manual screen-reader and physical-device verification remains outstanding.
+
+| # | Component | Custom element | Main interaction | Documentation | Status |
+|---:|---|---|---|---|---|
+| 20 | Progress Bar | `sand-progress` | A bamboo rake advances through a sand channel. | [README](../progress/README.md) · [Demo](../progress/) | Implemented, CI verification pending |
+| 21 | Progress Ring | `sand-progress-ring` | A pebble travels around a circular groove. | [README](../progress-ring/README.md) · [Demo](../progress-ring/) | Implemented, CI verification pending |
+| 22 | Step Indicator | `sand-steps` | Stepping stones show completed, active and upcoming steps. | [README](../steps/README.md) · [Demo](../steps/) | Implemented, CI verification pending |
+| 23 | Hourglass Timer | `sand-timer` | Sand falls between two chambers with timer controls. | [README](../timer/README.md) · [Demo](../timer/) | Implemented, CI verification pending |
+| 24 | Loading Indicator | `sand-loader` | A miniature rake loops through a distinct loading pattern. | [README](../loader/README.md) · [Demo](../loader/) | Implemented, CI verification pending |
+
 ## Planned components
 
 The components below are roadmap candidates, not implemented features. Their physical concepts are preliminary and may be refined during design exploration.
