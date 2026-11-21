@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GrainMotion-UI</title>
 <link rel="icon" href="data:,">
-<meta name="description" content="Nine tactile UI controls made from simulated sand, including a rake slider, stone toggle, signature pad, AI activity surface and five selection controls.">
+<meta name="description" content="Fourteen tactile UI controls made from simulated sand, including selection, text, password, search and one-time-code inputs.">
 <meta property="og:title" content="GrainMotion-UI">
-<meta property="og:description" content="Four UI controls made of sand that moves like sand. Each is one file with no dependencies.">
+<meta property="og:description" content="Fourteen tactile controls made from simulated sand, including text entry, password, search and one-time-code inputs.">
 <meta property="og:image" content="title.svg">
 <style>
   /* The gallery: every control live on one page, with its install line and a prompt for a coding agent. */
@@ -33,6 +33,7 @@
   .stage > :is(sand-slider, sand-signature) { width: 100%; }
   .stage > sand-toggle { width: 190px; } .stage > sand-thinking { width: 210px; }
   .stage > :is(sand-checkbox,sand-radio-group,sand-segmented,sand-range,sand-rating) { width: 100%; }
+  .stage > :is(sand-input,sand-textarea,sand-password,sand-search,sand-otp) { width: 100%; }
   .stage > sand-checkbox { max-width: 190px; }
   .field { width: 100%; display: flex; justify-content: space-between; font-size: 14px; font-weight: 500; } .field output { color: var(--mute); font-variant-numeric: tabular-nums; }
   .mini { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
@@ -47,7 +48,7 @@
 <div class="wrap">
   <header>
     <h1>GrainMotion-UI</h1>
-    <p class="lede">Nine tactile controls made of sand that moves like sand. Rake it, push a stone through it, choose options, set ranges, rate and sign. Each component is a standalone file with no runtime dependencies.</p>
+    <p class="lede">Fourteen tactile controls made of sand that moves like sand. Rake it, push a stone through it, choose options, write, search and enter a code. Each component is a standalone file with no runtime dependencies.</p>
     <p class="links">
       <button class="pill dark" type="button" id="snd">Sound on</button>
       <a class="pill" href="https://github.com/Brajesh31/GrainMotion-UI" target="_blank" rel="noopener">The repo on GitHub <span aria-hidden="true">&#8599;</span></a>
@@ -65,6 +66,11 @@
 <script src="../segmented/segmented.js"></script>
 <script src="../range/range.js"></script>
 <script src="../rating/rating.js"></script>
+<script src="../input/input.js"></script>
+<script src="../textarea/textarea.js"></script>
+<script src="../password/password.js"></script>
+<script src="../search/search.js"></script>
+<script src="../otp/otp.js"></script>
 <script>
 // The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
 const REPO = 'Brajesh31/GrainMotion-UI';
