@@ -7,7 +7,7 @@
 <link rel="icon" href="data:,">
 <meta name="description" content="Twenty-nine tactile UI controls made from simulated sand, including selection, text, calendar and time inputs.">
 <meta property="og:title" content="GrainMotion-UI">
-<meta property="og:description" content="Twenty-nine tactile controls made from simulated sand, including selection, text, calendar and time controls.">
+<meta property="og:description" content="Thirty-five tactile controls made from simulated sand, including selection, text, calendar and time controls.">
 <meta property="og:image" content="title.svg">
 <style>
   /* The gallery: every control live on one page, with its install line and a prompt for a coding agent. */
@@ -37,6 +37,7 @@
   .stage > :is(sand-select,sand-combobox,sand-date-picker,sand-date-range) { width: 100%; }
   .stage > sand-time-picker { width: min(280px, 100%); }
   .stage > :is(sand-tabs,sand-accordion,sand-pagination,sand-breadcrumbs,sand-menu) { width: 100%; }
+  .stage > :is(sand-dropzone,sand-upload-queue,sand-carousel,sand-lightbox,sand-scrubber,sand-color-picker) { width: 100%; }
   .stage > :is(sand-progress,sand-steps,sand-loader) { width: 100%; }
   .stage > sand-progress-ring { width: min(220px, 100%); }
   .stage > sand-timer { width: min(300px, 100%); }
@@ -54,7 +55,7 @@
 <div class="wrap">
   <header>
     <h1>GrainMotion-UI</h1>
-    <p class="lede">Twenty-four tactile controls made of sand that moves like sand. Rake it, push a stone through it, select, write, track progress, step through a workflow and watch an hourglass. Each component is a standalone file with no runtime dependencies.</p>
+    <p class="lede">Thirty-five tactile controls made of sand that moves like sand. Rake it, push a stone through it, select, write, track progress, step through a workflow and watch an hourglass. Each component is a standalone file with no runtime dependencies.</p>
     <p class="links">
       <button class="pill dark" type="button" id="snd">Sound on</button>
       <a class="pill" href="https://github.com/Brajesh31/GrainMotion-UI" target="_blank" rel="noopener">The repo on GitHub <span aria-hidden="true">&#8599;</span></a>
@@ -92,6 +93,12 @@
 <script src="../pagination/pagination.js"></script>
 <script src="../breadcrumbs/breadcrumbs.js"></script>
 <script src="../menu/menu.js"></script>
+<script src="../dropzone/dropzone.js"></script>
+<script src="../upload-queue/upload-queue.js"></script>
+<script src="../carousel/carousel.js"></script>
+<script src="../lightbox/lightbox.js"></script>
+<script src="../scrubber/scrubber.js"></script>
+<script src="../color-picker/color-picker.js"></script>
 <script>
 // The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
 const REPO = 'Brajesh31/GrainMotion-UI';
