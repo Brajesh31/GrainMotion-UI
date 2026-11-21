@@ -199,6 +199,20 @@
         }
       ],
       "docs": "GrainMotion-UI Rating is a plain script that registers a custom element. Load /grainmotion-ui/rating.js with a script tag (not a module), Use <sand-rating name=\"product-rating\" label=\"Product rating\" value=\"4\"></sand-rating>. Read el.value and listen for input/change. The supported scale is zero through five. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "type": "registry:file",
+      "title": "GrainMotion-UI undefined",
+      "description": "undefined One file of about undefined KB with its sand engine and sounds inside it, no dependencies, defines <undefined>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "files": [
+        {
+          "path": "undefined/undefined.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/undefined.js"
+        }
+      ],
+      "docs": "GrainMotion-UI undefined is a plain script that registers a custom element. Load /grainmotion-ui/undefined.js with a script tag (not a module), undefined More: https://brajesh31.github.io/GrainMotion-UI"
     }
   ]
 }
