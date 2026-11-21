@@ -60,11 +60,11 @@ The npm command above is the desired experience, not a claim that the package is
 **Repository:** `Brajesh31/GrainMotion-UI`  
 **Primary branch:** `main`  
 **Baseline Phase 0 handover commit:** `8a6c94d534c3d300bbff145e1d5bf5439504c3ef`  
-**Latest implementation base:** `47e6c90b284dc8989ecd19e0eb71e5ac4eb83df1`  
-**Latest recorded full validation run:** [GitHub Actions #502](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44883655931)  
+**Latest Phase 1 implementation commit:** `59b96431c1921c9cd5b5daa01e81be5fdf7c2e9b`  
+**Latest full mobile Chromium validation:** [GitHub Actions #511](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44885153121)  
 **Phase 0:** Foundation work complete.  
-**Next active task:** Complete Phase 1 visual and cross-browser verification for the original four.  
-**Phase 1 status:** Implementation in progress; not yet signed off.
+**Next active task:** Complete Phase 1 visual, real-device and assistive-technology verification for the original four.  
+**Phase 1 status:** Original-four automated regression checks pass; implementation not yet signed off.
 
 At the Phase 0 audit, the repository contained:
 
@@ -93,32 +93,25 @@ The provisional token stylesheet is not yet consumed by the legacy component scr
 
 ### Latest recorded test evidence
 
-In GitHub Actions run #502:
+In GitHub Actions run #511, at commit `59b96431c1921c9cd5b5daa01e81be5fdf7c2e9b`:
 
 - Standalone bundle synchronization passed.
 - Generated documentation and registry validation passed.
-- The new structural inventory/assets/registry audit passed.
-- The full 50-component mobile Chromium test step failed.
+- Structural inventory/assets/registry audit passed.
+- The no-WebGL test initialized all four original components in fallback mode.
+- The fallback rendered visible sand pixels for Slider, Toggle, Signature and Thinking.
+- Slider and Toggle public APIs remained usable in fallback mode.
+- Toggle reconnect reused its canvases and preserved a single change event and state.
+- Reduced-motion checks passed for Slider, Toggle, Signature undo, Signature clear and Thinking's static state motif.
+- The browser log reported **246 passing assertions and 3 failing assertions**. The three current failures are outside the original four:
+  1. Tooltip: keyboard focus does not open the hint as expected.
+  2. Tooltip: Escape does not dismiss the hint while preserving trigger focus.
+  3. Toast: info/success notifications do not pass the polite status announcement check.
+- No JavaScript runtime errors were reported.
 
-The latest recorded browser run reported **228 passing assertions and 11 failing assertions**. Failures recorded in that run:
+The earlier run #502 had 11 failures in overlays and feedback components; the current run shows that most of those checks now pass, but the three listed above remain. Do not hide or waive them. Diagnose them in the appropriate later component phases.
 
-1. Tooltip: keyboard focus does not open the hint as expected.
-2. Tooltip: Escape does not dismiss the hint while preserving trigger focus.
-3. Toast: info/success notifications do not pass the polite status announcement check.
-4. Alert: info status-region announcement check failed.
-5. Alert: error alert-region announcement check failed.
-6. Dialog: native modal top-layer/content check failed.
-7. Dialog: initial focus containment check failed.
-8. Dialog: confirm action/close/focus restoration check failed.
-9. Drawer: Escape close/focus-return check failed.
-10. Context Menu: named menu/initial focus check failed.
-11. Context Menu: arrow navigation skips enabled/disabled items incorrectly.
-
-These are the latest recorded test results, not a guarantee that the failures persist identically on every run. Re-run the suite from the latest `main` before acting on them. Do not hide or waive the failures. Diagnose the current source, fix the real cause and retain meaningful tests.
-
-The original four passed their limited functional checks in run #502, but that baseline did not test no-WebGL rendering, reduced motion, or reconnection. New Phase 1 browser regressions cover these cases.
-- Phase 1 implementation now adds a 2D fallback for the original four, reduced-motion behavior, reconnect checks, and focused regression coverage. Record the new commit and its CI result after the workflow finishes.
-- Visual comparison against approved original references, real-device touch verification, and screen-reader verification are still outstanding. Do not mark Phase 1 complete until these are evidenced.
+The original-four automated regression coverage passes on the latest recorded run. This is not visual sign-off. Visual comparison against approved original references, real-device touch verification, additional-browser testing and screen-reader verification are still outstanding. Do not mark Phase 1 complete until these are evidenced.
 
 ## 5. Active release-recovery phase plan
 
