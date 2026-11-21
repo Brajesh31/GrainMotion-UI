@@ -895,6 +895,120 @@
         }
       ],
       "docs": "GrainMotion-UI Tree View is a plain script that registers a custom element. Load /grainmotion-ui/tree.js with a script tag (not a module), Assign nested items with id, label and children. Read or set value and expanded, or call select(id) and toggle(id). Arrow keys navigate and expand/collapse branches. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Tooltip",
+      "description": "A non-interactive tooltip anchored to a trigger by element ID, with pointer and keyboard activation, Escape dismissal, configurable placement and delay, and aria-describedby token preservation. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-tooltip>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "tooltip",
+        "hint",
+        "accessibility",
+        "feedback",
+        "sand"
+      ],
+      "files": [
+        {
+          "path": "tooltip/tooltip.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/tooltip.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Tooltip is a plain script that registers a custom element. Load /grainmotion-ui/tooltip.js with a script tag (not a module), Use the for attribute to reference a trigger element ID and text for the hint. Set placement and delay, or read/write open and call show() or hide(). More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "toast",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Toast Notification",
+      "description": "A timed notification with status or alert semantics, action and dismiss controls, timer pausing on hover/focus, and independent corner stacking. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-toast>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "toast",
+        "notification",
+        "status",
+        "feedback",
+        "accessibility",
+        "sand"
+      ],
+      "files": [
+        {
+          "path": "toast/toast.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/toast.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Toast Notification is a plain script that registers a custom element. Load /grainmotion-ui/toast.js with a script tag (not a module), Call show(message?) and dismiss(reason?) or set open. Configure title, message, tone, duration, position and action-label. Listen for action and dismiss events. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "alert",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Alert Banner",
+      "description": "A persistent status banner with tone-aware live-region semantics, optional title, action and dismissal. It stays visible until the host or user dismisses it. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-alert>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "alert",
+        "banner",
+        "status",
+        "feedback",
+        "accessibility",
+        "sand"
+      ],
+      "files": [
+        {
+          "path": "alert/alert.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/alert.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Alert Banner is a plain script that registers a custom element. Load /grainmotion-ui/alert.js with a script tag (not a module), Set tone, title, message, dismissible and action-label. Call dismiss() or show(), and listen for action and dismiss events. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "dialog",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Dialog / Modal",
+      "description": "A native modal dialog custom element that preserves caller content, traps focus through the browser top layer, supports Escape and optional backdrop dismissal, and restores opener focus. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-dialog>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "dialog",
+        "modal",
+        "overlay",
+        "accessibility",
+        "feedback",
+        "sand"
+      ],
+      "files": [
+        {
+          "path": "dialog/dialog.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/dialog.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Dialog / Modal is a plain script that registers a custom element. Load /grainmotion-ui/dialog.js with a script tag (not a module), Set open or call showModal()/show(). Use close(returnValue), title, description, confirm-label, cancel-label and dismissal policy attributes. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "drawer",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Drawer / Sheet",
+      "description": "A responsive modal sheet that slides from the left, right, top or bottom, uses native dialog focus containment, and provides Escape/backdrop and action controls. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-drawer>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "drawer",
+        "sheet",
+        "overlay",
+        "modal",
+        "accessibility",
+        "sand"
+      ],
+      "files": [
+        {
+          "path": "drawer/drawer.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/drawer.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Drawer / Sheet is a plain script that registers a custom element. Load /grainmotion-ui/drawer.js with a script tag (not a module), Set open or call showModal()/show(). Configure placement, size, title and description; close(returnValue) and listen for drawer-open, drawer-close and confirm. More: https://brajesh31.github.io/GrainMotion-UI"
     }
   ]
 }

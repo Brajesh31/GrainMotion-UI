@@ -2,7 +2,7 @@
 
 Two sand-backed work surfaces meet at a narrow walnut divider. Move the divider to give the primary workspace or its inspector more room. Content remains ordinary DOM supplied by the host; the component only controls the split and its accessible separator.
 
-One of forty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of forty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 

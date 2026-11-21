@@ -2,7 +2,7 @@
 
 A file is a small object arriving at a physical tray. Dragging over the frame raises a settled stone; dropping a valid file makes its tile land in the tray and the sand settle around it. The native file picker remains available for keyboard and touch users.
 
-One of forty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of forty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 

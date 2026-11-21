@@ -2,7 +2,7 @@
 
 Branches are carved into a sand bed, with a river stone marking the selected node. Expand and collapse folders to reveal paths; the tree remains a real nested data structure and uses a roving keyboard focus model for navigation.
 
-One of forty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of forty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 

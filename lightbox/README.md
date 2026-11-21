@@ -2,7 +2,7 @@
 
 A set of thumbnail plates sits inside a walnut gallery tray. Opening a plate lifts it into a full-screen viewing surface; the browser's native dialog supplies modal behavior and focus containment.
 
-One of forty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of forty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 
