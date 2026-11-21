@@ -567,7 +567,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("(()=>{const e=document.querySelector('sand-context-menu');e.items=[{id:'open',label:'Open'},{id:'rename',label:'Rename'},{id:'archive',label:'Archive',disabled:true}];e.addEventListener('select',x=>window.__p9.menu.push(x.detail.id));e.addEventListener('menu-close',x=>window.__p9.menuClose.push(x.detail.reason));})()");
   await ev("document.querySelector('sand-context-menu').showAt(35,45)");
   check('context menu: opens with a named menu and focuses the first enabled item', await ev("(()=>{const e=document.querySelector('sand-context-menu');return e.open&&!e.menu.hidden&&e.menu.getAttribute('role')==='menu'&&e.menu.querySelector('[role=menuitem]').matches(':focus')})()")===true);
-  await ev("document.querySelector('sand-context-menu').menu.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}))");
+  await ev("document.activeElement.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}))");
   check('context menu: arrow navigation skips disabled actions', await ev("document.activeElement?.dataset.id==='rename'")===true);
   await ev("document.querySelector('sand-context-menu').menu.querySelector('[data-id=rename]').click()");
   check('context menu: selection emits the action ID and closes', await ev("(()=>{const e=document.querySelector('sand-context-menu');return window.__p9.menu.join(',')==='rename'&&!e.open&&window.__p9.menuClose.at(-1)==='select'})()")===true);
@@ -576,15 +576,15 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("document.querySelector('sand-context-menu').setAttribute('disabled','')");
   check('context menu: disabled blocks programmatic opening', await ev("document.querySelector('sand-context-menu').showAt(10,10)===false")===true);
   await ev("document.querySelector('sand-context-menu').removeAttribute('disabled')");
-  await ev("(()=>{const e=document.querySelector('sand-context-menu'),target=e.targetButton;target.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',clientX:20,clientY:20,bubbles:true}));})()");
+  await ev("(()=>{const e=document.querySelector('sand-context-menu'),target=e.targetButton;target.dispatchEvent((e=>e.targetButton.dispatchEvent(e))((()=>{const e=new Event('pointerdown',{bubbles:true});Object.defineProperties(e,{pointerType:{value:'touch'},clientX:{value:20},clientY:{value:20}});return e;})()));})()");
   await new Promise(r=>setTimeout(r,25));
-  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent(new PointerEvent('pointermove',{pointerType:'touch',clientX:45,clientY:20,bubbles:true}));e.targetButton.dispatchEvent(new PointerEvent('pointerup',{pointerType:'touch',clientX:45,clientY:20,bubbles:true}));})()");
+  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent((e=>e.targetButton.dispatchEvent(e))((()=>{const e=new Event('pointermove',{bubbles:true});Object.defineProperties(e,{pointerType:{value:'touch'},clientX:{value:45},clientY:{value:20}});return e;})()));e.targetButton.dispatchEvent((e=>e.targetButton.dispatchEvent(e))((()=>{const e=new Event('pointerup',{bubbles:true});Object.defineProperties(e,{pointerType:{value:'touch'},clientX:{value:45},clientY:{value:20}});return e;})()));})()");
   await new Promise(r=>setTimeout(r,590));
   check('context menu: touch movement cancels a pending long-press', await ev("!document.querySelector('sand-context-menu').open")===true);
-  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent(new PointerEvent('pointerdown',{pointerType:'touch',clientX:24,clientY:32,bubbles:true}));})()");
+  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent((e=>e.targetButton.dispatchEvent(e))((()=>{const e=new Event('pointerdown',{bubbles:true});Object.defineProperties(e,{pointerType:{value:'touch'},clientX:{value:24},clientY:{value:32}});return e;})()));})()");
   await new Promise(r=>setTimeout(r,590));
   check('context menu: touch long-press opens the menu at the press point', await ev("document.querySelector('sand-context-menu').open")===true);
-  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent(new PointerEvent('pointerup',{pointerType:'touch',clientX:24,clientY:32,bubbles:true}));e.close('test');})()");
+  await ev("(()=>{const e=document.querySelector('sand-context-menu');e.targetButton.dispatchEvent((e=>e.targetButton.dispatchEvent(e))((()=>{const e=new Event('pointerup',{bubbles:true});Object.defineProperties(e,{pointerType:{value:'touch'},clientX:{value:24},clientY:{value:32}});return e;})()));e.close('test');})()");
 
 
   await ev("(()=>{const e=document.querySelector('sand-filter-builder');e.fields=[{id:'status',label:'Status',type:'select',options:['Open','Done']},{id:'owner',label:'Owner',type:'text'}];e.filters=[{id:'f1',field:'status',operator:'is',value:'Open'}];e.logic='OR';e.addEventListener('change',()=>window.__p9.filter++);e.addEventListener('apply',()=>window.__p9.apply++);})()");
