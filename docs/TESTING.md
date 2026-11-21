@@ -28,7 +28,7 @@ The test and screenshot utilities require Chrome or Chromium. Set `CHROME` if th
 
 ## Current test coverage
 
-`tools/test.mjs` now covers all nineteen controls in a mobile-sized Chromium viewport. Phases 1, 2 and 3 have passed mobile Chromium CI, including the original four-component regression checks. The latest nineteen-component run completed 65 browser assertions with zero failures. The original-control checks cover:
+`tools/test.mjs` now covers all twenty-four controls in a mobile-sized Chromium viewport. Phases 1, 2 and 3 passed mobile Chromium CI. Phase 4 tests have been added and await the first passing twenty-four-component CI run. The original-control checks cover:
 
 - Slider drag, input/change events, vertical-swipe handling and keyboard increments.
 - Toggle click, Space behavior, change events and vertical-swipe handling.
@@ -43,7 +43,7 @@ The Phase 1 checks added to the test runner cover:
 - Segmented Control: active segment selection, arrow/Home/End/Space behavior and form serialization.
 - Range Slider: lower/upper handle movement, keyboard steps, non-crossing bounds, input/change timing, touch scroll coexistence and `low,high` form serialization.
 - Rating: pointer selection, Arrow/Home/End adjustments, accessible value text, disabled state and form serialization.
-- Regression: all original four tests must continue to pass with all nineteen scripts loaded together.
+- Regression: all original four tests must continue to pass with all twenty-four scripts loaded together.
 
 The Phase 2 and Phase 3 checks in the passing test runner cover:
 
@@ -59,6 +59,12 @@ The Phase 2 and Phase 3 checks in the passing test runner cover:
 - Phase 3 Date Range: ISO start/end serialization, end-before-start validation, unavailable endpoint and required-both-endpoints behavior.
 - Phase 3 Time Picker: timezone-free HH:MM value, explicit 12/24-hour readout, and native min/max/step constraints.
 - Phase 3 form serialization: Select, Combobox, Date Picker, Date Range and Time Picker are included with the earlier twelve controls.
+- Phase 4 Progress Bar: determinate value, max clamping, progressbar semantics and indeterminate aria-valuenow removal.
+- Phase 4 Progress Ring: determinate value and indeterminate accessibility semantics.
+- Phase 4 Step Indicator: native step button selection, aria-current, change event and disabled state.
+- Phase 4 Hourglass Timer: start, pause, resume, reset, cancel, completion event and form value.
+- Phase 4 Loading Indicator: status role, aria-busy, active/inactive state and configurable speed.
+- Phase 4 form serialization: Step Indicator and Hourglass Timer join the earlier form-associated controls.
 
 - Component sizing.
 - Horizontal overflow at the configured mobile viewport.
