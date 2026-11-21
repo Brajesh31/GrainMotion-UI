@@ -453,6 +453,7 @@ class SandOtp extends SandNativeField {
     this.field.addEventListener('paste',()=>setTimeout(()=>this.sanitize(),0));
     this.onNativeInput=()=>this.sanitize(true);
     this.applyMask();
+    this.sanitize(false);
   }
   attributeChangedCallback(name,oldValue,newValue){super.attributeChangedCallback(name,oldValue,newValue);if(this._ready&&name==='length'){this.field.maxLength=this.length;this.field.minLength=this.length;this.field.pattern='[0-9]{'+this.length+'}';if(this.value.length>this.length)this.setValue(this.value.slice(0,this.length),false);this.layout();this.spriteKey=null;}if(this._ready&&name==='masked')this.applyMask();}
   applyMask(){if(this.field)this.field.style.webkitTextSecurity=this.masked?'disc':'none';}
