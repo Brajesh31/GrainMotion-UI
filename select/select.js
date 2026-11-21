@@ -429,7 +429,7 @@ class SandSelect extends SandPickerBase {
  }
  attributeChangedCallback(n,o,v){super.attributeChangedCallback(n,o,v);if(this.ready&&n==='options')this.renderOptions();}
  renderOptions(){
-  if(!this.field)return;const old=this.value,placeholder=document.createElement('option');
+  if(!this.field)return;const old=this.value||this.defaultValue,placeholder=document.createElement('option');
   placeholder.value='';placeholder.textContent=this.getAttribute('placeholder')||'Choose an option';placeholder.disabled=this.required;placeholder.selected=!old;
   this.field.replaceChildren(placeholder);
   for(const item of parseOptions(this.getAttribute('options'))){const opt=document.createElement('option');opt.value=item.value;opt.textContent=item.label;this.field.append(opt);}
