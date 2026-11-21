@@ -42,7 +42,7 @@ Each scales to its CSS width and needs WebGL2 to draw. They are drawn for a ligh
 
 - [grainmotion-ui skill](https://brajesh31.github.io/GrainMotion-UI/skills/grainmotion-ui/SKILL.md): how the set was made and the rules it follows. Install with `npx skills add Brajesh31/GrainMotion-UI`.
 - [core.js](https://brajesh31.github.io/GrainMotion-UI/skills/grainmotion-ui/core.js): the sand engine (height field, slumping, raked lines, the GPU lighting, stones, sound).
-- [starter.html](https://brajesh31.github.io/GrainMotion-UI/starter.html): the smallest whole example, a tray you draw in with your finger.
+- [starter.html](https://brajesh31.github.io/GrainMotion-UI/skills/grainmotion-ui/starter.html): the smallest whole example, a tray you draw in with your finger.
 - [look.mjs](https://brajesh31.github.io/GrainMotion-UI/skills/grainmotion-ui/look.mjs): drives a page with a slowed CPU, measures frame times and saves frames side by side.
 
 ## How it was made
