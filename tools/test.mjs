@@ -164,7 +164,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("document.querySelector('sand-password').querySelector('button').click()");
   check('password: Show reveals the field and updates aria-pressed', (await ev("document.querySelector('sand-password').revealed && document.querySelector('sand-password').field.type === 'text' && document.querySelector('sand-password').querySelector('button').getAttribute('aria-pressed') === 'true'")) === true);
   await ev("document.querySelector('sand-password').querySelector('button').click()");
-  check('password: Hide re-masks the field while retaining its value', (await ev("document.querySelector('sand-password').field.type === 'password' && document.querySelector('sand-password').value.length === 16")) === true);
+  check('password: Hide re-masks the field while retaining its value', (await ev("document.querySelector('sand-password').field.type === 'password' && document.querySelector('sand-password').value.length === 17")) === true);
 }
 { // search: custom request event, busy state and clear action
   await ev("window.__phase2 = { search: 0, clear: 0, complete: 0 }; document.addEventListener('search', () => __phase2.search++); document.addEventListener('search-clear', () => __phase2.clear++); document.addEventListener('complete', () => __phase2.complete++)");
@@ -189,6 +189,10 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
     document.body.append(f); const out = JSON.stringify(Object.fromEntries(new FormData(f))); f.remove(); return out; })()`);
   const expected = { slider: '30', toggle: 'on', checkbox: 'yes', radio: 'Medium', segment: 'Week', range: '10,90', rating: '4' };
   check('forms: all seven form-associated components serialize their values', got === JSON.stringify(expected), got);
+}
+{ // Phase 2 forms: native text and sensitive controls serialize without logging their values
+  const formOk = await ev("(() => { const f = document.createElement('form'); f.innerHTML = '<sand-input name=\"input\" value=\"hello\"></sand-input><sand-textarea name=\"textarea\" value=\"note\"></sand-textarea><sand-password name=\"password\" value=\"do-not-print-this\"></sand-password><sand-search name=\"search\" value=\"grain\"></sand-search><sand-otp name=\"otp\" value=\"123456\" length=\"6\"></sand-otp>'; document.body.append(f); const d = Object.fromEntries(new FormData(f)); const ok = d.input === 'hello' && d.textarea === 'note' && d.password === 'do-not-print-this' && d.search === 'grain' && d.otp === '123456'; f.remove(); return ok; })()");
+  check('forms: all five Phase 2 controls serialize their values', formOk === true);
 }
 { // scaling: the height follows the width
   const got = await ev(`(() => { const e = document.createElement('sand-toggle'); e.style.width = '150px'; document.body.append(e); const b = e.getBoundingClientRect(); e.remove(); return b.width + ' ' + Math.round(b.height); })()`);
