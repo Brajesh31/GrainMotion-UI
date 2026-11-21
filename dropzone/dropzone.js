@@ -346,8 +346,8 @@ class SandDropzone extends SandTray {
     this.ui = make('div', 'gm-drop-ui');
     this.ui.setAttribute('role', 'group'); this.ui.setAttribute('aria-label', this.getAttribute('label') || 'File upload area');
     this.top = make('div', 'gm-drop-top'); this.icon = make('div', 'gm-drop-icon', '↥');
-    const copy = make('div'); this.title = make('div', 'gm-drop-title', 'Drop files into the tray'); this.subtitle = make('div', 'gm-drop-sub', 'or choose from your device');
-    copy.append(this.title, this.subtitle); this.top.append(this.icon, copy);
+    const copy = make('div'); this.titleNode = make('div', 'gm-drop-title', 'Drop files into the tray'); this.subtitle = make('div', 'gm-drop-sub', 'or choose from your device');
+    copy.append(this.titleNode, this.subtitle); this.top.append(this.icon, copy);
     this.fileList = make('div', 'gm-drop-files');
     this.error = make('div', 'gm-drop-error'); this.error.setAttribute('role', 'status'); this.error.setAttribute('aria-live', 'polite');
     this.actions = make('div', 'gm-drop-actions'); this.pick = make('button', 'gm-drop-pick', 'Choose files'); this.pick.type = 'button';
@@ -392,7 +392,7 @@ class SandDropzone extends SandTray {
     this.fileList.replaceChildren();
     this._files.slice(-3).forEach(file => this.fileList.append(make('span', 'gm-drop-file', file.name)));
     this.count.textContent = this._files.length ? this._files.length + ' file' + (this._files.length === 1 ? '' : 's') + ' selected' : 'No files selected';
-    this.title.textContent = this._files.length ? 'Files settled into the tray' : 'Drop files into the tray';
+    this.titleNode.textContent = this._files.length ? 'Files settled into the tray' : 'Drop files into the tray';
   }
   clear() { this._files = []; this.error.textContent = ''; this.renderFiles(); this.dispatchEvent(new CustomEvent('files-change', { bubbles: true, composed: true, detail: { files: [], rejected: [] } })); }
   layout() {
