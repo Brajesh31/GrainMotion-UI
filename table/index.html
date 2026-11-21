@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GrainMotion-UI · Data Table</title>
+<meta name="description" content="Search, sort, select and paginate records in a tactile sand data table.">
+<link rel="icon" href="data:,">
+<style>
+:root{color-scheme:light;--page:#e9e1d4;--ink:#322b22;--muted:#776b5a}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--page);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,sans-serif;display:grid;place-items:center;padding:22px}main{width:min(760px,100%);text-align:center}h1{font-size:26px;margin:0}p{color:var(--muted)}.stage{min-height:390px;display:grid;place-items:center;padding:18px 0}.stage sand-table{width:min(700px,100%);height:350px}.readout{min-height:24px;font-size:13px}
+</style>
+</head>
+<body><main>
+<h1>📊 Data Table</h1>
+<p>Search, sort by a column, select rows and move through bounded pages.</p>
+<div class="stage"><sand-table id="table" page-size="4"></sand-table></div>
+<p id="readout" class="readout" aria-live="polite">Selection and sorting status appears here.</p>
+<p><a href="../">← All components</a> · <a href="https://github.com/Brajesh31/GrainMotion-UI/blob/main/table/README.md">Documentation</a></p>
+</main>
+<script src="table.js"></script>
+<script>
+const table=document.getElementById('table'),out=document.getElementById('readout');
+table.addEventListener('select',e=>out.textContent=e.detail.selected.length+' selected row(s): '+e.detail.selected.join(', '));
+table.addEventListener('sort',e=>out.textContent='Sorted by '+e.detail.key+' ('+e.detail.direction+').');
+</script>
+</body>
+</html>
