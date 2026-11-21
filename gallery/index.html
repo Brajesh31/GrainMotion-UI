@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GrainMotion-UI</title>
 <link rel="icon" href="data:,">
-<meta name="description" content="Nineteen tactile UI controls made from simulated sand, including selection, text, calendar and time inputs.">
+<meta name="description" content="Twenty-four tactile UI controls made from simulated sand, including selection, text, calendar and time inputs.">
 <meta property="og:title" content="GrainMotion-UI">
-<meta property="og:description" content="Nineteen tactile controls made from simulated sand, including selection, text, calendar and time controls.">
+<meta property="og:description" content="Twenty-four tactile controls made from simulated sand, including selection, text, calendar and time controls.">
 <meta property="og:image" content="title.svg">
 <style>
   /* The gallery: every control live on one page, with its install line and a prompt for a coding agent. */
@@ -36,6 +36,9 @@
   .stage > :is(sand-input,sand-textarea,sand-password,sand-search,sand-otp) { width: 100%; }
   .stage > :is(sand-select,sand-combobox,sand-date-picker,sand-date-range) { width: 100%; }
   .stage > sand-time-picker { width: min(280px, 100%); }
+  .stage > :is(sand-progress,sand-steps,sand-loader) { width: 100%; }
+  .stage > sand-progress-ring { width: min(220px, 100%); }
+  .stage > sand-timer { width: min(300px, 100%); }
   .stage > sand-checkbox { max-width: 190px; }
   .field { width: 100%; display: flex; justify-content: space-between; font-size: 14px; font-weight: 500; } .field output { color: var(--mute); font-variant-numeric: tabular-nums; }
   .mini { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
@@ -50,7 +53,7 @@
 <div class="wrap">
   <header>
     <h1>GrainMotion-UI</h1>
-    <p class="lede">Nineteen tactile controls made of sand that moves like sand. Rake it, push a stone through it, select, write, search, choose dates and times. Each component is a standalone file with no runtime dependencies.</p>
+    <p class="lede">Twenty-four tactile controls made of sand that moves like sand. Rake it, push a stone through it, select, write, search, choose dates and times. Each component is a standalone file with no runtime dependencies.</p>
     <p class="links">
       <button class="pill dark" type="button" id="snd">Sound on</button>
       <a class="pill" href="https://github.com/Brajesh31/GrainMotion-UI" target="_blank" rel="noopener">The repo on GitHub <span aria-hidden="true">&#8599;</span></a>
@@ -78,6 +81,11 @@
 <script src="../date-picker/date-picker.js"></script>
 <script src="../date-range/date-range.js"></script>
 <script src="../time-picker/time-picker.js"></script>
+<script src="../progress/progress.js"></script>
+<script src="../progress-ring/progress-ring.js"></script>
+<script src="../steps/steps.js"></script>
+<script src="../timer/timer.js"></script>
+<script src="../loader/loader.js"></script>
 <script>
 // The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
 const REPO = 'Brajesh31/GrainMotion-UI';
@@ -145,7 +153,22 @@ ITEMS.push(
     wire: (el, card) => { const o=card.querySelector('.readout'),show=()=>o.textContent=el.start&&el.end?el.start+' → '+el.end:'Choose both dates';el.addEventListener('date-range-change',show);show(); } },
   { id: 'time-picker', name: 'Time Picker', tag: 'sand-time-picker', sub: 'A circular sand dial marks the selected time.',
     html: '<sand-time-picker label="Appointment" value="16:30" format="12" min="09:00" max="18:00" step="900"></sand-time-picker><div class="readout"></div>',
-    wire: (el, card) => { const o=card.querySelector('.readout'),show=()=>o.textContent=el.value?el.readout.textContent:'Choose a time';el.addEventListener('input',show);show(); } }
+    wire: (el, card) => { const o=card.querySelector('.readout'),show=()=>o.textContent=el.value?el.readout.textContent:'Choose a time';el.addEventListener('input',show);show(); } },
+  { id: 'progress', name: 'Progress Bar', tag: 'sand-progress', sub: 'A rake leaves a growing trail in a sand channel.',
+    html: '<sand-progress value="42" label="Upload progress"></sand-progress><div class="readout">42%</div>',
+    wire: (el, card) => { const o=card.querySelector('.readout');el.value=42; } },
+  { id: 'progress-ring', name: 'Progress Ring', tag: 'sand-progress-ring', sub: 'A pebble follows a circular groove.',
+    html: '<sand-progress-ring value="68" label="Processing"></sand-progress-ring><div class="readout">68%</div>',
+    wire: (el, card) => { card.querySelector('.readout').textContent=el.getAttribute('value')+'%'; } },
+  { id: 'steps', name: 'Step Indicator', tag: 'sand-steps', sub: 'Stepping stones mark completed, current and upcoming steps.',
+    html: '<sand-steps steps="Account,Details,Review,Finish" value="1" label="Setup progress"></sand-steps><div class="readout">Current step: Details</div>',
+    wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('change',()=>o.textContent='Current step: '+el.labels[el.value]); } },
+  { id: 'timer', name: 'Hourglass Timer', tag: 'sand-timer', sub: 'Sand falls between two chambers to show remaining time.',
+    html: '<sand-timer duration="60" label="Countdown timer"></sand-timer><div class="readout">60 seconds</div>',
+    wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('timer-tick',e=>o.textContent=e.detail.remaining+' seconds');el.addEventListener('complete',()=>o.textContent='Complete'); } },
+  { id: 'loader', name: 'Loading Indicator', tag: 'sand-loader', sub: 'A miniature rake loops through a changing sand pattern.',
+    html: '<sand-loader label="Loading results"></sand-loader><div class="readout">Loading results</div>',
+    wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('aria-busy-change',()=>o.textContent=el.active?'Loading results':'Loading complete'); } }
 );
 
 // What each prompt says about wiring its control in. The rest of the prompt is the same for all of them.
@@ -177,6 +200,11 @@ const WIRE = {
   'date-picker': ['Use <sand-date-picker label="Start date" min="2026-01-01" max="2026-12-31"></sand-date-picker> for a calendar date.', 'Read or set el.value as YYYY-MM-DD. min/max are inclusive. Add comma-separated ISO dates to unavailable to reject individual days. Dates are not converted through local time.', 'A pebble marks the chosen day in an engraved calendar grid; the browser owns its native calendar UI.'],
   'date-range': ['Use <sand-date-range label="Stay dates" name="stay"></sand-date-range> for a start and end date.', 'Read or set el.start and el.end; el.value and the form value use YYYY-MM-DD/YYYY-MM-DD. The end may not precede the start. date-range-change emits start and end on committed changes.', 'Two river stones mark the inclusive date interval. The inner fields are native date inputs.'],
   'time-picker': ['Use <sand-time-picker label="Appointment" format="12" step="900"></sand-time-picker> for a timezone-free time of day.', 'Read or set el.value as HH:MM. format controls the explicit 12/24-hour readout; native popup presentation follows browser locale. min/max are times and step is seconds.', 'A stone hand follows the time around a small engraved clock dial. No local timezone conversion is performed.'],
+  progress: ['Use <sand-progress value="42" label="Upload progress"></sand-progress> for determinate progress, or add indeterminate when the total is unknown.', 'Set el.value as a number and min/max as bounds. The component exposes role=progressbar, aria-valuenow only when determinate, and aria-valuetext.', 'A bamboo rake advances through a long sand channel and pushes a small ridge ahead of its tines.'],
+  'progress-ring': ['Use <sand-progress-ring value="68" label="Processing"></sand-progress-ring> for circular progress.', 'Set el.value and min/max, or add indeterminate for a continuous loop. The current value is exposed through progressbar ARIA.', 'A river pebble travels around an engraved circular groove.'],
+  steps: ['Use <sand-steps steps="Account,Details,Review,Finish" value="1" label="Setup progress"></sand-steps> for a short workflow.', 'Read or set el.value as a zero-based active step index. Native buttons are keyboard accessible; add name for form submission.', 'Stepping stones distinguish completed, active and upcoming steps.'],
+  timer: ['Use <sand-timer duration="90" label="Break timer"></sand-timer> for a countdown with pause, resume, reset and cancel.', 'Call start(), pause(), reset() or cancel(); read remaining and listen for timer-tick and complete. The timer is not a precision alarm clock.', 'Sand falls through the hourglass waist and collects in the lower chamber.'],
+  loader: ['Use <sand-loader label="Loading results"></sand-loader> for indeterminate activity.', 'Set active=false when work completes; speed accepts 0.25 through 4. role=status and aria-busy reflect activity. Reduced motion holds the rake still.', 'A miniature rake repeats a short sand pattern, distinct from the AI Thinking control.'],
 };
 const SKILL = { url: new URL('../skills/grainmotion-ui/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };
 const fileUrl = (id) => new URL(`../${id}/${id}.js`, location.href).href;
