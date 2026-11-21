@@ -318,7 +318,7 @@
       "name": "select",
       "type": "registry:file",
       "title": "GrainMotion-UI Select / Dropdown",
-      "description": "A native select control with a floating river stone and a carved chevron. The browser retains its familiar option popup, keyboard navigation and form semantics. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-select>.",
+      "description": "A native select control with a floating river stone and a carved chevron. The browser retains its familiar option popup, keyboard navigation and form semantics. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-select>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "select",
@@ -365,7 +365,7 @@
       "name": "date-picker",
       "type": "registry:file",
       "title": "GrainMotion-UI Date Picker",
-      "description": "A native date input over an engraved sand calendar. The value remains an ISO YYYY-MM-DD date string, with min, max and unavailable-day validation that avoids local timezone conversions. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-date-picker>.",
+      "description": "A native date input over an engraved sand calendar. The value remains an ISO YYYY-MM-DD date string, with min, max and unavailable-day validation that avoids local timezone conversions. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-date-picker>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "date-picker",
@@ -388,7 +388,7 @@
       "name": "date-range",
       "type": "registry:file",
       "title": "GrainMotion-UI Date Range Picker",
-      "description": "Two native date fields represent an inclusive calendar range. The component validates order, required endpoints, min/max bounds and unavailable days; it serializes complete ranges as start/end ISO strings. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-date-range>.",
+      "description": "Two native date fields represent an inclusive calendar range. The component validates order, required endpoints, min/max bounds and unavailable days; it serializes complete ranges as start/end ISO strings. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-date-range>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "date-range",
@@ -412,7 +412,7 @@
       "name": "time-picker",
       "type": "registry:file",
       "title": "GrainMotion-UI Time Picker",
-      "description": "A native time input paired with a circular sand dial and deterministic 12/24-hour readout. Values remain timezone-free HH:MM strings; min, max and step use native time constraints. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-time-picker>.",
+      "description": "A native time input paired with a circular sand dial and deterministic 12/24-hour readout. Values remain timezone-free HH:MM strings; min, max and step use native time constraints. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-time-picker>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "time-picker",
