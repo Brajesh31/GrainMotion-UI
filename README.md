@@ -4,7 +4,7 @@
 
 ### Interfaces shaped by sand, motion, and interaction.
 
-A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray. Phase 6 adds six media and file controls with real file selection, media timelines, framed images and mineral pigment choices. Phase 7 adds five advanced list and layout controls: sorting, item transfer, split panes, resizable panels and nested tree navigation. Phase 8 adds five feedback and overlay controls: tooltips, toasts, persistent alerts, native modal dialogs and edge drawers. Phase 9 is integrating five productivity controls: command palette, context menu, filter builder, data table and Kanban board.
+A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray. Phase 6 adds six media and file controls with real file selection, media timelines, framed images and mineral pigment choices. Phase 7 adds five advanced list and layout controls: sorting, item transfer, split panes, resizable panels and nested tree navigation. Phase 8 adds five feedback and overlay controls: tooltips, toasts, persistent alerts, native modal dialogs and edge drawers. Phase 9 adds five productivity controls: command palette, context menu, filter builder, data table and Kanban board.
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
@@ -15,7 +15,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml/badge.svg" alt="Component validation"></a>
   <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
   <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
-  <img src="https://img.shields.io/badge/Components-45%20verified%20%2B%205%20in%20progress-C49A6C" alt="45 verified components, five in progress">
+  <img src="https://img.shields.io/badge/Components-50%20verified-C49A6C" alt="Fifty CI-verified components">
 </p>
 
 </div>
@@ -24,7 +24,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI currently ships 45 CI-verified standalone custom elements across the original set and Phases 1–8. Phase 9 adds five more components on main, but they remain in progress until bundle, documentation, browser and Pages checks pass. The components simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI ships 50 CI-verified standalone custom elements across the original set and Phases 1–9. All five Phase 9 controls pass the bundle, documentation, mobile Chromium and Pages deployment gates. The components simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -93,9 +93,9 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 | **Sand Drawer / Sheet** | A wood-framed sheet enters from one of the four viewport edges. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/drawer/) · [Documentation](drawer/README.md) |
 
 
-### Phase 9 · Productivity and composite controls (in progress)
+### Phase 9 · Productivity and composite controls (CI-verified)
 
-The five new controls are implemented with standalone source, demos, docs and concept artwork. They are awaiting the full 50-component validation and release gates.
+The five controls are integrated with standalone source, demos, technical guides, concept artwork and registry entries. All Phase 9 release gates now pass: 50-component mobile Chromium validation completed 239 checks with zero failures, and GitHub Pages deployed successfully. Manual cross-browser, physical-device and screen-reader checks remain outstanding.
 
 | Component | Physical interaction | Demo and documentation |
 |---|---|---|
