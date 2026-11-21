@@ -1,6 +1,6 @@
 # Phase 6: Media, File and Visual Components
 
-> Status: implementation in progress on `main`. The requirements below define behavior and release gates. A roadmap entry is not considered complete until the full CI workflow passes.
+> Status: **Implemented and CI-verified on `main`**. All six components have standalone bundles, working demos, component guides, concept artwork, gallery/registry entries and Phase 6 browser coverage. The final 35-component mobile Chromium workflow passed **153 assertions with zero failures**; standalone bundle synchronization and generated documentation/registry checks also passed. GitHub Pages deployment succeeded for the same source commit. Manual screen-reader, physical-device and broader cross-browser checks remain outstanding.
 
 ## Design direction
 
@@ -86,3 +86,32 @@ Keep the same physical language used by the original controls: simulated sand he
 5. The original 29 components continue to pass all regression checks.
 6. GitHub Actions build synchronization, docs generation and 35-component browser suite pass on the final `main` commit.
 7. Manual screen-reader, physical-device and broader cross-browser checks are recorded separately; a headless Chromium pass does not prove them.
+
+
+## ✅ Phase 6 release verification
+
+**Final source commit:** [a4a6083](https://github.com/Brajesh31/GrainMotion-UI/commit/a4a60834c7dad7330d06bcc8ebcccf4b9cf4989a)  
+**Component validation:** [GitHub Actions run #44866762931](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44866762931)  
+**Pages deployment:** [GitHub Actions run #44866762935](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44866762935)
+
+| Release gate | Recorded result |
+|---|---|
+| Standalone bundle synchronization | Passed |
+| Generated documentation and registry | Passed |
+| 35-component mobile Chromium suite | 153 assertions passed, 0 failures |
+| Runtime script-error check | Passed |
+| 390px mobile horizontal-overflow check | Passed |
+| GitHub Pages deployment | Succeeded |
+
+### Delivered behavior and ownership boundaries
+
+- **File Dropzone:** real native file picker and drag/drop, MIME/extension and size validation, disabled and clear states, readable rejection events. It does not upload files.
+- **Upload Queue:** independent file IDs and host-fed progress, queued/uploading/complete/error/cancelled states, cancel/retry/remove/clear events. The host application owns HTTP transport, authentication and storage.
+- **Image Carousel:** supplied real image URLs with alt/caption content, previous/next and indexed navigation, keyboard and touch swipe behavior, safe source filtering.
+- **Lightbox Gallery:** actual image thumbnails and a native modal `dialog`, previous/next navigation, Escape/close handling and focus restoration.
+- **Media Scrubber:** binds to a real `HTMLMediaElement`, follows duration/currentTime/buffered ranges, delegates play/pause and supports keyboard/touch seeking. It does not load media itself.
+- **Color Picker:** native browser color chooser, mineral preset swatches, hex/RGB/HSL values and form-associated value support.
+
+### Verification still outstanding
+
+The automated pass is headless mobile Chromium, not proof of universal accessibility or device support. Manual screen-reader testing, physical touch-device testing and visual checks in additional browser engines remain release follow-ups. Existing project-wide WebGL2, light-page and reduced-motion limitations are not resolved by Phase 6.

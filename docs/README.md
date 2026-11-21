@@ -2,7 +2,7 @@
 
 This directory is the project handbook. It documents the current implementation, the planned 50-component catalogue, design rules, architecture, accessibility expectations, performance constraints, testing, contribution workflow and component authoring process.
 
-> **Status:** The repository now contains thirty-five implemented components across the original set and Phases 1 through 6. The remaining 15 entries in the 50-component roadmap are proposals, not available components yet.
+> **Status:** The repository now contains thirty-five implemented components across the original set and Phases 1 through 6. Phase 6 is CI-verified on `main` with 153 passing mobile Chromium assertions and zero failures. The remaining 15 entries in the 50-component roadmap (Phases 7–9) are proposals, not available components yet.
 
 ## Documentation map
 
