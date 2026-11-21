@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GrainMotion-UI</title>
 <link rel="icon" href="data:,">
-<meta name="description" content="Twenty-nine tactile UI controls made from simulated sand, including selection, text, calendar and time inputs.">
+<meta name="description" content="Forty tactile UI controls made from simulated sand, including selection, text, calendar, media and advanced layout controls.">
 <meta property="og:title" content="GrainMotion-UI">
 <meta property="og:description" content="Thirty-five tactile controls made from simulated sand, including selection, text, calendar and time controls.">
 <meta property="og:image" content="title.svg">
@@ -37,7 +37,7 @@
   .stage > :is(sand-select,sand-combobox,sand-date-picker,sand-date-range) { width: 100%; }
   .stage > sand-time-picker { width: min(280px, 100%); }
   .stage > :is(sand-tabs,sand-accordion,sand-pagination,sand-breadcrumbs,sand-menu) { width: 100%; }
-  .stage > :is(sand-dropzone,sand-upload-queue,sand-carousel,sand-lightbox,sand-scrubber,sand-color-picker) { width: 100%; }
+  .stage > :is(sand-dropzone,sand-upload-queue,sand-carousel,sand-lightbox,sand-scrubber,sand-color-picker,sand-sortable,sand-transfer-list,sand-split-pane,sand-resizable,sand-tree) { width: 100%; }
   .stage > :is(sand-progress,sand-steps,sand-loader) { width: 100%; }
   .stage > sand-progress-ring { width: min(220px, 100%); }
   .stage > sand-timer { width: min(300px, 100%); }
@@ -55,7 +55,7 @@
 <div class="wrap">
   <header>
     <h1>GrainMotion-UI</h1>
-    <p class="lede">Thirty-five tactile controls made of sand that moves like sand. Rake it, push a stone through it, select, write, track progress, step through a workflow and watch an hourglass. Each component is a standalone file with no runtime dependencies.</p>
+    <p class="lede">Forty tactile controls made of sand that moves like sand. Rake it, push a stone through it, select, write, track progress, step through a workflow and watch an hourglass. Each component is a standalone file with no runtime dependencies.</p>
     <p class="links">
       <button class="pill dark" type="button" id="snd">Sound on</button>
       <a class="pill" href="https://github.com/Brajesh31/GrainMotion-UI" target="_blank" rel="noopener">The repo on GitHub <span aria-hidden="true">&#8599;</span></a>
@@ -99,6 +99,11 @@
 <script src="../lightbox/lightbox.js"></script>
 <script src="../scrubber/scrubber.js"></script>
 <script src="../color-picker/color-picker.js"></script>
+<script src="../sortable/sortable.js"></script>
+<script src="../transfer-list/transfer-list.js"></script>
+<script src="../split-pane/split-pane.js"></script>
+<script src="../resizable/resizable.js"></script>
+<script src="../tree/tree.js"></script>
 <script>
 // The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
 const REPO = 'Brajesh31/GrainMotion-UI';
@@ -225,6 +230,14 @@ ITEMS.push(
     wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('input',e=>o.textContent=e.detail.hex); } }
 );
 
+
+ITEMS.push(
+ {id:'sortable',name:'Sortable List',tag:'sand-sortable',sub:'Stone tiles reorder inside carved grooves.',html:'<sand-sortable id="el" label="Sprint tasks"></sand-sortable><p class="readout" id="out">Move a task with its handle or keyboard.</p>',wire:(el,card)=>{el.items=[{id:'plan',label:'Plan the release'},{id:'design',label:'Review the design'},{id:'build',label:'Build the feature'},{id:'ship',label:'Ship the update'}];const o=card.querySelector('.readout');el.addEventListener('reorder',e=>o.textContent='New order: '+e.detail.order.join(' → '));}},
+ {id:'transfer-list',name:'Transfer List',tag:'sand-transfer-list',sub:'Selected stones move between two sand compartments.',html:'<sand-transfer-list id="el" label="Included project assets"></sand-transfer-list><p class="readout" id="out">Select assets and transfer them between trays.</p>',wire:(el,card)=>{el.items=[{id:'logo',label:'Brand logo',side:'left'},{id:'fonts',label:'Font files',side:'left'},{id:'tokens',label:'Design tokens',side:'left'},{id:'copy',label:'Product copy',side:'right'}];const o=card.querySelector('.readout');el.addEventListener('transfer',e=>o.textContent=e.detail.ids.length+' item(s) moved '+e.detail.target);}},
+ {id:'split-pane',name:'Split Pane',tag:'sand-split-pane',sub:'A stone divider adjusts the balance of two work surfaces.',html:'<sand-split-pane id="el" value="58" axis="horizontal" label="Design workspace"><section slot="start"><h3>Canvas</h3><p>Primary workspace and live preview.</p></section><aside slot="end"><h3>Inspector</h3><p>Selected layer properties.</p></aside></sand-split-pane><p class="readout" id="out">First pane: 58%</p>',wire:(el,card)=>{const o=card.querySelector('.readout');el.addEventListener('input',e=>o.textContent='First pane: '+Math.round(e.detail.value)+'%');}},
+ {id:'resizable',name:'Resizable Panels',tag:'sand-resizable',sub:'Walnut partitions resize several sand-backed panels.',html:'<sand-resizable id="el" label="Project dashboard"></sand-resizable><p class="readout" id="out">Drag a partition or focus it and press Left/Right.</p>',wire:(el,card)=>{el.panels=[{id:'summary',label:'Summary',content:'Milestones and project health.',min:20,max:58},{id:'activity',label:'Activity',content:'Recent changes and team updates.',min:20,max:60},{id:'inspector',label:'Inspector',content:'Selected task properties.',min:18,max:58}];const o=card.querySelector('.readout');el.addEventListener('change',e=>o.textContent='Panel sizes: '+e.detail.sizes.map(x=>Math.round(x)+'%').join(' / '));}},
+ {id:'tree',name:'Tree View',tag:'sand-tree',sub:'Branching paths are etched into sand and marked with stones.',html:'<sand-tree id="el" label="Project files"></sand-tree><p class="readout" id="out">Select a node or expand a branch.</p>',wire:(el,card)=>{el.items=[{id:'app',label:'app',children:[{id:'components',label:'components',children:[{id:'controls',label:'controls'},{id:'layout',label:'layout'}]},{id:'styles',label:'styles'}]},{id:'public',label:'public',children:[{id:'images',label:'images'}]},{id:'readme',label:'README.md'}];el.expanded=['app','components'];const o=card.querySelector('.readout');el.addEventListener('select',e=>o.textContent='Selected: '+e.detail.value);}}
+);
 // What each prompt says about wiring its control in. The rest of the prompt is the same for all of them.
 
 const WIRE = {
@@ -272,6 +285,13 @@ const WIRE = {
   lightbox: ['Use <sand-lightbox></sand-lightbox> and assign an array of {src, alt, caption} objects.', 'Call openAt(index, opener) or close(), and listen for open, change and close. The expanded viewer is a native dialog with Escape handling and focus restoration.', 'Thumbnail plates open into a full-screen framed image viewer.'],
   scrubber: ['Use <sand-scrubber></sand-scrubber> beside an existing <video> or <audio> element, then assign el.media = mediaElement.', 'The scrubber reads duration, currentTime and buffered ranges, delegates play/pause, and sets currentTime during seeking. Listen for seek and seeked.', 'A stone playhead follows the media position while a lighter ridge represents buffered media.'],
   'color-picker': ['Use <sand-color-picker name="accent" value="#c28b55" format="hex"></sand-color-picker>.', 'Read or set el.value. The format attribute selects hex, rgb or hsl readout; input and change expose detail.value and detail.hex. With name, the normalized color is submitted in a form.', 'The native browser color chooser and named mineral swatches share the same selected pigment.'],
+,
+
+ sortable:['Use <sand-sortable></sand-sortable> with items as {id,label,disabled}.','Read ordered IDs from value, call move(fromIndex,toIndex), or listen for reorder. Dragging, keyboard arrows/Home/End and visible move buttons are supported.','Stone tiles settle into new carved grooves.'],
+ 'transfer-list':['Use <sand-transfer-list></sand-transfer-list> with items containing id,label and side.','Set selected, call move(ids,target), moveSelected(target) or moveAll(target), and listen for transfer/change.','Stones move between two recessed compartments.'],
+ 'split-pane':['Use <sand-split-pane axis="horizontal" value="58"></sand-split-pane> with slotted start and end content.','Read/set value as the first pane percentage. Configure axis, min-size, max-size and disabled. Pointer and keyboard resizing are supported.','A stone divider shifts between two work surfaces.'],
+ resizable:['Use <sand-resizable></sand-resizable> with two to four panel descriptors.','Read/set sizes as percentages and call resizeBoundary(index,delta). Adjacent panels share each change; separators support pointer and keyboard input.','Walnut partitions resize independent panels.'],
+ tree:['Use <sand-tree></sand-tree> with nested items containing id,label and children.','Read/set value and expanded; call select(id) or toggle(id). Arrow keys navigate visible nodes and expand/collapse branches.','A stone marker follows the selected branch.'],
 
 };
 const SKILL = { url: new URL('../skills/grainmotion-ui/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };

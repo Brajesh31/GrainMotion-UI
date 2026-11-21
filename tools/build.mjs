@@ -46,6 +46,11 @@ export const SOUNDS = {
   lightbox: one('stone', 'tap'),
   scrubber: one('tap', 'settle'),
   'color-picker': one('stone', 'tap'),
+  sortable: one('stone', 'tap'),
+  'transfer-list': one('stone', 'tap'),
+  'split-pane': one('stone', 'tap'),
+  resizable: one('stone', 'tap'),
+  tree: one('stone', 'tap'),
 };
 // Images a control carries, as constants.
 export const ART = { thinking: { ROCK: 'rock.webp' } };
