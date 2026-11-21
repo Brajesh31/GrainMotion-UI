@@ -1585,7 +1585,7 @@ export const SPEC = [
     "The loader is intentionally indeterminate; it does not accept a percentage."
   ],
   "manualDocs": true
-}
+},
 {
   "id":"tabs","name":"Tabs","tag":"sand-tabs",
   "categories":["navigation","tabs","sand","animation"],
