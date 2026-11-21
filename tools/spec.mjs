@@ -3,7 +3,7 @@
 export const REPO = 'Brajesh31/GrainMotion-UI';
 export const SITE = 'https://brajesh31.github.io/GrainMotion-UI';
 export const AUTHOR = 'Brajesh Kumar <https://github.com/Brajesh31>';
-export const COUNT = 'thirty-five';
+export const COUNT = 'forty';
 
 // Limits every control shares; each README ends with its own, then these.
 export const COMMON_LIMITS = [
@@ -789,1290 +789,1946 @@ export const SPEC = [
     "docs": "Use <sand-otp name=\"verificationCode\" label=\"Verification code\" length=\"6\" autocomplete=\"one-time-code\" required></sand-otp>. Length is clamped from four to ten. The complete event exposes detail.length only, never the entered digits.",
     "manualDocs": true
   },
-{
-  "id": "select",
-  "name": "Select / Dropdown",
-  "tag": "sand-select",
-  "categories": [
-    "select",
-    "dropdown",
-    "selection",
-    "form",
-    "sand",
-    "animation"
-  ],
-  "sub": "A river stone settles in the well of the chosen option.",
-  "desc": "A native select control with a floating river stone and a carved chevron. The browser retains its familiar option popup, keyboard navigation and form semantics.",
-  "docs": "Use <sand-select name=\"delivery\" label=\"Delivery speed\" options=\"Standard,Express,Overnight\" placeholder=\"Choose delivery\"></sand-select>. Options are comma-separated; use value:Label for distinct submitted values and visible labels. Read or set el.value.",
-  "intro": [
-    "A small river stone settles into a carved well for the chosen option. The browser-native select remains responsible for its popup, keyboard navigation and selection semantics; the sand layer adds a physical marker and a pressed chevron."
-  ],
-  "use": "<script src=\"select.js\"></script>\n<sand-select name=\"delivery\" label=\"Delivery speed\" options=\"standard:Standard,express:Express,overnight:Overnight\" placeholder=\"Choose delivery\" required></sand-select>",
-  "js": "const select = document.querySelector('sand-select');\nselect.addEventListener('change', () => saveDelivery(select.value));\nselect.value = 'express';",
-  "attrs": [
-    [
-      "options",
-      "Comma-separated options; `value:Label` defines a distinct form value and display label",
-      "empty"
+  {
+    "id": "select",
+    "name": "Select / Dropdown",
+    "tag": "sand-select",
+    "categories": [
+      "select",
+      "dropdown",
+      "selection",
+      "form",
+      "sand",
+      "animation"
     ],
-    [
-      "value",
-      "Initially selected option value",
-      "empty"
+    "sub": "A river stone settles in the well of the chosen option.",
+    "desc": "A native select control with a floating river stone and a carved chevron. The browser retains its familiar option popup, keyboard navigation and form semantics.",
+    "docs": "Use <sand-select name=\"delivery\" label=\"Delivery speed\" options=\"Standard,Express,Overnight\" placeholder=\"Choose delivery\"></sand-select>. Options are comma-separated; use value:Label for distinct submitted values and visible labels. Read or set el.value.",
+    "intro": [
+      "A small river stone settles into a carved well for the chosen option. The browser-native select remains responsible for its popup, keyboard navigation and selection semantics; the sand layer adds a physical marker and a pressed chevron."
     ],
-    [
-      "label",
-      "Accessible name for the native select",
-      "Select a value"
+    "use": "<script src=\"select.js\"></script>\n<sand-select name=\"delivery\" label=\"Delivery speed\" options=\"standard:Standard,express:Express,overnight:Overnight\" placeholder=\"Choose delivery\" required></sand-select>",
+    "js": "const select = document.querySelector('sand-select');\nselect.addEventListener('change', () => saveDelivery(select.value));\nselect.value = 'express';",
+    "attrs": [
+      [
+        "options",
+        "Comma-separated options; `value:Label` defines a distinct form value and display label",
+        "empty"
+      ],
+      [
+        "value",
+        "Initially selected option value",
+        "empty"
+      ],
+      [
+        "label",
+        "Accessible name for the native select",
+        "Select a value"
+      ],
+      [
+        "placeholder",
+        "First empty option label",
+        "Choose an option"
+      ],
+      [
+        "name",
+        "Form submission name",
+        "empty"
+      ],
+      [
+        "required",
+        "Require a non-empty selection",
+        "absent"
+      ],
+      [
+        "disabled",
+        "Disable selection and form participation",
+        "absent"
+      ],
+      [
+        "lang",
+        "Locale hint for browser popup",
+        "document language"
+      ]
     ],
-    [
-      "placeholder",
-      "First empty option label",
-      "Choose an option"
+    "notes": [
+      "**Native select:** the inner control is a real `<select>`. The browser owns the option popup, arrow-key behavior, touch selection and option semantics.",
+      "**Option syntax:** `options=\"standard:Standard,express:Express\"` submits `standard` and displays `Standard`. Without a colon, the same text is used for both value and label.",
+      "**Form value:** the selected option value is submitted as a string; the empty placeholder submits an empty value."
     ],
-    [
-      "name",
-      "Form submission name",
-      "empty"
+    "happens": [
+      [
+        "open the control",
+        "the browser displays its native option picker"
+      ],
+      [
+        "choose an option",
+        "the select value changes and the sand stone settles at the selected position"
+      ],
+      [
+        "change the options attribute",
+        "the native option list is rebuilt while preserving the selected value when it still exists"
+      ]
     ],
-    [
-      "required",
-      "Require a non-empty selection",
-      "absent"
+    "limits": [
+      "The option popup is rendered by the browser/operating system and cannot be styled like a custom HTML menu.",
+      "The physical stone represents the current selection; it does not replace the native select popup."
     ],
-    [
-      "disabled",
-      "Disable selection and form participation",
-      "absent"
-    ],
-    [
-      "lang",
-      "Locale hint for browser popup",
-      "document language"
-    ]
-  ],
-  "notes": [
-    "**Native select:** the inner control is a real `<select>`. The browser owns the option popup, arrow-key behavior, touch selection and option semantics.",
-    "**Option syntax:** `options=\"standard:Standard,express:Express\"` submits `standard` and displays `Standard`. Without a colon, the same text is used for both value and label.",
-    "**Form value:** the selected option value is submitted as a string; the empty placeholder submits an empty value."
-  ],
-  "happens": [
-    [
-      "open the control",
-      "the browser displays its native option picker"
-    ],
-    [
-      "choose an option",
-      "the select value changes and the sand stone settles at the selected position"
-    ],
-    [
-      "change the options attribute",
-      "the native option list is rebuilt while preserving the selected value when it still exists"
-    ]
-  ],
-  "limits": [
-    "The option popup is rendered by the browser/operating system and cannot be styled like a custom HTML menu.",
-    "The physical stone represents the current selection; it does not replace the native select popup."
-  ],
-  "manualDocs": true
-},
-{
-  "id": "combobox",
-  "name": "Combobox / Autocomplete",
-  "tag": "sand-combobox",
-  "categories": [
-    "combobox",
-    "autocomplete",
-    "search",
-    "input",
-    "form",
-    "sand",
-    "animation"
-  ],
-  "sub": "A bamboo rake follows the typed query as native suggestions appear.",
-  "desc": "A native text input connected to a datalist for browser-managed suggestions. It permits free text, keyboard entry and paste while a small rake follows the query.",
-  "docs": "Use <sand-combobox name=\"city\" label=\"City\" options=\"DEL:Delhi,BLR:Bengaluru,HYD:Hyderabad\" placeholder=\"Start typing\"></sand-combobox>. The browser provides the datalist suggestion UI. Read or set el.value; free text is allowed.",
-  "intro": [
-    "A thin bamboo rake follows the characters as the user types. Suggestions come from a real browser `<datalist>` connected to a native text input, so free text, paste and keyboard editing remain available."
-  ],
-  "use": "<script src=\"combobox.js\"></script>\n<sand-combobox name=\"city\" label=\"City\" options=\"DEL:Delhi,BLR:Bengaluru,HYD:Hyderabad\" placeholder=\"Start typing\"></sand-combobox>",
-  "js": "const city = document.querySelector('sand-combobox');\ncity.addEventListener('option-selected', event => useCity(event.detail.value));\ncity.addEventListener('input', () => preview(city.value));",
-  "attrs": [
-    [
-      "options",
-      "Comma-separated suggestions; `value:Label` separates values from labels",
-      "empty"
-    ],
-    [
-      "value",
-      "Initial text value",
-      "empty"
-    ],
-    [
-      "label",
-      "Accessible name for the native text input",
-      "Search options"
-    ],
-    [
-      "placeholder",
-      "Native input placeholder",
-      "empty"
-    ],
-    [
-      "name",
-      "Form submission name",
-      "empty"
-    ],
-    [
-      "disabled",
-      "Disable editing and form participation",
-      "absent"
-    ],
-    [
-      "required",
-      "Require a non-empty value",
-      "absent"
-    ],
-    [
+    "manualDocs": true
+  },
+  {
+    "id": "combobox",
+    "name": "Combobox / Autocomplete",
+    "tag": "sand-combobox",
+    "categories": [
+      "combobox",
       "autocomplete",
-      "Browser autocomplete hint",
-      "off"
-    ]
-  ],
-  "notes": [
-    "**Native datalist:** the component uses an actual text input and an associated `<datalist>`. Suggestion display varies by browser and operating system.",
-    "**Free text:** users are not restricted to the provided options. This is an autocomplete input, not a strict select.",
-    "**Option event:** when the changed value exactly matches a suggestion, the component emits `option-selected` with `{ value, label }`."
-  ],
-  "happens": [
-    [
-      "type a query",
-      "the browser offers matching datalist suggestions where supported; the rake follows the input length"
+      "search",
+      "input",
+      "form",
+      "sand",
+      "animation"
     ],
-    [
-      "choose a suggestion",
-      "the native input receives its value and a matching change emits option-selected"
+    "sub": "A bamboo rake follows the typed query as native suggestions appear.",
+    "desc": "A native text input connected to a datalist for browser-managed suggestions. It permits free text, keyboard entry and paste while a small rake follows the query.",
+    "docs": "Use <sand-combobox name=\"city\" label=\"City\" options=\"DEL:Delhi,BLR:Bengaluru,HYD:Hyderabad\" placeholder=\"Start typing\"></sand-combobox>. The browser provides the datalist suggestion UI. Read or set el.value; free text is allowed.",
+    "intro": [
+      "A thin bamboo rake follows the characters as the user types. Suggestions come from a real browser `<datalist>` connected to a native text input, so free text, paste and keyboard editing remain available."
     ],
-    [
-      "enter an unlisted value",
-      "the value remains valid free text unless the integrating application applies its own validation"
-    ]
-  ],
-  "limits": [
-    "The suggestion popup is native browser UI and is not fully styleable.",
-    "Datalist filtering and announcement details differ across browsers; manual screen-reader verification is required.",
-    "Suggestions are comma-separated in the options attribute. For complex or dynamic data, set the `options` attribute from application code."
-  ],
-  "manualDocs": true
-},
-{
-  "id": "date-picker",
-  "name": "Date Picker",
-  "tag": "sand-date-picker",
-  "categories": [
-    "date-picker",
-    "calendar",
-    "date",
-    "form",
-    "sand",
-    "animation"
-  ],
-  "sub": "An engraved calendar grid holds a pebble on the selected day.",
-  "desc": "A native date input over an engraved sand calendar. The value remains an ISO YYYY-MM-DD date string, with min, max and unavailable-day validation that avoids local timezone conversions.",
-  "docs": "Use <sand-date-picker name=\"startDate\" label=\"Start date\" min=\"2026-01-01\" max=\"2026-12-31\" unavailable=\"2026-12-25\"></sand-date-picker>. The value uses YYYY-MM-DD and is not converted through the local timezone. The native date picker handles calendar keyboard interaction.",
-  "intro": [
-    "An engraved calendar grid is cut into the sand, with a small pebble marking the selected day. The actual calendar popup and keyboard behavior are provided by a native `<input type=\"date\">`; the component stores the browser's ISO `YYYY-MM-DD` value without converting it into a local-time timestamp."
-  ],
-  "use": "<script src=\"date-picker.js\"></script>\n<sand-date-picker name=\"startDate\" label=\"Start date\" min=\"2026-01-01\" max=\"2026-12-31\" unavailable=\"2026-12-25\" required></sand-date-picker>",
-  "js": "const date = document.querySelector('sand-date-picker');\ndate.addEventListener('change', () => saveDate(date.value));\ndate.value = '2026-11-21';",
-  "attrs": [
-    [
-      "value",
-      "Initial ISO calendar date (`YYYY-MM-DD`)",
-      "empty"
+    "use": "<script src=\"combobox.js\"></script>\n<sand-combobox name=\"city\" label=\"City\" options=\"DEL:Delhi,BLR:Bengaluru,HYD:Hyderabad\" placeholder=\"Start typing\"></sand-combobox>",
+    "js": "const city = document.querySelector('sand-combobox');\ncity.addEventListener('option-selected', event => useCity(event.detail.value));\ncity.addEventListener('input', () => preview(city.value));",
+    "attrs": [
+      [
+        "options",
+        "Comma-separated suggestions; `value:Label` separates values from labels",
+        "empty"
+      ],
+      [
+        "value",
+        "Initial text value",
+        "empty"
+      ],
+      [
+        "label",
+        "Accessible name for the native text input",
+        "Search options"
+      ],
+      [
+        "placeholder",
+        "Native input placeholder",
+        "empty"
+      ],
+      [
+        "name",
+        "Form submission name",
+        "empty"
+      ],
+      [
+        "disabled",
+        "Disable editing and form participation",
+        "absent"
+      ],
+      [
+        "required",
+        "Require a non-empty value",
+        "absent"
+      ],
+      [
+        "autocomplete",
+        "Browser autocomplete hint",
+        "off"
+      ]
     ],
-    [
-      "label",
-      "Accessible name",
-      "Choose a date"
+    "notes": [
+      "**Native datalist:** the component uses an actual text input and an associated `<datalist>`. Suggestion display varies by browser and operating system.",
+      "**Free text:** users are not restricted to the provided options. This is an autocomplete input, not a strict select.",
+      "**Option event:** when the changed value exactly matches a suggestion, the component emits `option-selected` with `{ value, label }`."
     ],
-    [
-      "name",
-      "Form submission name",
-      "empty"
+    "happens": [
+      [
+        "type a query",
+        "the browser offers matching datalist suggestions where supported; the rake follows the input length"
+      ],
+      [
+        "choose a suggestion",
+        "the native input receives its value and a matching change emits option-selected"
+      ],
+      [
+        "enter an unlisted value",
+        "the value remains valid free text unless the integrating application applies its own validation"
+      ]
     ],
-    [
-      "min / max",
-      "Inclusive ISO date bounds",
-      "unset"
+    "limits": [
+      "The suggestion popup is native browser UI and is not fully styleable.",
+      "Datalist filtering and announcement details differ across browsers; manual screen-reader verification is required.",
+      "Suggestions are comma-separated in the options attribute. For complex or dynamic data, set the `options` attribute from application code."
     ],
-    [
-      "unavailable",
-      "Comma-separated ISO dates that fail validation",
-      "empty"
+    "manualDocs": true
+  },
+  {
+    "id": "date-picker",
+    "name": "Date Picker",
+    "tag": "sand-date-picker",
+    "categories": [
+      "date-picker",
+      "calendar",
+      "date",
+      "form",
+      "sand",
+      "animation"
     ],
-    [
-      "required",
-      "Require a selected date",
-      "absent"
+    "sub": "An engraved calendar grid holds a pebble on the selected day.",
+    "desc": "A native date input over an engraved sand calendar. The value remains an ISO YYYY-MM-DD date string, with min, max and unavailable-day validation that avoids local timezone conversions.",
+    "docs": "Use <sand-date-picker name=\"startDate\" label=\"Start date\" min=\"2026-01-01\" max=\"2026-12-31\" unavailable=\"2026-12-25\"></sand-date-picker>. The value uses YYYY-MM-DD and is not converted through the local timezone. The native date picker handles calendar keyboard interaction.",
+    "intro": [
+      "An engraved calendar grid is cut into the sand, with a small pebble marking the selected day. The actual calendar popup and keyboard behavior are provided by a native `<input type=\"date\">`; the component stores the browser's ISO `YYYY-MM-DD` value without converting it into a local-time timestamp."
     ],
-    [
-      "disabled",
-      "Disable selection and form participation",
-      "absent"
+    "use": "<script src=\"date-picker.js\"></script>\n<sand-date-picker name=\"startDate\" label=\"Start date\" min=\"2026-01-01\" max=\"2026-12-31\" unavailable=\"2026-12-25\" required></sand-date-picker>",
+    "js": "const date = document.querySelector('sand-date-picker');\ndate.addEventListener('change', () => saveDate(date.value));\ndate.value = '2026-11-21';",
+    "attrs": [
+      [
+        "value",
+        "Initial ISO calendar date (`YYYY-MM-DD`)",
+        "empty"
+      ],
+      [
+        "label",
+        "Accessible name",
+        "Choose a date"
+      ],
+      [
+        "name",
+        "Form submission name",
+        "empty"
+      ],
+      [
+        "min / max",
+        "Inclusive ISO date bounds",
+        "unset"
+      ],
+      [
+        "unavailable",
+        "Comma-separated ISO dates that fail validation",
+        "empty"
+      ],
+      [
+        "required",
+        "Require a selected date",
+        "absent"
+      ],
+      [
+        "disabled",
+        "Disable selection and form participation",
+        "absent"
+      ],
+      [
+        "lang",
+        "Locale hint for native calendar UI",
+        "document language"
+      ]
     ],
-    [
-      "lang",
-      "Locale hint for native calendar UI",
-      "document language"
-    ]
-  ],
-  "notes": [
-    "**Native date input:** the browser provides its platform calendar UI, keyboard support and date formatting.",
-    "**Stable date value:** `value` is the native ISO `YYYY-MM-DD` string. The component does not parse the date through local time, so it does not shift at timezone boundaries.",
-    "**Unavailable dates:** put exact ISO dates in the comma-separated `unavailable` attribute. A selected unavailable date receives a custom validity message; min and max are enforced by the native input."
-  ],
-  "happens": [
-    [
-      "open the date field",
-      "the browser opens its native date picker"
+    "notes": [
+      "**Native date input:** the browser provides its platform calendar UI, keyboard support and date formatting.",
+      "**Stable date value:** `value` is the native ISO `YYYY-MM-DD` string. The component does not parse the date through local time, so it does not shift at timezone boundaries.",
+      "**Unavailable dates:** put exact ISO dates in the comma-separated `unavailable` attribute. A selected unavailable date receives a custom validity message; min and max are enforced by the native input."
     ],
-    [
-      "choose a date",
-      "the ISO date value updates and the pebble marks its day position"
+    "happens": [
+      [
+        "open the date field",
+        "the browser opens its native date picker"
+      ],
+      [
+        "choose a date",
+        "the ISO date value updates and the pebble marks its day position"
+      ],
+      [
+        "choose an unavailable date",
+        "the field becomes invalid with an explanatory validation message"
+      ],
+      [
+        "set min or max",
+        "the browser prevents dates outside the inclusive range"
+      ]
     ],
-    [
-      "choose an unavailable date",
-      "the field becomes invalid with an explanatory validation message"
+    "limits": [
+      "Individual unavailable days are validated after selection; the native browser calendar popup is not modified to gray out those days.",
+      "Calendar appearance and keyboard behavior are controlled by the browser/operating system and vary by platform.",
+      "The value is a calendar date, not a timestamp or timezone-aware instant."
     ],
-    [
-      "set min or max",
-      "the browser prevents dates outside the inclusive range"
-    ]
-  ],
-  "limits": [
-    "Individual unavailable days are validated after selection; the native browser calendar popup is not modified to gray out those days.",
-    "Calendar appearance and keyboard behavior are controlled by the browser/operating system and vary by platform.",
-    "The value is a calendar date, not a timestamp or timezone-aware instant."
-  ],
-  "manualDocs": true
-},
-{
-  "id": "date-range",
-  "name": "Date Range Picker",
-  "tag": "sand-date-range",
-  "categories": [
-    "date-range",
-    "calendar",
-    "date",
-    "range",
-    "form",
-    "sand",
-    "animation"
-  ],
-  "sub": "Two river stones mark the start and end of a date interval.",
-  "desc": "Two native date fields represent an inclusive calendar range. The component validates order, required endpoints, min/max bounds and unavailable days; it serializes complete ranges as start/end ISO strings.",
-  "docs": "Use <sand-date-range name=\"stay\" start=\"2026-11-21\" end=\"2026-11-25\" min=\"2026-01-01\" max=\"2026-12-31\"></sand-date-range>. The value is `YYYY-MM-DD/YYYY-MM-DD`; start and end are separate properties. Dates are compared as calendar days, not local timestamps.",
-  "intro": [
-    "Two river stones mark the beginning and end of a date interval, with a shallow line pressed between them. Two native date inputs preserve each endpoint's calendar popup and keyboard support. The complete value is serialized as `start/end` using ISO calendar dates."
-  ],
-  "use": "<script src=\"date-range.js\"></script>\n<sand-date-range name=\"stay\" label=\"Stay dates\" start=\"2026-11-21\" end=\"2026-11-25\" min=\"2026-01-01\" max=\"2026-12-31\" required></sand-date-range>",
-  "js": "const range = document.querySelector('sand-date-range');\nrange.addEventListener('date-range-change', ({ detail }) => showDates(detail.start, detail.end));\nrange.start = '2026-11-21';\nrange.end = '2026-11-25';",
-  "attrs": [
-    [
-      "start / end",
-      "Initial ISO start and end dates",
-      "empty"
+    "manualDocs": true
+  },
+  {
+    "id": "date-range",
+    "name": "Date Range Picker",
+    "tag": "sand-date-range",
+    "categories": [
+      "date-range",
+      "calendar",
+      "date",
+      "range",
+      "form",
+      "sand",
+      "animation"
     ],
-    [
-      "value",
-      "Combined `start/end` ISO value",
-      "empty"
+    "sub": "Two river stones mark the start and end of a date interval.",
+    "desc": "Two native date fields represent an inclusive calendar range. The component validates order, required endpoints, min/max bounds and unavailable days; it serializes complete ranges as start/end ISO strings.",
+    "docs": "Use <sand-date-range name=\"stay\" start=\"2026-11-21\" end=\"2026-11-25\" min=\"2026-01-01\" max=\"2026-12-31\"></sand-date-range>. The value is `YYYY-MM-DD/YYYY-MM-DD`; start and end are separate properties. Dates are compared as calendar days, not local timestamps.",
+    "intro": [
+      "Two river stones mark the beginning and end of a date interval, with a shallow line pressed between them. Two native date inputs preserve each endpoint's calendar popup and keyboard support. The complete value is serialized as `start/end` using ISO calendar dates."
     ],
-    [
-      "label",
-      "Accessible label prefix for the range",
-      "Date range"
+    "use": "<script src=\"date-range.js\"></script>\n<sand-date-range name=\"stay\" label=\"Stay dates\" start=\"2026-11-21\" end=\"2026-11-25\" min=\"2026-01-01\" max=\"2026-12-31\" required></sand-date-range>",
+    "js": "const range = document.querySelector('sand-date-range');\nrange.addEventListener('date-range-change', ({ detail }) => showDates(detail.start, detail.end));\nrange.start = '2026-11-21';\nrange.end = '2026-11-25';",
+    "attrs": [
+      [
+        "start / end",
+        "Initial ISO start and end dates",
+        "empty"
+      ],
+      [
+        "value",
+        "Combined `start/end` ISO value",
+        "empty"
+      ],
+      [
+        "label",
+        "Accessible label prefix for the range",
+        "Date range"
+      ],
+      [
+        "name",
+        "Form submission name",
+        "empty"
+      ],
+      [
+        "min / max",
+        "Inclusive bounds for both endpoints",
+        "unset"
+      ],
+      [
+        "unavailable",
+        "Comma-separated ISO dates invalid for either endpoint",
+        "empty"
+      ],
+      [
+        "required",
+        "Require both endpoints",
+        "absent"
+      ],
+      [
+        "disabled",
+        "Disable both date fields and form participation",
+        "absent"
+      ],
+      [
+        "lang",
+        "Locale hint for native date UI",
+        "document language"
+      ]
     ],
-    [
-      "name",
-      "Form submission name",
-      "empty"
+    "notes": [
+      "**Two native date fields:** start and end each use a browser `<input type=\"date\">` and have separate accessible names. The browser handles calendar popups and keyboard support.",
+      "**Stable serialization:** the complete form value is `YYYY-MM-DD/YYYY-MM-DD`. Both dates are calendar strings; no local timezone conversion is performed.",
+      "**Validation:** the end date cannot precede the start date. Both endpoints respect min/max and the unavailable list. Required means both endpoints must be present.",
+      "**Events:** native `input` and `change` events bubble from each field. `date-range-change` includes `{ start, end }` when an endpoint is committed."
     ],
-    [
-      "min / max",
-      "Inclusive bounds for both endpoints",
-      "unset"
+    "happens": [
+      [
+        "choose a start date",
+        "the first stone moves to that calendar day"
+      ],
+      [
+        "choose an end date",
+        "the second stone moves and the interval becomes visible"
+      ],
+      [
+        "set the end before the start",
+        "the range receives a validation error"
+      ],
+      [
+        "leave one endpoint empty",
+        "the range stays incomplete and required validation fails"
+      ]
     ],
-    [
-      "unavailable",
-      "Comma-separated ISO dates invalid for either endpoint",
-      "empty"
+    "limits": [
+      "The native calendar popup cannot visually disable individual unavailable days; those dates are rejected through validity after selection.",
+      "The visual marker position is a compact calendar-day scale, not a full month-layout calendar.",
+      "The form value is null until both endpoints are provided; when complete it is serialized as `start/end`."
     ],
-    [
-      "required",
-      "Require both endpoints",
-      "absent"
+    "manualDocs": true
+  },
+  {
+    "id": "time-picker",
+    "name": "Time Picker",
+    "tag": "sand-time-picker",
+    "categories": [
+      "time-picker",
+      "time",
+      "form",
+      "sand",
+      "animation"
     ],
-    [
-      "disabled",
-      "Disable both date fields and form participation",
-      "absent"
+    "sub": "A small clock dial is etched into the sand, with a stone hand marking the time.",
+    "desc": "A native time input paired with a circular sand dial and deterministic 12/24-hour readout. Values remain timezone-free HH:MM strings; min, max and step use native time constraints.",
+    "docs": "Use <sand-time-picker name=\"appointment\" label=\"Appointment time\" format=\"12\" min=\"09:00\" max=\"17:30\" step=\"900\"></sand-time-picker>. Read or set el.value in 24-hour `HH:MM` form. The `format` property controls a 12/24-hour readout; native input presentation follows browser locale.",
+    "intro": [
+      "A small clock dial is etched into the sand, with a river stone marking the selected time. A native `<input type=\"time\">` retains platform time selection, keyboard behavior and constraints. Values remain timezone-free `HH:MM` strings; a separate readout shows either 12-hour or 24-hour formatting."
     ],
-    [
-      "lang",
-      "Locale hint for native date UI",
-      "document language"
-    ]
-  ],
-  "notes": [
-    "**Two native date fields:** start and end each use a browser `<input type=\"date\">` and have separate accessible names. The browser handles calendar popups and keyboard support.",
-    "**Stable serialization:** the complete form value is `YYYY-MM-DD/YYYY-MM-DD`. Both dates are calendar strings; no local timezone conversion is performed.",
-    "**Validation:** the end date cannot precede the start date. Both endpoints respect min/max and the unavailable list. Required means both endpoints must be present.",
-    "**Events:** native `input` and `change` events bubble from each field. `date-range-change` includes `{ start, end }` when an endpoint is committed."
-  ],
-  "happens": [
-    [
-      "choose a start date",
-      "the first stone moves to that calendar day"
+    "use": "<script src=\"time-picker.js\"></script>\n<sand-time-picker name=\"appointment\" label=\"Appointment time\" format=\"12\" min=\"09:00\" max=\"17:30\" step=\"900\" required></sand-time-picker>",
+    "js": "const time = document.querySelector('sand-time-picker');\ntime.addEventListener('change', () => saveTime(time.value));\ntime.format = '24';\ntime.value = '16:30';",
+    "attrs": [
+      [
+        "value",
+        "Initial time in 24-hour `HH:MM` form",
+        "empty"
+      ],
+      [
+        "label",
+        "Accessible name",
+        "Choose a time"
+      ],
+      [
+        "name",
+        "Form submission name",
+        "empty"
+      ],
+      [
+        "format",
+        "Readout format: `12` or `24`",
+        "24"
+      ],
+      [
+        "min / max",
+        "Inclusive time bounds in `HH:MM`",
+        "unset"
+      ],
+      [
+        "step",
+        "Native time step in seconds",
+        "60"
+      ],
+      [
+        "required",
+        "Require a time value",
+        "absent"
+      ],
+      [
+        "disabled",
+        "Disable selection and form participation",
+        "absent"
+      ],
+      [
+        "lang",
+        "Locale hint for native input presentation",
+        "en-US for 12-hour readout, en-GB for 24-hour"
+      ]
     ],
-    [
-      "choose an end date",
-      "the second stone moves and the interval becomes visible"
+    "notes": [
+      "**Native time input:** the browser provides time selection and keyboard behavior; its visible controls follow browser and operating-system locale conventions.",
+      "**Deterministic value:** the component reads and submits a timezone-free `HH:MM` string. It does not create a `Date`, apply a timezone or convert the chosen time into an instant.",
+      "**12/24-hour display:** set `format=\"12\"` or `format=\"24\"` for the explicit readout. The component supplies an en-US/en-GB locale hint to the native control when no `lang` is specified; the exact native UI remains browser-controlled.",
+      "**Constraints:** min, max and step are passed to the native time input. Step is in seconds, so 900 means fifteen-minute increments."
     ],
-    [
-      "set the end before the start",
-      "the range receives a validation error"
+    "happens": [
+      [
+        "choose a time",
+        "the stone moves around the dial to the corresponding minute of the day"
+      ],
+      [
+        "set format to 12",
+        "the readout displays AM/PM time"
+      ],
+      [
+        "set format to 24",
+        "the readout displays 00:00 through 23:59"
+      ],
+      [
+        "change timezone or DST settings",
+        "the raw `HH:MM` value does not shift because no date or timezone is attached"
+      ]
     ],
-    [
-      "leave one endpoint empty",
-      "the range stays incomplete and required validation fails"
-    ]
-  ],
-  "limits": [
-    "The native calendar popup cannot visually disable individual unavailable days; those dates are rejected through validity after selection.",
-    "The visual marker position is a compact calendar-day scale, not a full month-layout calendar.",
-    "The form value is null until both endpoints are provided; when complete it is serialized as `start/end`."
-  ],
-  "manualDocs": true
-},
-{
-  "id": "time-picker",
-  "name": "Time Picker",
-  "tag": "sand-time-picker",
-  "categories": [
-    "time-picker",
-    "time",
-    "form",
-    "sand",
-    "animation"
-  ],
-  "sub": "A small clock dial is etched into the sand, with a stone hand marking the time.",
-  "desc": "A native time input paired with a circular sand dial and deterministic 12/24-hour readout. Values remain timezone-free HH:MM strings; min, max and step use native time constraints.",
-  "docs": "Use <sand-time-picker name=\"appointment\" label=\"Appointment time\" format=\"12\" min=\"09:00\" max=\"17:30\" step=\"900\"></sand-time-picker>. Read or set el.value in 24-hour `HH:MM` form. The `format` property controls a 12/24-hour readout; native input presentation follows browser locale.",
-  "intro": [
-    "A small clock dial is etched into the sand, with a river stone marking the selected time. A native `<input type=\"time\">` retains platform time selection, keyboard behavior and constraints. Values remain timezone-free `HH:MM` strings; a separate readout shows either 12-hour or 24-hour formatting."
-  ],
-  "use": "<script src=\"time-picker.js\"></script>\n<sand-time-picker name=\"appointment\" label=\"Appointment time\" format=\"12\" min=\"09:00\" max=\"17:30\" step=\"900\" required></sand-time-picker>",
-  "js": "const time = document.querySelector('sand-time-picker');\ntime.addEventListener('change', () => saveTime(time.value));\ntime.format = '24';\ntime.value = '16:30';",
-  "attrs": [
-    [
-      "value",
-      "Initial time in 24-hour `HH:MM` form",
-      "empty"
+    "limits": [
+      "The operating system/browser may render the native time selection popup differently from the explicit 12/24-hour readout.",
+      "A time-only value has no date or timezone and cannot identify a unique point in time across daylight-saving transitions.",
+      "The clock dial is a visual indicator; the native time input remains the actual keyboard-accessible control."
     ],
-    [
-      "label",
-      "Accessible name",
-      "Choose a time"
+    "manualDocs": true
+  },
+  {
+    "id": "progress",
+    "name": "Progress Bar",
+    "tag": "sand-progress",
+    "categories": [
+      "progress",
+      "status",
+      "sand",
+      "animation"
     ],
-    [
-      "name",
-      "Form submission name",
-      "empty"
+    "sub": "A rake leaves a growing trail in a sand channel.",
+    "desc": "A bamboo rake advances through a sand channel, leaving a growing trail and a soft ridge ahead of its tines. Supports determinate and indeterminate progress.",
+    "docs": "Use <sand-progress value=\"42\" label=\"Upload progress\"></sand-progress>. Set value, min and max; add indeterminate for unknown progress. The element exposes progressbar semantics and aria-valuetext.",
+    "intro": [
+      "A long sand channel holds a growing rake trail. The bamboo rake advances with the completion value, pushing a small ridge ahead of its tines. Indeterminate mode moves the rake back and forth without announcing a fabricated percentage."
     ],
-    [
-      "format",
-      "Readout format: `12` or `24`",
-      "24"
+    "use": "<script src=\"progress.js\"></script>\n<sand-progress value=\"42\" label=\"Upload progress\"></sand-progress>",
+    "js": "const progress = document.querySelector('sand-progress');\nprogress.value = 72;\nprogress.setAttribute('indeterminate', '');",
+    "attrs": [
+      [
+        "value",
+        "Current progress value",
+        "0"
+      ],
+      [
+        "min / max",
+        "Numeric progress bounds",
+        "0 / 100"
+      ],
+      [
+        "indeterminate",
+        "Use moving indeterminate animation and omit aria-valuenow",
+        "absent"
+      ],
+      [
+        "label",
+        "Accessible progress name",
+        "Progress"
+      ]
     ],
-    [
-      "min / max",
-      "Inclusive time bounds in `HH:MM`",
-      "unset"
+    "notes": [
+      "**Determinate progress:** value is clamped between min and max and reflected through aria-valuenow.",
+      "**Indeterminate progress:** add indeterminate; the moving rake loops without exposing a misleading numeric value.",
+      "**Accessibility:** role=progressbar, aria-valuemin, aria-valuemax, aria-valuenow when determinate and aria-valuetext are maintained."
     ],
-    [
-      "step",
-      "Native time step in seconds",
-      "60"
+    "happens": [
+      [
+        "increase value",
+        "the rake advances and leaves a longer groove behind"
+      ],
+      [
+        "decrease value",
+        "the rake moves back through the channel"
+      ],
+      [
+        "enable indeterminate",
+        "the rake moves back and forth without a numeric announcement"
+      ]
     ],
-    [
-      "required",
-      "Require a time value",
-      "absent"
+    "limits": [
+      "The progress bar is a visual status indicator, not a form input."
     ],
-    [
-      "disabled",
-      "Disable selection and form participation",
-      "absent"
+    "manualDocs": true
+  },
+  {
+    "id": "progress-ring",
+    "name": "Progress Ring",
+    "tag": "sand-progress-ring",
+    "categories": [
+      "progress",
+      "status",
+      "ring",
+      "sand",
+      "animation"
     ],
-    [
-      "lang",
-      "Locale hint for native input presentation",
-      "en-US for 12-hour readout, en-GB for 24-hour"
-    ]
-  ],
-  "notes": [
-    "**Native time input:** the browser provides time selection and keyboard behavior; its visible controls follow browser and operating-system locale conventions.",
-    "**Deterministic value:** the component reads and submits a timezone-free `HH:MM` string. It does not create a `Date`, apply a timezone or convert the chosen time into an instant.",
-    "**12/24-hour display:** set `format=\"12\"` or `format=\"24\"` for the explicit readout. The component supplies an en-US/en-GB locale hint to the native control when no `lang` is specified; the exact native UI remains browser-controlled.",
-    "**Constraints:** min, max and step are passed to the native time input. Step is in seconds, so 900 means fifteen-minute increments."
-  ],
-  "happens": [
-    [
-      "choose a time",
-      "the stone moves around the dial to the corresponding minute of the day"
+    "sub": "A pebble follows a circular groove.",
+    "desc": "A circular progress indicator with a river pebble travelling around an engraved sand groove. Supports determinate and indeterminate states.",
+    "docs": "Use <sand-progress-ring value=\"68\" label=\"Processing\"></sand-progress-ring>. Set value, min and max, or add indeterminate for a looping marker.",
+    "intro": [
+      "A circular groove is pressed into the sand. A small river pebble follows the ring as the completion value changes, tracing a full turn from the top. In indeterminate mode the pebble travels continuously without suggesting a percentage."
     ],
-    [
-      "set format to 12",
-      "the readout displays AM/PM time"
+    "use": "<script src=\"progress-ring.js\"></script>\n<sand-progress-ring value=\"68\" label=\"Processing\"></sand-progress-ring>",
+    "js": "const ring = document.querySelector('sand-progress-ring');\nring.value = 90;\nring.toggleAttribute('indeterminate', false);",
+    "attrs": [
+      [
+        "value",
+        "Current progress value",
+        "0"
+      ],
+      [
+        "min / max",
+        "Numeric progress bounds",
+        "0 / 100"
+      ],
+      [
+        "indeterminate",
+        "Move the pebble continuously",
+        "absent"
+      ],
+      [
+        "label",
+        "Accessible progress name",
+        "Progress"
+      ]
     ],
-    [
-      "set format to 24",
-      "the readout displays 00:00 through 23:59"
+    "notes": [
+      "**Determinate:** value is clamped to min/max and reflected as aria-valuenow.",
+      "**Indeterminate:** the pebble loops around the groove and aria-valuenow is omitted.",
+      "**Accessibility:** role=progressbar with min, max, current value and readable value text."
     ],
-    [
-      "change timezone or DST settings",
-      "the raw `HH:MM` value does not shift because no date or timezone is attached"
-    ]
-  ],
-  "limits": [
-    "The operating system/browser may render the native time selection popup differently from the explicit 12/24-hour readout.",
-    "A time-only value has no date or timezone and cannot identify a unique point in time across daylight-saving transitions.",
-    "The clock dial is a visual indicator; the native time input remains the actual keyboard-accessible control."
-  ],
-  "manualDocs": true
-},
-{
-  "id": "progress",
-  "name": "Progress Bar",
-  "tag": "sand-progress",
-  "categories": [
-    "progress",
-    "status",
-    "sand",
-    "animation"
-  ],
-  "sub": "A rake leaves a growing trail in a sand channel.",
-  "desc": "A bamboo rake advances through a sand channel, leaving a growing trail and a soft ridge ahead of its tines. Supports determinate and indeterminate progress.",
-  "docs": "Use <sand-progress value=\"42\" label=\"Upload progress\"></sand-progress>. Set value, min and max; add indeterminate for unknown progress. The element exposes progressbar semantics and aria-valuetext.",
-  "intro": [
-    "A long sand channel holds a growing rake trail. The bamboo rake advances with the completion value, pushing a small ridge ahead of its tines. Indeterminate mode moves the rake back and forth without announcing a fabricated percentage."
-  ],
-  "use": "<script src=\"progress.js\"></script>\n<sand-progress value=\"42\" label=\"Upload progress\"></sand-progress>",
-  "js": "const progress = document.querySelector('sand-progress');\nprogress.value = 72;\nprogress.setAttribute('indeterminate', '');",
-  "attrs": [
-    [
-      "value",
-      "Current progress value",
-      "0"
+    "happens": [
+      [
+        "increase value",
+        "the pebble moves clockwise around the groove"
+      ],
+      [
+        "decrease value",
+        "the pebble travels counter-clockwise"
+      ],
+      [
+        "enable indeterminate",
+        "the pebble loops around the ring"
+      ]
     ],
-    [
-      "min / max",
-      "Numeric progress bounds",
-      "0 / 100"
+    "limits": [
+      "The ring is a status indicator, not an input control."
     ],
-    [
-      "indeterminate",
-      "Use moving indeterminate animation and omit aria-valuenow",
-      "absent"
-    ],
-    [
-      "label",
-      "Accessible progress name",
-      "Progress"
-    ]
-  ],
-  "notes": [
-    "**Determinate progress:** value is clamped between min and max and reflected through aria-valuenow.",
-    "**Indeterminate progress:** add indeterminate; the moving rake loops without exposing a misleading numeric value.",
-    "**Accessibility:** role=progressbar, aria-valuemin, aria-valuemax, aria-valuenow when determinate and aria-valuetext are maintained."
-  ],
-  "happens": [
-    [
-      "increase value",
-      "the rake advances and leaves a longer groove behind"
-    ],
-    [
-      "decrease value",
-      "the rake moves back through the channel"
-    ],
-    [
-      "enable indeterminate",
-      "the rake moves back and forth without a numeric announcement"
-    ]
-  ],
-  "limits": [
-    "The progress bar is a visual status indicator, not a form input."
-  ],
-  "manualDocs": true
-},
-{
-  "id": "progress-ring",
-  "name": "Progress Ring",
-  "tag": "sand-progress-ring",
-  "categories": [
-    "progress",
-    "status",
-    "ring",
-    "sand",
-    "animation"
-  ],
-  "sub": "A pebble follows a circular groove.",
-  "desc": "A circular progress indicator with a river pebble travelling around an engraved sand groove. Supports determinate and indeterminate states.",
-  "docs": "Use <sand-progress-ring value=\"68\" label=\"Processing\"></sand-progress-ring>. Set value, min and max, or add indeterminate for a looping marker.",
-  "intro": [
-    "A circular groove is pressed into the sand. A small river pebble follows the ring as the completion value changes, tracing a full turn from the top. In indeterminate mode the pebble travels continuously without suggesting a percentage."
-  ],
-  "use": "<script src=\"progress-ring.js\"></script>\n<sand-progress-ring value=\"68\" label=\"Processing\"></sand-progress-ring>",
-  "js": "const ring = document.querySelector('sand-progress-ring');\nring.value = 90;\nring.toggleAttribute('indeterminate', false);",
-  "attrs": [
-    [
-      "value",
-      "Current progress value",
-      "0"
-    ],
-    [
-      "min / max",
-      "Numeric progress bounds",
-      "0 / 100"
-    ],
-    [
-      "indeterminate",
-      "Move the pebble continuously",
-      "absent"
-    ],
-    [
-      "label",
-      "Accessible progress name",
-      "Progress"
-    ]
-  ],
-  "notes": [
-    "**Determinate:** value is clamped to min/max and reflected as aria-valuenow.",
-    "**Indeterminate:** the pebble loops around the groove and aria-valuenow is omitted.",
-    "**Accessibility:** role=progressbar with min, max, current value and readable value text."
-  ],
-  "happens": [
-    [
-      "increase value",
-      "the pebble moves clockwise around the groove"
-    ],
-    [
-      "decrease value",
-      "the pebble travels counter-clockwise"
-    ],
-    [
-      "enable indeterminate",
-      "the pebble loops around the ring"
-    ]
-  ],
-  "limits": [
-    "The ring is a status indicator, not an input control."
-  ],
-  "manualDocs": true
-},
-{
-  "id": "steps",
-  "name": "Step Indicator",
-  "tag": "sand-steps",
-  "categories": [
-    "steps",
-    "navigation",
-    "progress",
-    "sand"
-  ],
-  "sub": "Stepping stones mark completed, current and upcoming steps.",
-  "desc": "A multi-step indicator using stepping stones and native buttons. Completed, current and upcoming steps are visually distinct and keyboard operable.",
-  "docs": "Use <sand-steps steps=\"Account,Details,Review,Done\" value=\"1\" label=\"Setup progress\"></sand-steps>. Read or set value as a zero-based active step index. The element submits that index when name is supplied.",
-  "intro": [
-    "A line of stepping stones crosses the tray. Stones behind the current step show completed progress, the current stone is raised, and the remaining stones wait ahead. Native buttons keep each step keyboard accessible; the active index is zero-based."
-  ],
-  "use": "<script src=\"steps.js\"></script>\n<sand-steps name=\"setupStep\" steps=\"Account,Details,Review,Done\" value=\"1\" label=\"Setup progress\"></sand-steps>",
-  "js": "const steps = document.querySelector('sand-steps');\nsteps.addEventListener('change', () => showStep(steps.value));\nsteps.value = 2;",
-  "attrs": [
-    [
+    "manualDocs": true
+  },
+  {
+    "id": "steps",
+    "name": "Step Indicator",
+    "tag": "sand-steps",
+    "categories": [
       "steps",
-      "Comma-separated step labels, up to five",
-      "Start,Details,Review,Finish"
+      "navigation",
+      "progress",
+      "sand"
     ],
-    [
-      "value",
-      "Zero-based active step index",
-      "0"
+    "sub": "Stepping stones mark completed, current and upcoming steps.",
+    "desc": "A multi-step indicator using stepping stones and native buttons. Completed, current and upcoming steps are visually distinct and keyboard operable.",
+    "docs": "Use <sand-steps steps=\"Account,Details,Review,Done\" value=\"1\" label=\"Setup progress\"></sand-steps>. Read or set value as a zero-based active step index. The element submits that index when name is supplied.",
+    "intro": [
+      "A line of stepping stones crosses the tray. Stones behind the current step show completed progress, the current stone is raised, and the remaining stones wait ahead. Native buttons keep each step keyboard accessible; the active index is zero-based."
     ],
-    [
-      "label",
-      "Accessible group name",
-      "Progress steps"
+    "use": "<script src=\"steps.js\"></script>\n<sand-steps name=\"setupStep\" steps=\"Account,Details,Review,Done\" value=\"1\" label=\"Setup progress\"></sand-steps>",
+    "js": "const steps = document.querySelector('sand-steps');\nsteps.addEventListener('change', () => showStep(steps.value));\nsteps.value = 2;",
+    "attrs": [
+      [
+        "steps",
+        "Comma-separated step labels, up to five",
+        "Start,Details,Review,Finish"
+      ],
+      [
+        "value",
+        "Zero-based active step index",
+        "0"
+      ],
+      [
+        "label",
+        "Accessible group name",
+        "Progress steps"
+      ],
+      [
+        "name",
+        "Form submission name",
+        "empty"
+      ],
+      [
+        "disabled",
+        "Disable step buttons",
+        "absent"
+      ]
     ],
-    [
-      "name",
-      "Form submission name",
-      "empty"
+    "notes": [
+      "**Native buttons:** each step is a real button with an accessible label and aria-current=step on the active step.",
+      "**Value:** zero-based active step index. The element emits bubbling input and change events when it changes.",
+      "**Forms:** when name is supplied, the active index is submitted as a string."
     ],
-    [
-      "disabled",
-      "Disable step buttons",
-      "absent"
-    ]
-  ],
-  "notes": [
-    "**Native buttons:** each step is a real button with an accessible label and aria-current=step on the active step.",
-    "**Value:** zero-based active step index. The element emits bubbling input and change events when it changes.",
-    "**Forms:** when name is supplied, the active index is submitted as a string."
-  ],
-  "happens": [
-    [
-      "choose a later step",
-      "the selected stone lifts and previous stones are marked complete"
+    "happens": [
+      [
+        "choose a later step",
+        "the selected stone lifts and previous stones are marked complete"
+      ],
+      [
+        "choose an earlier step",
+        "the active marker moves back and later stones become upcoming"
+      ],
+      [
+        "disable the control",
+        "all step buttons become disabled"
+      ]
     ],
-    [
-      "choose an earlier step",
-      "the active marker moves back and later stones become upcoming"
+    "limits": [
+      "The current layout supports up to five steps so each stone remains legible."
     ],
-    [
-      "disable the control",
-      "all step buttons become disabled"
-    ]
-  ],
-  "limits": [
-    "The current layout supports up to five steps so each stone remains legible."
-  ],
-  "manualDocs": true
-},
-{
-  "id": "timer",
-  "name": "Hourglass Timer",
-  "tag": "sand-timer",
-  "categories": [
-    "timer",
-    "time",
-    "status",
-    "sand",
-    "animation"
-  ],
-  "sub": "Sand falls between two chambers to show remaining time.",
-  "desc": "A countdown timer rendered as a two-chamber hourglass. Sand falls through a narrow waist; pause, resume, reset and cancel controls remain native buttons.",
-  "docs": "Use <sand-timer duration=\"90\" label=\"Break timer\"></sand-timer>. Call start(), pause(), reset() or cancel(); read remaining and listen for timer-tick and complete.",
-  "intro": [
-    "An hourglass is drawn into the sand tray. The upper chamber empties as grains fall through its narrow waist and collect below. Pause, resume, reset and cancel are native buttons; the countdown uses the animation frame clock rather than a background interval."
-  ],
-  "use": "<script src=\"timer.js\"></script>\n<sand-timer duration=\"90\" label=\"Break timer\"></sand-timer>",
-  "js": "const timer = document.querySelector('sand-timer');\ntimer.start();\ntimer.addEventListener('timer-tick', e => showRemaining(e.detail.remaining));\ntimer.addEventListener('complete', () => announceDone());",
-  "attrs": [
-    [
-      "duration",
-      "Initial duration in seconds",
-      "60"
+    "manualDocs": true
+  },
+  {
+    "id": "timer",
+    "name": "Hourglass Timer",
+    "tag": "sand-timer",
+    "categories": [
+      "timer",
+      "time",
+      "status",
+      "sand",
+      "animation"
     ],
-    [
-      "label",
-      "Accessible timer name",
-      "Countdown timer"
+    "sub": "Sand falls between two chambers to show remaining time.",
+    "desc": "A countdown timer rendered as a two-chamber hourglass. Sand falls through a narrow waist; pause, resume, reset and cancel controls remain native buttons.",
+    "docs": "Use <sand-timer duration=\"90\" label=\"Break timer\"></sand-timer>. Call start(), pause(), reset() or cancel(); read remaining and listen for timer-tick and complete.",
+    "intro": [
+      "An hourglass is drawn into the sand tray. The upper chamber empties as grains fall through its narrow waist and collect below. Pause, resume, reset and cancel are native buttons; the countdown uses the animation frame clock rather than a background interval."
     ],
-    [
-      "disabled",
-      "Disable timer controls",
-      "absent"
+    "use": "<script src=\"timer.js\"></script>\n<sand-timer duration=\"90\" label=\"Break timer\"></sand-timer>",
+    "js": "const timer = document.querySelector('sand-timer');\ntimer.start();\ntimer.addEventListener('timer-tick', e => showRemaining(e.detail.remaining));\ntimer.addEventListener('complete', () => announceDone());",
+    "attrs": [
+      [
+        "duration",
+        "Initial duration in seconds",
+        "60"
+      ],
+      [
+        "label",
+        "Accessible timer name",
+        "Countdown timer"
+      ],
+      [
+        "disabled",
+        "Disable timer controls",
+        "absent"
+      ],
+      [
+        "name",
+        "Form submission name for remaining seconds",
+        "empty"
+      ]
     ],
-    [
-      "name",
-      "Form submission name for remaining seconds",
-      "empty"
-    ]
-  ],
-  "notes": [
-    "**Methods:** start(), pause(), reset() and cancel(). The Pause button becomes Resume while paused.",
-    "**Events:** timer-tick emits remaining whole seconds; complete fires once when the countdown reaches zero.",
-    "**Reduced motion:** countdown timing remains correct, but sand animation is held static when reduced motion is requested."
-  ],
-  "happens": [
-    [
-      "start",
-      "sand begins falling from the upper chamber"
+    "notes": [
+      "**Methods:** start(), pause(), reset() and cancel(). The Pause button becomes Resume while paused.",
+      "**Events:** timer-tick emits remaining whole seconds; complete fires once when the countdown reaches zero.",
+      "**Reduced motion:** countdown timing remains correct, but sand animation is held static when reduced motion is requested."
     ],
-    [
-      "pause",
-      "the countdown and falling sand stop"
+    "happens": [
+      [
+        "start",
+        "sand begins falling from the upper chamber"
+      ],
+      [
+        "pause",
+        "the countdown and falling sand stop"
+      ],
+      [
+        "resume",
+        "the remaining sand continues falling"
+      ],
+      [
+        "reset",
+        "the original duration is restored"
+      ],
+      [
+        "cancel",
+        "the timer stops and reports Cancelled"
+      ],
+      [
+        "reach zero",
+        "the timer stops and emits complete"
+      ]
     ],
-    [
-      "resume",
-      "the remaining sand continues falling"
+    "limits": [
+      "The countdown uses requestAnimationFrame and pauses when the page is background-throttled; it is not a precision alarm clock."
     ],
-    [
-      "reset",
-      "the original duration is restored"
+    "manualDocs": true
+  },
+  {
+    "id": "loader",
+    "name": "Loading Indicator",
+    "tag": "sand-loader",
+    "categories": [
+      "loading",
+      "status",
+      "animation",
+      "sand"
     ],
-    [
-      "cancel",
-      "the timer stops and reports Cancelled"
+    "sub": "A miniature rake loops through a changing sand pattern.",
+    "desc": "An indeterminate loading indicator with a miniature rake that loops through a recognizable sand pattern, distinct from the AI Thinking state.",
+    "docs": "Use <sand-loader label=\"Loading results\"></sand-loader>. Set active=false when work completes and speed to adjust the animation rate. Reduced motion holds the rake still.",
+    "intro": [
+      "A miniature rake repeatedly crosses a short sand channel, smoothing one set of grooves and cutting another. Its repeating motion is deliberately simpler than the AI Thinking component, which communicates changing agent activity states."
     ],
-    [
-      "reach zero",
-      "the timer stops and emits complete"
-    ]
-  ],
-  "limits": [
-    "The countdown uses requestAnimationFrame and pauses when the page is background-throttled; it is not a precision alarm clock."
-  ],
-  "manualDocs": true
-},
-{
-  "id": "loader",
-  "name": "Loading Indicator",
-  "tag": "sand-loader",
-  "categories": [
-    "loading",
-    "status",
-    "animation",
-    "sand"
-  ],
-  "sub": "A miniature rake loops through a changing sand pattern.",
-  "desc": "An indeterminate loading indicator with a miniature rake that loops through a recognizable sand pattern, distinct from the AI Thinking state.",
-  "docs": "Use <sand-loader label=\"Loading results\"></sand-loader>. Set active=false when work completes and speed to adjust the animation rate. Reduced motion holds the rake still.",
-  "intro": [
-    "A miniature rake repeatedly crosses a short sand channel, smoothing one set of grooves and cutting another. Its repeating motion is deliberately simpler than the AI Thinking component, which communicates changing agent activity states."
-  ],
-  "use": "<script src=\"loader.js\"></script>\n<sand-loader label=\"Loading results\"></sand-loader>",
-  "js": "const loader = document.querySelector('sand-loader');\nloader.speed = 1.5;\nloader.active = false;",
-  "attrs": [
-    [
-      "label",
-      "Accessible status name",
-      "Loading"
+    "use": "<script src=\"loader.js\"></script>\n<sand-loader label=\"Loading results\"></sand-loader>",
+    "js": "const loader = document.querySelector('sand-loader');\nloader.speed = 1.5;\nloader.active = false;",
+    "attrs": [
+      [
+        "label",
+        "Accessible status name",
+        "Loading"
+      ],
+      [
+        "active",
+        "Whether work is ongoing",
+        "true"
+      ],
+      [
+        "speed",
+        "Animation speed multiplier from 0.25 to 4",
+        "1"
+      ]
     ],
-    [
-      "active",
-      "Whether work is ongoing",
-      "true"
+    "notes": [
+      "**Status semantics:** role=status, aria-live=polite and aria-busy reflect the active state.",
+      "**Control:** set active=false when the operation completes. The label then defaults to Loading complete unless supplied.",
+      "**Reduced motion:** the rake remains still while prefers-reduced-motion is active."
     ],
-    [
-      "speed",
-      "Animation speed multiplier from 0.25 to 4",
-      "1"
-    ]
-  ],
-  "notes": [
-    "**Status semantics:** role=status, aria-live=polite and aria-busy reflect the active state.",
-    "**Control:** set active=false when the operation completes. The label then defaults to Loading complete unless supplied.",
-    "**Reduced motion:** the rake remains still while prefers-reduced-motion is active."
-  ],
-  "happens": [
-    [
-      "active",
-      "the rake loops and re-cuts the pattern"
+    "happens": [
+      [
+        "active",
+        "the rake loops and re-cuts the pattern"
+      ],
+      [
+        "inactive",
+        "the rake rests and aria-busy becomes false"
+      ],
+      [
+        "reduced motion",
+        "the indicator remains visible without continuous motion"
+      ]
     ],
-    [
-      "inactive",
-      "the rake rests and aria-busy becomes false"
+    "limits": [
+      "The loader is intentionally indeterminate; it does not accept a percentage."
     ],
-    [
-      "reduced motion",
-      "the indicator remains visible without continuous motion"
-    ]
-  ],
-  "limits": [
-    "The loader is intentionally indeterminate; it does not accept a percentage."
-  ],
-  "manualDocs": true
-},
-{
-  "id":"tabs","name":"Tabs","tag":"sand-tabs",
-  "categories":["navigation","tabs","sand","animation"],
-  "sub":"A river stone glides between carved tab wells.",
-  "desc":"A tactile tab system with a flat river-stone marker moving between carved tab wells. Real HTML tab buttons and content panels preserve native interaction and accessible semantics.",
-  "docs":"Use <sand-tabs tabs=\"overview:Overview,activity:Activity\" value=\"overview\"></sand-tabs>. Put template[data-panel] elements inside for real panel content. Read or set value and listen for the bubbling change event.",
-  "intro":["A low river stone rests in one of several carved wells. The selected well is active, while the panel beneath remains actual HTML content."],
-  "use":"<script src=\"tabs.js\"></script>\n<sand-tabs tabs=\"overview:Overview,activity:Activity\" value=\"overview\"><template data-panel=\"overview\"><p>Overview content</p></template><template data-panel=\"activity\"><p>Activity content</p></template></sand-tabs>",
-  "js":"const tabs = document.querySelector('sand-tabs');\ntabs.value = 'activity';\ntabs.addEventListener('change', event => console.log(event.detail.value));",
-  "attrs":[["tabs","Comma-separated id:Label entries, up to six","Overview, Activity, Settings"],["value","Selected tab identifier","First enabled tab"],["label","Accessible tab group name","Content tabs"],["orientation","horizontal or vertical","horizontal"],["activation","automatic or manual keyboard activation","automatic"],["disabled-tabs","Comma-separated disabled tab IDs","none"]],
-  "notes":["Panel bodies are supplied as template[data-panel] elements and cloned during refresh().","Horizontal arrow keys move between tabs. Vertical orientation uses Up/Down. Home and End move to the edges; manual mode activates with Enter or Space.","A change event exposes value, previousValue and index."],
-  "happens":[["select a tab","the stone marker glides to its carved well and the matching panel is revealed"],["change orientation","the tab list and keyboard direction switch between horizontal and vertical"],["disable a tab","the disabled option is removed from keyboard selection"]],
-  "limits":["Up to six tab entries. Attribute definitions reserve comma and colon as delimiters.","The component does not provide routing, data fetching or lazy loading."],
-  "manualDocs":true
-},
-{
-  "id":"accordion","name":"Accordion","tag":"sand-accordion",
-  "categories":["disclosure","navigation","sand","animation"],
-  "sub":"Walnut lids lift to reveal separate sand compartments.",
-  "desc":"An accordion made from walnut lids with small stone pulls. Opening a lid reveals a sand-toned compartment containing preserved native HTML content.",
-  "docs":"Use <sand-accordion items=\"shipping:Shipping,returns:Returns\" value=\"shipping\"></sand-accordion> with template[data-panel] children. Add multiple for simultaneous panels and collapsible to allow all panels to close.",
-  "intro":["Walnut lids sit over separate sand compartments. Opening a lid lifts it from the frame and reveals the content below without rebuilding it on every toggle."],
-  "use":"<script src=\"accordion.js\"></script>\n<sand-accordion items=\"shipping:Shipping,returns:Returns\" value=\"shipping\"><template data-panel=\"shipping\"><p>Delivery information</p></template><template data-panel=\"returns\"><p>Return information</p></template></sand-accordion>",
-  "js":"const accordion = document.querySelector('sand-accordion');\naccordion.toggle('returns');\naccordion.addEventListener('change', event => console.log(event.detail.openItems));",
-  "attrs":[["items","Comma-separated id:Label entries, optional :disabled suffix","Shipping, Returns, Care"],["value","Open item ID or comma-separated IDs in multiple mode","First enabled item"],["label","Accessible group name","Expandable sections"],["multiple","Allow multiple panels to remain open","absent"],["collapsible","Allow all panels to close","absent"],["disabled-items","Comma-separated disabled item IDs","none"],["disabled","Disable every header","absent"]],
-  "notes":["Each panel is populated from a matching template[data-panel] child. Collapsing a panel hides its existing DOM instead of destroying form state.","Each header is a real button with aria-expanded and aria-controls; each panel is a labelled region.","The change event exposes value and openItems."],
-  "happens":[["open a section","the walnut lid lifts and its sand compartment is revealed"],["enable multiple","more than one lid may remain open"],["disable a section","its header button is disabled"]],
-  "limits":["Up to five accordion items. Attribute definitions reserve comma and colon as delimiters.","This is a disclosure control, not a nested tree view."],
-  "manualDocs":true
-},
-{
-  "id":"pagination","name":"Pagination","tag":"sand-pagination",
-  "categories":["navigation","pagination","sand","animation"],
-  "sub":"A stone marks the current page along a carved sand track.",
-  "desc":"A pagination control with numbered sand wells and a moving river-stone page marker. Page state and navigation are native buttons; data loading remains the host application's responsibility.",
-  "docs":"Use <sand-pagination page=\"4\" total=\"24\"></sand-pagination>. Read or set page, configure sibling-count and boundary-count, and listen for change to load the selected page.",
-  "intro":["A row of numbered wells is carved into a shallow sand track. The low river stone marks the current 1-based page."],
-  "use":"<script src=\"pagination.js\"></script>\n<sand-pagination page=\"4\" total=\"24\" sibling-count=\"1\" boundary-count=\"1\" show-first-last label=\"Search results\"></sand-pagination>",
-  "js":"const pages = document.querySelector('sand-pagination');\npages.addEventListener('change', event => loadResults(event.detail.page));\npages.page = 5;",
-  "attrs":[["page","Current 1-based page","1"],["total","Total page count, minimum 1","1"],["sibling-count","Adjacent page buttons, 0 to 3","1"],["boundary-count","Buttons at each end, 1 to 3","1"],["show-first-last","Include first/last navigation buttons","absent"],["disabled","Disable all page buttons","absent"],["label","Navigation landmark name","Pagination"]],
-  "notes":["Ellipses are decorative separators. A single-page gap is rendered as its missing page number.","The change event exposes page, previousPage and total. The component does not fetch data or change browser history.","The current page uses aria-current=page. Navigation edges use disabled buttons."],
-  "happens":[["select a page","the stone marker moves to that page's well and change is dispatched"],["reach the first or last page","the previous or next control is disabled"],["reduce the page window","the number of visible sibling and boundary buttons changes"]],
-  "limits":["Page values are clamped to the inclusive 1..total range.","The control is a single-row pagination bar, not infinite scrolling or cursor pagination."],
-  "manualDocs":true
-},
-{
-  "id":"breadcrumbs","name":"Breadcrumbs","tag":"sand-breadcrumbs",
-  "categories":["navigation","breadcrumbs","sand","animation"],
-  "sub":"Stepping stones form a navigable hierarchy through raked sand.",
-  "desc":"A breadcrumb navigation trail with real ancestor links and a non-interactive current page marker. River stones sit along a shallow raked path.",
-  "docs":"Use <sand-breadcrumbs items=\"Home|/;Library|/library;Current\"></sand-breadcrumbs>. Supply semicolon-separated Label|URL ancestors and a plain current label, or assign the items array property.",
-  "intro":["A hierarchy becomes a path of stepping stones across raked sand. Ancestors are links; the final stone marks the current location."],
-  "use":"<script src=\"breadcrumbs.js\"></script>\n<sand-breadcrumbs items=\"Home|/;Library|/library;Components|/components;Breadcrumbs\"></sand-breadcrumbs>",
-  "js":"const crumbs = document.querySelector('sand-breadcrumbs');\ncrumbs.items = [{ label: 'Home', href: '/' }, { label: 'Current' }];",
-  "attrs":[["items","Semicolon-separated Label|URL entries or an array of objects","Home, Library, Current project"],["label","Navigation landmark name","Breadcrumb"],["separator","Visible separator glyph","›"]],
-  "notes":["Ancestors render as native anchors. The final label is a span with aria-current=page.","Only HTTP(S) and safe relative destinations become links. javascript:, data:, protocol-relative and other schemes are rejected.","The items property accepts an array of {label, href} objects and supports labels/URLs containing delimiters."],
-  "happens":[["navigate an ancestor","the browser follows the supplied href as a normal link"],["change the item array","the breadcrumb path and stepping-stone positions are rebuilt"],["reach the final item","it is marked aria-current=page and is not a link"]],
-  "limits":["Up to eight breadcrumb items.","The component does not create routes or intercept navigation."],
-  "manualDocs":true
-},
-{
-  "id":"menu","name":"Menu / Popover","tag":"sand-menu",
-  "categories":["navigation","menu","popover","overlay","sand"],
-  "sub":"A stone trigger lifts a walnut-framed command tray.",
-  "desc":"A compact command menu with a lifting stone trigger, anchored walnut tray, keyboard navigation, outside dismissal and focus restoration. Commands are emitted as events for the host application.",
-  "docs":"Use <sand-menu items=\"new:New project,duplicate:Duplicate\"></sand-menu>. Listen for the bubbling select event to run an action. The open property and attribute control the menu visibility.",
-  "intro":["A small river stone lifts from a carved trigger well and reveals a walnut-framed option tray. Actions remain native buttons and are reported to the host application."],
-  "use":"<script src=\"menu.js\"></script>\n<sand-menu label=\"Project actions\" items=\"new:New project,duplicate:Duplicate,archive:Archive\"></sand-menu>",
-  "js":"const menu = document.querySelector('sand-menu');\nmenu.addEventListener('select', event => runAction(event.detail.value));\nmenu.open = true;",
-  "attrs":[["items","Comma-separated value:Label definitions, optional :disabled suffix","New project, Duplicate, Archive"],["label","Trigger and menu accessible name","Actions"],["open","Reflects open visibility","absent"],["disabled","Disable trigger and prevent opening","absent"],["keep-open","Keep menu open after a selection","absent"]],
-  "notes":["ArrowDown/ArrowUp open and focus the first/last enabled item. Up/Down move inside; Home/End move to edges; Escape closes and restores trigger focus.","Tab closes without trapping focus. Outside pointer press dismisses. The tray repositions on scroll and resize and stays within the viewport.","The select event exposes value and label; the component never executes the action itself."],
-  "happens":[["open the trigger","the stone lifts and the anchored walnut option tray appears"],["select an enabled action","a select event is emitted and the menu closes unless keep-open is present"],["press Escape or click outside","the tray closes; Escape restores focus to the trigger"]],
-  "limits":["Up to eight menu items.","This component is a command menu, not a modal dialog or general rich-content popover."],
-  "manualDocs":true
-},
-{
-  "id": "dropzone",
-  "name": "File Dropzone",
-  "tag": "sand-dropzone",
-  "categories": [
-    "file",
-    "upload",
-    "dropzone",
-    "input",
-    "sand",
-    "animation"
-  ],
-  "sub": "A file tile lands in a recessed walnut tray.",
-  "desc": "A file dropzone with real drag-and-drop and native file selection, type and size checks, clearable file state and accessible rejection messages. A file tile settles into a sand tray when accepted.",
-  "docs": "Use <sand-dropzone accept=\"image/*,.pdf\" multiple max-size=\"10485760\" label=\"Project files\"></sand-dropzone>. Read files, call addFiles() or clear(), and listen for files-change and file-reject. max-size is in bytes; the component selects files but does not upload them.",
-  "intro": [
-    "A file is a small object arriving at a physical tray. Dragging over the frame raises a settled stone; dropping a valid file makes its tile land in the tray and the sand settle around it. The native file picker remains available for keyboard and touch users."
-  ],
-  "use": "<script src=\"dropzone.js\"></script>\n<sand-dropzone accept=\"image/*,.pdf\" multiple max-size=\"10485760\" label=\"Project files\"></sand-dropzone>",
-  "js": "const zone = document.querySelector('sand-dropzone');\nzone.addEventListener('files-change', event => queueFiles(event.detail.files));\nzone.addEventListener('file-reject', event => showRejected(event.detail.rejected));\n// zone.files returns a copy; zone.clear() empties the tray.",
-  "attrs": [
-    [
-      "accept",
-      "Comma-separated MIME types, wildcards or extensions",
-      "all files"
+    "manualDocs": true
+  },
+  {
+    "id": "tabs",
+    "name": "Tabs",
+    "tag": "sand-tabs",
+    "categories": [
+      "navigation",
+      "tabs",
+      "sand",
+      "animation"
     ],
-    [
-      "multiple",
-      "Accept more than one file",
-      "absent"
+    "sub": "A river stone glides between carved tab wells.",
+    "desc": "A tactile tab system with a flat river-stone marker moving between carved tab wells. Real HTML tab buttons and content panels preserve native interaction and accessible semantics.",
+    "docs": "Use <sand-tabs tabs=\"overview:Overview,activity:Activity\" value=\"overview\"></sand-tabs>. Put template[data-panel] elements inside for real panel content. Read or set value and listen for the bubbling change event.",
+    "intro": [
+      "A low river stone rests in one of several carved wells. The selected well is active, while the panel beneath remains actual HTML content."
     ],
-    [
-      "max-size",
-      "Maximum size of each file, in bytes",
-      "no limit"
+    "use": "<script src=\"tabs.js\"></script>\n<sand-tabs tabs=\"overview:Overview,activity:Activity\" value=\"overview\"><template data-panel=\"overview\"><p>Overview content</p></template><template data-panel=\"activity\"><p>Activity content</p></template></sand-tabs>",
+    "js": "const tabs = document.querySelector('sand-tabs');\ntabs.value = 'activity';\ntabs.addEventListener('change', event => console.log(event.detail.value));",
+    "attrs": [
+      [
+        "tabs",
+        "Comma-separated id:Label entries, up to six",
+        "Overview, Activity, Settings"
+      ],
+      [
+        "value",
+        "Selected tab identifier",
+        "First enabled tab"
+      ],
+      [
+        "label",
+        "Accessible tab group name",
+        "Content tabs"
+      ],
+      [
+        "orientation",
+        "horizontal or vertical",
+        "horizontal"
+      ],
+      [
+        "activation",
+        "automatic or manual keyboard activation",
+        "automatic"
+      ],
+      [
+        "disabled-tabs",
+        "Comma-separated disabled tab IDs",
+        "none"
+      ]
     ],
-    [
-      "disabled",
-      "Disable picker and drop handling",
-      "absent"
+    "notes": [
+      "Panel bodies are supplied as template[data-panel] elements and cloned during refresh().",
+      "Horizontal arrow keys move between tabs. Vertical orientation uses Up/Down. Home and End move to the edges; manual mode activates with Enter or Space.",
+      "A change event exposes value, previousValue and index."
     ],
-    [
-      "label",
-      "Accessible name for the file area",
-      "File upload area"
-    ]
-  ],
-  "notes": [
-    "The component validates file MIME types/extensions and individual file size before accepting a file. It does not inspect file contents or upload anything.",
-    "The files-change event contains files and rejected entries. file-reject contains only rejected entries and reasons.",
-    "The Choose files button opens a real input[type=file]; drag-and-drop is an additional pointer interaction, not the only way to select files."
-  ],
-  "happens": [
-    [
-      "drag files over the tray",
-      "the recessed border brightens and a stone tile rises"
+    "happens": [
+      [
+        "select a tab",
+        "the stone marker glides to its carved well and the matching panel is revealed"
+      ],
+      [
+        "change orientation",
+        "the tab list and keyboard direction switch between horizontal and vertical"
+      ],
+      [
+        "disable a tab",
+        "the disabled option is removed from keyboard selection"
+      ]
     ],
-    [
-      "drop an accepted file",
-      "the file appears as a tile and the sand settles"
+    "limits": [
+      "Up to six tab entries. Attribute definitions reserve comma and colon as delimiters.",
+      "The component does not provide routing, data fetching or lazy loading."
     ],
-    [
-      "drop an unsupported file",
-      "the file is rejected with a readable reason"
+    "manualDocs": true
+  },
+  {
+    "id": "accordion",
+    "name": "Accordion",
+    "tag": "sand-accordion",
+    "categories": [
+      "disclosure",
+      "navigation",
+      "sand",
+      "animation"
     ],
-    [
-      "clear the tray",
-      "selected files and status are removed"
-    ]
-  ],
-  "limits": [
-    "The component stores File objects in memory for the lifetime of the element. It does not create previews, persist files or send network requests."
-  ],
-  "demo": {
-    "html": "<sand-dropzone id=\"el\" accept=\"image/*,.pdf\" multiple max-size=\"10485760\" label=\"Project files\"></sand-dropzone><p class=\"readout\" id=\"out\">Drop an image or PDF, or use Choose files.</p>",
-    "hint": "Try dropping a file or choosing one. Unsupported types and files above 10 MB are rejected.",
-    "script": "const out = document.getElementById('out'); el.addEventListener('files-change', e => out.textContent = e.detail.files.length + ' accepted file(s)'); el.addEventListener('file-reject', e => out.textContent = e.detail.rejected.map(x => x.name + ': ' + x.reason).join(' · '));"
-  }
-},
-{
-  "id": "upload-queue",
-  "name": "Upload Queue",
-  "tag": "sand-upload-queue",
-  "categories": [
-    "file",
-    "upload",
-    "queue",
-    "progress",
-    "sand",
-    "animation"
-  ],
-  "sub": "File tiles move through a walnut transfer channel.",
-  "desc": "A transport-agnostic upload queue with per-file progress, queued/uploading/complete/error/cancelled states, retry and removal controls. It emits requests so the host application can perform the actual transfer.",
-  "docs": "Use <sand-upload-queue label=\"Uploads\"></sand-upload-queue>. Call addFiles(files), update(id, {status, progress, error}), remove(id) or clear(). Listen for upload-request, upload-cancel, retry-request and queue-change. The host application owns the network transfer.",
-  "intro": [
-    "The queue is a small transfer channel: each file has its own tile, status and progress ridge. The component owns the queue's state and controls; your application owns the actual HTTP request, authentication, storage destination and retry policy."
-  ],
-  "use": "<script src=\"upload-queue.js\"></script>\n<sand-upload-queue label=\"Uploads\"></sand-upload-queue>",
-  "js": "const queue = document.querySelector('sand-upload-queue');\nqueue.addEventListener('upload-request', ({ detail }) => startYourUpload(detail.item));\n// From your transport callback:\nqueue.update(id, { status: 'uploading', progress: 46 });\nqueue.update(id, { status: 'complete', progress: 100 });",
-  "attrs": [
-    [
-      "label",
-      "Accessible queue name",
-      "Upload queue"
-    ]
-  ],
-  "notes": [
-    "addFiles(files) returns stable item IDs and emits upload-request once for each new item. It does not start a network request itself.",
-    "update(id, patch) accepts queued, uploading, complete, error and cancelled states. Progress is clamped to 0–100; reaching 100 while uploading completes the item.",
-    "Cancel and retry controls emit upload-cancel and retry-request. The host must cancel or restart the real transfer, then update queue state.",
-    "The queue-change event contains a snapshot of the item list. File objects are retained in memory and are not persisted."
-  ],
-  "happens": [
-    [
-      "add files",
-      "file tiles enter the queue with a waiting state"
+    "sub": "Walnut lids lift to reveal separate sand compartments.",
+    "desc": "An accordion made from walnut lids with small stone pulls. Opening a lid reveals a sand-toned compartment containing preserved native HTML content.",
+    "docs": "Use <sand-accordion items=\"shipping:Shipping,returns:Returns\" value=\"shipping\"></sand-accordion> with template[data-panel] children. Add multiple for simultaneous panels and collapsible to allow all panels to close.",
+    "intro": [
+      "Walnut lids sit over separate sand compartments. Opening a lid lifts it from the frame and reveals the content below without rebuilding it on every toggle."
     ],
-    [
-      "report progress",
-      "a carved channel fills beneath the active tile"
+    "use": "<script src=\"accordion.js\"></script>\n<sand-accordion items=\"shipping:Shipping,returns:Returns\" value=\"shipping\"><template data-panel=\"shipping\"><p>Delivery information</p></template><template data-panel=\"returns\"><p>Return information</p></template></sand-accordion>",
+    "js": "const accordion = document.querySelector('sand-accordion');\naccordion.toggle('returns');\naccordion.addEventListener('change', event => console.log(event.detail.openItems));",
+    "attrs": [
+      [
+        "items",
+        "Comma-separated id:Label entries, optional :disabled suffix",
+        "Shipping, Returns, Care"
+      ],
+      [
+        "value",
+        "Open item ID or comma-separated IDs in multiple mode",
+        "First enabled item"
+      ],
+      [
+        "label",
+        "Accessible group name",
+        "Expandable sections"
+      ],
+      [
+        "multiple",
+        "Allow multiple panels to remain open",
+        "absent"
+      ],
+      [
+        "collapsible",
+        "Allow all panels to close",
+        "absent"
+      ],
+      [
+        "disabled-items",
+        "Comma-separated disabled item IDs",
+        "none"
+      ],
+      [
+        "disabled",
+        "Disable every header",
+        "absent"
+      ]
     ],
-    [
-      "complete a transfer",
-      "the tile settles and its status becomes complete"
+    "notes": [
+      "Each panel is populated from a matching template[data-panel] child. Collapsing a panel hides its existing DOM instead of destroying form state.",
+      "Each header is a real button with aria-expanded and aria-controls; each panel is a labelled region.",
+      "The change event exposes value and openItems."
     ],
-    [
-      "cancel or retry",
-      "a request event is sent to the host application"
-    ]
-  ],
-  "limits": [
-    "No HTTP transport is built in. Connect upload-request, upload-cancel and retry-request to your own upload service.",
-    "Progress is supplied by the host; the queue does not infer progress from a File object."
-  ],
-  "demo": {
-    "html": "<sand-upload-queue id=\"el\" label=\"Uploads\"></sand-upload-queue><div class=\"row\"><button class=\"pill\" id=\"simulate\" type=\"button\">Add sample files</button></div><p class=\"readout\" id=\"out\">The demo simulates queue events, not a network upload.</p>",
-    "hint": "Add sample files. The queue emits upload-request; the demo simulates progress locally.",
-    "script": "const out = document.getElementById('out'); el.addEventListener('upload-request', e => out.textContent = 'Queued: ' + e.detail.item.name + '. Demo will simulate progress.'); document.getElementById('simulate').onclick = () => { const ids = el.addFiles([new File(['one'], 'brand-assets.zip', {type:'application/zip'}), new File(['two'], 'hero-image.png', {type:'image/png'})]); ids.forEach((id,i) => { el.update(id,{status:'uploading',progress:22}); setTimeout(()=>el.update(id,{status:'uploading',progress:68}),450+i*120); setTimeout(()=>el.update(id,{status:'complete',progress:100}),900+i*160); }); };"
-  }
-},
-{
-  "id": "carousel",
-  "name": "Image Carousel",
-  "tag": "sand-carousel",
-  "categories": [
-    "media",
-    "image",
-    "carousel",
-    "gallery",
-    "sand",
-    "animation"
-  ],
-  "sub": "Framed image plates travel along a sand track.",
-  "desc": "An image carousel that displays real images in a recessed walnut frame with previous/next buttons, indexed selection, touch swipes and keyboard navigation. It never fetches or transforms image sources.",
-  "docs": "Set el.items to an array of {src, alt, caption} objects. Read or set el.index and listen for change. Only HTTP(S), blob and data:image sources are accepted.",
-  "intro": [
-    "Photographs sit in framed walnut plates. The selected plate moves along a shallow sand track while the native controls and accessible text identify the current image."
-  ],
-  "use": "<script src=\"carousel.js\"></script>\n<sand-carousel id=\"photos\" label=\"Project photos\"></sand-carousel>\n<script>\nphotos.items = [{ src: '/images/one.jpg', alt: 'Studio', caption: 'Studio light' }];\n</script>",
-  "js": "const carousel = document.querySelector('sand-carousel');\ncarousel.items = [\n  { src: '/images/studio.jpg', alt: 'Studio', caption: 'Studio light' },\n  { src: '/images/material.jpg', alt: 'Material', caption: 'Walnut and sand' },\n];\ncarousel.addEventListener('change', event => showImage(event.detail.index));",
-  "attrs": [
-    [
-      "label",
-      "Accessible carousel name",
-      "Image carousel"
+    "happens": [
+      [
+        "open a section",
+        "the walnut lid lifts and its sand compartment is revealed"
+      ],
+      [
+        "enable multiple",
+        "more than one lid may remain open"
+      ],
+      [
+        "disable a section",
+        "its header button is disabled"
+      ]
     ],
-    [
-      "index",
-      "Initial/current image index (zero-based)",
-      "0"
+    "limits": [
+      "Up to five accordion items. Attribute definitions reserve comma and colon as delimiters.",
+      "This is a disclosure control, not a nested tree view."
     ],
-    [
-      "disabled",
-      "Disable navigation controls",
-      "absent"
+    "manualDocs": true
+  },
+  {
+    "id": "pagination",
+    "name": "Pagination",
+    "tag": "sand-pagination",
+    "categories": [
+      "navigation",
+      "pagination",
+      "sand",
+      "animation"
     ],
-    [
-      "items",
-      "Property array of image objects",
-      "empty"
-    ]
-  ],
-  "notes": [
-    "items is a property array of {src, alt, caption}; the component does not parse an arbitrary HTML string into images.",
-    "Previous/next buttons, dot buttons, Left/Right keys and touch swipes change the selected image. Selection wraps at either end.",
-    "Only HTTP(S), blob and data:image URLs are accepted. Images use object-fit:cover within a beveled frame."
-  ],
-  "happens": [
-    [
-      "select another frame",
-      "the framed plate changes and the stone marker moves along the track"
+    "sub": "A stone marks the current page along a carved sand track.",
+    "desc": "A pagination control with numbered sand wells and a moving river-stone page marker. Page state and navigation are native buttons; data loading remains the host application's responsibility.",
+    "docs": "Use <sand-pagination page=\"4\" total=\"24\"></sand-pagination>. Read or set page, configure sibling-count and boundary-count, and listen for change to load the selected page.",
+    "intro": [
+      "A row of numbered wells is carved into a shallow sand track. The low river stone marks the current 1-based page."
     ],
-    [
-      "swipe left or right",
-      "the next or previous image is selected"
+    "use": "<script src=\"pagination.js\"></script>\n<sand-pagination page=\"4\" total=\"24\" sibling-count=\"1\" boundary-count=\"1\" show-first-last label=\"Search results\"></sand-pagination>",
+    "js": "const pages = document.querySelector('sand-pagination');\npages.addEventListener('change', event => loadResults(event.detail.page));\npages.page = 5;",
+    "attrs": [
+      [
+        "page",
+        "Current 1-based page",
+        "1"
+      ],
+      [
+        "total",
+        "Total page count, minimum 1",
+        "1"
+      ],
+      [
+        "sibling-count",
+        "Adjacent page buttons, 0 to 3",
+        "1"
+      ],
+      [
+        "boundary-count",
+        "Buttons at each end, 1 to 3",
+        "1"
+      ],
+      [
+        "show-first-last",
+        "Include first/last navigation buttons",
+        "absent"
+      ],
+      [
+        "disabled",
+        "Disable all page buttons",
+        "absent"
+      ],
+      [
+        "label",
+        "Navigation landmark name",
+        "Pagination"
+      ]
     ],
-    [
-      "press an arrow key",
-      "the carousel advances while focus remains within it"
-    ]
-  ],
-  "limits": [
-    "The component does not lazy-fetch remote images beyond the browser's normal image loading and does not implement video slides or automatic autoplay."
-  ],
-  "demo": {
-    "html": "<sand-carousel id=\"el\" label=\"Material study\"></sand-carousel><div class=\"readout\" id=\"out\">Image 1 of 3</div>",
-    "hint": "Use the arrows, dots, Left/Right keys or swipe across the framed image.",
-    "script": "el.items = [{src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1100&q=85',alt:'Mountain landscape',caption:'Stone and open sky'},{src:'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=1100&q=85',alt:'Warm interior',caption:'Quiet interior details'},{src:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1100&q=85',alt:'Mountain under stars',caption:'Night over the mountains'}]; const out=document.getElementById('out'); const show=()=>out.textContent='Image '+(el.index+1)+' of '+el.items.length;el.addEventListener('change',show);show();"
-  }
-},
-{
-  "id": "lightbox",
-  "name": "Lightbox Gallery",
-  "tag": "sand-lightbox",
-  "categories": [
-    "media",
-    "image",
-    "gallery",
-    "lightbox",
-    "dialog",
-    "sand"
-  ],
-  "sub": "A selected framed image opens above the tray.",
-  "desc": "A thumbnail gallery with a native modal dialog for expanded images, accessible previous/next navigation, Escape/backdrop dismissal and focus restoration.",
-  "docs": "Set el.items to {src, alt, caption} objects. Call openAt(index, opener) or close(), and listen for open, change and close. The expanded viewer uses the native dialog element.",
-  "intro": [
-    "A set of thumbnail plates sits inside a walnut gallery tray. Opening a plate lifts it into a full-screen viewing surface; the browser's native dialog supplies modal behavior and focus containment."
-  ],
-  "use": "<script src=\"lightbox.js\"></script>\n<sand-lightbox id=\"gallery\" label=\"Product gallery\"></sand-lightbox>\n<script>\ngallery.items = [{ src: '/images/one.jpg', alt: 'Detail', caption: 'Close detail' }];\n</script>",
-  "js": "const gallery = document.querySelector('sand-lightbox');\ngallery.items = [{ src: '/images/one.jpg', alt: 'Detail', caption: 'Close detail' }];\ngallery.openAt(0); // gallery.close() dismisses the dialog",
-  "attrs": [
-    [
-      "label",
-      "Accessible gallery/viewer name",
-      "Image gallery"
+    "notes": [
+      "Ellipses are decorative separators. A single-page gap is rendered as its missing page number.",
+      "The change event exposes page, previousPage and total. The component does not fetch data or change browser history.",
+      "The current page uses aria-current=page. Navigation edges use disabled buttons."
     ],
-    [
-      "items",
-      "Property array of {src, alt, caption} objects",
-      "empty"
-    ]
-  ],
-  "notes": [
-    "The thumbnail grid uses actual images with alt text. Activating a thumbnail opens a native <dialog> using showModal().",
-    "Escape, Close and backdrop clicks dismiss the dialog. Focus returns to the element that opened the image when that opener remains connected.",
-    "Left/Right keys and Previous/Next buttons navigate images; open, change and close events expose the current index/item."
-  ],
-  "happens": [
-    [
-      "choose a thumbnail",
-      "a framed image opens above the page"
+    "happens": [
+      [
+        "select a page",
+        "the stone marker moves to that page's well and change is dispatched"
+      ],
+      [
+        "reach the first or last page",
+        "the previous or next control is disabled"
+      ],
+      [
+        "reduce the page window",
+        "the number of visible sibling and boundary buttons changes"
+      ]
     ],
-    [
-      "navigate",
-      "the displayed plate changes without closing the viewer"
+    "limits": [
+      "Page values are clamped to the inclusive 1..total range.",
+      "The control is a single-row pagination bar, not infinite scrolling or cursor pagination."
     ],
-    [
-      "press Escape or Close",
-      "the viewer closes and focus returns to the opener"
-    ]
-  ],
-  "limits": [
-    "The image URLs are supplied by the host and are not downloaded, proxied or cached by this component.",
-    "Browser-native dialog support is required for the modal viewer."
-  ],
-  "demo": {
-    "html": "<sand-lightbox id=\"el\" label=\"Material gallery\"></sand-lightbox><p class=\"readout\" id=\"out\">Select a thumbnail to open the viewer.</p>",
-    "hint": "Select a thumbnail, then navigate inside the viewer or close it with Escape.",
-    "script": "el.items=[{src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=90',alt:'Mountain landscape',caption:'Open sky above the ridge'},{src:'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=1200&q=90',alt:'Warm interior',caption:'A quiet interior'},{src:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=90',alt:'Night sky',caption:'Stars above the mountains'}];const out=document.getElementById('out');el.addEventListener('open',e=>out.textContent='Opened image '+(e.detail.index+1));el.addEventListener('close',()=>out.textContent='Viewer closed');"
-  }
-},
-{
-  "id": "scrubber",
-  "name": "Media Scrubber",
-  "tag": "sand-scrubber",
-  "categories": [
-    "media",
-    "audio",
-    "video",
-    "timeline",
-    "scrubber",
-    "sand"
-  ],
-  "sub": "A rake and stone mark the playhead in a media timeline.",
-  "desc": "A media timeline bound to an existing HTMLAudioElement or HTMLVideoElement, with play/pause, current position, buffered range visualization and keyboard-accessible seeking.",
-  "docs": "Assign el.media = document.querySelector('video') or an audio element. The scrubber does not fetch media; it reads duration/currentTime/buffered and writes currentTime when seeking.",
-  "intro": [
-    "A narrow raked channel becomes a media timeline. A stone marks the playhead, a pale ridge shows buffered content, and the native range input makes seeking available to touch, mouse and keyboard users."
-  ],
-  "use": "<script src=\"scrubber.js\"></script>\n<video id=\"clip\" controls src=\"/media/demo.mp4\"></video>\n<sand-scrubber id=\"timeline\" label=\"Clip position\"></sand-scrubber>\n<script>timeline.media = clip;</script>",
-  "js": "const media = document.querySelector('video');\nconst scrubber = document.querySelector('sand-scrubber');\nscrubber.media = media;\nscrubber.addEventListener('seek', event => logSeek(event.detail.time));",
-  "attrs": [
-    [
-      "label",
-      "Accessible timeline label",
-      "Media position"
+    "manualDocs": true
+  },
+  {
+    "id": "breadcrumbs",
+    "name": "Breadcrumbs",
+    "tag": "sand-breadcrumbs",
+    "categories": [
+      "navigation",
+      "breadcrumbs",
+      "sand",
+      "animation"
     ],
-    [
-      "disabled",
-      "Disable play and seek controls",
-      "absent"
+    "sub": "Stepping stones form a navigable hierarchy through raked sand.",
+    "desc": "A breadcrumb navigation trail with real ancestor links and a non-interactive current page marker. River stones sit along a shallow raked path.",
+    "docs": "Use <sand-breadcrumbs items=\"Home|/;Library|/library;Current\"></sand-breadcrumbs>. Supply semicolon-separated Label|URL ancestors and a plain current label, or assign the items array property.",
+    "intro": [
+      "A hierarchy becomes a path of stepping stones across raked sand. Ancestors are links; the final stone marks the current location."
     ],
-    [
+    "use": "<script src=\"breadcrumbs.js\"></script>\n<sand-breadcrumbs items=\"Home|/;Library|/library;Components|/components;Breadcrumbs\"></sand-breadcrumbs>",
+    "js": "const crumbs = document.querySelector('sand-breadcrumbs');\ncrumbs.items = [{ label: 'Home', href: '/' }, { label: 'Current' }];",
+    "attrs": [
+      [
+        "items",
+        "Semicolon-separated Label|URL entries or an array of objects",
+        "Home, Library, Current project"
+      ],
+      [
+        "label",
+        "Navigation landmark name",
+        "Breadcrumb"
+      ],
+      [
+        "separator",
+        "Visible separator glyph",
+        "›"
+      ]
+    ],
+    "notes": [
+      "Ancestors render as native anchors. The final label is a span with aria-current=page.",
+      "Only HTTP(S) and safe relative destinations become links. javascript:, data:, protocol-relative and other schemes are rejected.",
+      "The items property accepts an array of {label, href} objects and supports labels/URLs containing delimiters."
+    ],
+    "happens": [
+      [
+        "navigate an ancestor",
+        "the browser follows the supplied href as a normal link"
+      ],
+      [
+        "change the item array",
+        "the breadcrumb path and stepping-stone positions are rebuilt"
+      ],
+      [
+        "reach the final item",
+        "it is marked aria-current=page and is not a link"
+      ]
+    ],
+    "limits": [
+      "Up to eight breadcrumb items.",
+      "The component does not create routes or intercept navigation."
+    ],
+    "manualDocs": true
+  },
+  {
+    "id": "menu",
+    "name": "Menu / Popover",
+    "tag": "sand-menu",
+    "categories": [
+      "navigation",
+      "menu",
+      "popover",
+      "overlay",
+      "sand"
+    ],
+    "sub": "A stone trigger lifts a walnut-framed command tray.",
+    "desc": "A compact command menu with a lifting stone trigger, anchored walnut tray, keyboard navigation, outside dismissal and focus restoration. Commands are emitted as events for the host application.",
+    "docs": "Use <sand-menu items=\"new:New project,duplicate:Duplicate\"></sand-menu>. Listen for the bubbling select event to run an action. The open property and attribute control the menu visibility.",
+    "intro": [
+      "A small river stone lifts from a carved trigger well and reveals a walnut-framed option tray. Actions remain native buttons and are reported to the host application."
+    ],
+    "use": "<script src=\"menu.js\"></script>\n<sand-menu label=\"Project actions\" items=\"new:New project,duplicate:Duplicate,archive:Archive\"></sand-menu>",
+    "js": "const menu = document.querySelector('sand-menu');\nmenu.addEventListener('select', event => runAction(event.detail.value));\nmenu.open = true;",
+    "attrs": [
+      [
+        "items",
+        "Comma-separated value:Label definitions, optional :disabled suffix",
+        "New project, Duplicate, Archive"
+      ],
+      [
+        "label",
+        "Trigger and menu accessible name",
+        "Actions"
+      ],
+      [
+        "open",
+        "Reflects open visibility",
+        "absent"
+      ],
+      [
+        "disabled",
+        "Disable trigger and prevent opening",
+        "absent"
+      ],
+      [
+        "keep-open",
+        "Keep menu open after a selection",
+        "absent"
+      ]
+    ],
+    "notes": [
+      "ArrowDown/ArrowUp open and focus the first/last enabled item. Up/Down move inside; Home/End move to edges; Escape closes and restores trigger focus.",
+      "Tab closes without trapping focus. Outside pointer press dismisses. The tray repositions on scroll and resize and stays within the viewport.",
+      "The select event exposes value and label; the component never executes the action itself."
+    ],
+    "happens": [
+      [
+        "open the trigger",
+        "the stone lifts and the anchored walnut option tray appears"
+      ],
+      [
+        "select an enabled action",
+        "a select event is emitted and the menu closes unless keep-open is present"
+      ],
+      [
+        "press Escape or click outside",
+        "the tray closes; Escape restores focus to the trigger"
+      ]
+    ],
+    "limits": [
+      "Up to eight menu items.",
+      "This component is a command menu, not a modal dialog or general rich-content popover."
+    ],
+    "manualDocs": true
+  },
+  {
+    "id": "dropzone",
+    "name": "File Dropzone",
+    "tag": "sand-dropzone",
+    "categories": [
+      "file",
+      "upload",
+      "dropzone",
+      "input",
+      "sand",
+      "animation"
+    ],
+    "sub": "A file tile lands in a recessed walnut tray.",
+    "desc": "A file dropzone with real drag-and-drop and native file selection, type and size checks, clearable file state and accessible rejection messages. A file tile settles into a sand tray when accepted.",
+    "docs": "Use <sand-dropzone accept=\"image/*,.pdf\" multiple max-size=\"10485760\" label=\"Project files\"></sand-dropzone>. Read files, call addFiles() or clear(), and listen for files-change and file-reject. max-size is in bytes; the component selects files but does not upload them.",
+    "intro": [
+      "A file is a small object arriving at a physical tray. Dragging over the frame raises a settled stone; dropping a valid file makes its tile land in the tray and the sand settle around it. The native file picker remains available for keyboard and touch users."
+    ],
+    "use": "<script src=\"dropzone.js\"></script>\n<sand-dropzone accept=\"image/*,.pdf\" multiple max-size=\"10485760\" label=\"Project files\"></sand-dropzone>",
+    "js": "const zone = document.querySelector('sand-dropzone');\nzone.addEventListener('files-change', event => queueFiles(event.detail.files));\nzone.addEventListener('file-reject', event => showRejected(event.detail.rejected));\n// zone.files returns a copy; zone.clear() empties the tray.",
+    "attrs": [
+      [
+        "accept",
+        "Comma-separated MIME types, wildcards or extensions",
+        "all files"
+      ],
+      [
+        "multiple",
+        "Accept more than one file",
+        "absent"
+      ],
+      [
+        "max-size",
+        "Maximum size of each file, in bytes",
+        "no limit"
+      ],
+      [
+        "disabled",
+        "Disable picker and drop handling",
+        "absent"
+      ],
+      [
+        "label",
+        "Accessible name for the file area",
+        "File upload area"
+      ]
+    ],
+    "notes": [
+      "The component validates file MIME types/extensions and individual file size before accepting a file. It does not inspect file contents or upload anything.",
+      "The files-change event contains files and rejected entries. file-reject contains only rejected entries and reasons.",
+      "The Choose files button opens a real input[type=file]; drag-and-drop is an additional pointer interaction, not the only way to select files."
+    ],
+    "happens": [
+      [
+        "drag files over the tray",
+        "the recessed border brightens and a stone tile rises"
+      ],
+      [
+        "drop an accepted file",
+        "the file appears as a tile and the sand settles"
+      ],
+      [
+        "drop an unsupported file",
+        "the file is rejected with a readable reason"
+      ],
+      [
+        "clear the tray",
+        "selected files and status are removed"
+      ]
+    ],
+    "limits": [
+      "The component stores File objects in memory for the lifetime of the element. It does not create previews, persist files or send network requests."
+    ],
+    "demo": {
+      "html": "<sand-dropzone id=\"el\" accept=\"image/*,.pdf\" multiple max-size=\"10485760\" label=\"Project files\"></sand-dropzone><p class=\"readout\" id=\"out\">Drop an image or PDF, or use Choose files.</p>",
+      "hint": "Try dropping a file or choosing one. Unsupported types and files above 10 MB are rejected.",
+      "script": "const out = document.getElementById('out'); el.addEventListener('files-change', e => out.textContent = e.detail.files.length + ' accepted file(s)'); el.addEventListener('file-reject', e => out.textContent = e.detail.rejected.map(x => x.name + ': ' + x.reason).join(' · '));"
+    }
+  },
+  {
+    "id": "upload-queue",
+    "name": "Upload Queue",
+    "tag": "sand-upload-queue",
+    "categories": [
+      "file",
+      "upload",
+      "queue",
+      "progress",
+      "sand",
+      "animation"
+    ],
+    "sub": "File tiles move through a walnut transfer channel.",
+    "desc": "A transport-agnostic upload queue with per-file progress, queued/uploading/complete/error/cancelled states, retry and removal controls. It emits requests so the host application can perform the actual transfer.",
+    "docs": "Use <sand-upload-queue label=\"Uploads\"></sand-upload-queue>. Call addFiles(files), update(id, {status, progress, error}), remove(id) or clear(). Listen for upload-request, upload-cancel, retry-request and queue-change. The host application owns the network transfer.",
+    "intro": [
+      "The queue is a small transfer channel: each file has its own tile, status and progress ridge. The component owns the queue's state and controls; your application owns the actual HTTP request, authentication, storage destination and retry policy."
+    ],
+    "use": "<script src=\"upload-queue.js\"></script>\n<sand-upload-queue label=\"Uploads\"></sand-upload-queue>",
+    "js": "const queue = document.querySelector('sand-upload-queue');\nqueue.addEventListener('upload-request', ({ detail }) => startYourUpload(detail.item));\n// From your transport callback:\nqueue.update(id, { status: 'uploading', progress: 46 });\nqueue.update(id, { status: 'complete', progress: 100 });",
+    "attrs": [
+      [
+        "label",
+        "Accessible queue name",
+        "Upload queue"
+      ]
+    ],
+    "notes": [
+      "addFiles(files) returns stable item IDs and emits upload-request once for each new item. It does not start a network request itself.",
+      "update(id, patch) accepts queued, uploading, complete, error and cancelled states. Progress is clamped to 0–100; reaching 100 while uploading completes the item.",
+      "Cancel and retry controls emit upload-cancel and retry-request. The host must cancel or restart the real transfer, then update queue state.",
+      "The queue-change event contains a snapshot of the item list. File objects are retained in memory and are not persisted."
+    ],
+    "happens": [
+      [
+        "add files",
+        "file tiles enter the queue with a waiting state"
+      ],
+      [
+        "report progress",
+        "a carved channel fills beneath the active tile"
+      ],
+      [
+        "complete a transfer",
+        "the tile settles and its status becomes complete"
+      ],
+      [
+        "cancel or retry",
+        "a request event is sent to the host application"
+      ]
+    ],
+    "limits": [
+      "No HTTP transport is built in. Connect upload-request, upload-cancel and retry-request to your own upload service.",
+      "Progress is supplied by the host; the queue does not infer progress from a File object."
+    ],
+    "demo": {
+      "html": "<sand-upload-queue id=\"el\" label=\"Uploads\"></sand-upload-queue><div class=\"row\"><button class=\"pill\" id=\"simulate\" type=\"button\">Add sample files</button></div><p class=\"readout\" id=\"out\">The demo simulates queue events, not a network upload.</p>",
+      "hint": "Add sample files. The queue emits upload-request; the demo simulates progress locally.",
+      "script": "const out = document.getElementById('out'); el.addEventListener('upload-request', e => out.textContent = 'Queued: ' + e.detail.item.name + '. Demo will simulate progress.'); document.getElementById('simulate').onclick = () => { const ids = el.addFiles([new File(['one'], 'brand-assets.zip', {type:'application/zip'}), new File(['two'], 'hero-image.png', {type:'image/png'})]); ids.forEach((id,i) => { el.update(id,{status:'uploading',progress:22}); setTimeout(()=>el.update(id,{status:'uploading',progress:68}),450+i*120); setTimeout(()=>el.update(id,{status:'complete',progress:100}),900+i*160); }); };"
+    }
+  },
+  {
+    "id": "carousel",
+    "name": "Image Carousel",
+    "tag": "sand-carousel",
+    "categories": [
       "media",
-      "HTMLAudioElement/HTMLVideoElement property",
-      "null"
-    ]
-  ],
-  "notes": [
-    "Assign a real audio or video element to the media property. The component listens for timeupdate, durationchange, progress, play, pause, seeking, seeked, loadedmetadata and ended.",
-    "Play/Pause delegates to the media element. Seeking writes its currentTime and emits seek while adjusting and seeked when committed.",
-    "Buffered width is derived from the media element's TimeRanges. The component does not own the source URL or network loading."
-  ],
-  "happens": [
-    [
-      "play media",
-      "the play button reflects the media element's state"
+      "image",
+      "carousel",
+      "gallery",
+      "sand",
+      "animation"
     ],
-    [
-      "seek",
-      "the stone playhead and media currentTime move together"
+    "sub": "Framed image plates travel along a sand track.",
+    "desc": "An image carousel that displays real images in a recessed walnut frame with previous/next buttons, indexed selection, touch swipes and keyboard navigation. It never fetches or transforms image sources.",
+    "docs": "Set el.items to an array of {src, alt, caption} objects. Read or set el.index and listen for change. Only HTTP(S), blob and data:image sources are accepted.",
+    "intro": [
+      "Photographs sit in framed walnut plates. The selected plate moves along a shallow sand track while the native controls and accessible text identify the current image."
     ],
-    [
-      "buffer media",
-      "the buffered ridge advances along the carved channel"
-    ]
-  ],
-  "limits": [
-    "Duration/currentTime and buffered data are browser media APIs; live streams with unknown duration may not show a seekable range.",
-    "The component does not implement a media player, source selection, captions or transport controls beyond play/pause."
-  ],
-  "demo": {
-    "html": "<video id=\"media\" controls muted playsinline preload=\"metadata\" src=\"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4\" style=\"width:min(100%,440px);border-radius:12px\"></video><sand-scrubber id=\"el\" label=\"Video position\"></sand-scrubber><p class=\"readout\" id=\"out\">Loading media metadata…</p>",
-    "hint": "Load the sample clip, play it, then seek using the stone timeline or keyboard.",
-    "script": "const media=document.getElementById('media'),out=document.getElementById('out');el.media=media;const show=()=>out.textContent=media.duration?Math.floor(media.currentTime)+'s / '+Math.floor(media.duration)+'s':'Waiting for media metadata';media.addEventListener('loadedmetadata',show);media.addEventListener('timeupdate',show);show();"
+    "use": "<script src=\"carousel.js\"></script>\n<sand-carousel id=\"photos\" label=\"Project photos\"></sand-carousel>\n<script>\nphotos.items = [{ src: '/images/one.jpg', alt: 'Studio', caption: 'Studio light' }];\n</script>",
+    "js": "const carousel = document.querySelector('sand-carousel');\ncarousel.items = [\n  { src: '/images/studio.jpg', alt: 'Studio', caption: 'Studio light' },\n  { src: '/images/material.jpg', alt: 'Material', caption: 'Walnut and sand' },\n];\ncarousel.addEventListener('change', event => showImage(event.detail.index));",
+    "attrs": [
+      [
+        "label",
+        "Accessible carousel name",
+        "Image carousel"
+      ],
+      [
+        "index",
+        "Initial/current image index (zero-based)",
+        "0"
+      ],
+      [
+        "disabled",
+        "Disable navigation controls",
+        "absent"
+      ],
+      [
+        "items",
+        "Property array of image objects",
+        "empty"
+      ]
+    ],
+    "notes": [
+      "items is a property array of {src, alt, caption}; the component does not parse an arbitrary HTML string into images.",
+      "Previous/next buttons, dot buttons, Left/Right keys and touch swipes change the selected image. Selection wraps at either end.",
+      "Only HTTP(S), blob and data:image URLs are accepted. Images use object-fit:cover within a beveled frame."
+    ],
+    "happens": [
+      [
+        "select another frame",
+        "the framed plate changes and the stone marker moves along the track"
+      ],
+      [
+        "swipe left or right",
+        "the next or previous image is selected"
+      ],
+      [
+        "press an arrow key",
+        "the carousel advances while focus remains within it"
+      ]
+    ],
+    "limits": [
+      "The component does not lazy-fetch remote images beyond the browser's normal image loading and does not implement video slides or automatic autoplay."
+    ],
+    "demo": {
+      "html": "<sand-carousel id=\"el\" label=\"Material study\"></sand-carousel><div class=\"readout\" id=\"out\">Image 1 of 3</div>",
+      "hint": "Use the arrows, dots, Left/Right keys or swipe across the framed image.",
+      "script": "el.items = [{src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1100&q=85',alt:'Mountain landscape',caption:'Stone and open sky'},{src:'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=1100&q=85',alt:'Warm interior',caption:'Quiet interior details'},{src:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1100&q=85',alt:'Mountain under stars',caption:'Night over the mountains'}]; const out=document.getElementById('out'); const show=()=>out.textContent='Image '+(el.index+1)+' of '+el.items.length;el.addEventListener('change',show);show();"
+    }
+  },
+  {
+    "id": "lightbox",
+    "name": "Lightbox Gallery",
+    "tag": "sand-lightbox",
+    "categories": [
+      "media",
+      "image",
+      "gallery",
+      "lightbox",
+      "dialog",
+      "sand"
+    ],
+    "sub": "A selected framed image opens above the tray.",
+    "desc": "A thumbnail gallery with a native modal dialog for expanded images, accessible previous/next navigation, Escape/backdrop dismissal and focus restoration.",
+    "docs": "Set el.items to {src, alt, caption} objects. Call openAt(index, opener) or close(), and listen for open, change and close. The expanded viewer uses the native dialog element.",
+    "intro": [
+      "A set of thumbnail plates sits inside a walnut gallery tray. Opening a plate lifts it into a full-screen viewing surface; the browser's native dialog supplies modal behavior and focus containment."
+    ],
+    "use": "<script src=\"lightbox.js\"></script>\n<sand-lightbox id=\"gallery\" label=\"Product gallery\"></sand-lightbox>\n<script>\ngallery.items = [{ src: '/images/one.jpg', alt: 'Detail', caption: 'Close detail' }];\n</script>",
+    "js": "const gallery = document.querySelector('sand-lightbox');\ngallery.items = [{ src: '/images/one.jpg', alt: 'Detail', caption: 'Close detail' }];\ngallery.openAt(0); // gallery.close() dismisses the dialog",
+    "attrs": [
+      [
+        "label",
+        "Accessible gallery/viewer name",
+        "Image gallery"
+      ],
+      [
+        "items",
+        "Property array of {src, alt, caption} objects",
+        "empty"
+      ]
+    ],
+    "notes": [
+      "The thumbnail grid uses actual images with alt text. Activating a thumbnail opens a native <dialog> using showModal().",
+      "Escape, Close and backdrop clicks dismiss the dialog. Focus returns to the element that opened the image when that opener remains connected.",
+      "Left/Right keys and Previous/Next buttons navigate images; open, change and close events expose the current index/item."
+    ],
+    "happens": [
+      [
+        "choose a thumbnail",
+        "a framed image opens above the page"
+      ],
+      [
+        "navigate",
+        "the displayed plate changes without closing the viewer"
+      ],
+      [
+        "press Escape or Close",
+        "the viewer closes and focus returns to the opener"
+      ]
+    ],
+    "limits": [
+      "The image URLs are supplied by the host and are not downloaded, proxied or cached by this component.",
+      "Browser-native dialog support is required for the modal viewer."
+    ],
+    "demo": {
+      "html": "<sand-lightbox id=\"el\" label=\"Material gallery\"></sand-lightbox><p class=\"readout\" id=\"out\">Select a thumbnail to open the viewer.</p>",
+      "hint": "Select a thumbnail, then navigate inside the viewer or close it with Escape.",
+      "script": "el.items=[{src:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200&q=90',alt:'Mountain landscape',caption:'Open sky above the ridge'},{src:'https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=1200&q=90',alt:'Warm interior',caption:'A quiet interior'},{src:'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=90',alt:'Night sky',caption:'Stars above the mountains'}];const out=document.getElementById('out');el.addEventListener('open',e=>out.textContent='Opened image '+(e.detail.index+1));el.addEventListener('close',()=>out.textContent='Viewer closed');"
+    }
+  },
+  {
+    "id": "scrubber",
+    "name": "Media Scrubber",
+    "tag": "sand-scrubber",
+    "categories": [
+      "media",
+      "audio",
+      "video",
+      "timeline",
+      "scrubber",
+      "sand"
+    ],
+    "sub": "A rake and stone mark the playhead in a media timeline.",
+    "desc": "A media timeline bound to an existing HTMLAudioElement or HTMLVideoElement, with play/pause, current position, buffered range visualization and keyboard-accessible seeking.",
+    "docs": "Assign el.media = document.querySelector('video') or an audio element. The scrubber does not fetch media; it reads duration/currentTime/buffered and writes currentTime when seeking.",
+    "intro": [
+      "A narrow raked channel becomes a media timeline. A stone marks the playhead, a pale ridge shows buffered content, and the native range input makes seeking available to touch, mouse and keyboard users."
+    ],
+    "use": "<script src=\"scrubber.js\"></script>\n<video id=\"clip\" controls src=\"/media/demo.mp4\"></video>\n<sand-scrubber id=\"timeline\" label=\"Clip position\"></sand-scrubber>\n<script>timeline.media = clip;</script>",
+    "js": "const media = document.querySelector('video');\nconst scrubber = document.querySelector('sand-scrubber');\nscrubber.media = media;\nscrubber.addEventListener('seek', event => logSeek(event.detail.time));",
+    "attrs": [
+      [
+        "label",
+        "Accessible timeline label",
+        "Media position"
+      ],
+      [
+        "disabled",
+        "Disable play and seek controls",
+        "absent"
+      ],
+      [
+        "media",
+        "HTMLAudioElement/HTMLVideoElement property",
+        "null"
+      ]
+    ],
+    "notes": [
+      "Assign a real audio or video element to the media property. The component listens for timeupdate, durationchange, progress, play, pause, seeking, seeked, loadedmetadata and ended.",
+      "Play/Pause delegates to the media element. Seeking writes its currentTime and emits seek while adjusting and seeked when committed.",
+      "Buffered width is derived from the media element's TimeRanges. The component does not own the source URL or network loading."
+    ],
+    "happens": [
+      [
+        "play media",
+        "the play button reflects the media element's state"
+      ],
+      [
+        "seek",
+        "the stone playhead and media currentTime move together"
+      ],
+      [
+        "buffer media",
+        "the buffered ridge advances along the carved channel"
+      ]
+    ],
+    "limits": [
+      "Duration/currentTime and buffered data are browser media APIs; live streams with unknown duration may not show a seekable range.",
+      "The component does not implement a media player, source selection, captions or transport controls beyond play/pause."
+    ],
+    "demo": {
+      "html": "<video id=\"media\" controls muted playsinline preload=\"metadata\" src=\"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4\" style=\"width:min(100%,440px);border-radius:12px\"></video><sand-scrubber id=\"el\" label=\"Video position\"></sand-scrubber><p class=\"readout\" id=\"out\">Loading media metadata…</p>",
+      "hint": "Load the sample clip, play it, then seek using the stone timeline or keyboard.",
+      "script": "const media=document.getElementById('media'),out=document.getElementById('out');el.media=media;const show=()=>out.textContent=media.duration?Math.floor(media.currentTime)+'s / '+Math.floor(media.duration)+'s':'Waiting for media metadata';media.addEventListener('loadedmetadata',show);media.addEventListener('timeupdate',show);show();"
+    }
+  },
+  {
+    "id": "color-picker",
+    "name": "Color Picker",
+    "tag": "sand-color-picker",
+    "categories": [
+      "color",
+      "picker",
+      "input",
+      "form",
+      "sand",
+      "palette"
+    ],
+    "sub": "Mineral pigment stones select a usable color value.",
+    "desc": "A color control with the native browser color dialog and a palette of tactile mineral swatches. Supports hexadecimal, RGB and HSL readouts plus form submission.",
+    "docs": "Use <sand-color-picker name=\"accent\" value=\"#c28b55\" format=\"hex\"></sand-color-picker>. Read or set value; input and change events expose both formatted value and normalized hex.",
+    "intro": [
+      "A pigment well holds a mineral sample. The native color input opens the browser's color chooser, while named mineral stones provide quick selections without replacing native keyboard and platform behavior."
+    ],
+    "use": "<script src=\"color-picker.js\"></script>\n<sand-color-picker name=\"accent\" value=\"#c28b55\" format=\"hex\" label=\"Accent color\"></sand-color-picker>",
+    "js": "const picker = document.querySelector('sand-color-picker');\npicker.addEventListener('input', event => preview(event.detail.hex));\npicker.addEventListener('change', event => save(event.detail.value));\npicker.value = '#547d73';",
+    "attrs": [
+      [
+        "value",
+        "Selected CSS color; normalized to #rrggbb",
+        "#c28b55"
+      ],
+      [
+        "format",
+        "hex, rgb or hsl readout and submitted value",
+        "hex"
+      ],
+      [
+        "label",
+        "Accessible name for the native color control",
+        "Choose a colour"
+      ],
+      [
+        "name",
+        "Form field name",
+        "absent"
+      ],
+      [
+        "disabled",
+        "Disable color input and mineral swatches",
+        "absent"
+      ]
+    ],
+    "notes": [
+      "The browser's native input[type=color] opens the platform color chooser. The component does not emulate a custom hue/saturation canvas.",
+      "Preset mineral stones select named values. input and change events expose detail.value in the selected format and detail.hex in normalized hexadecimal.",
+      "When a name is present, the normalized selected value is submitted through ElementInternals. The component participates in form reset and disabled-state callbacks."
+    ],
+    "happens": [
+      [
+        "choose a pigment stone",
+        "the sample well changes to that mineral color"
+      ],
+      [
+        "open the native chooser",
+        "the browser color dialog is used"
+      ],
+      [
+        "change format",
+        "the displayed and submitted value is represented as hex, rgb or hsl"
+      ]
+    ],
+    "limits": [
+      "Exact appearance of the native color dialog is browser/OS controlled.",
+      "CSS color names and rgb/hsl strings are normalized to 6-digit hex; alpha/transparency is not preserved."
+    ],
+    "demo": {
+      "html": "<sand-color-picker id=\"el\" name=\"accent\" value=\"#c28b55\" format=\"hex\" label=\"Accent color\"></sand-color-picker><p class=\"readout\" id=\"out\">#c28b55</p>",
+      "hint": "Choose one of the mineral swatches or open the native browser color chooser.",
+      "script": "const out=document.getElementById('out');el.addEventListener('input',e=>out.textContent=e.detail.hex);"
+    }
+  },
+  {
+    "id": "sortable",
+    "name": "Sortable List",
+    "tag": "sand-sortable",
+    "categories": [
+      "list",
+      "sortable",
+      "drag-and-drop",
+      "reorder",
+      "sand",
+      "accessibility"
+    ],
+    "sub": "Stone tiles reorder inside carved sand grooves.",
+    "desc": "A reorderable list with native drag-and-drop, keyboard shortcuts and explicit move buttons. Ordering is stored as stable item IDs and exposed through a property and events.",
+    "docs": "Set items to an array of {id,label,disabled} objects. Read value for the ordered IDs or call move(fromIndex,toIndex). Native dragging, arrow keys and Move Up/Down buttons are supported.",
+    "intro": [
+      "A row of small stone tiles rests in individually carved grooves. Drag a tile to another position, use the keyboard to move it, or press the raised arrow controls. The data order is real and is reported to the host application; the sand marker simply follows the active row."
+    ],
+    "use": "<script src=\"sortable.js\"></script>\n<sand-sortable id=\"tasks\" label=\"Project tasks\"></sand-sortable>\n<script>\ntasks.items = [{ id: 'brief', label: 'Prepare brief' }, { id: 'build', label: 'Build prototype' }];\n</script>",
+    "js": "const list = document.querySelector('sand-sortable');\nlist.addEventListener('reorder', event => saveOrder(event.detail.order));\nlist.move(1, 0); // move the second item to the first position\nlist.value;       // stable IDs in current order",
+    "attrs": [
+      [
+        "`label`",
+        "Accessible list name",
+        "Sortable list"
+      ],
+      [
+        "`disabled`",
+        "Disable dragging and move actions",
+        "absent"
+      ],
+      [
+        "`items`",
+        "Property array of {id,label,disabled} objects",
+        "empty"
+      ],
+      [
+        "`value`",
+        "Ordered array of stable item IDs",
+        "items order"
+      ]
+    ],
+    "notes": [
+      "Set `items` as a property array. IDs must be unique; labels are rendered as text, not interpreted as HTML.",
+      "Drag a row with a mouse, use Arrow Up/Down or Home/End on its handle, or use the visible Move Up/Down buttons.",
+      "`move(fromIndex,toIndex)` moves one row. `reorder` and `change` expose the item, indices, updated items and ordered ID array.",
+      "Disabled items cannot be dragged or moved through the component API."
+    ],
+    "happens": [
+      [
+        "drag a tile",
+        "the row lifts and settles into the new position"
+      ],
+      [
+        "press Arrow Up/Down",
+        "the focused handle reorders the tile and stays focused"
+      ],
+      [
+        "use Move Up/Down",
+        "the tile moves one place and the stone marker follows"
+      ]
+    ],
+    "limits": [
+      "The component manages list order only. Persistence, server synchronization, virtualization and application-specific validation belong to the host."
+    ],
+    "demo": {
+      "html": "<sand-sortable id=\"el\" label=\"Sprint tasks\"></sand-sortable><p class=\"readout\" id=\"out\">Move a task with its handle, arrow keys or move buttons.</p>",
+      "hint": "Drag a row or focus its handle and press Arrow Up/Down. The visible buttons provide the same action.",
+      "script": "el.items=[{id:'plan',label:'Plan the release'},{id:'design',label:'Review the design'},{id:'build',label:'Build the feature'},{id:'ship',label:'Ship the update'}];const out=document.getElementById('out');el.addEventListener('reorder',e=>out.textContent='New order: '+e.detail.order.join(' → '));"
+    }
+  },
+  {
+    "id": "transfer-list",
+    "name": "Transfer List",
+    "tag": "sand-transfer-list",
+    "categories": [
+      "list",
+      "transfer",
+      "selection",
+      "multi-select",
+      "sand",
+      "accessibility"
+    ],
+    "sub": "Selected stones move between two sand compartments.",
+    "desc": "A two-sided transfer control with multi-selection, explicit move-selected and move-all actions, and stable item IDs. The host owns the data and persistence.",
+    "docs": "Set items to {id,label,side,disabled} objects. Select IDs through the selected property, then call move(ids,'left'|'right'), moveSelected(target) or moveAll(target).",
+    "intro": [
+      "Two shallow walnut-edged trays hold small river stones. Select one or more stones in either tray, then move them across the channel. The selected set and each item's side remain ordinary data, ready for the host application to persist."
+    ],
+    "use": "<script src=\"transfer-list.js\"></script>\n<sand-transfer-list id=\"fields\" label=\"Included fields\"></sand-transfer-list>\n<script>\nfields.items = [{ id: 'name', label: 'Name', side: 'left' }, { id: 'email', label: 'Email', side: 'right' }];\n</script>",
+    "js": "const transfer = document.querySelector('sand-transfer-list');\ntransfer.addEventListener('transfer', event => saveFields(event.detail.items));\ntransfer.select(['name', 'email']);\ntransfer.moveSelected('right');",
+    "attrs": [
+      [
+        "`label`",
+        "Accessible transfer control name",
+        "Transfer items"
+      ],
+      [
+        "`disabled`",
+        "Disable selection and transfer actions",
+        "absent"
+      ],
+      [
+        "`items`",
+        "Property array with id, label and side",
+        "empty"
+      ],
+      [
+        "`selected`",
+        "Selected item ID array",
+        "empty"
+      ]
+    ],
+    "notes": [
+      "Each item uses `side: 'left'` or `side: 'right'`. An unknown or omitted side starts on the left.",
+      "Click an item to toggle its selection. The selected property can also be assigned from application state.",
+      "`move(ids,target)`, `moveSelected(target)` and `moveAll(target)` update side values and emit `transfer` plus `change`.",
+      "The component does not fetch, filter or persist data. It only changes which tray owns each item."
+    ],
+    "happens": [
+      [
+        "select stones",
+        "the selected tiles lift against the walnut tray"
+      ],
+      [
+        "move selected",
+        "the stones cross to the opposite compartment"
+      ],
+      [
+        "move all",
+        "every enabled item in the source tray transfers"
+      ]
+    ],
+    "limits": [
+      "The component is designed for compact option sets. Large data sets should be filtered or virtualized by the host application."
+    ],
+    "demo": {
+      "html": "<sand-transfer-list id=\"el\" label=\"Included project assets\"></sand-transfer-list><p class=\"readout\" id=\"out\">Select assets and transfer them between trays.</p>",
+      "hint": "Select one or more assets, then use the centre arrows. You can move all items back as well.",
+      "script": "el.items=[{id:'logo',label:'Brand logo',side:'left'},{id:'fonts',label:'Font files',side:'left'},{id:'tokens',label:'Design tokens',side:'left'},{id:'copy',label:'Product copy',side:'right'}];const out=document.getElementById('out');el.addEventListener('transfer',e=>out.textContent=e.detail.ids.length+' item(s) moved '+e.detail.target);"
+    }
+  },
+  {
+    "id": "split-pane",
+    "name": "Split Pane",
+    "tag": "sand-split-pane",
+    "categories": [
+      "layout",
+      "split-pane",
+      "resizable",
+      "panels",
+      "sand",
+      "accessibility"
+    ],
+    "sub": "A stone divider adjusts the balance of two working surfaces.",
+    "desc": "A two-pane horizontal or vertical layout with a pointer-draggable separator, keyboard resizing, minimum and maximum bounds, and slotted host content.",
+    "docs": "Place child elements in slot=\"start\" and slot=\"end\". Set value as the first pane percentage, axis to horizontal or vertical, and configure min-size/max-size. Listen for input and change.",
+    "intro": [
+      "Two sand-backed work surfaces meet at a narrow walnut divider. Move the divider to give the primary workspace or its inspector more room. Content remains ordinary DOM supplied by the host; the component only controls the split and its accessible separator."
+    ],
+    "use": "<script src=\"split-pane.js\"></script>\n<sand-split-pane value=\"62\" axis=\"horizontal\" label=\"Editor layout\">\n  <section slot=\"start\">Editor content</section>\n  <aside slot=\"end\">Inspector content</aside>\n</sand-split-pane>",
+    "js": "const split = document.querySelector('sand-split-pane');\nsplit.addEventListener('input', event => previewRatio(event.detail.value));\nsplit.value = 68; // first pane receives 68 percent",
+    "attrs": [
+      [
+        "`value`",
+        "First pane size as a percentage",
+        "58"
+      ],
+      [
+        "`axis`",
+        "`horizontal` (left/right) or `vertical` (top/bottom)",
+        "horizontal"
+      ],
+      [
+        "`min-size` / `max-size`",
+        "Minimum and maximum first-pane percentage",
+        "20 / 80"
+      ],
+      [
+        "`disabled`",
+        "Disable pointer and keyboard resizing",
+        "absent"
+      ],
+      [
+        "`label`",
+        "Accessible separator name",
+        "Resize panes"
+      ]
+    ],
+    "notes": [
+      "Place content in direct children with `slot=\"start\"` and `slot=\"end\"`. Content nodes are moved into the two scrollable pane containers without parsing HTML strings.",
+      "`value` is the first pane's percentage. The second pane receives the remaining space after the divider.",
+      "Drag the divider with a pointer or focus it and use the axis arrows, Home or End. The separator exposes `role=\"separator\"` and its current value.",
+      "`input` fires while the divider moves; `change` fires when a pointer drag completes or a keyboard adjustment commits."
+    ],
+    "happens": [
+      [
+        "drag the divider",
+        "one pane grows while the other gives up the same space"
+      ],
+      [
+        "press an axis arrow",
+        "the divider moves by the configured step"
+      ],
+      [
+        "press Home or End",
+        "the first pane moves to its minimum or maximum"
+      ]
+    ],
+    "limits": [
+      "This component provides a single two-pane split. It does not persist sizes, coordinate nested layouts or manage application routing."
+    ],
+    "demo": {
+      "html": "<sand-split-pane id=\"el\" value=\"58\" axis=\"horizontal\" label=\"Design workspace\"><section slot=\"start\"><h3>Canvas</h3><p>Primary workspace and live preview.</p></section><aside slot=\"end\"><h3>Inspector</h3><p>Selected layer properties.</p></aside></sand-split-pane><p class=\"readout\" id=\"out\">First pane: 58%</p>",
+      "hint": "Drag the stone divider, or focus it and use Left/Right. Switch axis to vertical to stack the panes.",
+      "script": "const out=document.getElementById('out');el.addEventListener('input',e=>out.textContent='First pane: '+Math.round(e.detail.value)+'%');"
+    }
+  },
+  {
+    "id": "resizable",
+    "name": "Resizable Panels",
+    "tag": "sand-resizable",
+    "categories": [
+      "layout",
+      "panels",
+      "resize",
+      "dashboard",
+      "sand",
+      "accessibility"
+    ],
+    "sub": "Walnut partitions resize several sand-backed panels.",
+    "desc": "A multi-panel layout with two to four panels, adjacent resizable boundaries, keyboard controls, minimum and maximum proportions, and serializable panel sizes.",
+    "docs": "Assign panels as an array of {id,label,content,min,max} objects. Read or set sizes as percentages and call resizeBoundary(index,delta) to adjust an adjacent pair.",
+    "intro": [
+      "Several sand-backed panels sit behind thin walnut partitions. Each divider balances the two adjacent sections while keeping their combined width unchanged. The panel metadata and percentages are public state, so a dashboard can save and restore its layout."
+    ],
+    "use": "<script src=\"resizable.js\"></script>\n<sand-resizable id=\"layout\" label=\"Dashboard panels\"></sand-resizable>\n<script>\nlayout.panels = [{ id: 'summary', label: 'Summary', content: 'Key metrics' }, { id: 'activity', label: 'Activity', content: 'Recent events' }, { id: 'details', label: 'Details', content: 'Selected record' }];\n</script>",
+    "js": "const layout = document.querySelector('sand-resizable');\nlayout.addEventListener('change', event => savePanelSizes(event.detail.sizes));\nlayout.resizeBoundary(0, 6); // grow panel 1 by six percentage points",
+    "attrs": [
+      [
+        "`panels`",
+        "Property array of two to four panel descriptors",
+        "Three sample panels"
+      ],
+      [
+        "`sizes`",
+        "Panel size percentages; values sum to 100",
+        "Equal or default layout"
+      ],
+      [
+        "`disabled`",
+        "Disable all resize handles",
+        "absent"
+      ],
+      [
+        "`label`",
+        "Accessible layout group name",
+        "Resizable panels"
+      ]
+    ],
+    "notes": [
+      "Each panel descriptor accepts `id`, `label`, `content`, `min` and `max`. Content is rendered as text, not HTML.",
+      "Read or set `sizes` as percentages. Use `resizeBoundary(index,delta)` to adjust the panel pair on either side of a divider.",
+      "Each divider is a focusable `role=\"separator\"`. Arrow Left/Right and Home/End provide keyboard resizing; pointer dragging works with mouse and touch.",
+      "`input` is emitted during pointer changes and `change` is emitted on commit. The host is responsible for persisting sizes."
+    ],
+    "happens": [
+      [
+        "drag a partition",
+        "one panel gains space while its neighbor gives up the same amount"
+      ],
+      [
+        "use arrow keys",
+        "the focused partition moves in small increments"
+      ],
+      [
+        "save sizes",
+        "the host stores the public percentage array"
+      ]
+    ],
+    "limits": [
+      "This component intentionally renders panel descriptions as text. Mount full application content in adjacent layout regions rather than injecting arbitrary HTML into panel descriptors."
+    ],
+    "demo": {
+      "html": "<sand-resizable id=\"el\" label=\"Project dashboard\"></sand-resizable><p class=\"readout\" id=\"out\">Drag a partition or focus it and press Left/Right.</p>",
+      "hint": "Resize any boundary. The host can store the sizes array and restore it later.",
+      "script": "el.panels=[{id:'summary',label:'Summary',content:'Milestones, status and project health.',min:20,max:58},{id:'activity',label:'Activity',content:'Recent changes and team updates.',min:20,max:60},{id:'inspector',label:'Inspector',content:'Selected task properties.',min:18,max:58}];const out=document.getElementById('out');el.addEventListener('change',e=>out.textContent='Panel sizes: '+e.detail.sizes.map(x=>Math.round(x)+'%').join(' / '));"
+    }
+  },
+  {
+    "id": "tree",
+    "name": "Tree View",
+    "tag": "sand-tree",
+    "categories": [
+      "tree",
+      "hierarchy",
+      "navigation",
+      "nested-data",
+      "sand",
+      "accessibility"
+    ],
+    "sub": "Branching paths are etched into sand and marked with stones.",
+    "desc": "A nested tree with expansion state, single-node selection, visible-node keyboard navigation and accessible treeitem semantics.",
+    "docs": "Assign nested items with id, label and children. Read or set value and expanded, or call select(id) and toggle(id). Arrow keys navigate and expand/collapse branches.",
+    "intro": [
+      "Branches are carved into a sand bed, with a river stone marking the selected node. Expand and collapse folders to reveal paths; the tree remains a real nested data structure and uses a roving keyboard focus model for navigation."
+    ],
+    "use": "<script src=\"tree.js\"></script>\n<sand-tree id=\"files\" label=\"Project files\"></sand-tree>\n<script>\nfiles.items = [{ id: 'src', label: 'src', children: [{ id: 'components', label: 'components' }] }];\nfiles.expanded = ['src'];\n</script>",
+    "js": "const tree = document.querySelector('sand-tree');\ntree.addEventListener('select', event => openNode(event.detail.value));\ntree.value = 'components';\ntree.toggle('src');",
+    "attrs": [
+      [
+        "`items`",
+        "Nested property array with id, label, children and disabled",
+        "Sample project tree"
+      ],
+      [
+        "`value`",
+        "Selected node ID",
+        "First active node"
+      ],
+      [
+        "`expanded`",
+        "Array of expanded parent IDs",
+        "Workspace and src"
+      ],
+      [
+        "`disabled`",
+        "Disable selection and expansion",
+        "absent"
+      ],
+      [
+        "`label`",
+        "Accessible tree name",
+        "Tree view"
+      ]
+    ],
+    "notes": [
+      "Each node accepts `id`, `label`, `disabled` and a nested `children` array. IDs must be unique across the whole tree.",
+      "Set `expanded` to restore expanded branches. `toggle(id)` expands or collapses a parent; `select(id)` sets the active node.",
+      "Arrow Up/Down moves through visible nodes, Arrow Right expands or enters a child, Arrow Left collapses or moves to the parent, and Home/End move to the first/last visible node.",
+      "The tree emits `select` and `change` for selection, and `expand` for branch changes. The host owns loading children and persistence."
+    ],
+    "happens": [
+      [
+        "expand a branch",
+        "child rows appear under the carved path"
+      ],
+      [
+        "select a node",
+        "the marker settles beside the active branch"
+      ],
+      [
+        "use arrow keys",
+        "focus follows the visible hierarchy without leaving the tree"
+      ]
+    ],
+    "limits": [
+      "The component renders the supplied tree in one DOM pass. Lazy loading, virtualized very large trees, checkbox selection and context menus are host responsibilities."
+    ],
+    "demo": {
+      "html": "<sand-tree id=\"el\" label=\"Project files\"></sand-tree><p class=\"readout\" id=\"out\">Select a node or expand a branch.</p>",
+      "hint": "Use Arrow Up/Down to move, Arrow Right to expand, Arrow Left to collapse or return to the parent.",
+      "script": "el.items=[{id:'app',label:'app',children:[{id:'components',label:'components',children:[{id:'controls',label:'controls'},{id:'layout',label:'layout'}]},{id:'styles',label:'styles'}]},{id:'public',label:'public',children:[{id:'images',label:'images'}]},{id:'readme',label:'README.md'}];el.expanded=['app','components'];const out=document.getElementById('out');el.addEventListener('select',e=>out.textContent='Selected: '+e.detail.value);"
+    }
   }
-},
-{
-  "id": "color-picker",
-  "name": "Color Picker",
-  "tag": "sand-color-picker",
-  "categories": [
-    "color",
-    "picker",
-    "input",
-    "form",
-    "sand",
-    "palette"
-  ],
-  "sub": "Mineral pigment stones select a usable color value.",
-  "desc": "A color control with the native browser color dialog and a palette of tactile mineral swatches. Supports hexadecimal, RGB and HSL readouts plus form submission.",
-  "docs": "Use <sand-color-picker name=\"accent\" value=\"#c28b55\" format=\"hex\"></sand-color-picker>. Read or set value; input and change events expose both formatted value and normalized hex.",
-  "intro": [
-    "A pigment well holds a mineral sample. The native color input opens the browser's color chooser, while named mineral stones provide quick selections without replacing native keyboard and platform behavior."
-  ],
-  "use": "<script src=\"color-picker.js\"></script>\n<sand-color-picker name=\"accent\" value=\"#c28b55\" format=\"hex\" label=\"Accent color\"></sand-color-picker>",
-  "js": "const picker = document.querySelector('sand-color-picker');\npicker.addEventListener('input', event => preview(event.detail.hex));\npicker.addEventListener('change', event => save(event.detail.value));\npicker.value = '#547d73';",
-  "attrs": [
-    [
-      "value",
-      "Selected CSS color; normalized to #rrggbb",
-      "#c28b55"
-    ],
-    [
-      "format",
-      "hex, rgb or hsl readout and submitted value",
-      "hex"
-    ],
-    [
-      "label",
-      "Accessible name for the native color control",
-      "Choose a colour"
-    ],
-    [
-      "name",
-      "Form field name",
-      "absent"
-    ],
-    [
-      "disabled",
-      "Disable color input and mineral swatches",
-      "absent"
-    ]
-  ],
-  "notes": [
-    "The browser's native input[type=color] opens the platform color chooser. The component does not emulate a custom hue/saturation canvas.",
-    "Preset mineral stones select named values. input and change events expose detail.value in the selected format and detail.hex in normalized hexadecimal.",
-    "When a name is present, the normalized selected value is submitted through ElementInternals. The component participates in form reset and disabled-state callbacks."
-  ],
-  "happens": [
-    [
-      "choose a pigment stone",
-      "the sample well changes to that mineral color"
-    ],
-    [
-      "open the native chooser",
-      "the browser color dialog is used"
-    ],
-    [
-      "change format",
-      "the displayed and submitted value is represented as hex, rgb or hsl"
-    ]
-  ],
-  "limits": [
-    "Exact appearance of the native color dialog is browser/OS controlled.",
-    "CSS color names and rgb/hsl strings are normalized to 6-digit hex; alpha/transparency is not preserved."
-  ],
-  "demo": {
-    "html": "<sand-color-picker id=\"el\" name=\"accent\" value=\"#c28b55\" format=\"hex\" label=\"Accent color\"></sand-color-picker><p class=\"readout\" id=\"out\">#c28b55</p>",
-    "hint": "Choose one of the mineral swatches or open the native browser color chooser.",
-    "script": "const out=document.getElementById('out');el.addEventListener('input',e=>out.textContent=e.detail.hex);"
-  }
-}
 ];

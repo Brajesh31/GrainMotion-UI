@@ -76,7 +76,7 @@ ${[...c.limits, ...COMMON_LIMITS].map((l) => `- ${l}`).join('\n')}
   .sub { margin: 4px 0 0; color: var(--mute); }
   .stage { display: grid; justify-items: center; gap: 12px; padding: 28px 0 18px; }
   .stage > :is(sand-slider, sand-signature) { width: 100%; }
-  .stage > sand-toggle { width: min(220px, 60%); } .stage > sand-thinking { width: min(320px, 80%); }${['dropzone', 'upload-queue', 'carousel', 'lightbox', 'scrubber', 'color-picker'].includes(c.id) ? ' .stage > :is(sand-dropzone, sand-upload-queue, sand-carousel, sand-lightbox, sand-scrubber, sand-color-picker) { width: min(520px, 100%); }' : ''}
+  .stage > sand-toggle { width: min(220px, 60%); } .stage > sand-thinking { width: min(320px, 80%); }${['dropzone', 'upload-queue', 'carousel', 'lightbox', 'scrubber', 'color-picker', 'sortable', 'transfer-list', 'split-pane', 'resizable', 'tree'].includes(c.id) ? ' .stage > :is(sand-dropzone, sand-upload-queue, sand-carousel, sand-lightbox, sand-scrubber, sand-color-picker) { width: min(520px, 100%); }' : ''}
   .field { width: 100%; display: flex; justify-content: space-between; font-weight: 500; } .field output { color: var(--mute); font-variant-numeric: tabular-nums; }
   .readout { margin: 0; color: var(--mute); }
   .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
@@ -128,7 +128,7 @@ put('registry.json', JSON.stringify({
 // ---- llms.txt
 put('llms.txt', `# GrainMotion-UI
 
-> ${COUNT[0].toUpperCase() + COUNT.slice(1)} tactile UI controls made from simulated sand, stones, bamboo and walnut. The original four establish the physical design language: Slider, Toggle, Signature and Thinking. Phase 1 adds Checkbox, Radio Group, Segmented Control, Range Slider and Rating. Phase 2 adds Text Field, Textarea, Password Field, Search Field and OTP/PIN Input. Phase 3 adds Select/Dropdown, Combobox/Autocomplete, Date Picker, Date Range Picker and Time Picker. Phase 4 adds Progress Bar, Progress Ring, Step Indicator, Hourglass Timer and Loading Indicator. Phase 5 adds Tabs, Accordion, Pagination, Breadcrumbs and Menu / Popover. Phase 6 adds File Dropzone, Upload Queue, Image Carousel, Lightbox Gallery, Media Scrubber and Color Picker. Every control is a standalone custom element with the sand engine and its required sound assets embedded. No runtime framework is required. MIT licensed.
+> ${COUNT[0].toUpperCase() + COUNT.slice(1)} tactile UI controls made from simulated sand, stones, bamboo and walnut. The original four establish the physical design language: Slider, Toggle, Signature and Thinking. Phase 1 adds Checkbox, Radio Group, Segmented Control, Range Slider and Rating. Phase 2 adds Text Field, Textarea, Password Field, Search Field and OTP/PIN Input. Phase 3 adds Select/Dropdown, Combobox/Autocomplete, Date Picker, Date Range Picker and Time Picker. Phase 4 adds Progress Bar, Progress Ring, Step Indicator, Hourglass Timer and Loading Indicator. Phase 5 adds Tabs, Accordion, Pagination, Breadcrumbs and Menu / Popover. Phase 6 adds File Dropzone, Upload Queue, Image Carousel, Lightbox Gallery, Media Scrubber and Color Picker. Phase 7 adds Sortable List, Transfer List, Split Pane, Resizable Panels and Tree View. Every control is a standalone custom element with the sand engine and its required sound assets embedded. No runtime framework is required. MIT licensed.
 
 Live gallery: ${SITE}
 Source: https://github.com/${REPO}
