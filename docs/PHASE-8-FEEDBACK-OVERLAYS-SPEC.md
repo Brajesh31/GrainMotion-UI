@@ -22,11 +22,11 @@ Feedback and overlays must be useful controls, not decorative popups. Their sema
 
 **Element:** `sand-tooltip`
 
-**Markup:** `<sand-tooltip for="save" text="Saves the current draft." placement="top"></sand-tooltip>`; it can also wrap a trigger when no `for` target is supplied.
+**Markup:** `<sand-tooltip for="save" text="Saves the current draft." placement="top"></sand-tooltip>`; the `for` attribute references a trigger element ID in the same document.
 
 **API:** `text`, `placement=top|right|bottom|left`, `delay`, `disabled`, `open`; `show()` and `hide()`.
 
-**Interaction:** show on pointer hover or keyboard focus, dismiss on pointer exit/focus loss or Escape, and allow explicit programmatic control.
+**Interaction:** show on pointer hover or keyboard focus, dismiss on pointer exit/focus loss or Escape, and allow explicit programmatic control. The tooltip never receives focus.
 
 **Accessibility:** expose the floating message as `role="tooltip"`; append its ID to the trigger's existing `aria-describedby` tokens and restore the original value on disconnect. Never move focus into a tooltip.
 
