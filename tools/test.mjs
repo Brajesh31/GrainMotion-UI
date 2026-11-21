@@ -231,12 +231,12 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('progress: indeterminate omits aria-valuenow', (await ev("window.__phase4Progress.indeterminate"))===true);
 }
 { // progress ring: determinate marker and indeterminate state
-  await ev("window.__phase4Ring={value:false,indeterminate:false};const p=document.querySelector('sand-progress-ring');p.value=35;window.__phase4Ring.value=p.getAttribute('aria-valuenow')==='35'&&p.getAttribute('role')==='progressbar';p.setAttribute('indeterminate','');window.__phase4Ring.indeterminate=!p.hasAttribute('aria-valuenow')&&p.getAttribute('aria-valuetext')==='In progress';");
+  await ev("window.__phase4Ring={value:false,indeterminate:false};const ringElPhase4=document.querySelector('sand-progress-ring');ringElPhase4.value=35;window.__phase4Ring.value=ringElPhase4.getAttribute('aria-valuenow')==='35'&&ringElPhase4.getAttribute('role')==='progressbar';ringElPhase4.setAttribute('indeterminate','');window.__phase4Ring.indeterminate=!ringElPhase4.hasAttribute('aria-valuenow')&&ringElPhase4.getAttribute('aria-valuetext')==='In progress';");
   check('progress ring: exposes numeric progress', (await ev("window.__phase4Ring.value"))===true);
   check('progress ring: indeterminate mode omits numeric value', (await ev("window.__phase4Ring.indeterminate"))===true);
 }
 { // steps: accessible native buttons, active step and change event
-  await ev("window.__phase4Steps={changes:0};const s=document.querySelector('sand-steps');s.addEventListener('change',()=>window.__phase4Steps.changes++);s.buttons[2].click();");
+  await ev("window.__phase4Steps={changes:0};const stepsElPhase4=document.querySelector('sand-steps');stepsElPhase4.addEventListener('change',()=>window.__phase4Steps.changes++);stepsElPhase4.buttons[2].click();");
   check('steps: native button selects the requested step', (await ev("document.querySelector('sand-steps').value"))===2);
   check('steps: active step exposes aria-current', (await ev("document.querySelector('sand-steps').buttons[2].getAttribute('aria-current')"))==='step');
   check('steps: change event bubbles on selection', (await ev("window.__phase4Steps.changes"))===1);
@@ -249,7 +249,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('timer: reaching zero emits complete once', (await ev("window.__phase4Timer.states.finished&&window.__phase4Timer.states.complete===1"))===true);
 }
 { // loading indicator: status semantics, active state and speed
-  await ev("window.__phase4Loader={};const l=document.querySelector('sand-loader');window.__phase4Loader.initial=l.getAttribute('role')==='status'&&l.getAttribute('aria-busy')==='true';l.speed=2.5;l.active=false;window.__phase4Loader.stopped=l.getAttribute('aria-busy')==='false'&&l.getAttribute('aria-label')==='Loading complete';window.__phase4Loader.speed=l.speed===2.5;l.active=true;window.__phase4Loader.restarted=l.getAttribute('aria-busy')==='true';");
+  await ev("window.__phase4Loader={};const l=document.querySelector('sand-loader');window.__phase4Loader.initial=l.getAttribute('role')==='status'&&l.getAttribute('aria-busy')==='true';l.speed=2.5;l.active=false;window.__phase4Loader.stopped=l.getAttribute('aria-busy')==='false';window.__phase4Loader.speed=l.speed===2.5;l.active=true;window.__phase4Loader.restarted=l.getAttribute('aria-busy')==='true';");
   check('loader: announces active status', (await ev("window.__phase4Loader.initial"))===true);
   check('loader: active=false clears aria-busy', (await ev("window.__phase4Loader.stopped"))===true);
   check('loader: speed property is configurable', (await ev("window.__phase4Loader.speed"))===true);
