@@ -4,7 +4,7 @@
 
 ### Interfaces shaped by sand, motion, and interaction.
 
-A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray. Phase 6 adds six media and file controls with real file selection, media timelines, framed images and mineral pigment choices. Phase 7 adds five advanced list and layout controls: sorting, item transfer, split panes, resizable panels and nested tree navigation.
+A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 added five progress, loading and activity controls. Phase 5 adds five navigation controls with moving river-stone markers, walnut lids and a carved command tray. Phase 6 adds six media and file controls with real file selection, media timelines, framed images and mineral pigment choices. Phase 7 adds five advanced list and layout controls: sorting, item transfer, split panes, resizable panels and nested tree navigation. Phase 8 is underway with five feedback and overlay controls: tooltips, toasts, persistent alerts, native modal dialogs and edge drawers.
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
@@ -24,7 +24,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI currently includes forty standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI currently has forty CI-verified standalone custom elements, with five additional Phase 8 feedback and overlay controls in active integration. The components simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -81,6 +81,16 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 | **Sand Split Pane** | A draggable and keyboard-accessible stone divider balances two content panes. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/split-pane/) · [Documentation](split-pane/README.md) |
 | **Sand Resizable Panels** | Walnut partitions resize two to four adjacent dashboard panels. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/resizable/) · [Documentation](resizable/README.md) |
 | **Sand Tree View** | Branching paths expand and collapse while a stone marks the selected node. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/tree/) · [Documentation](tree/README.md) |
+
+### Phase 8 · Feedback and overlays (in progress)
+
+| Component | Physical interaction | Demo and documentation |
+|---|---|---|
+| **Sand Tooltip** | A small information stone appears beside a focused or hovered control. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/tooltip/) · [Documentation](tooltip/README.md) |
+| **Sand Toast Notification** | A stone rolls into a corner tray, announces status and exits. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/toast/) · [Documentation](toast/README.md) |
+| **Sand Alert Banner** | A persistent raised sand strip carries an announcement and an action. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/alert/) · [Documentation](alert/README.md) |
+| **Sand Dialog / Modal** | A framed native modal surface appears above the page. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/dialog/) · [Documentation](dialog/README.md) |
+| **Sand Drawer / Sheet** | A wood-framed sheet enters from one of the four viewport edges. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/drawer/) · [Documentation](drawer/README.md) |
 
 > The gallery image above shows the component set together. The concept artwork below documents visual exploration and design direction, not additional live component screenshots.
 
@@ -293,6 +303,20 @@ These five studies illustrate ordering, transfer, split layout, multi-panel resi
 
 </div>
 
+### Phase 8 feedback and overlay concepts
+
+These studies distinguish transient notifications, persistent alerts, non-interactive hints, native modal surfaces and edge sheets. They are concept diagrams, not screenshots of the running components.
+
+<div align="center">
+
+<table>
+<tr><td align="center"><img src="tooltip/assets/concept.svg" alt="Tooltip hint connected to a focused trigger" width="100%"><br><strong>Tooltip</strong></td><td align="center"><img src="toast/assets/concept.svg" alt="Two stacked toast notifications with an Undo action" width="100%"><br><strong>Toast Notification</strong></td></tr>
+<tr><td align="center"><img src="alert/assets/concept.svg" alt="Persistent warning banner with Review action" width="100%"><br><strong>Alert Banner</strong></td><td align="center"><img src="dialog/assets/concept.svg" alt="Native modal dialog over a dimmed page" width="100%"><br><strong>Dialog / Modal</strong></td></tr>
+<tr><td align="center"><img src="drawer/assets/concept.svg" alt="Right-edge filter drawer over a dimmed workspace" width="100%"><br><strong>Drawer / Sheet</strong></td><td align="center"><strong>Accessibility first</strong><br>Native dialog top-layer behavior, live regions, Escape dismissal and focus restoration guide the implementation.</td></tr>
+</table>
+
+</div>
+
 ## ⚙️ How it works
 
 The sand is simulated, not a static texture. A height field stores the sand surface, JavaScript updates it as controls move, and a WebGL2 shader lights the surface to reveal grooves, ridges, shadows, and highlights.
@@ -465,6 +489,7 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [50-component expansion roadmap](docs/ROADMAP.md)
 - [Component catalog and implementation status](docs/COMPONENT-CATALOG.md)
 - [Phase 7 advanced layout implementation spec](docs/PHASE-7-ADVANCED-LAYOUT-SPEC.md)
+- [Phase 8 feedback and overlay implementation spec](docs/PHASE-8-FEEDBACK-OVERLAYS-SPEC.md)
 - [Architecture and shared sand engine](docs/ARCHITECTURE.md)
 - [Design system and visual standards](docs/DESIGN-SYSTEM.md)
 - [Asset catalog and creation standards](docs/ASSET-CATALOG.md)
