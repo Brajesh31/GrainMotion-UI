@@ -1,0 +1,40 @@
+/*
+ * GrainMotion-UI provisional design tokens.
+ *
+ * This file records the shared visual baseline for future component migrations.
+ * Existing standalone component scripts do not import this stylesheet yet.
+ * Do not assume changing a token currently changes a component's canvas/shader output.
+ */
+:root {
+  color-scheme: light;
+
+  /* Interface surfaces and typography, from docs/DESIGN-SYSTEM.md. */
+  --gm-page: #e9e4da;
+  --gm-card: #f1ede5;
+  --gm-ink: #2b2a27;
+  --gm-ink-muted: #7c766b;
+  --gm-divider: #d6cec0;
+
+  /* Sand material ramp, including colors used by the original rake/signature artwork. */
+  --gm-sand-base: #f0e1c4;
+  --gm-sand-shadow: #a88f58;
+  --gm-sand-mid: #c9b27a;
+  --gm-sand-highlight: #e8d6a2;
+  --gm-sand-rake: #d9c38c;
+
+  /* Natural materials. Several shader-derived values are approximate visual matches. */
+  --gm-walnut: #604632;
+  --gm-moss: #96a654;
+  --gm-stone: #5c5e60;
+  --gm-bamboo-shadow: #a3864d;
+  --gm-bamboo-mid: #e6d29c;
+  --gm-bamboo-shaft: #b89a5e;
+
+  /* Ink used by the signature export example. */
+  --gm-signature-ink: #1f2a44;
+
+  /* Motion durations documented by the original interactions. */
+  --gm-motion-toggle-glide: 1000ms;
+  --gm-motion-thinking-transition: 2000ms;
+  --gm-motion-reduced: 0ms;
+}
