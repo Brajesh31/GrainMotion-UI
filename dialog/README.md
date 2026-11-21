@@ -15,7 +15,7 @@ python3 -m http.server 8000     # from the repo folder
 
 ## Use it
 
-`dialog.js` is the whole control: one file of about 30 KB with the sand engine and its sounds inside it, and no dependencies.
+`dialog.js` is the whole control: one file of about 40 KB with the sand engine and its sounds inside it, and no dependencies.
 
 ```html
 <script src="dialog.js"></script>\n<button id="confirm" type="button">Review changes</button>\n<sand-dialog id="review" title="Confirm changes" description="Review before saving.">\n  <p>Your draft is ready to publish.</p>\n</sand-dialog>\n<script>\nconfirm.addEventListener('click', () => review.showModal());\nreview.addEventListener('dialog-close', event => console.log(event.detail.returnValue));\n</script>

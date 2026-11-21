@@ -15,7 +15,7 @@ python3 -m http.server 8000     # from the repo folder
 
 ## Use it
 
-`upload-queue.js` is the whole control: one file of about 40 KB with the sand engine and its sounds inside it, and no dependencies.
+`upload-queue.js` is the whole control: one file of about 50 KB with the sand engine and its sounds inside it, and no dependencies.
 
 ```html
 <script src="upload-queue.js"></script>

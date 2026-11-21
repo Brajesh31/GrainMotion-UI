@@ -28,7 +28,7 @@
       "name": "toggle",
       "type": "registry:file",
       "title": "GrainMotion-UI Toggle",
-      "description": "A switch that is a river stone in a tray of raked sand. Switch it on and the stone glides along, parting the sand into a wake, and uncovers a power symbol it had pressed into the sand where it was resting. One file of about 170 KB with its sand engine and sounds inside it, no dependencies, defines <sand-toggle>.",
+      "description": "A switch that is a river stone in a tray of raked sand. Switch it on and the stone glides along, parting the sand into a wake, and uncovers a power symbol it had pressed into the sand where it was resting. One file of about 180 KB with its sand engine and sounds inside it, no dependencies, defines <sand-toggle>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "switch",
@@ -71,7 +71,7 @@
       "name": "thinking",
       "type": "registry:file",
       "title": "GrainMotion-UI Thinking",
-      "description": "An AI agent's working state as a rock in a round tray of sand that rakes itself. Thinking draws rings round the rock, searching draws spokes, using a tool draws lines that flow round it like water, and writing draws dashes like lines of text. One file of about 370 KB with its sand engine and sounds inside it, no dependencies, defines <sand-thinking>.",
+      "description": "An AI agent's working state as a rock in a round tray of sand that rakes itself. Thinking draws rings round the rock, searching draws spokes, using a tool draws lines that flow round it like water, and writing draws dashes like lines of text. One file of about 380 KB with its sand engine and sounds inside it, no dependencies, defines <sand-thinking>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "loader",
@@ -94,7 +94,7 @@
       "name": "checkbox",
       "type": "registry:file",
       "title": "GrainMotion-UI Checkbox",
-      "description": "A checkbox where a small river stone rolls aside to reveal a checkmark etched into a circular sand well. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-checkbox>.",
+      "description": "A checkbox where a small river stone rolls aside to reveal a checkmark etched into a circular sand well. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-checkbox>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "checkbox",
@@ -116,7 +116,7 @@
       "name": "radio-group",
       "type": "registry:file",
       "title": "GrainMotion-UI Radio Group",
-      "description": "A radio group with individual stone wells and one selected pebble moving to the active option. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-radio-group>.",
+      "description": "A radio group with individual stone wells and one selected pebble moving to the active option. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-radio-group>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "radio",
@@ -160,7 +160,7 @@
       "name": "range",
       "type": "registry:file",
       "title": "GrainMotion-UI Range Slider",
-      "description": "A two-handle range slider with independently adjustable bamboo rake markers and a visibly disturbed selected interval. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-range>.",
+      "description": "A two-handle range slider with independently adjustable bamboo rake markers and a visibly disturbed selected interval. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-range>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "range",
@@ -182,7 +182,7 @@
       "name": "rating",
       "type": "registry:file",
       "title": "GrainMotion-UI Rating",
-      "description": "A five-point rating control where a selected river stone marks the chosen rating in one of five individual sand wells. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-rating>.",
+      "description": "A five-point rating control where a selected river stone marks the chosen rating in one of five individual sand wells. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-rating>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "rating",
@@ -204,7 +204,7 @@
       "name": "input",
       "type": "registry:file",
       "title": "GrainMotion-UI Text Field",
-      "description": "A native text input with a bamboo stylus-like focus marker and fine pressed guide line, retaining normal browser editing, selection and validation. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-input>.",
+      "description": "A native text input with a bamboo stylus-like focus marker and fine pressed guide line, retaining normal browser editing, selection and validation. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-input>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "input",
@@ -226,7 +226,7 @@
       "name": "textarea",
       "type": "registry:file",
       "title": "GrainMotion-UI Textarea",
-      "description": "A native multiline textarea over a wider sand tray, with shallow writing grooves and a moving stylus focus cue. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-textarea>.",
+      "description": "A native multiline textarea over a wider sand tray, with shallow writing grooves and a moving stylus focus cue. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-textarea>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "textarea",
@@ -249,7 +249,7 @@
       "name": "password",
       "type": "registry:file",
       "title": "GrainMotion-UI Password Field",
-      "description": "A native password input with a physical Show/Hide stone shutter. The value remains masked by default and is never printed in the demo status text. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-password>.",
+      "description": "A native password input with a physical Show/Hide stone shutter. The value remains masked by default and is never printed in the demo status text. One file of about 50 KB with its sand engine and sounds inside it, no dependencies, defines <sand-password>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "password",
@@ -272,7 +272,7 @@
       "name": "search",
       "type": "registry:file",
       "title": "GrainMotion-UI Search Field",
-      "description": "A native search input with a small search well, a clear button, an Enter-to-search event and a moving sand rake while busy. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-search>.",
+      "description": "A native search input with a small search well, a clear button, an Enter-to-search event and a moving sand rake while busy. One file of about 50 KB with its sand engine and sounds inside it, no dependencies, defines <sand-search>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "search",
@@ -294,7 +294,7 @@
       "name": "otp",
       "type": "registry:file",
       "title": "GrainMotion-UI OTP / PIN Input",
-      "description": "A numeric OTP/PIN input drawn across individual engraved wells. One native input preserves mobile one-time-code autofill, paste, selection and keyboard behavior. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-otp>.",
+      "description": "A numeric OTP/PIN input drawn across individual engraved wells. One native input preserves mobile one-time-code autofill, paste, selection and keyboard behavior. One file of about 50 KB with its sand engine and sounds inside it, no dependencies, defines <sand-otp>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "otp",
@@ -341,7 +341,7 @@
       "name": "combobox",
       "type": "registry:file",
       "title": "GrainMotion-UI Combobox / Autocomplete",
-      "description": "A native text input connected to a datalist for browser-managed suggestions. It permits free text, keyboard entry and paste while a small rake follows the query. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-combobox>.",
+      "description": "A native text input connected to a datalist for browser-managed suggestions. It permits free text, keyboard entry and paste while a small rake follows the query. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-combobox>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "combobox",
@@ -388,7 +388,7 @@
       "name": "date-range",
       "type": "registry:file",
       "title": "GrainMotion-UI Date Range Picker",
-      "description": "Two native date fields represent an inclusive calendar range. The component validates order, required endpoints, min/max bounds and unavailable days; it serializes complete ranges as start/end ISO strings. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-date-range>.",
+      "description": "Two native date fields represent an inclusive calendar range. The component validates order, required endpoints, min/max bounds and unavailable days; it serializes complete ranges as start/end ISO strings. One file of about 50 KB with its sand engine and sounds inside it, no dependencies, defines <sand-date-range>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "date-range",
@@ -434,7 +434,7 @@
       "name": "progress",
       "type": "registry:file",
       "title": "GrainMotion-UI Progress Bar",
-      "description": "A bamboo rake advances through a sand channel, leaving a growing trail and a soft ridge ahead of its tines. Supports determinate and indeterminate progress. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-progress>.",
+      "description": "A bamboo rake advances through a sand channel, leaving a growing trail and a soft ridge ahead of its tines. Supports determinate and indeterminate progress. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-progress>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "progress",
@@ -455,7 +455,7 @@
       "name": "progress-ring",
       "type": "registry:file",
       "title": "GrainMotion-UI Progress Ring",
-      "description": "A circular progress indicator with a river pebble travelling around an engraved sand groove. Supports determinate and indeterminate states. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-progress-ring>.",
+      "description": "A circular progress indicator with a river pebble travelling around an engraved sand groove. Supports determinate and indeterminate states. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-progress-ring>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "progress",
@@ -477,7 +477,7 @@
       "name": "steps",
       "type": "registry:file",
       "title": "GrainMotion-UI Step Indicator",
-      "description": "A multi-step indicator using stepping stones and native buttons. Completed, current and upcoming steps are visually distinct and keyboard operable. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-steps>.",
+      "description": "A multi-step indicator using stepping stones and native buttons. Completed, current and upcoming steps are visually distinct and keyboard operable. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-steps>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "steps",
@@ -498,7 +498,7 @@
       "name": "timer",
       "type": "registry:file",
       "title": "GrainMotion-UI Hourglass Timer",
-      "description": "A countdown timer rendered as a two-chamber hourglass. Sand falls through a narrow waist; pause, resume, reset and cancel controls remain native buttons. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-timer>.",
+      "description": "A countdown timer rendered as a two-chamber hourglass. Sand falls through a narrow waist; pause, resume, reset and cancel controls remain native buttons. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-timer>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "timer",
@@ -520,7 +520,7 @@
       "name": "loader",
       "type": "registry:file",
       "title": "GrainMotion-UI Loading Indicator",
-      "description": "An indeterminate loading indicator with a miniature rake that loops through a recognizable sand pattern, distinct from the AI Thinking state. One file of about 20 KB with its sand engine and sounds inside it, no dependencies, defines <sand-loader>.",
+      "description": "An indeterminate loading indicator with a miniature rake that loops through a recognizable sand pattern, distinct from the AI Thinking state. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-loader>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "loading",
@@ -583,7 +583,7 @@
       "name": "pagination",
       "type": "registry:file",
       "title": "GrainMotion-UI Pagination",
-      "description": "A pagination control with numbered sand wells and a moving river-stone page marker. Page state and navigation are native buttons; data loading remains the host application's responsibility. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-pagination>.",
+      "description": "A pagination control with numbered sand wells and a moving river-stone page marker. Page state and navigation are native buttons; data loading remains the host application's responsibility. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-pagination>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "navigation",
@@ -604,7 +604,7 @@
       "name": "breadcrumbs",
       "type": "registry:file",
       "title": "GrainMotion-UI Breadcrumbs",
-      "description": "A breadcrumb navigation trail with real ancestor links and a non-interactive current page marker. River stones sit along a shallow raked path. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-breadcrumbs>.",
+      "description": "A breadcrumb navigation trail with real ancestor links and a non-interactive current page marker. River stones sit along a shallow raked path. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-breadcrumbs>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "navigation",
@@ -670,7 +670,7 @@
       "name": "upload-queue",
       "type": "registry:file",
       "title": "GrainMotion-UI Upload Queue",
-      "description": "A transport-agnostic upload queue with per-file progress, queued/uploading/complete/error/cancelled states, retry and removal controls. It emits requests so the host application can perform the actual transfer. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-upload-queue>.",
+      "description": "A transport-agnostic upload queue with per-file progress, queued/uploading/complete/error/cancelled states, retry and removal controls. It emits requests so the host application can perform the actual transfer. One file of about 50 KB with its sand engine and sounds inside it, no dependencies, defines <sand-upload-queue>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "file",
@@ -693,7 +693,7 @@
       "name": "carousel",
       "type": "registry:file",
       "title": "GrainMotion-UI Image Carousel",
-      "description": "An image carousel that displays real images in a recessed walnut frame with previous/next buttons, indexed selection, touch swipes and keyboard navigation. It never fetches or transforms image sources. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-carousel>.",
+      "description": "An image carousel that displays real images in a recessed walnut frame with previous/next buttons, indexed selection, touch swipes and keyboard navigation. It never fetches or transforms image sources. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-carousel>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "media",
@@ -739,7 +739,7 @@
       "name": "scrubber",
       "type": "registry:file",
       "title": "GrainMotion-UI Media Scrubber",
-      "description": "A media timeline bound to an existing HTMLAudioElement or HTMLVideoElement, with play/pause, current position, buffered range visualization and keyboard-accessible seeking. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-scrubber>.",
+      "description": "A media timeline bound to an existing HTMLAudioElement or HTMLVideoElement, with play/pause, current position, buffered range visualization and keyboard-accessible seeking. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-scrubber>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "media",
@@ -762,7 +762,7 @@
       "name": "color-picker",
       "type": "registry:file",
       "title": "GrainMotion-UI Color Picker",
-      "description": "A color control with the native browser color dialog and a palette of tactile mineral swatches. Supports hexadecimal, RGB and HSL readouts plus form submission. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-color-picker>.",
+      "description": "A color control with the native browser color dialog and a palette of tactile mineral swatches. Supports hexadecimal, RGB and HSL readouts plus form submission. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-color-picker>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "color",
@@ -945,7 +945,7 @@
       "name": "alert",
       "type": "registry:file",
       "title": "GrainMotion-UI Alert Banner",
-      "description": "A persistent status banner with tone-aware live-region semantics, optional title, action and dismissal. It stays visible until the host or user dismisses it. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-alert>.",
+      "description": "A persistent status banner with tone-aware live-region semantics, optional title, action and dismissal. It stays visible until the host or user dismisses it. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-alert>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "alert",
@@ -968,7 +968,7 @@
       "name": "dialog",
       "type": "registry:file",
       "title": "GrainMotion-UI Dialog / Modal",
-      "description": "A native modal dialog custom element that preserves caller content, traps focus through the browser top layer, supports Escape and optional backdrop dismissal, and restores opener focus. One file of about 30 KB with its sand engine and sounds inside it, no dependencies, defines <sand-dialog>.",
+      "description": "A native modal dialog custom element that preserves caller content, traps focus through the browser top layer, supports Escape and optional backdrop dismissal, and restores opener focus. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-dialog>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "dialog",
@@ -1014,7 +1014,7 @@
       "name": "command",
       "type": "registry:file",
       "title": "GrainMotion-UI Command Palette",
-      "description": "A keyboard-first searchable command palette with native modal focus containment, filtering, active result navigation and host-facing command events. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-command>.",
+      "description": "A keyboard-first searchable command palette with native modal focus containment, filtering, active result navigation and host-facing command events. One file of about 50 KB with its sand engine and sounds inside it, no dependencies, defines <sand-command>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "command",
@@ -1083,7 +1083,7 @@
       "name": "table",
       "type": "registry:file",
       "title": "GrainMotion-UI Data Table",
-      "description": "A searchable, sortable and selectable data table with stable row IDs, column visibility, multi-selection, sticky headings and bounded client-side pagination. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-table>.",
+      "description": "A searchable, sortable and selectable data table with stable row IDs, column visibility, multi-selection, sticky headings and bounded client-side pagination. One file of about 50 KB with its sand engine and sounds inside it, no dependencies, defines <sand-table>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "table",
@@ -1106,7 +1106,7 @@
       "name": "kanban",
       "type": "registry:file",
       "title": "GrainMotion-UI Kanban Board",
-      "description": "A multi-column Kanban board with stable card and column IDs, native drag-and-drop, explicit move buttons, arrow-key movement, priority labels and host-facing move/select events. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-kanban>.",
+      "description": "A multi-column Kanban board with stable card and column IDs, native drag-and-drop, explicit move buttons, arrow-key movement, priority labels and host-facing move/select events. One file of about 50 KB with its sand engine and sounds inside it, no dependencies, defines <sand-kanban>.",
       "author": "Brajesh Kumar <https://github.com/Brajesh31>",
       "categories": [
         "kanban",
