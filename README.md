@@ -4,7 +4,7 @@
 
 ### Interfaces shaped by sand, motion, and interaction.
 
-A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 adds five selection, calendar and time controls, each with its own physical interaction.
+A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 added five selection, calendar and time controls. Phase 4 adds five progress, loading and activity controls, each with its own physical interaction.
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
@@ -15,7 +15,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml/badge.svg" alt="Component validation"></a>
   <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
   <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
-  <img src="https://img.shields.io/badge/Components-19-C49A6C" alt="Nineteen components">
+  <img src="https://img.shields.io/badge/Components-24-C49A6C" alt="Twenty-four components">
 </p>
 
 </div>
@@ -24,7 +24,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI currently includes nineteen standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI currently includes twenty-four standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -57,6 +57,11 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 | **Sand Date Picker** | An engraved calendar grid holds a pebble on the selected day. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/date-picker/) · [Documentation](date-picker/README.md) |
 | **Sand Date Range** | Two river stones mark the start and end of a date interval. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/date-range/) · [Documentation](date-range/README.md) |
 | **Sand Time Picker** | A circular sand dial marks the selected time. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/time-picker/) · [Documentation](time-picker/README.md) |
+| **Sand Progress Bar** | A bamboo rake advances through a sand channel. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/progress/) · [Documentation](progress/README.md) |
+| **Sand Progress Ring** | A river pebble follows a circular progress groove. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/progress-ring/) · [Documentation](progress-ring/README.md) |
+| **Sand Step Indicator** | Stepping stones distinguish completed, current and upcoming steps. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/steps/) · [Documentation](steps/README.md) |
+| **Sand Hourglass Timer** | Sand falls between two chambers with pause and reset controls. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/timer/) · [Documentation](timer/README.md) |
+| **Sand Loading Indicator** | A miniature rake loops through a changing sand pattern. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/loader/) · [Documentation](loader/README.md) |
 
 > The gallery image above shows the component set together. The concept artwork below documents visual exploration and design direction, not additional live component screenshots.
 
@@ -138,6 +143,20 @@ Each new control also has its own physical-interaction concept sheet. These are 
       <br>Sand, walnut, bamboo and river stone carry through all fourteen controls.
     </td>
   </tr>
+</table>
+
+</div>
+
+### Phase 4 progress and activity concepts
+
+These diagrams illustrate the new progress and loading interactions. They are original concept artwork, not runtime screenshots.
+
+<div align="center">
+
+<table>
+<tr><td align="center"><img src="progress/assets/concept.svg" alt="Progress bar rake trail" width="100%"><br><strong>Progress Bar</strong></td><td align="center"><img src="progress-ring/assets/concept.svg" alt="Progress ring pebble groove" width="100%"><br><strong>Progress Ring</strong></td></tr>
+<tr><td align="center"><img src="steps/assets/concept.svg" alt="Stepping stone progress" width="100%"><br><strong>Step Indicator</strong></td><td align="center"><img src="timer/assets/concept.svg" alt="Hourglass timer sand" width="100%"><br><strong>Hourglass Timer</strong></td></tr>
+<tr><td align="center"><img src="loader/assets/concept.svg" alt="Loading rake pattern" width="100%"><br><strong>Loading Indicator</strong></td><td align="center">Five new controls, one consistent sand material language.</td></tr>
 </table>
 
 </div>
@@ -426,6 +445,11 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [Date Picker documentation](date-picker/README.md)
 - [Date Range Picker documentation](date-range/README.md)
 - [Time Picker documentation](time-picker/README.md)
+- [Loading Indicator documentation](loader/README.md)
+- [Hourglass Timer documentation](timer/README.md)
+- [Step Indicator documentation](steps/README.md)
+- [Progress Ring documentation](progress-ring/README.md)
+- [Progress Bar documentation](progress/README.md)
 - [Agent skill](skills/grainmotion-ui/SKILL.md)
 - [AI-readable project guide](llms.txt)
 - [Design process and concept artwork](making-of/README.md)
