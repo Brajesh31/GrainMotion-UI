@@ -35,6 +35,11 @@ export const SOUNDS = {
   steps: one('stone', 'tap'),
   timer: one('tap', 'settle'),
   loader: one('tap'),
+  tabs: one('stone', 'tap'),
+  accordion: one('stone', 'tap'),
+  pagination: one('stone', 'tap'),
+  breadcrumbs: one('stone', 'tap'),
+  menu: one('stone', 'tap'),
 };
 // Images a control carries, as constants.
 export const ART = { thinking: { ROCK: 'rock.webp' } };
