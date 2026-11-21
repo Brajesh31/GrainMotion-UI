@@ -28,7 +28,7 @@ The test and screenshot utilities require Chrome or Chromium. Set `CHROME` if th
 
 ## Current test coverage
 
-`tools/test.mjs` now includes checks for the original four controls and the five Phase 1 additions in a mobile-sized Chromium viewport. The updated suite has been committed, but a successful CI run is still required before the release can be called verified. The original-control checks cover:
+`tools/test.mjs` covers all fourteen controls in a mobile-sized Chromium viewport. Phase 1 has a successful CI baseline. Phase 2 assertions have been added and will be marked verified only after the current GitHub Actions run passes. The original-control checks cover:
 
 - Slider drag, input/change events, vertical-swipe handling and keyboard increments.
 - Toggle click, Space behavior, change events and vertical-swipe handling.
@@ -43,7 +43,17 @@ The Phase 1 checks added to the test runner cover:
 - Segmented Control: active segment selection, arrow/Home/End/Space behavior and form serialization.
 - Range Slider: lower/upper handle movement, keyboard steps, non-crossing bounds, input/change timing, touch scroll coexistence and `low,high` form serialization.
 - Rating: pointer selection, Arrow/Home/End adjustments, accessible value text, disabled state and form serialization.
-- Regression: all original four tests must continue to pass with all nine scripts loaded together.
+- Regression: all original four tests must continue to pass with all fourteen scripts loaded together.
+
+The Phase 2 checks added to the test runner cover:
+
+- Text Field: real native input value updates, accessible name, and native email validity.
+- Textarea: multiline value retention and rows configuration.
+- Password Field: masked default, Show/Hide state and value retention. Assertions inspect booleans or lengths only, never print the password.
+- Search Field: bubbling search event, busy/aria-busy state, clear behavior and search-clear event.
+- OTP/PIN: non-digit sanitation, configured maximum length, one-time-code autocomplete, numeric input mode and a completion event that does not expose the code.
+- Phase 2 form serialization: all five fields submit their configured values. The test returns a boolean and does not log password or OTP contents.
+
 - Component sizing.
 - Horizontal overflow at the configured mobile viewport.
 - Browser script exceptions.
