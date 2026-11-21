@@ -114,6 +114,8 @@ Required coverage:
 
 **Target after phase:** 29 components total.
 
+**Implementation status:** In progress. The Phase 5 implementation contract is recorded in [PHASE-5-NAVIGATION-SPEC.md](PHASE-5-NAVIGATION-SPEC.md). The five components remain planned until each has a standalone bundle, demo, complete documentation, gallery/registry integration and passing regression tests.
+
 | # | Component | Element | Physical interaction |
 |---:|---|---|---|
 | 25 | Tabs | `sand-tabs` | A stone marker glides between carved tab sections. |
