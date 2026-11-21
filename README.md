@@ -4,7 +4,7 @@
 
 ### Interfaces shaped by sand, motion, and interaction.
 
-A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 adds five native text and structured-input controls, each with its own physical interaction.
+A growing collection of tactile UI controls built from a real-time sand simulation. The original four established the physical language: a bamboo rake slider, a river-stone toggle, a sand signature pad, and an AI activity surface. Phase 1 added five selection controls. Phase 2 added five native text and structured-input controls. Phase 3 adds five selection, calendar and time controls, each with its own physical interaction.
 
 [**Explore the live gallery**](https://brajesh31.github.io/GrainMotion-UI/) · [Components](#-the-components) · [Installation](#-installation) · [Documentation](#-documentation)
 
@@ -15,7 +15,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
   <a href="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml"><img src="https://github.com/Brajesh31/GrainMotion-UI/actions/workflows/component-tests.yml/badge.svg" alt="Component validation"></a>
   <img src="https://img.shields.io/badge/WebGL2-powered-8B7355" alt="WebGL2 powered">
   <img src="https://img.shields.io/badge/Dependencies-none-6D8B74" alt="No dependencies">
-  <img src="https://img.shields.io/badge/Components-14-C49A6C" alt="Fourteen components">
+  <img src="https://img.shields.io/badge/Components-19-C49A6C" alt="Nineteen components">
 </p>
 
 </div>
@@ -24,7 +24,7 @@ A growing collection of tactile UI controls built from a real-time sand simulati
 
 ## ✨ What is GrainMotion-UI?
 
-GrainMotion-UI currently includes fourteen standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
+GrainMotion-UI currently includes nineteen standalone custom elements that simulate sand as a height field and render it with a WebGL2 shader. Instead of placing a conventional control inside a decorative skin, each interaction changes the sand itself.
 
 - **Tactile interaction:** grooves, ridges, wakes, and settling sand respond to user input.
 - **Standalone components:** each control is delivered as a single JavaScript file with its engine and sounds embedded.
@@ -52,6 +52,11 @@ Each component has its own live demo, usage guide, standalone JavaScript file an
 | **Sand Password** | A native masked credential input with a physical Show/Hide shutter. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/password/) · [Documentation](password/README.md) |
 | **Sand Search** | A native search field with a search well, clear action and busy rake. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/search/) · [Documentation](search/README.md) |
 | **Sand OTP / PIN** | One native numeric field framed by separate engraved digit wells. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/otp/) · [Documentation](otp/README.md) |
+| **Sand Select / Dropdown** | A river stone settles into the chosen option well. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/select/) · [Documentation](select/README.md) |
+| **Sand Combobox** | A bamboo rake follows the typed query as native suggestions appear. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/combobox/) · [Documentation](combobox/README.md) |
+| **Sand Date Picker** | An engraved calendar grid holds a pebble on the selected day. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/date-picker/) · [Documentation](date-picker/README.md) |
+| **Sand Date Range** | Two river stones mark the start and end of a date interval. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/date-range/) · [Documentation](date-range/README.md) |
+| **Sand Time Picker** | A circular sand dial marks the selected time. | [Live demo](https://brajesh31.github.io/GrainMotion-UI/time-picker/) · [Documentation](time-picker/README.md) |
 
 > The gallery image above shows the component set together. The concept artwork below documents visual exploration and design direction, not additional live component screenshots.
 
@@ -137,6 +142,47 @@ Each new control also has its own physical-interaction concept sheet. These are 
 
 </div>
 
+### Phase 3 selection, calendar and time concepts
+
+The five new controls extend the same physical language into option selection, autocomplete, calendar dates, ranges and time-of-day. The browser-native controls remain responsible for their accessible selection and popup behavior.
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="select/assets/concept.svg" alt="Select dropdown with a river-stone selection marker" width="100%">
+      <br><strong>Select · Chosen option well</strong>
+    </td>
+    <td align="center" width="50%">
+      <img src="combobox/assets/concept.svg" alt="Combobox suggestion tray and bamboo rake concept" width="100%">
+      <br><strong>Combobox · Suggestion rake</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="date-picker/assets/concept.svg" alt="Engraved date picker calendar concept" width="100%">
+      <br><strong>Date Picker · Calendar pebble</strong>
+    </td>
+    <td align="center" width="50%">
+      <img src="date-range/assets/concept.svg" alt="Date range with two river-stone markers concept" width="100%">
+      <br><strong>Date Range · Two markers</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="time-picker/assets/concept.svg" alt="Time picker with an engraved circular dial concept" width="100%">
+      <br><strong>Time Picker · Clock dial</strong>
+    </td>
+    <td align="center" width="50%">
+      <strong>Native controls, tactile surface</strong>
+      <br>The browser manages selection, calendar popups, keyboard behavior and form semantics.
+    </td>
+  </tr>
+</table>
+
+</div>
+
 ### Phase 2 text-input concepts
 
 The next five studies show how native browser fields sit above the sand renderer. The visual surface is not used to store or draw entered text, especially for passwords and one-time codes.
@@ -213,6 +259,11 @@ npx shadcn add Brajesh31/GrainMotion-UI/textarea
 npx shadcn add Brajesh31/GrainMotion-UI/password
 npx shadcn add Brajesh31/GrainMotion-UI/search
 npx shadcn add Brajesh31/GrainMotion-UI/otp
+npx shadcn add Brajesh31/GrainMotion-UI/select
+npx shadcn add Brajesh31/GrainMotion-UI/combobox
+npx shadcn add Brajesh31/GrainMotion-UI/date-picker
+npx shadcn add Brajesh31/GrainMotion-UI/date-range
+npx shadcn add Brajesh31/GrainMotion-UI/time-picker
 ```
 
 The files are intended to be placed in `public/grainmotion-ui/`.
@@ -267,6 +318,21 @@ Other elements:
 
 <script src="/grainmotion-ui/otp.js"></script>
 <sand-otp label="Verification code" length="6" autocomplete="one-time-code"></sand-otp>
+
+<script src="/grainmotion-ui/select.js"></script>
+<sand-select label="Delivery speed" options="standard:Standard,express:Express" placeholder="Choose delivery"></sand-select>
+
+<script src="/grainmotion-ui/combobox.js"></script>
+<sand-combobox label="City" options="DEL:Delhi,BLR:Bengaluru"></sand-combobox>
+
+<script src="/grainmotion-ui/date-picker.js"></script>
+<sand-date-picker label="Start date" min="2026-01-01" max="2026-12-31"></sand-date-picker>
+
+<script src="/grainmotion-ui/date-range.js"></script>
+<sand-date-range label="Stay dates" name="stay"></sand-date-range>
+
+<script src="/grainmotion-ui/time-picker.js"></script>
+<sand-time-picker label="Appointment" format="12" step="900"></sand-time-picker>
 ```
 
 For the thinking component, update its state as your agent works:
@@ -355,6 +421,11 @@ The browser test and screenshot utilities require Chrome or Chromium. See the in
 - [Password Field documentation](password/README.md)
 - [Search Field documentation](search/README.md)
 - [OTP / PIN documentation](otp/README.md)
+- [Select / Dropdown documentation](select/README.md)
+- [Combobox / Autocomplete documentation](combobox/README.md)
+- [Date Picker documentation](date-picker/README.md)
+- [Date Range Picker documentation](date-range/README.md)
+- [Time Picker documentation](time-picker/README.md)
 - [Agent skill](skills/grainmotion-ui/SKILL.md)
 - [AI-readable project guide](llms.txt)
 - [Design process and concept artwork](making-of/README.md)
@@ -381,3 +452,9 @@ This project is distributed under the MIT License. See [LICENSE](LICENSE) for th
 [Live Demo](https://brajesh31.github.io/GrainMotion-UI/) · [GitHub Repository](https://github.com/Brajesh31/GrainMotion-UI)
 
 </div>
+
+## 📄 License
+
+GrainMotion-UI is licensed under the [MIT License](LICENSE).
+
+Copyright (c) 2026 Brajesh Kumar.
