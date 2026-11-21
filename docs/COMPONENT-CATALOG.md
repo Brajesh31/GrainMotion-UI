@@ -49,15 +49,15 @@ The five selection, calendar and time controls have standalone bundles, live dem
 
 ## Phase 4 components
 
-The five progress and activity controls now have standalone bundles, demos, expanded READMEs, concept diagrams, gallery cards and registry entries. Their mobile Chromium interaction and form checks are part of the twenty-four-component suite. Manual screen-reader and physical-device verification remains outstanding.
+The five progress and activity controls now have standalone bundles, demos, expanded READMEs, concept diagrams, gallery cards and registry entries. Their mobile Chromium interaction and form checks passed in the twenty-four-component suite, with 80 assertions and zero failures. Manual screen-reader and physical-device verification remains outstanding.
 
 | # | Component | Custom element | Main interaction | Documentation | Status |
 |---:|---|---|---|---|---|
-| 20 | Progress Bar | `sand-progress` | A bamboo rake advances through a sand channel. | [README](../progress/README.md) · [Demo](../progress/) | Implemented, CI verification pending |
-| 21 | Progress Ring | `sand-progress-ring` | A pebble travels around a circular groove. | [README](../progress-ring/README.md) · [Demo](../progress-ring/) | Implemented, CI verification pending |
-| 22 | Step Indicator | `sand-steps` | Stepping stones show completed, active and upcoming steps. | [README](../steps/README.md) · [Demo](../steps/) | Implemented, CI verification pending |
-| 23 | Hourglass Timer | `sand-timer` | Sand falls between two chambers with timer controls. | [README](../timer/README.md) · [Demo](../timer/) | Implemented, CI verification pending |
-| 24 | Loading Indicator | `sand-loader` | A miniature rake loops through a distinct loading pattern. | [README](../loader/README.md) · [Demo](../loader/) | Implemented, CI verification pending |
+| 20 | Progress Bar | `sand-progress` | A bamboo rake advances through a sand channel. | [README](../progress/README.md) · [Demo](../progress/) | Implemented, Chromium CI passed |
+| 21 | Progress Ring | `sand-progress-ring` | A pebble travels around a circular groove. | [README](../progress-ring/README.md) · [Demo](../progress-ring/) | Implemented, Chromium CI passed |
+| 22 | Step Indicator | `sand-steps` | Stepping stones show completed, active and upcoming steps. | [README](../steps/README.md) · [Demo](../steps/) | Implemented, Chromium CI passed |
+| 23 | Hourglass Timer | `sand-timer` | Sand falls between two chambers with timer controls. | [README](../timer/README.md) · [Demo](../timer/) | Implemented, Chromium CI passed |
+| 24 | Loading Indicator | `sand-loader` | A miniature rake loops through a distinct loading pattern. | [README](../loader/README.md) · [Demo](../loader/) | Implemented, Chromium CI passed |
 
 ## Planned components
 
