@@ -144,6 +144,44 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await focus('sand-rating'); await key('End', 35); await sleep(150);
   check('rating: End sets the maximum rating', (await ev(`${E('sand-rating')}.value`)) === 5);
 }
+
+{ // text field: native input, accessible name and validation
+  await ev("document.querySelector('sand-input').field.value = 'Brajesh'; document.querySelector('sand-input').field.dispatchEvent(new Event('input', { bubbles: true }))");
+  check('text field: native input updates the custom-element value', (await ev("document.querySelector('sand-input').value === 'Brajesh'")) === true);
+  check('text field: accessible name is applied to the native input', (await ev("document.querySelector('sand-input').field.getAttribute('aria-label')")) === 'Display name');
+  await ev("document.querySelector('sand-input').setAttribute('type', 'email'); document.querySelector('sand-input').field.value = 'not-an-email'");
+  check('text field: native email validation is retained', (await ev("document.querySelector('sand-input').checkValidity()")) === false);
+  await ev("document.querySelector('sand-input').removeAttribute('type')");
+}
+{ // textarea: multiline text and native row configuration
+  await ev("document.querySelector('sand-textarea').field.value = 'first' + String.fromCharCode(10) + 'second'; document.querySelector('sand-textarea').field.dispatchEvent(new Event('input', { bubbles: true }))");
+  check('textarea: multiline text is retained', (await ev("document.querySelector('sand-textarea').value.includes(String.fromCharCode(10))")) === true);
+  check('textarea: native rows configuration is applied', (await ev("document.querySelector('sand-textarea').field.rows")) === 4);
+}
+{ // password: hidden by default, revealable, and re-masked without losing value
+  check('password: native field is masked by default', (await ev("document.querySelector('sand-password').field.type")) === 'password');
+  await ev("document.querySelector('sand-password').value = 'do-not-print-this'");
+  await ev("document.querySelector('sand-password').querySelector('button').click()");
+  check('password: Show reveals the field and updates aria-pressed', (await ev("document.querySelector('sand-password').revealed && document.querySelector('sand-password').field.type === 'text' && document.querySelector('sand-password').querySelector('button').getAttribute('aria-pressed') === 'true'")) === true);
+  await ev("document.querySelector('sand-password').querySelector('button').click()");
+  check('password: Hide re-masks the field while retaining its value', (await ev("document.querySelector('sand-password').field.type === 'password' && document.querySelector('sand-password').value.length === 16")) === true);
+}
+{ // search: custom request event, busy state and clear action
+  await ev("window.__phase2 = { search: 0, clear: 0, complete: 0 }; document.addEventListener('search', () => __phase2.search++); document.addEventListener('search-clear', () => __phase2.clear++); document.addEventListener('complete', () => __phase2.complete++)");
+  await ev("document.querySelector('sand-search').value = 'grain motion'");
+  await ev("document.querySelector('sand-search').search()");
+  check('search: request dispatches a bubbling search event', (await ev("__phase2.search")) === 1);
+  await ev("document.querySelector('sand-search').busy = true");
+  check('search: busy state is exposed through aria-busy', (await ev("document.querySelector('sand-search').getAttribute('aria-busy')")) === 'true');
+  await ev("document.querySelector('sand-search').clear()");
+  check('search: clear resets the field and dispatches search-clear', (await ev("document.querySelector('sand-search').value === '' && __phase2.clear === 1")) === true);
+}
+{ // OTP/PIN: numeric sanitation, configured length, autofill hint and completion
+  await ev("document.querySelector('sand-otp').field.value = '12a34 567890'; document.querySelector('sand-otp').field.dispatchEvent(new Event('input', { bubbles: true }))");
+  check('OTP: non-digits are removed and value is capped at six', (await ev("document.querySelector('sand-otp').value.length === 6 && /^[0-9]+$/.test(document.querySelector('sand-otp').value)")) === true);
+  check('OTP: one-time-code autocomplete and numeric input mode are retained', (await ev("document.querySelector('sand-otp').field.autocomplete === 'one-time-code' && document.querySelector('sand-otp').field.inputMode === 'numeric'")) === true);
+  check('OTP: complete event fires without exposing the digits', (await ev("__phase2.complete === 1")) === true);
+}
 { // forms: the value controls are sent with a form
   const got = await ev(`(() => {
     const f = document.createElement('form');
