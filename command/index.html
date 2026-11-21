@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GrainMotion-UI · Command Palette</title>
+<meta name="description" content="Search and navigate a command palette built from sand, walnut and river stone.">
+<link rel="icon" href="data:,">
+<style>
+:root{color-scheme:light;--page:#e9e1d4;--ink:#322b22;--muted:#776b5a}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--page);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,sans-serif;display:grid;place-items:center;padding:22px}
+main{width:min(600px,100%);text-align:center}h1{font-size:26px;margin:0}p{color:var(--muted)}.stage{min-height:200px;display:grid;place-items:center;padding:18px 0}.stage sand-command{width:min(520px,100%)}.pill{border:1px solid #b7a180;border-radius:99px;background:#f4ecdf;color:#59432d;padding:8px 16px;font:inherit;cursor:pointer}.readout{min-height:24px;font-size:13px}
+</style>
+</head>
+<body><main>
+<h1>🧭 Command Palette</h1>
+<p>Search available actions, move with the arrow keys and execute a selected command.</p>
+<div class="stage"><sand-command id="palette"></sand-command></div>
+<button class="pill" id="open" type="button">Open command palette</button>
+<p class="readout" id="readout" aria-live="polite">Choose an action from the palette.</p>
+<p><a href="../">← All components</a> · <a href="https://github.com/Brajesh31/GrainMotion-UI/blob/main/command/README.md">Documentation</a></p>
+</main>
+<script src="command.js"></script>
+<script>
+const palette=document.getElementById('palette'),out=document.getElementById('readout');
+palette.commands=[
+{id:'new',label:'Create a new project',description:'Start with a blank workspace',keywords:'add create project',shortcut:'N'},
+{id:'search',label:'Search files',description:'Find a file or document',keywords:'find lookup',shortcut:'⌘ F'},
+{id:'settings',label:'Open settings',description:'Manage workspace preferences',keywords:'preferences config'},
+{id:'export',label:'Export workspace',description:'Download the current project',keywords:'download save'}
+];
+document.getElementById('open').addEventListener('click',()=>palette.show());
+palette.addEventListener('command',e=>out.textContent='Command requested: '+e.detail.label+'. The host would execute this action.');
+palette.addEventListener('command-close',e=>{if(e.detail.reason==='escape')out.textContent='Palette closed.'});
+</script>
+</body>
+</html>
