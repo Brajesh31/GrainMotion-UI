@@ -312,6 +312,52 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('menu: outside pointer press dismisses the option tray', await ev("!document.querySelector('sand-menu').open")===true);
 }
 
+
+{ // Phase 5 acceptance edges: dynamic updates, keyboard variants and lifecycle
+  await ev("(()=>{const el=document.querySelector('sand-tabs');el.setAttribute('activation','automatic');el.setAttribute('orientation','vertical');el.setAttribute('tabs','overview:Overview,activity:Activity');el.removeAttribute('disabled-tabs');el.value='settings';})()");
+  check('tabs: removing the selected tab selects the first remaining enabled tab', await ev("document.querySelector('sand-tabs').value==='overview'&&document.querySelectorAll('sand-tabs [role=tab]').length===2")===true);
+  await ev("(()=>{const el=document.querySelector('sand-tabs');el.buttons[0].focus();el.buttons[0].dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true}));})()");
+  check('tabs: vertical orientation uses ArrowDown and automatic activation', await ev("document.querySelector('sand-tabs').value==='activity'&&document.activeElement===document.querySelector('sand-tabs').buttons[1]")===true);
+  await ev("(()=>{const el=document.querySelector('sand-tabs');el.setAttribute('tabs','overview:Overview,activity:Activity,settings:Settings');const parent=el.parentNode;parent.removeChild(el);parent.appendChild(el);})()");
+  check('tabs: component reconnect preserves its selected value and controls', await ev("document.querySelector('sand-tabs').value==='activity'&&document.querySelector('sand-tabs').buttons.length===3")===true);
+
+  await ev("(()=>{const el=document.querySelector('sand-accordion');el.removeAttribute('multiple');el.setAttribute('collapsible','');el.removeAttribute('disabled-items');el.setAttribute('items','shipping:Shipping,returns:Returns,care:Care');el.value='shipping';el.panels[0].innerHTML='<label>Tracking <input id=\'p5-persist\' value=\'GM-2048\'></label>';el.toggle('shipping');el.toggle('shipping');})()");
+  check('accordion: collapsible mode allows the last open panel to close', await ev("(()=>{const el=document.querySelector('sand-accordion');el.toggle('shipping');return el.value===''})()")===true);
+  await ev("(()=>{const el=document.querySelector('sand-accordion');el.toggle('shipping');el.setAttribute('items','care:Care,faq:FAQ');})()");
+  check('accordion: dynamic item changes rebuild the control and choose a valid initial item', await ev("document.querySelector('sand-accordion').buttons.length===2&&document.querySelector('sand-accordion').value==='care'")===true);
+  check('accordion: collapsing and reopening preserves panel DOM and input value', await ev("(()=>{const el=document.querySelector('sand-accordion');el.setAttribute('items','shipping:Shipping,returns:Returns,care:Care');el.value='shipping';return el.panels[0].querySelector('#p5-persist')?.value==='GM-2048'})()")===true);
+  await ev("(()=>{const el=document.querySelector('sand-accordion');const parent=el.parentNode;parent.removeChild(el);parent.appendChild(el);})()");
+  check('accordion: component reconnect preserves its current state', await ev("document.querySelector('sand-accordion').buttons.length===3")===true);
+
+  await ev("(()=>{const el=document.querySelector('sand-pagination');el.page=1;el.total=24;})()");
+  check('pagination: first page disables first and previous navigation', await ev("(()=>{const el=document.querySelector('sand-pagination');return el.buttons[0].disabled&&el.buttons[1].disabled})()")===true);
+  await ev("document.querySelector('sand-pagination').page=24");
+  check('pagination: last page disables next and last navigation', await ev("(()=>{const el=document.querySelector('sand-pagination');return el.buttons.at(-1).disabled&&el.buttons.at(-2).disabled})()")===true);
+  check('pagination: large page windows expose boundary buttons and ellipses', await ev("(()=>{const el=document.querySelector('sand-pagination');return el.buttons.some(b=>b.dataset.page==='1')&&el.buttons.some(b=>b.dataset.page==='24')&&!!el.querySelector('.gm-page-gap')})()")===true);
+  await ev("(()=>{const el=document.querySelector('sand-pagination');el.buttons.find(b=>b.dataset.page==='24').focus();const parent=el.parentNode;parent.removeChild(el);parent.appendChild(el);})()");
+  check('pagination: component reconnect preserves its current page', await ev("document.querySelector('sand-pagination').page===24")===true);
+
+  await ev("(()=>{const el=document.querySelector('sand-breadcrumbs');el.setAttribute('separator','/');el.items=[{label:'Home',href:'/'},{label:'A very long location label that wraps safely on narrow screens',href:'/long'},{label:'Current location'}];})()");
+  check('breadcrumbs: configured separators render between each ancestor and current item', await ev("Array.from(document.querySelectorAll('sand-breadcrumbs .gm-crumb-sep')).every(x=>x.textContent==='/')&&document.querySelectorAll('sand-breadcrumbs .gm-crumb-sep').length===2")===true);
+  check('breadcrumbs: long labels remain inside the responsive document width', await ev("document.documentElement.scrollWidth<=390")===true);
+  await ev("(()=>{const el=document.querySelector('sand-breadcrumbs');el.items=[{label:'Current only'}];})()");
+  check('breadcrumbs: a single item is current and does not create an ancestor link', await ev("document.querySelector('sand-breadcrumbs').links.length===0&&document.querySelector('sand-breadcrumbs [aria-current=page]')?.textContent==='Current only'")===true);
+  await ev("document.querySelector('sand-breadcrumbs').items=[]");
+  check('breadcrumbs: an empty path retains its labelled navigation landmark', await ev("document.querySelector('sand-breadcrumbs nav')?.getAttribute('aria-label')==='You are here'&&!document.querySelector('sand-breadcrumbs [aria-current=page]')")===true);
+  await ev("(()=>{const el=document.querySelector('sand-breadcrumbs');el.items=[{label:'Home',href:'/'},{label:'Current'}];el.links[0].focus();const parent=el.parentNode;parent.removeChild(el);parent.appendChild(el);})()");
+  check('breadcrumbs: ancestor links remain keyboard focusable after reconnect', await ev("document.activeElement===document.querySelector('sand-breadcrumbs').links[0]")===true);
+
+  await ev("(()=>{const el=document.querySelector('sand-menu');el.open=true;el.menuItems[0].focus();el.menuItems[0].dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true}));})()");
+  check('menu: ArrowDown moves focus to the next enabled menu item', await ev("document.activeElement===document.querySelector('sand-menu').menuItems[1]")===true);
+  await ev("document.activeElement.dispatchEvent(new KeyboardEvent('keydown',{key:'End',bubbles:true}))");
+  check('menu: End moves focus to the last enabled menu item', await ev("document.activeElement===document.querySelector('sand-menu').menuItems.at(-1)")===true);
+  await ev("document.activeElement.dispatchEvent(new KeyboardEvent('keydown',{key:'Home',bubbles:true}))");
+  check('menu: Home returns focus to the first enabled menu item', await ev("document.activeElement===document.querySelector('sand-menu').menuItems[0]")===true);
+  check('menu: open tray remains within the mobile viewport', await ev("(()=>{const r=document.querySelector('sand-menu .gm-menu-popup').getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>=0&&r.bottom<=innerHeight})()")===true);
+  await ev("(()=>{const el=document.querySelector('sand-menu');const parent=el.parentNode;parent.removeChild(el);parent.appendChild(el);})()");
+  check('menu: disconnect closes the overlay and releases transient state', await ev("!document.querySelector('sand-menu').open&&document.querySelector('sand-menu .gm-menu-popup').hidden")===true);
+}
+
 { // forms: verify all nineteen form-associated components in a small isolated form
   const formResults = await ev(`(() => {
     const f = document.createElement('form');
