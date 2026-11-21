@@ -323,7 +323,7 @@ const {Sound,SandTray}=window.GrainMotionUI,parse=s=>String(s||'').split(',').ma
 class SandTabs extends SandTray{
 static observedAttributes=['tabs','value','label','orientation','activation','disabled-tabs'];
 constructor(){super();this._ready=false;this._value='';this.buttons=[];this.panels=[];this.marker=0;this.target=0;}
-get tabs(){return this._tabs||parse(this.getAttribute('tabs')||'overview:Overview,activity:Activity,settings:Settings');}get value(){return this._value;}set value(v){this.selectValue(String(v),true);}get orientation(){return this.getAttribute('orientation')==='vertical'?'vertical':'horizontal';}get activation(){return this.getAttribute('activation')==='manual'?'manual':'automatic';}
+get aspect(){return 0.55;}get tabs(){return this._tabs||parse(this.getAttribute('tabs')||'overview:Overview,activity:Activity,settings:Settings');}get value(){return this._value;}set value(v){this.selectValue(String(v),true);}get orientation(){return this.getAttribute('orientation')==='vertical'?'vertical':'horizontal';}get activation(){return this.getAttribute('activation')==='manual'?'manual':'automatic';}
 attributeChangedCallback(n,o,v){if(!this._ready||o===v)return;if(n==='tabs'||n==='disabled-tabs')this.refresh();else if(n==='value')this.selectValue(v||this.tabs[0]?.id,false,false);else this.syncA11y();}
 init(){this._ready=true;this.style.touchAction='pan-y';this.refresh();}
 isDisabled(t){return this.hasAttribute('disabled')||!!t.disabled||String(this.getAttribute('disabled-tabs')||'').split(',').map(x=>x.trim()).includes(t.id);}
