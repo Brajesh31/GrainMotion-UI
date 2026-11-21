@@ -13,20 +13,34 @@ This is the single human-readable inventory of GrainMotion-UI components. It dis
 
 ## Phase 1 components
 
-The following five controls now have source files, standalone demos, component READMEs, individual concept diagrams, gallery cards and registry entries. Runtime testing is still pending, so treat them as implemented but not yet fully release-verified.
+The five selection controls have standalone source files, demos, component READMEs, concept diagrams, gallery cards and registry entries. Their automated mobile Chromium checks have passed; manual screen-reader and physical-device verification remains outstanding.
 
 | # | Component | Custom element | Main interaction | Documentation | Status |
 |---:|---|---|---|---|---|
-| 5 | Checkbox | `sand-checkbox` | A stone rolls aside to reveal a checkmark pressed into a sand well. | [README](../checkbox/README.md) · [Demo](../checkbox/) | Implemented, verification pending |
-| 6 | Radio Group | `sand-radio-group` | A selected pebble moves between individual option wells. | [README](../radio-group/README.md) · [Demo](../radio-group/) | Implemented, verification pending |
-| 7 | Segmented Control | `sand-segmented` | A flat stone marker glides between carved segments. | [README](../segmented/README.md) · [Demo](../segmented/) | Implemented, verification pending |
-| 8 | Range Slider | `sand-range` | Two bamboo rakes define an interval through the sand. | [README](../range/README.md) · [Demo](../range/) | Implemented, verification pending |
-| 9 | Rating | `sand-rating` | Five pebbles sit in separate wells; one marks the rating. | [README](../rating/README.md) · [Demo](../rating/) | Implemented, verification pending |
-| 10 | Text Field | `sand-input` | Text input | Planned |
-| 11 | Textarea | `sand-textarea` | Text input | Planned |
-| 12 | Password Field | `sand-password` | Secure input | Planned |
-| 13 | Search Field | `sand-search` | Search | Planned |
-| 14 | OTP / PIN Input | `sand-otp` | Structured input | Planned |
+| 5 | Checkbox | `sand-checkbox` | A stone rolls aside to reveal a checkmark pressed into a sand well. | [README](../checkbox/README.md) · [Demo](../checkbox/) | Implemented, Chromium CI passed |
+| 6 | Radio Group | `sand-radio-group` | A selected pebble moves between individual option wells. | [README](../radio-group/README.md) · [Demo](../radio-group/) | Implemented, Chromium CI passed |
+| 7 | Segmented Control | `sand-segmented` | A flat stone marker glides between carved segments. | [README](../segmented/README.md) · [Demo](../segmented/) | Implemented, Chromium CI passed |
+| 8 | Range Slider | `sand-range` | Two bamboo rakes define an interval through the sand. | [README](../range/README.md) · [Demo](../range/) | Implemented, Chromium CI passed |
+| 9 | Rating | `sand-rating` | Five pebbles sit in separate wells; one marks the rating. | [README](../rating/README.md) · [Demo](../rating/) | Implemented, Chromium CI passed |
+
+## Phase 2 components
+
+These five native text and structured-input controls have standalone bundles, live demos, detailed READMEs, concept diagrams, gallery cards and registry entries. The Phase 2 interaction suite is not yet verified, so these are marked implemented with verification pending until CI passes.
+
+| # | Component | Custom element | Main interaction | Documentation | Status |
+|---:|---|---|---|---|---|
+| 10 | Text Field | `sand-input` | A real native input with a bamboo stylus focus cue. | [README](../input/README.md) · [Demo](../input/) | Implemented, verification pending |
+| 11 | Textarea | `sand-textarea` | A native multiline input over shallow writing grooves. | [README](../textarea/README.md) · [Demo](../textarea/) | Implemented, verification pending |
+| 12 | Password Field | `sand-password` | A native masked credential field with a stone Show/Hide shutter. | [README](../password/README.md) · [Demo](../password/) | Implemented, verification pending |
+| 13 | Search Field | `sand-search` | A native search input with clear action and a moving busy rake. | [README](../search/README.md) · [Demo](../search/) | Implemented, verification pending |
+| 14 | OTP / PIN Input | `sand-otp` | One native numeric input across engraved digit wells. | [README](../otp/README.md) · [Demo](../otp/) | Implemented, verification pending |
+
+## Planned components
+
+The components below are roadmap candidates, not implemented features. Their physical concepts are preliminary and may be refined during design exploration.
+
+| # | Component | Custom element | Category | Status |
+|---:|---|---|---|---|
 | 15 | Select / Dropdown | `sand-select` | Selection | Planned |
 | 16 | Combobox / Autocomplete | `sand-combobox` | Searchable selection | Planned |
 | 17 | Date Picker | `sand-date-picker` | Date and time | Planned |
