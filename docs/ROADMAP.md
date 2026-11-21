@@ -6,7 +6,7 @@ Grow GrainMotion-UI into a carefully designed library of tactile interface contr
 
 **Target:** 50 components total, including the four already implemented. This means 46 new components.
 
-**Status update (through Phase 3 implementation):** Fifteen additions now have standalone source files, live demo pages, component READMEs and concept assets. Phases 1, 2 and 3 are wired into the main gallery, registry and AI-readable catalog. Phases 1, 2 and 3 passed the mobile Chromium suite with 65 passing browser assertions and no failures. Manual assistive-technology and physical-device checks remain outstanding. The original four components remain in place.
+**Status update:** Phases 1–4 have 20 implemented additions on top of the original four. Phase 5 adds five navigation components, bringing the implementation set to 29. Phase 5 source bundles, interactive demos, component guides, concept SVGs, gallery cards, registry entries and 23 targeted Chromium assertions are now committed. The final 29-component validation run is pending; manual assistive-technology and physical-device checks remain outstanding.
 
 This roadmap is not a completion report. A component is not release-complete until its functional and regression tests pass.
 
@@ -114,7 +114,7 @@ Required coverage:
 
 **Target after phase:** 29 components total.
 
-**Implementation status:** In progress. The Phase 5 implementation contract is recorded in [PHASE-5-NAVIGATION-SPEC.md](PHASE-5-NAVIGATION-SPEC.md). The five components remain planned until each has a standalone bundle, demo, complete documentation, gallery/registry integration and passing regression tests.
+**Implementation status:** Implemented; automated validation pending. Each component now has a standalone bundle, interactive demo, component guide, concept SVG, gallery integration and registry entry. The 29-component build/documentation/browser regression run is the release gate. See [PHASE-5-NAVIGATION-SPEC.md](PHASE-5-NAVIGATION-SPEC.md) for the detailed contract.
 
 | # | Component | Element | Physical interaction |
 |---:|---|---|---|
