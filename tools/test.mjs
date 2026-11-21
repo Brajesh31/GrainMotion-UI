@@ -422,10 +422,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
 
 
 { // Phase 7: advanced ordering, transfer, pane sizing and nested hierarchy
-  const sort=document.querySelector('sand-sortable');
-  sort.items=[{id:'a',label:'First'},{id:'b',label:'Second'},{id:'c',label:'Third'}];
-  window.__p7={reorder:0,transfer:0,split:0,resize:0,select:0,expand:0};
-  sort.addEventListener('reorder',()=>window.__p7.reorder++);
+  await ev("(()=>{const el=document.querySelector('sand-sortable');el.items=[{id:'a',label:'First'},{id:'b',label:'Second'},{id:'c',label:'Third'}];window.__p7={reorder:0,transfer:0,split:0,resize:0,select:0,expand:0};el.addEventListener('reorder',()=>window.__p7.reorder++);})()");
   check('sortable: renders each stable item as a list row', await ev("document.querySelector('sand-sortable').list.querySelectorAll('[role=listitem]').length===3")===true);
   await ev("document.querySelector('sand-sortable').move(2,0)");
   check('sortable: move updates stable ID order', await ev("document.querySelector('sand-sortable').value.join(',')==='c,a,b'")===true);
@@ -436,10 +433,7 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('sortable: disabled blocks API reorder and disables controls', await ev("(()=>{const el=document.querySelector('sand-sortable');return el.move(0,2)===false&&Array.from(el.list.querySelectorAll('button')).every(b=>b.disabled)})()")===true);
   await ev("document.querySelector('sand-sortable').removeAttribute('disabled')");
 
-  const transfer=document.querySelector('sand-transfer-list');
-  transfer.items=[{id:'one',label:'One',side:'left'},{id:'two',label:'Two',side:'left'},{id:'three',label:'Three',side:'right'}];
-  transfer.addEventListener('transfer',()=>window.__p7.transfer++);
-  transfer.select(['one','two']);
+  await ev("(()=>{const el=document.querySelector('sand-transfer-list');el.items=[{id:'one',label:'One',side:'left'},{id:'two',label:'Two',side:'left'},{id:'three',label:'Three',side:'right'}];el.addEventListener('transfer',()=>window.__p7.transfer++);el.select(['one','two']);})()");
   check('transfer: multi-selection is represented in state', await ev("document.querySelector('sand-transfer-list').selected.length===2")===true);
   await ev("document.querySelector('sand-transfer-list').moveSelected('right')");
   check('transfer: selected items move into other tray', await ev("document.querySelector('sand-transfer-list').items.filter(x=>x.side==='right').length===3")===true);
@@ -450,11 +444,9 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('transfer: disabled state disables selection and actions', await ev("document.querySelector('sand-transfer-list').toRight.disabled&&document.querySelector('sand-transfer-list').leftList.querySelector('button').disabled")===true);
   await ev("document.querySelector('sand-transfer-list').removeAttribute('disabled')");
 
-  const split=document.querySelector('sand-split-pane');
-  split.value=65;
+  await ev("(()=>{const el=document.querySelector('sand-split-pane');el.value=65;el.addEventListener('input',()=>window.__p7.split++);})()");
   check('split pane: value sets first pane percentage', await ev("Math.round(document.querySelector('sand-split-pane').value)===65")===true);
   check('split pane: separator exposes role, orientation and value', await ev("(()=>{const b=document.querySelector('sand-split-pane .gm-split-divider');return b.getAttribute('role')==='separator'&&b.getAttribute('aria-valuenow')==='65'&&b.getAttribute('aria-orientation')==='vertical'})()")===true);
-  split.addEventListener('input',()=>window.__p7.split++);
   await ev("(()=>{const el=document.querySelector('sand-split-pane');el.divider.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));})()");
   check('split pane: keyboard separator adjusts size and emits input', await ev("document.querySelector('sand-split-pane').value===67&&window.__p7.split===1")===true);
   await ev("document.querySelector('sand-split-pane').setAttribute('axis','vertical')");
@@ -462,10 +454,8 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   await ev("document.querySelector('sand-split-pane').value=97");
   check('split pane: value respects maximum', await ev("document.querySelector('sand-split-pane').value===80")===true);
 
-  const resize=document.querySelector('sand-resizable');
-  resize.panels=[{id:'a',label:'A',content:'Panel A',min:20,max:60},{id:'b',label:'B',content:'Panel B',min:20,max:60},{id:'c',label:'C',content:'Panel C',min:20,max:60}];
+  await ev("(()=>{const el=document.querySelector('sand-resizable');el.panels=[{id:'a',label:'A',content:'Panel A',min:20,max:60},{id:'b',label:'B',content:'Panel B',min:20,max:60},{id:'c',label:'C',content:'Panel C',min:20,max:60}];el.addEventListener('change',()=>window.__p7.resize++);})()");
   check('resizable: renders panels and separators', await ev("document.querySelector('sand-resizable').ui.querySelectorAll('.gm-res-panel').length===3&&document.querySelector('sand-resizable').ui.querySelectorAll('[role=separator]').length===2")===true);
-  resize.addEventListener('change',()=>window.__p7.resize++);
   await ev("document.querySelector('sand-resizable').resizeBoundary(0,8,true)");
   check('resizable: adjacent resize preserves 100 percent total', await ev("Math.abs(document.querySelector('sand-resizable').sizes.reduce((a,b)=>a+b,0)-100)<0.01")===true);
   check('resizable: boundary adjustment emits change', await ev("window.__p7.resize===1")===true);
@@ -475,12 +465,8 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
   check('resizable: disabled state disables every separator', await ev("Array.from(document.querySelector('sand-resizable').ui.querySelectorAll('[role=separator]')).every(b=>b.disabled)")===true);
   await ev("document.querySelector('sand-resizable').removeAttribute('disabled')");
 
-  const tree=document.querySelector('sand-tree');
-  tree.items=[{id:'root',label:'Root',children:[{id:'branch',label:'Branch',children:[{id:'leaf',label:'Leaf'}]},{id:'other',label:'Other'}]},{id:'loose',label:'Loose'}];
-  tree.expanded=['root','branch'];
+  await ev("(()=>{const el=document.querySelector('sand-tree');el.items=[{id:'root',label:'Root',children:[{id:'branch',label:'Branch',children:[{id:'leaf',label:'Leaf'}]},{id:'other',label:'Other'}]},{id:'loose',label:'Loose'}];el.expanded=['root','branch'];el.addEventListener('select',()=>window.__p7.select++);el.addEventListener('expand',()=>window.__p7.expand++);})()");
   check('tree: new hierarchy assigns one valid keyboard entry point', await ev("(()=>{const el=document.querySelector('sand-tree');return el.value==='root'&&el.nodeButtons.filter(b=>b.tabIndex===0).length===1})()")===true);
-  tree.addEventListener('select',()=>window.__p7.select++);
-  tree.addEventListener('expand',()=>window.__p7.expand++);
   check('tree: nested nodes expose treeitem levels', await ev("document.querySelector('sand-tree').nodeButtons.find(b=>b.dataset.nodeId==='leaf')?.getAttribute('aria-level')==='3'")===true);
   await ev("document.querySelector('sand-tree').select('leaf',true)");
   check('tree: selected node is reflected and announced', await ev("document.querySelector('sand-tree').value==='leaf'&&window.__p7.select===1")===true);
