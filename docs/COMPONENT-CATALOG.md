@@ -108,15 +108,15 @@ The five feedback and overlay controls are complete on `main`. The 45-component 
 | 44 | Dialog / Modal | `sand-dialog` | Opens a native modal surface with focus containment and explicit actions. | Implemented, Chromium CI passed |
 | 45 | Drawer / Sheet | `sand-drawer` | Opens a responsive modal sheet from any screen edge. | Implemented, Chromium CI passed |
 
-## Phase 9 proposals
+## Phase 9 components (implementation in progress)
 
 | # | Component | Custom element | Preliminary interaction | Status |
 |---:|---|---|---|---|
-| 46 | Command Palette | `sand-command` | A central stone navigates a searchable command list. | Planned |
-| 47 | Context Menu | `sand-context-menu` | A carved menu appears at a context-menu or long-press position. | Planned |
-| 48 | Filter Builder | `sand-filter-builder` | Filter conditions are represented by stones connected by logical grooves. | Planned |
-| 49 | Data Table | `sand-table` | A structured board uses sand markers for selection, sorting and filtering. | Planned |
-| 50 | Kanban Board | `sand-kanban` | Cards move between columns with material movement and settling. | Planned |
+| 46 | Command Palette | `sand-command` | A central stone filters and navigates the searchable command list. | Source, demo and docs committed; validation pending |
+| 47 | Context Menu | `sand-context-menu` | A carved menu appears at a context-menu, long-press or keyboard target. | Source, demo and docs committed; validation pending |
+| 48 | Filter Builder | `sand-filter-builder` | Filter conditions are represented by stones connected by logical grooves. | Source, demo and docs committed; validation pending |
+| 49 | Data Table | `sand-table` | A structured board uses sand markers for selection, sorting, filtering and pagination. | Source, demo and docs committed; validation pending |
+| 50 | Kanban Board | `sand-kanban` | Cards move between columns with drag, buttons and keyboard movement. | Source, demo and docs committed; validation pending |
 
 ## Naming and API conventions
 
