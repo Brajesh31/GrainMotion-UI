@@ -177,7 +177,9 @@ Required coverage: focus trapping where appropriate, Escape behavior, dismissal 
 
 ## Phase 9: Advanced productivity and composite components
 
-**Status: In progress on `main`.** Five source components, demos, guides, concept sheets, registry entries and 30 targeted browser assertions are committed. Bundle, documentation, full regression and Pages release checks remain pending.
+**Status: Complete and CI-verified on `main` (2026-11-21).** All five source components, demos, guides, concept sheets, registry entries and 33 targeted browser checks are committed. The full 50-component mobile Chromium suite passed 239 checks with zero failures. Standalone bundle synchronization, generated documentation/registry validation and GitHub Pages deployment passed.
+
+Evidence: [50-component validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878408790) · [GitHub Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878408728). Manual Safari, Firefox, physical-device and screen-reader testing remain open follow-up QA.
 
 **Target after phase:** 50 components total.
 
