@@ -3,8 +3,9 @@
 **Audit date:** 2026-11-21  
 **Repository:** [Brajesh31/GrainMotion-UI](https://github.com/Brajesh31/GrainMotion-UI)  
 **Audited branch:** `main`  
-**Audited commit:** `901599d9106143d87f8cb2eb32be9e576a390b1a`  
-**Phase status:** Foundation work in progress. This report is a baseline, not a release approval.
+**Baseline commit:** `901599d9106143d87f8cb2eb32be9e576a390b1a`  
+**Phase 0 implementation commit:** `68ec65ab2103053a6e2e62e857a098edc6c39bcc`  
+**Phase status:** Foundation work complete. The repository as a whole is not release-ready.
 
 ## Scope
 
@@ -36,20 +37,22 @@ The repository already contains a shared renderer in `core.js`, standalone bundl
 
 ## Latest automated quality baseline
 
-The latest full component-validation run on the audited commit is [GitHub Actions run #486](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878968524).
+The latest full component-validation run after Phase 0 changes is [GitHub Actions run #498](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44883477540) on commit `68ec65ab2103053a6e2e62e857a098edc6c39bcc`.
 
 | Check | Result |
 |---|---|
 | `node tools/build.mjs --check` | Passed |
 | `node tools/docs.mjs --check` | Passed |
-| 50-component mobile Chromium suite | 236 assertions passed, 3 failed |
-| GitHub Pages deployment for the same commit | Passed in [run #587](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44878968566) |
+| 50-component mobile Chromium suite | 235 assertions passed, 4 failed |
+| Structural component/asset/registry audit | Passed |
+| GitHub Pages deployment for the Phase 0 commit | Pending at the time of this update |
 
 ### Known failures in the latest browser run
 
 1. Tooltip: keyboard focus should open the hint without moving focus.
 2. Tooltip: Escape should dismiss the hint while leaving trigger focus unchanged.
 3. Toast: informational and success notifications should announce through a polite live region.
+4. Context Menu: touch long-press should open the menu at the press point.
 
 These are confirmed failures in the latest recorded run. They are not silently waived. They must be fixed in the corresponding component audit phase and rechecked in the full 50-component suite.
 
@@ -87,8 +90,8 @@ This is a limited automated interaction baseline only. It does not prove the fou
 | Component contract | [COMPONENT-CONTRACT.md](COMPONENT-CONTRACT.md) | Added |
 | Design token source | [../design/tokens.css](../design/tokens.css) | Added, provisional and not yet consumed by current bundles |
 | Token usage guidance | [../design/README.md](../design/README.md) | Added |
-| Structural and asset audit | [../tools/audit.mjs](../tools/audit.mjs) | Added; CI execution pending |
-| CI audit gate | [../.github/workflows/component-tests.yml](../.github/workflows/component-tests.yml) | Added; awaiting its first run |
+| Structural and asset audit | [../tools/audit.mjs](../tools/audit.mjs) | Added and passed in run #498 |
+| CI audit gate | [../.github/workflows/component-tests.yml](../.github/workflows/component-tests.yml) | Added and passed in run #498 |
 | Current blocker register | This document | Added |
 | Component-by-component repair | Phases 1–11 | Not started in Phase 0 |
 
@@ -98,9 +101,9 @@ Phase 0 may be marked complete only when:
 
 - `node tools/build.mjs --check` passes.
 - `node tools/docs.mjs --check` passes.
-- `node tools/audit.mjs` passes on the same commit in GitHub Actions.
+- `node tools/audit.mjs` passes on the same commit in GitHub Actions. This gate passed in run #498.
 - The component contract, architecture, design token source and current limitations are documented.
-- The original-four automated baseline is reproducible and the visual reference baseline is ready for Phase 1.
-- No Phase 0 change has altered the rendered behavior of the existing components.
+- The original-four automated interaction baseline is recorded. Visual screenshot baselines and their repair work are explicitly handed to Phase 1.
+- No Phase 0 change intentionally altered component source or rendered behavior.
 
-A passing structural audit does not mean that all components work. Functional, visual, accessibility, security and cross-browser sign-off remain mandatory for the later phases.
+**Phase 0 is complete as a foundation phase.** It does not certify all component behavior. The full 50-component browser suite currently has four failures, and visual, accessibility, security, performance and cross-browser sign-off remain mandatory before release.
