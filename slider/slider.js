@@ -250,20 +250,14 @@ class SandTray extends HTMLElement {
     if (!sizeChanged && this.W && this.H) {
       this.c.width = this.o.width = Math.round(this.W * dpr);
       this.c.height = this.o.height = Math.round(this.H * dpr);
-      if (this.fallbackCanvas) {
-        this.fallbackCanvas.width = this.c.width; this.fallbackCanvas.height = this.c.height;
-        this.fallbackReady = false;
-      }
+      if (this.fallbackCanvas) { this.fallbackCanvas.width = this.c.width; this.fallbackCanvas.height = this.c.height; this.fallbackReady = false; }
       this.dirty = true; this.spriteKey = null;
       return;
     }
     const W = Math.round(css), H = Math.round(css * this.aspect);
     this.W = W; this.H = H;
     this.c.width = this.o.width = Math.round(W * dpr); this.c.height = this.o.height = Math.round(H * dpr);
-    if (this.fallbackCanvas) {
-      this.fallbackCanvas.width = this.c.width; this.fallbackCanvas.height = this.c.height;
-      this.fallbackReady = false;
-    }
+    if (this.fallbackCanvas) { this.fallbackCanvas.width = this.c.width; this.fallbackCanvas.height = this.c.height; this.fallbackReady = false; }
     this.pad = Math.max(3, Math.round(H * (this.padRatio ?? 0.12)));
     this.h = new Float32Array(W * H);
     this.inside = new Uint8Array(W * H);
@@ -337,7 +331,8 @@ class SandTray extends HTMLElement {
     }
     if (hi >= lo) { this.moved = [lo, hi]; this.dirty = true; } else this.moved = [W, 0];
   }
-  // 2D compatibility renderer for unavailable or evicted WebGL2 contexts.
+  // Canvas 2D compatibility renderer. It draws the same height field and material frame
+  // when WebGL2 is unavailable or a browser has evicted a context.
   renderFallback() {
     if (!this.fallbackCanvas) {
       this.fallbackCanvas = document.createElement('canvas');
@@ -357,24 +352,30 @@ class SandTray extends HTMLElement {
     if (!this.fallbackSand || this.fallbackSand.width !== W || this.fallbackSand.height !== H) {
       this.fallbackSand = document.createElement('canvas');
       this.fallbackSand.width = W; this.fallbackSand.height = H;
-      this.fallbackSandContext = this.fallbackSand.getContext('2d'); this.fallbackReady = false;
+      this.fallbackSandContext = this.fallbackSand.getContext('2d');
+      this.fallbackReady = false;
     }
     if (this.dirty || !this.fallbackReady) {
       const paint = this.fallbackSandContext;
       const image = paint.createImageData(W, H), pixels = image.data, h = this.h, inside = this.inside;
       for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-        const i = y * W + x; if (!inside[i]) continue;
+        const i = y * W + x;
+        if (!inside[i]) continue;
         const z = h[i] || 0;
         const left = x > 0 ? h[i - 1] : z, right = x + 1 < W ? h[i + 1] : z;
         const up = y > 0 ? h[i - W] : z, down = y + 1 < H ? h[i + W] : z;
         const grain = (((x * 73856093) ^ (y * 19349663)) >>> 0) & 15;
         const shade = Math.max(0.66, Math.min(1.2, 0.91 + (left - right) * 0.15 + (up - down) * 0.12
           + Math.max(-0.1, Math.min(0.1, z * 0.045)) + (grain - 7.5) * 0.0035));
-        const p = i * 4; pixels[p] = Math.round(239 * shade); pixels[p + 1] = Math.round(223 * shade);
+        const p = i * 4;
+        pixels[p] = Math.round(239 * shade); pixels[p + 1] = Math.round(223 * shade);
         pixels[p + 2] = Math.round(191 * shade); pixels[p + 3] = 255;
       }
-      paint.putImageData(image, 0, 0); this.fallbackReady = true; this.dirty = false;
+      paint.putImageData(image, 0, 0);
+      this.fallbackReady = true;
+      this.dirty = false;
     }
+
     const rounded = (g, x, y, w, h, radius) => {
       const r = Math.max(0, Math.min(radius, w / 2, h / 2));
       g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r);
@@ -388,11 +389,13 @@ class SandTray extends HTMLElement {
     wood.addColorStop(0.78, '#553a2a'); wood.addColorStop(1, '#78563b');
     rounded(ctx, 0.5 * k, 0.5 * k, width - k, height - k, height / 2);
     ctx.fillStyle = wood; ctx.fill(); ctx.restore();
+
     const pad = this.pad * k, x = pad, y = pad, w = width - 2 * pad, h = height - 2 * pad;
     ctx.save(); rounded(ctx, x, y, w, h, h / 2); ctx.clip();
     ctx.drawImage(this.fallbackSand, 0, 0, width, height); ctx.restore();
     ctx.lineWidth = Math.max(1, k); rounded(ctx, x, y, w, h, h / 2);
     ctx.strokeStyle = 'rgba(80,54,35,.72)'; ctx.stroke();
+
     const drawStone = (stone) => {
       if (!stone || !(stone[2] > 0) || !(stone[3] > 0)) return;
       const [sx, sy, rx, ry] = stone;
