@@ -84,17 +84,17 @@ The six media and file components use the shared sand simulation, walnut frames 
 | 34 | Media Scrubber | `sand-scrubber` | A stone playhead follows HTML media time and buffered ranges. | [README](../scrubber/README.md) · [Demo](../scrubber/) · [Concept](../scrubber/assets/concept.svg) | Implemented, CI verified |
 | 35 | Color Picker | `sand-color-picker` | Native color chooser and mineral swatches with form value support. | [README](../color-picker/README.md) · [Demo](../color-picker/) · [Concept](../color-picker/assets/concept.svg) | Implemented, CI verified |
 
-## Phase 7 components (implementation in progress)
+## Phase 7 components (complete)
 
-Five advanced list and layout controls extend the material language into real data ordering, two-sided transfer, pane sizing and nested navigation. All components are present in source and in the live gallery; generated component guides and full 40-component CI verification are still being finalized.
+Five advanced list and layout controls extend the material language into real data ordering, two-sided transfer, pane sizing and nested navigation. All five controls have standalone source bundles, demos, generated guides, concept artwork, gallery cards and registry entries. The 40-component mobile Chromium run passed 180 assertions with zero failures, and the build, docs and Pages release gates passed. Manual screen-reader, physical-device and additional-browser checks remain outstanding.
 
 | # | Component | Custom element | Main interaction | Documentation | Status |
 |---:|---|---|---|---|---|
-| 36 | Sortable List | `sand-sortable` | Stable-ID list reordering with drag, keyboard and button controls. | [README](../sortable/README.md) · [Demo](../sortable/) · [Concept](../sortable/assets/concept.svg) | In progress |
-| 37 | Transfer List | `sand-transfer-list` | Multi-selection and moving items between two compartments. | [README](../transfer-list/README.md) · [Demo](../transfer-list/) · [Concept](../transfer-list/assets/concept.svg) | In progress |
-| 38 | Split Pane | `sand-split-pane` | Pointer and keyboard divider for two slotted content panes. | [README](../split-pane/README.md) · [Demo](../split-pane/) · [Concept](../split-pane/assets/concept.svg) | In progress |
-| 39 | Resizable Panels | `sand-resizable` | Adjacent panel resizing with bounded shares and keyboard separators. | [README](../resizable/README.md) · [Demo](../resizable/) · [Concept](../resizable/assets/concept.svg) | In progress |
-| 40 | Tree View | `sand-tree` | Expandable nested nodes, selection and arrow-key navigation. | [README](../tree/README.md) · [Demo](../tree/) · [Concept](../tree/assets/concept.svg) | In progress |
+| 36 | Sortable List | `sand-sortable` | Stable-ID list reordering with drag, keyboard and button controls. | [README](../sortable/README.md) · [Demo](../sortable/) · [Concept](../sortable/assets/concept.svg) | Complete |
+| 37 | Transfer List | `sand-transfer-list` | Multi-selection and moving items between two compartments. | [README](../transfer-list/README.md) · [Demo](../transfer-list/) · [Concept](../transfer-list/assets/concept.svg) | Complete |
+| 38 | Split Pane | `sand-split-pane` | Pointer and keyboard divider for two slotted content panes. | [README](../split-pane/README.md) · [Demo](../split-pane/) · [Concept](../split-pane/assets/concept.svg) | Complete |
+| 39 | Resizable Panels | `sand-resizable` | Adjacent panel resizing with bounded shares and keyboard separators. | [README](../resizable/README.md) · [Demo](../resizable/) · [Concept](../resizable/assets/concept.svg) | Complete |
+| 40 | Tree View | `sand-tree` | Expandable nested nodes, selection and arrow-key navigation. | [README](../tree/README.md) · [Demo](../tree/) · [Concept](../tree/assets/concept.svg) | Complete |
 
 ## Planned components
 

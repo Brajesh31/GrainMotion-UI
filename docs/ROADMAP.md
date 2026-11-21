@@ -6,7 +6,7 @@ Grow GrainMotion-UI into a carefully designed library of tactile interface contr
 
 **Target:** 50 components total, including the four already implemented. This means 46 new components.
 
-**Status update:** Phases 1–4 contributed 20 implemented additions on top of the original four. Phase 5 adds five navigation components, bringing the implemented set to 29 of the 50-component roadmap. All five Phase 5 standalone bundles, interactive demos, component guides, concept SVGs, gallery cards, registry entries and 45 targeted Chromium assertions are committed. The final 29-component GitHub Actions mobile Chromium run passed **125 assertions with zero failures**. Manual assistive-technology and physical-device checks remain outstanding.
+**Status update:** Phases 1–7 now deliver 40 implemented components of the 50-component roadmap. Phase 5 introduced navigation controls, Phase 6 added file and media controls, and Phase 7 adds advanced ordering, transfer, pane layout and nested navigation. The final 40-component GitHub Actions mobile Chromium run passed **180 assertions with zero failures**; standalone bundle synchronization, generated documentation validation and GitHub Pages deployment also passed. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44872261254) · [Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44872261277). Manual screen-reader, physical-device, Safari and Firefox checks remain outstanding.
 
 This roadmap is not a completion report. A component is not release-complete until its functional and regression tests pass.
 
@@ -147,7 +147,7 @@ Required coverage: MIME/type and size restrictions, upload progress/error/cancel
 
 **Target after phase:** 40 components total.
 
-**Implementation status:** Five component source files, demos and gallery wiring are on `main`. The standalone build manifest, central spec, generated registry/docs and 40-component mobile Chromium run are being finalized. Phase 7 will be closed only after all automated release gates pass. See [PHASE-7-ADVANCED-LAYOUT-SPEC.md](PHASE-7-ADVANCED-LAYOUT-SPEC.md).
+**Implementation status: Complete.** All five components, standalone bundles, demos, gallery cards, component guides, concept SVGs, registry entries and 40-component test coverage are committed on `main`. The final mobile Chromium suite passed **180 assertions with zero failures**; bundle synchronization, generated documentation and GitHub Pages deployment passed. Manual screen-reader, physical-device and additional-browser checks remain outstanding. See [PHASE-7-ADVANCED-LAYOUT-SPEC.md](PHASE-7-ADVANCED-LAYOUT-SPEC.md).
 
 | # | Component | Element | Physical interaction |
 |---:|---|---|---|

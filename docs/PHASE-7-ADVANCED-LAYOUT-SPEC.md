@@ -1,6 +1,6 @@
 # Phase 7: Lists, Drag-and-Drop and Advanced Layout
 
-> **Status:** Implementation in progress on `main`. Five standalone controls are present, gallery wiring and Phase 7 browser assertions are integrated. Bundle synchronization, generated registry/docs and the full 40-component Chromium suite are the remaining release gates.
+> **Status:** Complete on `main`. All five standalone controls, gallery wiring, guides, concept SVGs, registry entries and 27 Phase 7 browser assertions are integrated. The 40-component mobile Chromium suite passed **180 assertions with zero failures**; bundle synchronization, generated docs and GitHub Pages deployment passed. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44872261254) · [Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44872261277). Manual screen-reader, physical-device, Safari and Firefox checks remain outstanding.
 
 ## Design direction
 

@@ -2,7 +2,7 @@
 
 This directory is the project handbook. It documents the current implementation, the planned 50-component catalogue, design rules, architecture, accessibility expectations, performance constraints, testing, contribution workflow and component authoring process.
 
-> **Status:** The repository now contains forty implemented component source bundles across the original set and Phases 1 through 7. Phase 6 is CI-verified; Phase 7 source, gallery entries and interaction tests are integrated, with final bundle/docs/browser validation pending. The remaining ten roadmap entries in Phases 8–9 are proposals, not available components yet.
+> **Status:** Forty components are implemented across the original set and Phases 1–7. Phase 7 is CI-verified: the 40-component mobile Chromium suite passed 180 assertions with zero failures, and both standalone bundle synchronization and generated documentation checks passed. [Validation run](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44872261254) · [Pages deployment](https://github.com/Brajesh31/GrainMotion-UI/actions/runs/44872261277). Manual screen-reader, physical-device, Safari and Firefox checks remain outstanding. The ten components in Phases 8–9 are proposals, not available components yet.
 
 ## Documentation map
 

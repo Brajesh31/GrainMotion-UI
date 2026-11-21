@@ -28,7 +28,7 @@ The test and screenshot utilities require Chrome or Chromium. Set `CHROME` if th
 
 ## Current test coverage
 
-`tools/test.mjs` now loads all twenty-nine controls in a mobile-sized Chromium viewport. The last passing twenty-four-component baseline recorded 80 browser assertions with zero failures. Phase 5 adds 45 targeted assertions for the five navigation controls; the final 29-component CI run passed 125 assertions with zero failures. The original four-component regression checks remain part of the suite. The original-control checks cover:
+`tools/test.mjs` loads all forty implemented controls in a mobile-sized Chromium viewport. The latest 40-component GitHub Actions run passed **180 browser assertions with zero failures**, including 27 targeted Phase 7 assertions. Standalone bundle synchronization and generated documentation checks passed in the same run, and the corresponding GitHub Pages deployment succeeded. The suite continues to cover original-control regressions as well as every implemented phase. The original-control checks cover:
 
 - Slider drag, input/change events, vertical-swipe handling and keyboard increments.
 - Toggle click, Space behavior, change events and vertical-swipe handling.
@@ -70,7 +70,15 @@ The Phase 2, Phase 3 and Phase 4 checks in the passing test runner cover:
 - Phase 5 Pagination: named navigation, aria-current, page clamping, total reduction and disabled navigation.
 - Phase 5 Breadcrumbs: ancestor links, current-page state, structured property updates and unsafe URL scheme rejection.
 - Phase 5 Menu: menu-button semantics, open state, disabled commands, select event, Escape/focus restoration and outside-pointer dismissal.
-
+- Phase 6 Dropzone: accepted/rejected MIME types and file sizes, host events, clearing and disabled picker state.
+- Phase 6 Upload Queue: queued file registration, host progress updates, cancellation, retry and clearing.
+- Phase 6 Carousel and Lightbox: safe image sources, accessible labels, index changes, native modal behavior, focus restoration and reconnect handling.
+- Phase 6 Media Scrubber and Color Picker: media binding/seeking/buffered state and color normalization, format readout, swatches and disabled state.
+- Phase 7 Sortable List: stable-ID reordering, keyboard movement, order events and disabled behavior.
+- Phase 7 Transfer List: multi-selection, transfer events, move-all and disabled state.
+- Phase 7 Split Pane: separator semantics, orientation, keyboard resize, input event and min/max clamping.
+- Phase 7 Resizable Panels: panel/separator rendering, adjacent size conservation, keyboard resize, change event and disabled state.
+- Phase 7 Tree View: valid roving entry point, nested levels, selection events, visible-node collapse/expand, arrow-key navigation and disabled state.
 
 - Component sizing.
 - Horizontal overflow at the configured mobile viewport.
