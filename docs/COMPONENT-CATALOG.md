@@ -59,47 +59,23 @@ The five progress and activity controls now have standalone bundles, demos, expa
 | 23 | Hourglass Timer | `sand-timer` | Sand falls between two chambers with timer controls. | [README](../timer/README.md) · [Demo](../timer/) | Implemented, Chromium CI passed |
 | 24 | Loading Indicator | `sand-loader` | A miniature rake loops through a distinct loading pattern. | [README](../loader/README.md) · [Demo](../loader/) | Implemented, Chromium CI passed |
 
-## Phase 5 status
+## Phase 5 components
 
-Phase 5 navigation work has started. The five navigation components below remain **planned** until their source bundles, live demos, component guides, gallery/registry integration and automated verification are complete. See [Phase 5 implementation contract](PHASE-5-NAVIGATION-SPEC.md) for detailed interaction and acceptance requirements.
+The five navigation components now have standalone bundles, interactive demos, detailed component guides, hand-authored concept SVGs, gallery cards and shadcn registry entries. The shared build and documentation checks and 23 new Phase 5 browser assertions are wired into the validation pipeline. Final CI execution is pending, and manual assistive-technology and physical-device verification remains outstanding. See [Phase 5 implementation contract](PHASE-5-NAVIGATION-SPEC.md) for requirements and known limits.
+
+| # | Component | Custom element | Main interaction | Documentation | Status |
+|---:|---|---|---|---|---|
+| 25 | Tabs | `sand-tabs` | A flat river stone moves between tab wells; content remains native HTML. | [README](../tabs/README.md) · [Demo](../tabs/) · [Concept](../tabs/assets/concept.svg) | Implemented, CI pending |
+| 26 | Accordion | `sand-accordion` | Walnut lids with stone pulls uncover separate sand compartments. | [README](../accordion/README.md) · [Demo](../accordion/) · [Concept](../accordion/assets/concept.svg) | Implemented, CI pending |
+| 27 | Pagination | `sand-pagination` | A river stone marks the active numbered well in a carved track. | [README](../pagination/README.md) · [Demo](../pagination/) · [Concept](../pagination/assets/concept.svg) | Implemented, CI pending |
+| 28 | Breadcrumbs | `sand-breadcrumbs` | Stepping stones join ancestor links and the current-location marker. | [README](../breadcrumbs/README.md) · [Demo](../breadcrumbs/) · [Concept](../breadcrumbs/assets/concept.svg) | Implemented, CI pending |
+| 29 | Menu / Popover | `sand-menu` | A stone trigger lifts a walnut-framed command tray. | [README](../menu/README.md) · [Demo](../menu/) · [Concept](../menu/assets/concept.svg) | Implemented, CI pending |
 
 ## Planned components
 
 The components below are roadmap candidates, not implemented features. Their physical concepts are preliminary and may be refined during design exploration.
 
-| # | Component | Custom element | Category | Status |
-|---:|---|---|---|---|
-| 20 | Progress Bar | `sand-progress` | Progress | Planned |
-| 21 | Progress Ring | `sand-progress-ring` | Progress | Planned |
-| 22 | Step Indicator | `sand-steps` | Progress | Planned |
-| 23 | Hourglass Timer | `sand-timer` | Time | Planned |
-| 24 | Loading Indicator | `sand-loader` | Loading | Planned |
-| 25 | Tabs | `sand-tabs` | Navigation | Planned |
-| 26 | Accordion | `sand-accordion` | Disclosure | Planned |
-| 27 | Pagination | `sand-pagination` | Navigation | Planned |
-| 28 | Breadcrumbs | `sand-breadcrumbs` | Navigation | Planned |
-| 29 | Menu / Popover | `sand-menu` | Navigation / overlay | Planned |
-| 30 | File Dropzone | `sand-dropzone` | File input | Planned |
-| 31 | Upload Queue | `sand-upload-queue` | File handling | Planned |
-| 32 | Image Carousel | `sand-carousel` | Media | Planned |
-| 33 | Lightbox Gallery | `sand-lightbox` | Media / overlay | Planned |
-| 34 | Media Scrubber | `sand-scrubber` | Media | Planned |
-| 35 | Color Picker | `sand-color-picker` | Color input | Planned |
-| 36 | Sortable List | `sand-sortable` | Drag and drop | Planned |
-| 37 | Transfer List | `sand-transfer-list` | Selection / data | Planned |
-| 38 | Split Pane | `sand-split-pane` | Layout | Planned |
-| 39 | Resizable Panels | `sand-resizable` | Layout | Planned |
-| 40 | Tree View | `sand-tree` | Data navigation | Planned |
-| 41 | Tooltip | `sand-tooltip` | Feedback / overlay | Planned |
-| 42 | Toast Notification | `sand-toast` | Feedback | Planned |
-| 43 | Alert Banner | `sand-alert` | Feedback | Planned |
-| 44 | Dialog / Modal | `sand-dialog` | Overlay | Planned |
-| 45 | Drawer / Sheet | `sand-drawer` | Overlay | Planned |
-| 46 | Command Palette | `sand-command` | Productivity | Planned |
-| 47 | Context Menu | `sand-context-menu` | Productivity / overlay | Planned |
-| 48 | Filter Builder | `sand-filter-builder` | Data / productivity | Planned |
-| 49 | Data Table | `sand-table` | Data display | Planned |
-| 50 | Kanban Board | `sand-kanban` | Data / productivity | Planned |
+
 
 ## Naming and API conventions
 
