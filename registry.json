@@ -780,6 +780,121 @@
         }
       ],
       "docs": "GrainMotion-UI Color Picker is a plain script that registers a custom element. Load /grainmotion-ui/color-picker.js with a script tag (not a module), Use <sand-color-picker name=\"accent\" value=\"#c28b55\" format=\"hex\"></sand-color-picker>. Read or set value; input and change events expose both formatted value and normalized hex. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "sortable",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Sortable List",
+      "description": "A reorderable list with native drag-and-drop, keyboard shortcuts and explicit move buttons. Ordering is stored as stable item IDs and exposed through a property and events. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-sortable>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "list",
+        "sortable",
+        "drag-and-drop",
+        "reorder",
+        "sand",
+        "accessibility"
+      ],
+      "files": [
+        {
+          "path": "sortable/sortable.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/sortable.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Sortable List is a plain script that registers a custom element. Load /grainmotion-ui/sortable.js with a script tag (not a module), Set items to an array of {id,label,disabled} objects. Read value for the ordered IDs or call move(fromIndex,toIndex). Native dragging, arrow keys and Move Up/Down buttons are supported. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "transfer-list",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Transfer List",
+      "description": "A two-sided transfer control with multi-selection, explicit move-selected and move-all actions, and stable item IDs. The host owns the data and persistence. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-transfer-list>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "list",
+        "transfer",
+        "selection",
+        "multi-select",
+        "sand",
+        "accessibility"
+      ],
+      "files": [
+        {
+          "path": "transfer-list/transfer-list.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/transfer-list.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Transfer List is a plain script that registers a custom element. Load /grainmotion-ui/transfer-list.js with a script tag (not a module), Set items to {id,label,side,disabled} objects. Select IDs through the selected property, then call move(ids,'left'|'right'), moveSelected(target) or moveAll(target). More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "split-pane",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Split Pane",
+      "description": "A two-pane horizontal or vertical layout with a pointer-draggable separator, keyboard resizing, minimum and maximum bounds, and slotted host content. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-split-pane>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "layout",
+        "split-pane",
+        "resizable",
+        "panels",
+        "sand",
+        "accessibility"
+      ],
+      "files": [
+        {
+          "path": "split-pane/split-pane.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/split-pane.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Split Pane is a plain script that registers a custom element. Load /grainmotion-ui/split-pane.js with a script tag (not a module), Place child elements in slot=\"start\" and slot=\"end\". Set value as the first pane percentage, axis to horizontal or vertical, and configure min-size/max-size. Listen for input and change. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "resizable",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Resizable Panels",
+      "description": "A multi-panel layout with two to four panels, adjacent resizable boundaries, keyboard controls, minimum and maximum proportions, and serializable panel sizes. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-resizable>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "layout",
+        "panels",
+        "resize",
+        "dashboard",
+        "sand",
+        "accessibility"
+      ],
+      "files": [
+        {
+          "path": "resizable/resizable.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/resizable.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Resizable Panels is a plain script that registers a custom element. Load /grainmotion-ui/resizable.js with a script tag (not a module), Assign panels as an array of {id,label,content,min,max} objects. Read or set sizes as percentages and call resizeBoundary(index,delta) to adjust an adjacent pair. More: https://brajesh31.github.io/GrainMotion-UI"
+    },
+    {
+      "name": "tree",
+      "type": "registry:file",
+      "title": "GrainMotion-UI Tree View",
+      "description": "A nested tree with expansion state, single-node selection, visible-node keyboard navigation and accessible treeitem semantics. One file of about 40 KB with its sand engine and sounds inside it, no dependencies, defines <sand-tree>.",
+      "author": "Brajesh Kumar <https://github.com/Brajesh31>",
+      "categories": [
+        "tree",
+        "hierarchy",
+        "navigation",
+        "nested-data",
+        "sand",
+        "accessibility"
+      ],
+      "files": [
+        {
+          "path": "tree/tree.js",
+          "type": "registry:file",
+          "target": "~/public/grainmotion-ui/tree.js"
+        }
+      ],
+      "docs": "GrainMotion-UI Tree View is a plain script that registers a custom element. Load /grainmotion-ui/tree.js with a script tag (not a module), Assign nested items with id, label and children. Read or set value and expanded, or call select(id) and toggle(id). Arrow keys navigate and expand/collapse branches. More: https://brajesh31.github.io/GrainMotion-UI"
     }
   ]
 }
