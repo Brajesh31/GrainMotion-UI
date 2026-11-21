@@ -2,7 +2,7 @@
 
 ## Current verified scope
 
-The repository's current component documentation says its automated interaction checks were run in headless Chromium with real touch and keyboard events, using CPU throttling in the visual inspection workflow.
+The Phase 1 selection controls have a successful automated mobile Chromium baseline with pointer, keyboard, form and regression checks. Phase 2 adds native text-field, password, search and OTP/PIN assertions to the same workflow. Physical mobile, desktop Safari/Firefox and manual assistive-technology testing remain unverified.
 
 The existing notes explicitly say the project has not yet been broadly tested in:
 
