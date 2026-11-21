@@ -106,6 +106,24 @@ ITEMS.push(
     html: '<sand-rating label="Experience rating" value="3"></sand-rating><div class="readout"></div>',
     wire: (el, c) => { const o = c.querySelector('.readout'), f = () => o.textContent = el.value ? el.value + ' / 5' : 'Not rated'; el.addEventListener('change', f); f(); } }
 );
+ITEMS.push(
+  { id: 'input', name: 'Text Field', tag: 'sand-input', sub: 'A stylus guides focus on a native text field.',
+    html: '<div class="field"><span>Display name</span><output></output></div><sand-input label="Display name" placeholder="Your name"></sand-input>',
+    wire: (el, card) => { const o = card.querySelector('output'); const show = () => o.textContent = el.value.length + ' chars'; el.addEventListener('input', show); show(); } },
+  { id: 'textarea', name: 'Textarea', tag: 'sand-textarea', sub: 'A wider writing surface with shallow grooves.',
+    html: '<sand-textarea label="Message" rows="4" placeholder="Write a message..."></sand-textarea><div class="readout"></div>',
+    wire: (el, card) => { const o = card.querySelector('.readout'); const show = () => o.textContent = el.value.length + ' characters'; el.addEventListener('input', show); show(); } },
+  { id: 'password', name: 'Password', tag: 'sand-password', sub: 'A stone shutter reveals the password only on request.',
+    html: '<sand-password label="Password" placeholder="Enter a password"></sand-password><div class="readout">Password is hidden</div>',
+    wire: (el, card) => { const o = card.querySelector('.readout'); el.querySelector('button').addEventListener('click', () => { o.textContent = el.revealed ? 'Password is visible' : 'Password is hidden'; }); } },
+  { id: 'search', name: 'Search', tag: 'sand-search', sub: 'A search well and rake mark pending work.',
+    html: '<sand-search label="Search documentation" placeholder="Search the documentation"></sand-search><div class="mini"><button class="pill" type="button" data-finish>Mark idle</button></div><div class="readout">Press Enter to emit a search event</div>',
+    wire: (el, card) => { const o = card.querySelector('.readout'); el.addEventListener('search', () => { el.busy = true; o.textContent = 'Search requested'; }); el.addEventListener('search-clear', () => { el.busy = false; o.textContent = 'Query cleared'; }); card.querySelector('[data-finish]').addEventListener('click', () => { el.busy = false; o.textContent = 'Search indicator is idle'; }); } },
+  { id: 'otp', name: 'OTP / PIN', tag: 'sand-otp', sub: 'Engraved wells mark a numeric one-time code.',
+    html: '<sand-otp label="Verification code" length="6" placeholder="Six-digit code"></sand-otp><div class="readout">Enter a six-digit code</div>',
+    wire: (el, card) => { const o = card.querySelector('.readout'); el.addEventListener('complete', event => { o.textContent = event.detail.length + '-digit code entered'; }); el.addEventListener('input', () => { if (el.value.length < el.length) o.textContent = 'Code entry in progress'; }); } }
+);
+
 // What each prompt says about wiring its control in. The rest of the prompt is the same for all of them.
 const WIRE = {
   slider: ['Use <sand-slider value="40" label="..."></sand-slider> where my slider is. min, max and step work as attributes, like a range input.',
