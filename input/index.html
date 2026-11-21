@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GrainMotion-UI Text Field</title>
+<style>
+:root{--page:#e9e4da;--card:#f1ede5;--ink:#2b2a27;--mute:#7c766b}
+*{box-sizing:border-box}html{background:var(--page);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,sans-serif}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px}
+main{width:min(620px,100%);padding:32px 24px;background:var(--card);border-radius:24px;text-align:center}
+h1{margin:0;font-size:32px}.lede,.hint,.readout{color:var(--mute)}
+.stage{margin:32px auto 18px;max-width:520px}.stage>sand-input{width:100%}
+:focus-visible{outline:2px solid #3a3027;outline-offset:4px}a{color:inherit}
+</style></head><body><main>
+<h1>Text Field</h1><p class="lede">A bamboo stylus rests at the edge of a familiar text field. The native input remains fully editable; a subtle pressed guide and stylus follow focus and caret movement.</p>
+<div class="stage"><sand-input id="el" name="displayName" label="Display name" placeholder="Type a display name"></sand-input><p class="readout" id="readout">No text entered</p></div>
+<p class="hint">Try keyboard input, paste and native selection. <a href="../gallery/">Back to gallery</a> · <a href="README.md">Docs</a></p>
+</main>
+<script src="input.js"></script><script>
+const el=document.getElementById('el');
+const readout = document.getElementById('readout');
+el.addEventListener('input', () => { readout.textContent = el.value.length + ' characters'; });
+</script></body></html>
