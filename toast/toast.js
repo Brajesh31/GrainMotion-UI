@@ -352,7 +352,7 @@ class SandToast extends SandTray{
   startTimer(){this.clearTimer();if(!this._open||this.durationMs()===0)return;if(!this._remaining)this._remaining=this.durationMs();this._started=Date.now();this._timer=setTimeout(()=>{this._timer=0;this.dismiss('timeout');},this._remaining);}
   pauseTimer(){if(!this._timer)return;clearTimeout(this._timer);this._timer=0;this._remaining=Math.max(0,this._remaining-(Date.now()-this._started));}
   resumeTimer(){if(this._open&&this.durationMs()>0&&this._remaining>0)this.startTimer();}
-  place(index,position){const [v,h]=position.split('-');this.style.left=h==='left'?'12px':'auto';this.style.right=h==='right'?'12px':'auto';this.style.top=v==='top'?(18+index*96)+'px':'auto';this.style.bottom=v==='bottom'?(18+index*82)+'px':'auto';}
+  place(index,position){const [v,h]=position.split('-');this.style.left=h==='left'?'12px':'auto';this.style.right=h==='right'?'12px':'auto';this.style.top=v==='top'?(18+index*96)+'px':'auto';this.style.bottom=v==='bottom'?(18+index*96)+'px':'auto';}
 }
 customElements.define('sand-toast',SandToast);
 })();
