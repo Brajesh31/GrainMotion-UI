@@ -37,6 +37,9 @@ jobs:
       - name: Check generated documentation and registry
         run: node tools/docs.mjs --check
 
+      - name: Audit component inventory, standalone assets and registry
+        run: node tools/audit.mjs
+
       - name: Start local documentation and demo server
         run: |
           python3 -m http.server 8000 > /tmp/grainmotion-ui-server.log 2>&1 &
