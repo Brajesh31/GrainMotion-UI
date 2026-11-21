@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GrainMotion-UI</title>
 <link rel="icon" href="data:,">
-<meta name="description" content="Twenty-four tactile UI controls made from simulated sand, including selection, text, calendar and time inputs.">
+<meta name="description" content="Twenty-nine tactile UI controls made from simulated sand, including selection, text, calendar and time inputs.">
 <meta property="og:title" content="GrainMotion-UI">
-<meta property="og:description" content="Twenty-four tactile controls made from simulated sand, including selection, text, calendar and time controls.">
+<meta property="og:description" content="Twenty-nine tactile controls made from simulated sand, including selection, text, calendar and time controls.">
 <meta property="og:image" content="title.svg">
 <style>
   /* The gallery: every control live on one page, with its install line and a prompt for a coding agent. */
@@ -36,6 +36,7 @@
   .stage > :is(sand-input,sand-textarea,sand-password,sand-search,sand-otp) { width: 100%; }
   .stage > :is(sand-select,sand-combobox,sand-date-picker,sand-date-range) { width: 100%; }
   .stage > sand-time-picker { width: min(280px, 100%); }
+  .stage > :is(sand-tabs,sand-accordion,sand-pagination,sand-breadcrumbs,sand-menu) { width: 100%; }
   .stage > :is(sand-progress,sand-steps,sand-loader) { width: 100%; }
   .stage > sand-progress-ring { width: min(220px, 100%); }
   .stage > sand-timer { width: min(300px, 100%); }
@@ -86,6 +87,11 @@
 <script src="../steps/steps.js"></script>
 <script src="../timer/timer.js"></script>
 <script src="../loader/loader.js"></script>
+<script src="../tabs/tabs.js"></script>
+<script src="../accordion/accordion.js"></script>
+<script src="../pagination/pagination.js"></script>
+<script src="../breadcrumbs/breadcrumbs.js"></script>
+<script src="../menu/menu.js"></script>
 <script>
 // The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
 const REPO = 'Brajesh31/GrainMotion-UI';
@@ -171,7 +177,27 @@ ITEMS.push(
     wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('aria-busy-change',()=>o.textContent=el.active?'Loading results':'Loading complete'); } }
 );
 
+
+ITEMS.push(
+  { id: 'tabs', name: 'Tabs', tag: 'sand-tabs', sub: 'A river stone glides between carved tab wells.',
+    html: '<sand-tabs tabs="overview:Overview,activity:Activity,settings:Settings" value="overview" label="Project sections"><template data-panel="overview"><strong>Project overview</strong><p>One selected tab, real content panels and a marker resting in the active well.</p></template><template data-panel="activity"><strong>Recent activity</strong><p>Deployment complete. Two review notes remain open.</p></template><template data-panel="settings"><strong>Project settings</strong><p>Manage visibility and integrations.</p></template></sand-tabs><div class="readout"></div>',
+    wire: (el, card) => { const o=card.querySelector('.readout'),show=()=>o.textContent='Selected tab: '+el.value;el.addEventListener('change',show);show(); } },
+  { id: 'accordion', name: 'Accordion', tag: 'sand-accordion', sub: 'Walnut lids lift to reveal sand compartments.',
+    html: '<sand-accordion items="shipping:Shipping,returns:Returns,care:Care" value="shipping" label="Help topics"><template data-panel="shipping"><p>Standard delivery takes three to five working days.</p></template><template data-panel="returns"><p>Returns are accepted within thirty days.</p></template><template data-panel="care"><p>Keep the item dry and out of direct sunlight.</p></template></sand-accordion><div class="readout"></div>',
+    wire: (el, card) => { const o=card.querySelector('.readout'),show=()=>o.textContent='Open: '+(el.openItems.join(', ')||'none');el.addEventListener('change',show);show(); } },
+  { id: 'pagination', name: 'Pagination', tag: 'sand-pagination', sub: 'A stone marks the page along a carved sand track.',
+    html: '<sand-pagination page="4" total="24" sibling-count="1" boundary-count="1" show-first-last label="Search results"></sand-pagination><div class="readout">Page 4 of 24</div>',
+    wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('change',e=>o.textContent='Page '+e.detail.page+' of '+e.detail.total); } },
+  { id: 'breadcrumbs', name: 'Breadcrumbs', tag: 'sand-breadcrumbs', sub: 'Stepping stones form a navigable hierarchy.',
+    html: '<sand-breadcrumbs label="You are here" items="Home|/;Library|/library;Components|/components;Breadcrumbs"></sand-breadcrumbs><div class="readout">Current location: Breadcrumbs</div>',
+    wire: (el, card) => { card.querySelector('.readout').textContent='Current: '+el.items.at(-1)?.label; } },
+  { id: 'menu', name: 'Menu / Popover', tag: 'sand-menu', sub: 'A stone trigger lifts a walnut-framed command tray.',
+    html: '<sand-menu label="Project actions" items="new:New project,duplicate:Duplicate,archive:Archive:disabled,delete:Move to trash"></sand-menu><div class="readout">Choose an action</div>',
+    wire: (el, card) => { const o=card.querySelector('.readout');el.addEventListener('select',e=>o.textContent='Selected: '+e.detail.label); } }
+);
+
 // What each prompt says about wiring its control in. The rest of the prompt is the same for all of them.
+
 const WIRE = {
   slider: ['Use <sand-slider value="40" label="..."></sand-slider> where my slider is. min, max and step work as attributes, like a range input.',
     'Read el.value. It fires input while it moves and change when it comes to rest. With a name attribute it is sent with its form.',
@@ -205,6 +231,11 @@ const WIRE = {
   steps: ['Use <sand-steps steps="Account,Details,Review,Finish" value="1" label="Setup progress"></sand-steps> for a short workflow.', 'Read or set el.value as a zero-based active step index. Native buttons are keyboard accessible; add name for form submission.', 'Stepping stones distinguish completed, active and upcoming steps.'],
   timer: ['Use <sand-timer duration="90" label="Break timer"></sand-timer> for a countdown with pause, resume, reset and cancel.', 'Call start(), pause(), reset() or cancel(); read remaining and listen for timer-tick and complete. The timer is not a precision alarm clock.', 'Sand falls through the hourglass waist and collects in the lower chamber.'],
   loader: ['Use <sand-loader label="Loading results"></sand-loader> for indeterminate activity.', 'Set active=false when work completes; speed accepts 0.25 through 4. role=status and aria-busy reflect activity. Reduced motion holds the rake still.', 'A miniature rake repeats a short sand pattern, distinct from the AI Thinking control.'],
+  tabs: ['Use <sand-tabs tabs="overview:Overview,activity:Activity" value="overview"></sand-tabs> and put template[data-panel] elements inside for actual panel content.', 'Read or set el.value and listen for change. Horizontal lists use Left/Right; vertical lists use Up/Down. Manual activation waits for Enter or Space.', 'A flat river stone moves between carved tab wells. The selected state is real and the panel remains HTML.'],
+  accordion: ['Use <sand-accordion items="shipping:Shipping,returns:Returns"></sand-accordion> with matching template[data-panel] content.', 'Use multiple for several open panels, collapsible to allow all closed, and listen for change. Header controls are native buttons.', 'Walnut lids with river-stone pulls lift above pale sand compartments.'],
+  pagination: ['Use <sand-pagination page="1" total="24"></sand-pagination> and listen for change to load the requested page in your application.', 'Read or set el.page. Configure sibling-count and boundary-count; the component does not fetch results or change the URL.', 'A river stone marks the current numbered well along the shallow sand track.'],
+  breadcrumbs: ['Use <sand-breadcrumbs items="Home|/;Library|/library;Current"></sand-breadcrumbs>. Ancestors use Label|URL and the last entry is the current location.', 'Set the items property to an array for labels or URLs containing delimiters. Only HTTP(S) and safe relative links are rendered as anchors.', 'Stepping stones cross a raked sand path; the current location is a darker settled stone.'],
+  menu: ['Use <sand-menu items="new:New project,duplicate:Duplicate"></sand-menu> and listen for the select event to execute actions.', 'Use el.open to control visibility. Arrow keys, Home/End and Escape work in the menu; outside pointer presses dismiss it and Escape restores trigger focus.', 'A stone trigger lifts to reveal an anchored walnut option tray.'],
 };
 const SKILL = { url: new URL('../skills/grainmotion-ui/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };
 const fileUrl = (id) => new URL(`../${id}/${id}.js`, location.href).href;
