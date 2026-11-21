@@ -3,7 +3,7 @@
 export const REPO = 'Brajesh31/GrainMotion-UI';
 export const SITE = 'https://brajesh31.github.io/GrainMotion-UI';
 export const AUTHOR = 'Brajesh Kumar <https://github.com/Brajesh31>';
-export const COUNT = 'nineteen';
+export const COUNT = 'twenty-four';
 
 // Limits every control shares; each README ends with its own, then these.
 export const COMMON_LIMITS = [
@@ -1249,6 +1249,340 @@ export const SPEC = [
     "The operating system/browser may render the native time selection popup differently from the explicit 12/24-hour readout.",
     "A time-only value has no date or timezone and cannot identify a unique point in time across daylight-saving transitions.",
     "The clock dial is a visual indicator; the native time input remains the actual keyboard-accessible control."
+  ],
+  "manualDocs": true
+},
+{
+  "id": "progress",
+  "name": "Progress Bar",
+  "tag": "sand-progress",
+  "categories": [
+    "progress",
+    "status",
+    "sand",
+    "animation"
+  ],
+  "sub": "A rake leaves a growing trail in a sand channel.",
+  "desc": "A bamboo rake advances through a sand channel, leaving a growing trail and a soft ridge ahead of its tines. Supports determinate and indeterminate progress.",
+  "docs": "Use <sand-progress value=\"42\" label=\"Upload progress\"></sand-progress>. Set value, min and max; add indeterminate for unknown progress. The element exposes progressbar semantics and aria-valuetext.",
+  "intro": [
+    "A long sand channel holds a growing rake trail. The bamboo rake advances with the completion value, pushing a small ridge ahead of its tines. Indeterminate mode moves the rake back and forth without announcing a fabricated percentage."
+  ],
+  "use": "<script src=\"progress.js\"></script>\n<sand-progress value=\"42\" label=\"Upload progress\"></sand-progress>",
+  "js": "const progress = document.querySelector('sand-progress');\nprogress.value = 72;\nprogress.setAttribute('indeterminate', '');",
+  "attrs": [
+    [
+      "value",
+      "Current progress value",
+      "0"
+    ],
+    [
+      "min / max",
+      "Numeric progress bounds",
+      "0 / 100"
+    ],
+    [
+      "indeterminate",
+      "Use moving indeterminate animation and omit aria-valuenow",
+      "absent"
+    ],
+    [
+      "label",
+      "Accessible progress name",
+      "Progress"
+    ]
+  ],
+  "notes": [
+    "**Determinate progress:** value is clamped between min and max and reflected through aria-valuenow.",
+    "**Indeterminate progress:** add indeterminate; the moving rake loops without exposing a misleading numeric value.",
+    "**Accessibility:** role=progressbar, aria-valuemin, aria-valuemax, aria-valuenow when determinate and aria-valuetext are maintained."
+  ],
+  "happens": [
+    [
+      "increase value",
+      "the rake advances and leaves a longer groove behind"
+    ],
+    [
+      "decrease value",
+      "the rake moves back through the channel"
+    ],
+    [
+      "enable indeterminate",
+      "the rake moves back and forth without a numeric announcement"
+    ]
+  ],
+  "limits": [
+    "The progress bar is a visual status indicator, not a form input."
+  ],
+  "manualDocs": true
+},
+{
+  "id": "progress-ring",
+  "name": "Progress Ring",
+  "tag": "sand-progress-ring",
+  "categories": [
+    "progress",
+    "status",
+    "ring",
+    "sand",
+    "animation"
+  ],
+  "sub": "A pebble follows a circular groove.",
+  "desc": "A circular progress indicator with a river pebble travelling around an engraved sand groove. Supports determinate and indeterminate states.",
+  "docs": "Use <sand-progress-ring value=\"68\" label=\"Processing\"></sand-progress-ring>. Set value, min and max, or add indeterminate for a looping marker.",
+  "intro": [
+    "A circular groove is pressed into the sand. A small river pebble follows the ring as the completion value changes, tracing a full turn from the top. In indeterminate mode the pebble travels continuously without suggesting a percentage."
+  ],
+  "use": "<script src=\"progress-ring.js\"></script>\n<sand-progress-ring value=\"68\" label=\"Processing\"></sand-progress-ring>",
+  "js": "const ring = document.querySelector('sand-progress-ring');\nring.value = 90;\nring.toggleAttribute('indeterminate', false);",
+  "attrs": [
+    [
+      "value",
+      "Current progress value",
+      "0"
+    ],
+    [
+      "min / max",
+      "Numeric progress bounds",
+      "0 / 100"
+    ],
+    [
+      "indeterminate",
+      "Move the pebble continuously",
+      "absent"
+    ],
+    [
+      "label",
+      "Accessible progress name",
+      "Progress"
+    ]
+  ],
+  "notes": [
+    "**Determinate:** value is clamped to min/max and reflected as aria-valuenow.",
+    "**Indeterminate:** the pebble loops around the groove and aria-valuenow is omitted.",
+    "**Accessibility:** role=progressbar with min, max, current value and readable value text."
+  ],
+  "happens": [
+    [
+      "increase value",
+      "the pebble moves clockwise around the groove"
+    ],
+    [
+      "decrease value",
+      "the pebble travels counter-clockwise"
+    ],
+    [
+      "enable indeterminate",
+      "the pebble loops around the ring"
+    ]
+  ],
+  "limits": [
+    "The ring is a status indicator, not an input control."
+  ],
+  "manualDocs": true
+},
+{
+  "id": "steps",
+  "name": "Step Indicator",
+  "tag": "sand-steps",
+  "categories": [
+    "steps",
+    "navigation",
+    "progress",
+    "sand"
+  ],
+  "sub": "Stepping stones mark completed, current and upcoming steps.",
+  "desc": "A multi-step indicator using stepping stones and native buttons. Completed, current and upcoming steps are visually distinct and keyboard operable.",
+  "docs": "Use <sand-steps steps=\"Account,Details,Review,Done\" value=\"1\" label=\"Setup progress\"></sand-steps>. Read or set value as a zero-based active step index. The element submits that index when name is supplied.",
+  "intro": [
+    "A line of stepping stones crosses the tray. Stones behind the current step show completed progress, the current stone is raised, and the remaining stones wait ahead. Native buttons keep each step keyboard accessible; the active index is zero-based."
+  ],
+  "use": "<script src=\"steps.js\"></script>\n<sand-steps name=\"setupStep\" steps=\"Account,Details,Review,Done\" value=\"1\" label=\"Setup progress\"></sand-steps>",
+  "js": "const steps = document.querySelector('sand-steps');\nsteps.addEventListener('change', () => showStep(steps.value));\nsteps.value = 2;",
+  "attrs": [
+    [
+      "steps",
+      "Comma-separated step labels, up to five",
+      "Start,Details,Review,Finish"
+    ],
+    [
+      "value",
+      "Zero-based active step index",
+      "0"
+    ],
+    [
+      "label",
+      "Accessible group name",
+      "Progress steps"
+    ],
+    [
+      "name",
+      "Form submission name",
+      "empty"
+    ],
+    [
+      "disabled",
+      "Disable step buttons",
+      "absent"
+    ]
+  ],
+  "notes": [
+    "**Native buttons:** each step is a real button with an accessible label and aria-current=step on the active step.",
+    "**Value:** zero-based active step index. The element emits bubbling input and change events when it changes.",
+    "**Forms:** when name is supplied, the active index is submitted as a string."
+  ],
+  "happens": [
+    [
+      "choose a later step",
+      "the selected stone lifts and previous stones are marked complete"
+    ],
+    [
+      "choose an earlier step",
+      "the active marker moves back and later stones become upcoming"
+    ],
+    [
+      "disable the control",
+      "all step buttons become disabled"
+    ]
+  ],
+  "limits": [
+    "The current layout supports up to five steps so each stone remains legible."
+  ],
+  "manualDocs": true
+},
+{
+  "id": "timer",
+  "name": "Hourglass Timer",
+  "tag": "sand-timer",
+  "categories": [
+    "timer",
+    "time",
+    "status",
+    "sand",
+    "animation"
+  ],
+  "sub": "Sand falls between two chambers to show remaining time.",
+  "desc": "A countdown timer rendered as a two-chamber hourglass. Sand falls through a narrow waist; pause, resume, reset and cancel controls remain native buttons.",
+  "docs": "Use <sand-timer duration=\"90\" label=\"Break timer\"></sand-timer>. Call start(), pause(), reset() or cancel(); read remaining and listen for timer-tick and complete.",
+  "intro": [
+    "An hourglass is drawn into the sand tray. The upper chamber empties as grains fall through its narrow waist and collect below. Pause, resume, reset and cancel are native buttons; the countdown uses the animation frame clock rather than a background interval."
+  ],
+  "use": "<script src=\"timer.js\"></script>\n<sand-timer duration=\"90\" label=\"Break timer\"></sand-timer>",
+  "js": "const timer = document.querySelector('sand-timer');\ntimer.start();\ntimer.addEventListener('timer-tick', e => showRemaining(e.detail.remaining));\ntimer.addEventListener('complete', () => announceDone());",
+  "attrs": [
+    [
+      "duration",
+      "Initial duration in seconds",
+      "60"
+    ],
+    [
+      "label",
+      "Accessible timer name",
+      "Countdown timer"
+    ],
+    [
+      "disabled",
+      "Disable timer controls",
+      "absent"
+    ],
+    [
+      "name",
+      "Form submission name for remaining seconds",
+      "empty"
+    ]
+  ],
+  "notes": [
+    "**Methods:** start(), pause(), reset() and cancel(). The Pause button becomes Resume while paused.",
+    "**Events:** timer-tick emits remaining whole seconds; complete fires once when the countdown reaches zero.",
+    "**Reduced motion:** countdown timing remains correct, but sand animation is held static when reduced motion is requested."
+  ],
+  "happens": [
+    [
+      "start",
+      "sand begins falling from the upper chamber"
+    ],
+    [
+      "pause",
+      "the countdown and falling sand stop"
+    ],
+    [
+      "resume",
+      "the remaining sand continues falling"
+    ],
+    [
+      "reset",
+      "the original duration is restored"
+    ],
+    [
+      "cancel",
+      "the timer stops and reports Cancelled"
+    ],
+    [
+      "reach zero",
+      "the timer stops and emits complete"
+    ]
+  ],
+  "limits": [
+    "The countdown uses requestAnimationFrame and pauses when the page is background-throttled; it is not a precision alarm clock."
+  ],
+  "manualDocs": true
+},
+{
+  "id": "loader",
+  "name": "Loading Indicator",
+  "tag": "sand-loader",
+  "categories": [
+    "loading",
+    "status",
+    "animation",
+    "sand"
+  ],
+  "sub": "A miniature rake loops through a changing sand pattern.",
+  "desc": "An indeterminate loading indicator with a miniature rake that loops through a recognizable sand pattern, distinct from the AI Thinking state.",
+  "docs": "Use <sand-loader label=\"Loading results\"></sand-loader>. Set active=false when work completes and speed to adjust the animation rate. Reduced motion holds the rake still.",
+  "intro": [
+    "A miniature rake repeatedly crosses a short sand channel, smoothing one set of grooves and cutting another. Its repeating motion is deliberately simpler than the AI Thinking component, which communicates changing agent activity states."
+  ],
+  "use": "<script src=\"loader.js\"></script>\n<sand-loader label=\"Loading results\"></sand-loader>",
+  "js": "const loader = document.querySelector('sand-loader');\nloader.speed = 1.5;\nloader.active = false;",
+  "attrs": [
+    [
+      "label",
+      "Accessible status name",
+      "Loading"
+    ],
+    [
+      "active",
+      "Whether work is ongoing",
+      "true"
+    ],
+    [
+      "speed",
+      "Animation speed multiplier from 0.25 to 4",
+      "1"
+    ]
+  ],
+  "notes": [
+    "**Status semantics:** role=status, aria-live=polite and aria-busy reflect the active state.",
+    "**Control:** set active=false when the operation completes. The label then defaults to Loading complete unless supplied.",
+    "**Reduced motion:** the rake remains still while prefers-reduced-motion is active."
+  ],
+  "happens": [
+    [
+      "active",
+      "the rake loops and re-cuts the pattern"
+    ],
+    [
+      "inactive",
+      "the rake rests and aria-busy becomes false"
+    ],
+    [
+      "reduced motion",
+      "the indicator remains visible without continuous motion"
+    ]
+  ],
+  "limits": [
+    "The loader is intentionally indeterminate; it does not accept a percentage."
   ],
   "manualDocs": true
 }
