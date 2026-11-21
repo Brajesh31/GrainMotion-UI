@@ -2,7 +2,7 @@
 
 Several sand-backed panels sit behind thin walnut partitions. Each divider balances the two adjacent sections while keeping their combined width unchanged. The panel metadata and percentages are public state, so a dashboard can save and restore its layout.
 
-One of forty-five files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
+One of fifty files in this repo. Same idea in each (an ordinary control made of sand that moves like sand), different control.
 
 ## Run it
 
