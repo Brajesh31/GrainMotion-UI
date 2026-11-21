@@ -184,26 +184,15 @@ const check = (name, ok, got) => { if (!ok) fails++; console.log(`${ok ? 'ok  ' 
 }
 
 
-{ // forms: associate existing gallery controls without disconnecting their renderers
+
+{ // forms: verify all twelve form-associated components in a small isolated form
   const formResults = await ev(`(() => {
-    const tags = ['sand-slider','sand-toggle','sand-checkbox','sand-radio-group','sand-segmented','sand-range','sand-rating','sand-input','sand-textarea','sand-password','sand-search','sand-otp'];
-    const names = ['slider','toggle','checkbox','radio','segment','range','rating','input','textarea','password','search','otp'];
-    const els = tags.map(tag => document.querySelector(tag));
-    const saved = els.map(el => ({ el, name: el.getAttribute('name'), form: el.getAttribute('form'), value: Array.isArray(el.value) ? [...el.value] : el.value, checked: el.checked }));
-    const f = document.createElement('form'); f.id = 'grainmotion-form-check'; document.body.append(f);
-    els.forEach((el, i) => { el.setAttribute('name', names[i]); el.setAttribute('form', f.id); });
-    els[0].value = 30; els[1].checked = true; els[2].checked = true;
-    els[3].value = 'Medium'; els[4].value = 'Week'; els[5].value = [10, 90]; els[6].value = 4;
-    els[7].value = 'hello'; els[8].value = 'note'; els[9].value = 'do-not-print-this'; els[10].value = 'grain'; els[11].value = '123456';
+    const f = document.createElement('form');
+    f.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;overflow:hidden';
+    f.innerHTML = '<sand-slider name="slider" value="30"></sand-slider><sand-toggle name="toggle" checked></sand-toggle><sand-checkbox name="checkbox" value="yes" checked></sand-checkbox><sand-radio-group name="radio" options="Small,Medium,Large" value="Medium"></sand-radio-group><sand-segmented name="segment" options="Day,Week,Month" value="Week"></sand-segmented><sand-range name="range" value="10,90"></sand-range><sand-rating name="rating" value="4"></sand-rating><sand-input name="input" value="hello"></sand-input><sand-textarea name="textarea" value="note"></sand-textarea><sand-password name="password" value="do-not-print-this"></sand-password><sand-search name="search" value="grain"></sand-search><sand-otp name="otp" value="123456" length="6"></sand-otp>';
+    document.body.append(f);
     const d = Object.fromEntries(new FormData(f));
     const results = { slider: d.slider === '30', toggle: d.toggle === 'on', checkbox: d.checkbox === 'yes', radio: d.radio === 'Medium', segment: d.segment === 'Week', range: d.range === '10,90', rating: d.rating === '4', input: d.input === 'hello', textarea: d.textarea === 'note', password: d.password === 'do-not-print-this', search: d.search === 'grain', otp: d.otp === '123456' };
-    for (const s of saved) {
-      if (s.name === null) s.el.removeAttribute('name'); else s.el.setAttribute('name', s.name);
-      if (s.form === null) s.el.removeAttribute('form'); else s.el.setAttribute('form', s.form);
-      if (s.checked !== undefined) s.el.checked = s.checked;
-      if (Array.isArray(s.value)) s.el.value = s.value;
-      else if (s.value !== undefined) s.el.value = s.value;
-    }
     f.remove();
     return results;
   })()`);
